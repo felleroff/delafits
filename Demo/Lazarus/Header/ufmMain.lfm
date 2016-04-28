@@ -1,0 +1,30 @@
+object fmMain: TfmMain
+  Left = 500
+  Height = 400
+  Top = 200
+  Width = 800
+  Caption = 'DeLaFits library. Demo. Header'
+  ClientHeight = 400
+  ClientWidth = 800
+  KeyPreview = True
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  LCLVersion = '1.2.6.0'
+  object Memo1: TMemo
+    Left = 0
+    Height = 400
+    Top = 0
+    Width = 800
+    Align = alClient
+    Font.CharSet = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Courier New'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 0
+  end
+end

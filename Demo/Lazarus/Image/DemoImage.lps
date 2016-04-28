@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="11">
+      <Unit0>
+        <Filename Value="DemoImage.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DemoImage"/>
+        <UsageCount Value="20"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="ufmMain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fmMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ufmMain"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="52" Y="22"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="..\..\..\Scr\Source\DeLaFitsClasses.pas"/>
+        <UnitName Value="DeLaFitsClasses"/>
+        <UsageCount Value="20"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\..\Scr\Source\DeLaFitsCommon.pas"/>
+        <UnitName Value="DeLaFitsCommon"/>
+        <UsageCount Value="20"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\..\..\Scr\Source\DeLaFitsDataRead.pas"/>
+        <UnitName Value="DeLaFitsDataRead"/>
+        <UsageCount Value="20"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\..\..\Scr\Source\DeLaFitsDataWrite.pas"/>
+        <UnitName Value="DeLaFitsDataWrite"/>
+        <UsageCount Value="20"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\..\Scr\Source\DeLaFitsGraphics.pas"/>
+        <UnitName Value="DeLaFitsGraphics"/>
+        <UsageCount Value="20"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\..\Scr\Source\DeLaFitsMath.pas"/>
+        <UnitName Value="DeLaFitsMath"/>
+        <UsageCount Value="20"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\..\Scr\Source\DeLaFitsOrderByte.pas"/>
+        <UnitName Value="DeLaFitsOrderByte"/>
+        <UsageCount Value="20"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\..\..\Scr\Source\DeLaFitsPalettes.pas"/>
+        <UnitName Value="DeLaFitsPalettes"/>
+        <UsageCount Value="20"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\..\..\Scr\Source\DeLaFitsString.pas"/>
+        <UnitName Value="DeLaFitsString"/>
+        <UsageCount Value="20"/>
+      </Unit10>
+    </Units>
+    <General>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <JumpHistory Count="15" HistoryIndex="14">
+      <Position1>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="20" Column="45" TopLine="18"/>
+      </Position1>
+      <Position2>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="36" Column="1" TopLine="18"/>
+      </Position2>
+      <Position3>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="38" Column="17" TopLine="30"/>
+      </Position3>
+      <Position4>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="163" Column="26" TopLine="127"/>
+      </Position4>
+      <Position5>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="169" Column="31" TopLine="136"/>
+      </Position5>
+      <Position6>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="78" Column="5" TopLine="58"/>
+      </Position6>
+      <Position7>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="180" Column="3" TopLine="148"/>
+      </Position7>
+      <Position8>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="177" Column="29" TopLine="147"/>
+      </Position8>
+      <Position9>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="265" Column="29" TopLine="243"/>
+      </Position9>
+      <Position10>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="85" Column="29" TopLine="66"/>
+      </Position10>
+      <Position11>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="308" Column="19" TopLine="282"/>
+      </Position11>
+      <Position12>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="302" Column="37" TopLine="283"/>
+      </Position12>
+      <Position13>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="312" Column="36" TopLine="294"/>
+      </Position13>
+      <Position14>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="323" Column="40" TopLine="291"/>
+      </Position14>
+      <Position15>
+        <Filename Value="ufmMain.pas"/>
+        <Caret Line="326" Column="1" TopLine="306"/>
+      </Position15>
+    </JumpHistory>
+  </ProjectSession>
+  <EditorMacros Count="0"/>
+</CONFIG>
