@@ -79,7 +79,8 @@ begin
     Bmp.SaveToFile('some.bmp');    
   finally
     Fit.Free;
-    Bmp.Free;
+    if Assigned(Bmp) then
+      Bmp.Free;
     Data := nil;
   end;
 end;
