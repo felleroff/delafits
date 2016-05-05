@@ -56,10 +56,10 @@ begin
       Fit.LineBuilder.Add(Item, cCastDateTime);
     end;   
     // edit data
-    Rgn.X1     := 0;
-    Rgn.Y1     := 0;
-    Rgn.Width  := 200;
-    Rgn.Height := 200;
+    Rgn.X1        := 0;
+    Rgn.Y1        := 0;
+    Rgn.ColsCount := 200;
+    Rgn.RowsCount := 200;
     Fit.DataRep := rep32c;
     Fit.DataPrepare(Pointer(Data), Rgn);
     Fit.DataRead(Pointer(Data), Rgn); 
@@ -69,10 +69,10 @@ begin
     Fit.DataWrite(Pointer(Data), Rgn);    
     // render
     Bmp := TBitmap.Create;
-    Rgn.X1        := 0;
-    Rgn.Y1        := 0;
-    Rgn.ColsCount := 200;
-    Rgn.RowsCount := 200;
+    Rgn.X1     := 0;
+    Rgn.Y1     := 0;
+    Rgn.Width  := 200;
+    Rgn.Height := 200;
     Fit.GraphicColor.ToneContrast := 1.2;
     Fit.GraphicGeom.Scl(2.0, 2.0, xy00).Rot(45.0, xy00);
     Fit.BitmapRead(Bmp, Rgn);
