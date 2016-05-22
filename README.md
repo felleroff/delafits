@@ -88,7 +88,7 @@ end;
 
 ### Credits
 
-DeLaFits is developed and used in the [CoLiTec](http://www.neoastrosoft.com "http://www.neoastrosoft.com") project (software for automated asteroids and comets discoveries).
+DeLaFits is used in the [CoLiTec](http://www.neoastrosoft.com "http://www.neoastrosoft.com") project (software for automated asteroids and comets discoveries).
 
 ### License
 
