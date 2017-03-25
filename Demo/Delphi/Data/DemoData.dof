@@ -91,7 +91,7 @@ ImageBase=4194304
 ExeDescription=
 [Directories]
 OutputDir=
-UnitOutputDir=Dcu\
+UnitOutputDir=..\Data
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=..\..\..\Scr\Source;..\..\..\Source
@@ -143,5 +143,6 @@ Item0=..\..\..\Scr\Source;..\..\..\Source
 Item1=$(DELAFITS);..\..\..\Source
 Item2=$(DELAFITS)
 [HistoryLists\hlUnitOutputDirectory]
-Count=1
-Item0=Dcu\
+Count=2
+Item0=..\Data
+Item1=Dcu\
