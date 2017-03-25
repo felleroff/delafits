@@ -3,7 +3,7 @@
 {                                                      }
 {         Functions to format the header lines         }
 {                                                      }
-{        Copyright(c) 2013-2016, Evgeniy Dikov         }
+{        Copyright(c) 2013-2017, Evgeniy Dikov         }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }
@@ -433,9 +433,13 @@ end;
 function GetFormatSettings: TFormatSettings;
 begin
   {$IFDEF FPC}
-  Result := FormatSettings
+  Result := FormatSettings;
   {$ELSE}
-  GetLocaleFormatSettings(LOCALE_SYSTEM_DEFAULT, Result);
+    {$IF CompilerVersion < 22}
+    GetLocaleFormatSettings(LOCALE_SYSTEM_DEFAULT, Result);
+    {$ELSE}
+    Result := TFormatSettings.Create;
+    {$IFEND}
   {$ENDIF}
 end;
 

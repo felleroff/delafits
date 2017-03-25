@@ -3,7 +3,7 @@
 {                                                      }
 {            Access to the header and data             }
 {                                                      }
-{        Copyright(c) 2013-2016, Evgeniy Dikov         }
+{        Copyright(c) 2013-2017, Evgeniy Dikov         }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }
@@ -408,7 +408,10 @@ begin
   if Length(Keyword) > Length(cNAXIS) then
   begin
     S := Trim(Copy(Keyword, Length(cNAXIS) + 1, Length(Keyword)));
+    Code := -1;
     Val(S, Result, Code);
+    if Code <> 0 then
+      Result := - 1;
   end;
 end;
 
@@ -2112,7 +2115,9 @@ begin
   F := TFileStream.Create(AFileName, AFileMode);
   try
     inherited CreateJoin(F);
+    FFileName := AFileName;
   except
+    FStream := nil;
     F.Free;
     raise;
   end;
@@ -2130,7 +2135,9 @@ begin
   F := TFileStream.Create(AFileName, cFileReadWrite);
   try
     inherited CreateMade(F, AHduCore);
+    FFileName := AFileName;
   except
+    FStream := nil;
     F.Free;
     raise;
   end;
@@ -2159,7 +2166,9 @@ begin
   F := TFileStream.Create(AFileName, AFileMode);
   try
     inherited CreateJoin(F);
+    FFileName := AFileName;
   except
+    FStream := nil;
     F.Free;
     raise;
   end;
@@ -2177,7 +2186,9 @@ begin
   F := TFileStream.Create(AFileName, cFileReadWrite);
   try
     inherited CreateMade(F, AHduCore);
+    FFileName := AFileName;
   except
+    FStream := nil;
     F.Free;
     raise;
   end;

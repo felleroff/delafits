@@ -13,7 +13,7 @@
 {       only BitPix = 08, 16, 32;                      }
 {   e - BScale = R or BZero = R;                       }
 {                                                      }
-{        Copyright(c) 2013-2016, Evgeniy Dikov         }
+{        Copyright(c) 2013-2017, Evgeniy Dikov         }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }
@@ -8444,6 +8444,7 @@ var
   Offset: Int64;
   OffsetInc: Integer;
   J, I: Integer;
+  Valu64f: T64f;
 begin
   with Handle do
   begin
@@ -8465,7 +8466,12 @@ begin
         Stream.Seek(Offset, soFromBeginning);
         Inc(Offset, OffsetInc);
         for J := 0 to ColsCount - 1 do
-          Buf[J] := Swap32cc(Round(Dat[J, I] - cBZero32u));
+        begin
+          //Buf[J] := Swap32cc(Round(Dat[J, I] - cBZero32u)); <-- bad in Lazarus-v1.6-win64
+          Valu64f := Dat[J, I];
+          Valu64f := Valu64f - cBZero32u;
+          Buf[J] := Swap32cc(Round(Valu64f));
+        end;
         Stream.Write(Buf[0], SizeBuf);
       end;
     end;

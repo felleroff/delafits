@@ -5,7 +5,7 @@
 {        Ñonstants PPalette are declared in the        }
 {              module of DeLaFitsGraphics              }
 {                                                      }
-{        Copyright(c) 2013-2016, Evgeniy Dikov         }
+{        Copyright(c) 2013-2017, Evgeniy Dikov         }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }

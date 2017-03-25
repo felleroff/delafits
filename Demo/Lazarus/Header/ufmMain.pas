@@ -5,7 +5,7 @@
 {     Reading and editing the header of FITS-file      }
 {   Line ~ <keyword-separator-value-separator-note>    }
 {                                                      }
-{        Copyright(c) 2013-2016, Evgeniy Dikov         }
+{        Copyright(c) 2013-2017, Evgeniy Dikov         }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }

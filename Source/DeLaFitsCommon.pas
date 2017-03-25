@@ -4,7 +4,7 @@
 {    Types, constants, Fits dictionary of keywords     }
 {                 and simple functions                 }
 {                                                      }
-{        Copyright(c) 2013-2016, Evgeniy Dikov         }
+{        Copyright(c) 2013-2017, Evgeniy Dikov         }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }
@@ -454,7 +454,7 @@ type
     Count: Int64;
   end;
   PHistogram = ^THistogram;
-  THistogram = array [0 .. MaxListSize - 1] of PHistogramItem;
+  THistogram = array [0 .. cHistogramMaxCountItems - 1] of PHistogramItem;
 
   THistogramDynamicRange = record
     Index1: Integer;

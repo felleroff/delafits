@@ -3,7 +3,7 @@
 {                                                      }
 {              Graphic image of the data               }
 {                                                      }
-{        Copyright(c) 2013-2016, Evgeniy Dikov         }
+{        Copyright(c) 2013-2017, Evgeniy Dikov         }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }
@@ -608,6 +608,10 @@ end;
 { TGraphicColor }
 
 procedure TGraphicColor.Banding;
+{$IFDEF FPC}{$IFNDEF FPC_HAS_TYPE_EXTENDED}
+const
+  MaxExtended  =  math.MaxDouble;
+{$ENDIF}{$ENDIF}
 var
   Items: PHistogram;
   H, H1, H2: Integer;
@@ -2107,7 +2111,9 @@ begin
   F := TFileStream.Create(AFileName, AFileMode);
   try
     inherited CreateJoin(F);
+    FFileName := AFileName;
   except
+    FStream := nil;
     F.Free;
     raise;
   end;
@@ -2125,7 +2131,9 @@ begin
   F := TFileStream.Create(AFileName, cFileReadWrite);
   try
     inherited CreateMade(F, AHduCore);
+    FFileName := AFileName;
   except
+    FStream := nil;
     F.Free;
     raise;
   end;
