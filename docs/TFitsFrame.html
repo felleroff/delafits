@@ -1,0 +1,235 @@
+﻿<html>
+	
+<head>
+	<title>TFitsFrame</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TFitsFarme.DataPrepare, TFitsFrame, TFitsFrame.HduCore, TFitsFrameDataRep, TFitsFrame.DataRgn, TFitsFrame.DataPixels, TFitsFrame.DataRead, TFitsFrame.DataWrite, TFitsFrame.CreateJoin, TFitsFrame.CreateMade">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TFitsFrame");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">TFitsFrame</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Classes.html">Classes</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> DeLaFitsClasses</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> class</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Inherited from:</span><span class="rvts6"> </span><a class="rvts12" href="TFitsHeader.html">TFitsHeader</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Data access.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Frame data - is a </span><a class="rvts12" href="TypesArray.html">two-dimensional array of numbers</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6">The user reads and writes the data of frame according to the specified </span><a class="rvts12" href="TRgn.html">region</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6">The user specifies the </span><a class="rvts12" href="TRep.html">type of buffer</a><span class="rvts6"> for data read/write </span><span class="rvts17">−</span><span class="rvts6"> the type of elements (numbers) of two-dimensional array.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The property </span><a class="rvts12" href="TFitsFrameDataRgn.html">DataRgn</a><span class="rvts6"> defines full data region.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Access to the data is possible only for 2D-frames </span><a class="rvts12" href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank">NAXIS</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6"> = 2.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">An example of the data region of frame:</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">00</span></p>
+<p class="rvps2"><span class="rvts29">01</span></p>
+<p class="rvps2"><span class="rvts29">02</span></p>
+<p class="rvps2"><span class="rvts29">03</span></p>
+<p class="rvps2"><span class="rvts29">04</span></p>
+<p class="rvps2"><span class="rvts29">05</span></p>
+<p class="rvps2"><span class="rvts29">06</span></p>
+<p class="rvps2"><span class="rvts29">07</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SIMPLE &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;T / conforms to FITS standard &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BITPIX &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 16 / number of bits per data value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">NAXIS &nbsp; = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 / number of axes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">NAXIS1 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7 / length of first axis &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">NAXIS2 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;8 / length of second axis &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BSCALE &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1.0 / data scaling factor &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BZERO &nbsp; = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 / data offset &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">END &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps5"><span class="rvts17">⇓</span></p>
+<p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-file-map-data.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Protected methods</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">CheckCore override</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Checking a header </span><a class="rvts12" href="THduCore2d.html">core</a><span class="rvts6"> of frame: </span><a class="rvts12" href="Keywords.html">keyword</a><span class="rvts6"> NAXIS should be equal to two</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">CheckStreamSize virtual</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Checking the stream size:</span></p>
+<p class="rvps2"><span class="rvts6">- header size should be proportional to 2880 bytes;</span></p>
+<p class="rvps2"><span class="rvts6">- data block size not less than NAXIS1 x NAXIS2 x </span><a class="rvts12" href="BitPixByteSize.html">BitPixByteSize</a><span class="rvts6">(BITPIX) bytes;</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Init override</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Initializes the fields of the class</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Constructor &amp; Destructor</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">constructor </span><a class="rvts12" href="TFitsFrameCreateJoin.html">CreateJoin</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Creates an object from an existing 2D-frame (NAXIS = 2)</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">constructor </span><a class="rvts12" href="TFitsFrameCreateMade.html">CreateMade</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Creates an object from an </span><a class="rvts12" href="THduCore2d.html">2D-core</a></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Public methods</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts13" href="TFitsFarmeDataPrepare.html">DataPrepare</a><span class="rvts6"> overload</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Preparing the Buffer of user: memory allocation</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts13" href="TFitsFrameDataRead.html">DataRead</a><span class="rvts6"> overload</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Reading data</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts13" href="TFitsFrameDataWrite.html">DataWrite</a><span class="rvts6"> overload</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Writing data</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Public property</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">DataBitPix readonly</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TBitPix.html">Bits per data value</a><span class="rvts6">,</span></p>
+<p class="rvps2"><span class="rvts17">≡</span><a class="rvts12" href="TFitsFrameHduCore.html">HduCore.BitPix</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TFitsFrameDataPixels.html">DataPixels</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Access to the pixels of the data</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TFitsFrameDataRep.html">DataRep</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TRep.html">Type</a><span class="rvts6"> of the elements of buffer of user for read/write data</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TFitsFrameDataRgn.html">DataRgn</a><span class="rvts6"> readonly</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Full data region:</span></p>
+<p class="rvps3"><span class="rvts15">DataRgn.X1 = 0;</span></p>
+<p class="rvps3"><span class="rvts15">DataRgn.Y1 = 0;</span></p>
+<p class="rvps3"><span class="rvts15">DataRgn.ColsCount = NAXIS1;</span></p>
+<p class="rvps3"><span class="rvts15">DataRgn.RowsCount = NAXIS2;</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TFitsFrameHduCore.html">HduCore</a><span class="rvts6"> readonly</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="THduCore2d.html">2D-core</a><span class="rvts6"> of frame</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="Design.html">Design</a></p>
+<p class="rvps2"><a class="rvts12" href="Architecture.html">Architecture</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour" target="_top">Easily create Qt Help files</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

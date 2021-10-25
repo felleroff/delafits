@@ -1,0 +1,114 @@
+﻿<html>
+	
+<head>
+	<title>EFitsException</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="EFitsException, EFitsException.Code, EFitsException.Create">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("EFitsException");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">EFitsException</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Classes.html">Classes</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsCommon</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> class</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Inherited from:</span><span class="rvts6"> SysUtils.Exception</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">EFitsException is the base class for all run-time exceptions DeLaFits. The class contains a field with an error code, which is set in the constructor.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Constructor</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="150" valign="top" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">constructor </span><a class="rvts12" href="EFitsExceptionCreate.html">Create</a></p>
+</td>
+<td valign="middle" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Instantiates an instance of an exception with a simple message string and value of code</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" valign="top" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">constructor </span><a class="rvts12" href="EFitsExceptionCreate.html">CreateFmt</a></p>
+</td>
+<td valign="middle" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Instantiates an instance of an exception with a formatted message string and value of code</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Public property</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="150" valign="middle" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="EFitsExceptionCode.html">Code</a><span class="rvts6"> readonly</span></p>
+</td>
+<td valign="middle" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Exception code, see </span><a class="rvts12" href="ErrorCodes.html">list of error codes</a><span class="rvts6"> DeLaFits</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="Architecture.html">Architecture</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com" target="_top">Free HTML Help documentation generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

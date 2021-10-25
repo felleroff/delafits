@@ -1,0 +1,300 @@
+﻿<html>
+	
+<head>
+	<title>TLineBuilder</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TLineBuilder, TLineBuilder.Compose, TLineBuilder.Parse, TLineBuilder.IndexOf, TLineBuilder.Insert, TLineBuilder.Delete, TLineBuilder.Add, TLineBuilder.Read, TLineBuilder.Write, TLineBuilder.ValuesDateTimeAny, TLineBuilder.Items, TLineBuilder.Keywords, TLineBuilder.Notes, TLineBuilder.ValuesChars, TLineBuilder.ValuesCharsLong, TLineBuilder.ValuesString, TLineBuilder.ValuesBoolean, TLineBuilder.ValuesInteger, TLineBuilder.ValuesFloat, TLineBuilderValuesDe, TLineBuilderValuesRa, TLineBuilder.ValuesTime, TLineBuilder.ValuesDateTime, TLineBuilder.ValuesDate, TLineBuilder.Fmt">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TLineBuilder");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">TLineBuilder</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Classes.html">Classes</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> DeLaFitsClasses</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> class</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Inherited from:</span><span class="rvts6"> System.TObject</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Member Of:</span><span class="rvts6"> </span><a class="rvts12" href="TFitsHeader.html">TFitsHeader</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The class is designed for access to the items of the lines of header a frame.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Header line consists of elements </span><a class="rvts12" href="TLineItem.html">TLineItem</a><span class="rvts6">:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><span class="rvts7">&lt;keyword-separator-value-separator-note&gt;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Use property </span><a class="rvts12" href="TFitsHeader.html">TFitsHeader.LineBulder</a><span class="rvts6"> to access the instance TLineBuilder.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Constructor &amp; Destructor</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="180" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">constructor Create</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">The constructor. </span><a class="rvts12" href="TFitsHeader.html">TFitsHeader</a><span class="rvts6"> creates this object</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="180" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">destructor Destroy; override</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">The destructor. </span><a class="rvts12" href="TFitsHeader.html">TFitsHeader</a><span class="rvts6"> destroys this object</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Public methods</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderAdd.html">Add</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Adds a the line (as </span><a class="rvts12" href="TLineItem.html">TLineItem</a><span class="rvts6">) into header</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TFitsHeaderLineClear.html">Clear</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Remove all lines of header, except those which define the </span><a class="rvts12" href="THduCore.html">core</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderCompose.html">Compose</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Assembles a the line - </span><span class="rvts6">converts </span><a class="rvts12" href="TLineItem.html">TLineItem</a><span class="rvts6"> into header line</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderDelete.html">Delete</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Remove a line of header</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Exchange</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Swaps the position of two lines in the header</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderIndexOf.html">IndexOf</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Find the index of the line of header by </span><a class="rvts12" href="Keywords.html">keyword</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderInsert.html">Insert</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Inserts a new line (as </span><a class="rvts12" href="TLineItem.html">TLineItem</a><span class="rvts6">) into header</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Move</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Changes the position of an the line in the header</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderParse.html">Parse</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Disassembles the line - converts header line (as String) into </span><a class="rvts12" href="TLineItem.html">TLineItem</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderRead.html">Read</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Reads the header line and converts this line into </span><a class="rvts12" href="TLineItem.html">TLineItem</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesDateTimeAny.html">ValuesDateTimeAny</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Reads the TDateTime-value of the header line, and identify the </span><a class="rvts12" href="TSliceDateTime.html">type</a><span class="rvts6"> of this value: the date and time, only a date or only a time</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderWrite.html">Write</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Converts </span><a class="rvts12" href="TLineItem.html">TLineItem</a><span class="rvts6"> into String and rewrites the header line</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Public property</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Count</span><span class="rvts6"> readonly</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Number of significant lines of header, including END,</span></p>
+<p class="rvps6"><span class="rvts6">see topic </span><a class="rvts12" href="TFitsHeaderLinesCapacityCount.html">LinesCapacityCount</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Fits reference</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Reference to the owner - </span><a class="rvts12" href="TFitsHeader.html">TFitsHeader</a><span class="rvts6">, see topic </span><a class="rvts12" href="Architecture.html">Architecture</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderFmt.html">Fmt</a><span class="rvts6"> reference</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Reference to the </span><a class="rvts12" href="TFormatLine.html">parameters</a><span class="rvts6"> of parsing/composing a line of header</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderItems.html">Items</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">items</a><span class="rvts6"> of the lines of header</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderKeywords.html">Keywords</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="Keywords.html">Keywords</a><span class="rvts6"> from the lines of header</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderNotes.html">Notes</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Notes</a><span class="rvts6"> from the lines of header</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesBoolean.html">ValuesBoolean</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastBoolean.html">Boolean</a><span class="rvts6">-value</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesChars.html">ValuesChars</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastChars.html">Chars</a><span class="rvts6">-value, "as is"</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesCharsLong.html">ValuesCharsLong</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastCharsLong.html">Long Chars</a><span class="rvts6">-value, "as is"</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesDateTime.html">ValuesDate</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastDateTime.html">TDate</a><span class="rvts6">-value</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesDateTime.html">ValuesDateTime</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastDateTime.html">TDateTime</a><span class="rvts6">-value</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesRaDe.html">ValuesDe</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastRaDe.html">Declination</a><span class="rvts6">-value</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesFloat.html">ValuesFloat</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastFloat.html">Float</a><span class="rvts6">-value</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesInteger.html">ValuesInteger</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastInteger.html">Integer</a><span class="rvts6">-value</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesRaDe.html">ValuesRa</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastRaDe.html">Right ascension</a><span class="rvts6">-value</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesString.html">ValuesString</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastString.html">String</a><span class="rvts6">-value, the quote</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="150" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TLineBuilderValuesDateTime.html">ValuesTime</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">List of the </span><a class="rvts12" href="TLineItem.html">Values</a><span class="rvts6"> from the lines of header as </span><a class="rvts12" href="ExamplecCastDateTime.html">TTime</a><span class="rvts6">-value</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="Architecture.html">Architecture</a></p>
+<p class="rvps2"><a class="rvts12" href="TLineItem.html">TLineItem</a></p>
+<p class="rvps2"><a class="rvts12" href="Cast.html">Cast</a></p>
+<p class="rvps2"><a class="rvts12" href="TFitsHeader.html">TFitsHeader</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour/iphone-website-generation" target="_top">Free iPhone documentation generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

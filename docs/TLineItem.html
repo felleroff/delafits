@@ -1,0 +1,132 @@
+﻿<html>
+	
+<head>
+	<title>TLineItem</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TLineItem">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TLineItem");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">TLineItem</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Types.html">Types</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsCommon</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> type</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">TLineItem = </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Keyword: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ValueIndicate: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Value: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Str: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Bol: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Int: Int64;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Ext: Extended;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Dtm: TDateTime;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;NoteIndicate: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Note: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The </span><a class="rvts12" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">standard</a><a href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> describes the header of file as a list of lines. The length of line - 80 characters. Each 80-character header keyword record shall consist of a keyword name, a value indicator (only required if a value is present), an optional value, and an optional comment. TLineItem is a container (record) of elements of such line:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><span class="rvts7">&lt;keyword-separator-value-separator-note&gt;</span><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">keyword</span><span class="rvts6"> - keyword name;</span></li>
+<li class="rvps2"><span class="rvts7">separator</span><span class="rvts6"> - indicator that separates the keyword and the value, symbol '=';</span></li>
+<li class="rvps2"><span class="rvts7">value</span><span class="rvts6"> - value of a line;</span></li>
+<li class="rvps2"><span class="rvts7">separator</span><span class="rvts6"> - indicator that separates the value and the note, symbol '/';</span></li>
+<li class="rvps2"><span class="rvts7">note</span><span class="rvts6"> - comment to the value.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Keyword: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="Keywords.html">Keyword name</a><span class="rvts6">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">ValueIndicate: Boolean;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The Value Indicator. Separator of the keyword and the value. 'True' - there is a separator, 'False' - no separator;</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Value: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Str: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bol: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Int: Int64;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Ext: Extended;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Dtm: TDateTime;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The value of a line. The value can have various type: string, Boolean, TDateTime etc. In DeLaFits is defined this type 'Value: record...' (analogue Variant) - universal container. </span><a class="rvts12" href="Keywords.html">cCast</a><span class="rvts6"> constant defines the field TLineItem.Value, which contains the real data;</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">NoteIndicate: Boolean;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Separator of the value and the note. 'True' - there is a separator, 'False' - no separator;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Note: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Comment to the value.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="ToLineItem.html">ToLineItem</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com" target="_top">Free EPub and documentation generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

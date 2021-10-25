@@ -1,0 +1,173 @@
+﻿<html>
+	
+<head>
+	<title>Cast</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="cCast, cCastChars, cCastCharsLong, cCastString, cCastBoolean, cCastInteger, cCastFloat, cCastRa, cCastDe, cCastDateTime, cCastDate, cCastTime">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("Cast");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Cast</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Const.html">Const</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsCommon</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> const</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">cCast = 0;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">cCastChars &nbsp; &nbsp; = cCast + 1;</span></p>
+<p class="rvps3"><span class="rvts15">cCastCharsLong = cCast + 2;</span></p>
+<p class="rvps3"><span class="rvts15">cCastString &nbsp; &nbsp;= cCast + 3;</span></p>
+<p class="rvps3"><span class="rvts15">cCastBoolean &nbsp; = cCast + 4;</span></p>
+<p class="rvps3"><span class="rvts15">cCastInteger &nbsp; = cCast + 5;</span></p>
+<p class="rvps3"><span class="rvts15">cCastFloat &nbsp; &nbsp; = cCast + 6;</span></p>
+<p class="rvps3"><span class="rvts15">cCastRa &nbsp; &nbsp; &nbsp; &nbsp;= cCast + 7;</span></p>
+<p class="rvps3"><span class="rvts15">cCastDe &nbsp; &nbsp; &nbsp; &nbsp;= cCast + 8;</span></p>
+<p class="rvps3"><span class="rvts15">cCastDateTime &nbsp;= cCast + 9;</span></p>
+<p class="rvps3"><span class="rvts15">cCastDate &nbsp; &nbsp; &nbsp;= cCast + 10;</span></p>
+<p class="rvps3"><span class="rvts15">cCastTime &nbsp; &nbsp; &nbsp;= cCast + 11;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The constants define the rules of parse/compose of the line of header: </span><a class="rvts12" href="TLineItem.html">TLineItem.Value</a><span class="rvts6"> in </span><a class="rvts12" href="TLineBuilder.html">TLineBuilder</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Line is a container (record) of the form:</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><span class="rvts7">&lt;keyword-separator-value-separator-note&gt;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">keyword</span><span class="rvts6"> - keyword name;</span></li>
+<li class="rvps2"><span class="rvts7">separator</span><span class="rvts6"> - indicator that separates the keyword and the value, symbol '=';</span></li>
+<li class="rvps2"><span class="rvts7">value</span><span class="rvts6"> - value of a line;</span></li>
+<li class="rvps2"><span class="rvts7">separator</span><span class="rvts6"> - indicator that separates the value and the note, symbol '/';</span></li>
+<li class="rvps2"><span class="rvts7">note</span><span class="rvts6"> - comment to the value.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">List of const:</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCast"></a>
+<span class="rvts7">cCast</span><span class="rvts6"> - Basic constant, not used;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastChars"></a>
+<span class="rvts7">cCastChars</span><span class="rvts6"> - The value of the line is analysed "as is", length of lines = 80 characters, see </span><a class="rvts12" href="ExamplecCastChars.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastCharsLong"></a>
+<span class="rvts7">cCastCharsLong</span><span class="rvts6"> - The value of the line is analysed "as is", length of lines ~80 characters. The keyword will be duplicated, see </span><a class="rvts12" href="ExamplecCastCharsLong.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastString"></a>
+<span class="rvts7">cCastString</span><span class="rvts6"> - The value of the line is analysed as quote: the value in quotes, the quotes inside the value is duplicated, see </span><a class="rvts12" href="ExamplecCastString.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastBoolean"></a>
+<span class="rvts7">cCastBoolean</span><span class="rvts6"> - The value of the line is analysed as Boolean, see </span><a class="rvts12" href="ExamplecCastBoolean.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastInteger"></a>
+<span class="rvts7">cCastInteger</span><span class="rvts6"> - The value of the line is analysed as Integer (Int64), see </span><a class="rvts12" href="ExamplecCastInteger.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastFloat"></a>
+<span class="rvts7">cCastFloat</span><span class="rvts6"> - The value of the line is analysed as Float (Extended), see </span><a class="rvts12" href="ExamplecCastFloat.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastRa"></a>
+<span class="rvts7">cCastRa</span><span class="rvts6"> - The value of the line is analysed as Float (Extended) - Right ascension </span><span class="rvts17">α</span><span class="rvts6">, see </span><a class="rvts12" href="ExamplecCastRaDe.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastDe"></a>
+<span class="rvts7">cCastDe</span><span class="rvts6"> - The value of the line is analysed as Float (Extended) - Declination </span><span class="rvts17">δ</span><span class="rvts6">, see </span><a class="rvts12" href="ExamplecCastRaDe.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastDateTime"></a>
+<span class="rvts7">cCastDateTime</span><span class="rvts6"> - The value of the line is analysed as TDateTime, see </span><a class="rvts12" href="ExamplecCastDateTime.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastDate"></a>
+<span class="rvts7">cCastDate</span><span class="rvts6"> - The value of the line is analysed as TDateTime (Date only), see </span><a class="rvts12" href="ExamplecCastDateTime.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a name="DeLaFitsCommon.cCastTime"></a>
+<span class="rvts7">cCastTime</span><span class="rvts6"> - The value of the line is analysed as TDateTime (Time only), see </span><a class="rvts12" href="ExamplecCastDateTime.html">Example</a><span class="rvts6">;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">To read and rewrite the value of the line of the header use the properties of </span><a class="rvts12" href="TLineBuilder.html">TLineBuilder</a><span class="rvts6">: </span><a class="rvts12" href="TLineBuilderValuesChars.html">ValuesChars</a><span class="rvts6">, </span><a class="rvts12" href="TLineBuilderValuesCharsLong.html">ValuesCharsLong</a><span class="rvts6">, </span><a class="rvts12" href="TLineBuilderValuesInteger.html">ValuesInteger</a><span class="rvts6"> etc.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TLineItem.html">TLineItem</a></p>
+<p class="rvps2"><a class="rvts12" href="TLineBuilder.html">TLineBuilder</a></p>
+<p class="rvps2"><span class="rvts25"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour" target="_top">Easily create HTML Help documents</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

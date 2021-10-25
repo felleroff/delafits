@@ -1,0 +1,188 @@
+﻿<html>
+	
+<head>
+	<title>Palette</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TGraphicColor.Palette">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TGraphicColorPalette");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Palette</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Classes.html">Classes</a> &rsaquo;&rsaquo; <a href="TGraphicColor.html">TGraphicColor</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> DeLaFitsGraphics</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> property</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Visibility:</span><span class="rvts6"> public</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Member Of:</span><span class="rvts6"> </span><a class="rvts12" href="TGraphicColor.html">TGraphicColor</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">property</span><span class="rvts27"> Palette: PPalette </span><span class="rvts10">read</span><span class="rvts27"> FPalette </span><span class="rvts10">write</span><span class="rvts27"> SetPalette;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The palette of the graphic image of data. The graphic image of data 8-bit, i.e. 256 colors.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">DeLaFits (unit DeLaFitsGraphics) defines the following constants for the palette:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps5"><table width="420" border="0" cellpadding="2" cellspacing="2" style="border-width: 0px; border-spacing: 2px; margin: 0px auto;">
+<tr valign="top">
+<td width="130" valign="middle" style="padding: 2px;"><p class="rvps2"><span class="rvts7">cPaletteGrayScale</span></p>
+<p class="rvps2"><span class="rvts6"> &nbsp; &nbsp; &nbsp;(by default)</span></p>
+</td>
+<td style="padding: 2px;"><p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-pal-grayscale.png"></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="130" valign="middle" style="padding: 2px;"><p class="rvps2"><span class="rvts7">cPaletteHot</span></p>
+</td>
+<td style="padding: 2px;"><p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-pal-hot.png"></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="130" valign="middle" style="padding: 2px;"><p class="rvps2"><span class="rvts7">cPaletteCool</span></p>
+</td>
+<td style="padding: 2px;"><p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-pal-cool.png"></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="130" valign="middle" style="padding: 2px;"><p class="rvps2"><span class="rvts7">cPaletteBonnet</span></p>
+</td>
+<td style="padding: 2px;"><p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-pal-bonnet.png"></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="130" valign="middle" style="padding: 2px;"><p class="rvps2"><span class="rvts7">cPaletteJet</span></p>
+</td>
+<td style="padding: 2px;"><p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-pal-jet.png"></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The user can define his palette. To do this, create your own array of </span><a class="rvts12" href="TPalette.html">TPalette</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps6"><span class="rvts7">Code Sample:</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsBitmap;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn: TRgn;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp: TBitmap;</span></p>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsBitmap.CreateJoin(TFileStream.Create(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileRead));</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;// create bitmap</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp := TBitmap.Create;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;// define region</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.X1 &nbsp; &nbsp; := 34;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Y1 &nbsp; &nbsp; := 929;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Width &nbsp;:= 200;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Height := 200;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;// default</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.BitmapRead(Bmp, Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp.SaveToFile(</span><span class="rvts16">'pal-default.bmp'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;// set inverse GrayScale palette</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.Palette &nbsp; &nbsp; &nbsp;:= cPaletteGrayScale;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.PaletteOrder := palInverse;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp.SaveToFile(</span><span class="rvts16">'pal-grayscale-inverse.bmp'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;// set direct Jet palette</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.Palette &nbsp; &nbsp; &nbsp;:= cPaletteJet;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.PaletteOrder := palDirect;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp.SaveToFile(</span><span class="rvts16">'pal-jet-direct.bmp'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// free</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp.Free;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Stream.Free;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="630" border="0" cellpadding="2" cellspacing="2" style="border-width: 0px; border-spacing: 2px; margin: 0px auto;">
+<tr valign="top">
+<td style="padding: 2px;"><p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-pal-example1.png"></p>
+<p class="rvps5"><span class="rvts45">pal-default.bmp</span></p>
+</td>
+<td style="padding: 2px;"><p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-pal-example2.png"></p>
+<p class="rvps5"><span class="rvts45">pal-grayscale-inverse.bmp</span></p>
+</td>
+<td style="padding: 2px;"><p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-pal-example3.png"></p>
+<p class="rvps5"><span class="rvts45">pal-jet-direct.bmp</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TPalette.html">TPalette</a></p>
+<p class="rvps2"><a class="rvts12" href="TGraphicColor.html">TGraphicColor</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour/create-ebooks-for-amazon-kindle" target="_top">Free Kindle producer</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

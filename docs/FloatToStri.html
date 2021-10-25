@@ -1,0 +1,143 @@
+﻿<html>
+	
+<head>
+	<title>FloatToStri</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="FloatToStri">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("FloatToStri");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">FloatToStri</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Functions.html">Functions</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsString</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> function</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">function</span><span class="rvts15"> FloatToStri(</span><span class="rvts10">const</span><span class="rvts15"> Value: Extended): </span><span class="rvts10">string</span><span class="rvts15">; </span><span class="rvts10">overload</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">function</span><span class="rvts15"> FloatToStri(</span><span class="rvts10">const</span><span class="rvts15"> Value: Extended; Sign: Boolean; </span><span class="rvts10">const</span><span class="rvts15"> Fmt: </span><span class="rvts10">string</span><span class="rvts15">):</span></p>
+<p class="rvps11"><span class="rvts10">string</span><span class="rvts15">; </span><span class="rvts10">overload</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<p class="rvps3"><span class="rvts10">function</span><span class="rvts15"> FloatToStri(</span><span class="rvts10">const</span><span class="rvts15"> Value: Extended; Sign: Boolean; PrecInt, PrecFloat:</span></p>
+<p class="rvps11"><span class="rvts15">Word): </span><span class="rvts10">string</span><span class="rvts15">; </span><span class="rvts10">overload</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The function converts Float into String, by the </span><a class="rvts12" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">standard</a><a href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The function is overloaded:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ol style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: decimal;">
+<li value="1" class="rvps2"><span class="rvts6">see the function FloatToStr;</span></li>
+</ol>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ol style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: decimal;">
+<li value="2" class="rvps2"><span class="rvts6">Sign - display a sign Value;</span><br/><span class="rvts6">Fmt - format of the string, see the function Format;</span></li>
+</ol>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ol style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: decimal;">
+<li value="3" class="rvps2"><span class="rvts6">Sign - display a sign Value;</span><br/><span class="rvts6">PrecInt - the number of characters of the integer part of Value;</span><br/><span class="rvts6">PrecFloat - the number of characters of the fractional part of Value.</span></li>
+</ol>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Code Sample:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S1, S2, S3, S4, S5, S6: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span><span class="rvts15"> &nbsp;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// Simple</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S1 := FloatToStri(123.45);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// Sign</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S2 := FloatToStri(-123.45, False, </span><span class="rvts16">'.%2f'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S3 := FloatToStri(+123.45, True, </span><span class="rvts16">'.%2f'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// Rounding</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S4 := FloatToStri(123.45, False, </span><span class="rvts16">'.%3f'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S5 := FloatToStri(123.45, False, </span><span class="rvts16">'.%2f'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S6 := FloatToStri(123.45, False, </span><span class="rvts16">'.%1f'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// Prec</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S7 := FloatToStri(123.45, False, 4, 4);</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">// Simple</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">S1 = </span><span class="rvts16">'123.45'</span></p>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<p class="rvps3"><span class="rvts11">// Sign</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">S2 = </span><span class="rvts16">'-123.45'</span></p>
+<p class="rvps3"><span class="rvts15">S3 = </span><span class="rvts16">'+123.45'</span></p>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<p class="rvps3"><span class="rvts11">// Rounding</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">S4 = </span><span class="rvts16">'123.450'</span></p>
+<p class="rvps3"><span class="rvts15">S5 = </span><span class="rvts16">'123.45'</span></p>
+<p class="rvps3"><span class="rvts15">S6 = </span><span class="rvts16">'123.5'</span></p>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<p class="rvps3"><span class="rvts11">// Prec</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">S6 = </span><span class="rvts16">'0123.4500'</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="StriToFloat.html">StriToFloat</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour" target="_top">Easily create Help documents</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

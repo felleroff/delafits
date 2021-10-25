@@ -1,0 +1,148 @@
+﻿<html>
+	
+<head>
+	<title>TRep</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TRep, repUnknown, rep80f, rep64f, rep32f, rep08c, rep08u, rep16c, rep16u, rep32c, rep32u, rep64c">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TRep");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">TRep</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Types.html">Types</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsCommon</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> type</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">TRep = (repUnknown, rep80f, rep64f, rep32f, rep08c, rep08u, rep16c, rep16u,</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;rep32c, rep32u, rep64c);</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">TRep defines the user data presentation: integers or numbers from a floating comma (various bit). This type of buffer to read / write data, see. </span><a class="rvts12" href="TFitsFrame.html">TFitsFrame</a><span class="rvts6">. The </span><a class="rvts12" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">Standard</a><a href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> defines </span><a class="rvts12" href="TBitPix.html">9 types</a><span class="rvts6"> (including sign extension) of data format. Delphi and Lazarus define more numerical types, for example Word, Integer, Double, etc. DeLaFits supports a 10 of them.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">repUnknown</span><span class="rvts6"> - unknown type of the buffer of the user;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep80f</span><span class="rvts6"> - Extended;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep64f</span><span class="rvts6"> - Double;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep32f</span><span class="rvts6"> - Single;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep08c</span><span class="rvts6"> - ShortInt;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep08u</span><span class="rvts6"> - Byte;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep16c</span><span class="rvts6"> - SmallInt;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep16u</span><span class="rvts6"> - Word;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep32c</span><span class="rvts6"> - LongInt;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep32u</span><span class="rvts6"> - LongWord;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts7">rep64c</span><span class="rvts6"> - Int64;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Note:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">DeLaFits determines the best option of data representation automatically (analyzes BITPIX, BZERO and BSCALE). But, the user can specify the type of buffer read/write, for example:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Fits.DataRep := rep32c;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">It means that the read / write of data will be carried out with a buffer type:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Buffer: </span><span class="rvts10">array</span><span class="rvts15"> </span><span class="rvts10">of</span><span class="rvts15"> </span><span class="rvts10">array</span><span class="rvts15"> of LongInt;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Thus, </span><a class="rvts12" href="TFitsFrame.html">TFitsFrame</a><span class="rvts6"> defines Buffer as a two-dimensional array of integral numbers LongInt:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Fits.DataPrepare(Pointer(Buffer), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15">Fits.DataRead(Pointer(Buffer), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15">Fits.DataWrite(Pointer(Buffer), Rgn);</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><a class="rvts26" href="ToHduCore.html"><br/></a></p>
+<p class="rvps2"><a class="rvts12" href="TypesNumbers.html">Numbers</a></p>
+<p class="rvps2"><a class="rvts12" href="TypesArray.html">Array</a></p>
+<p class="rvps2"><a class="rvts12" href="TBitPix.html">TBitPix</a></p>
+<p class="rvps2"><a class="rvts12" href="TFitsFrame.html">TFitsFrame</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpauthoringsoftware.com" target="_top">What is a Help Authoring tool?</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

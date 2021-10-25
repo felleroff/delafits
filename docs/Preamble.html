@@ -1,0 +1,293 @@
+﻿<html>
+	
+<head>
+	<title>Preamble</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="FITS, Delphi, Lazarus, , ">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("Preamble");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Preamble</h1>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts9">What is DeLaFits?</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">DeLaFits </span><span class="rvts17">−</span><span class="rvts6"> native for </span><a class="rvts12" href="http://www.embarcadero.com/products/delphi" target="_blank">Delphi</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6"> and </span><a class="rvts12" href="http://lazarus.freepascal.org/" target="_blank">Lazarus</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6"> class library for operation with files in the </span><a class="rvts12" href="http://fits.gsfc.nasa.gov/" target="_blank">FITS</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6"> format:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">building new;</span></li>
+<li class="rvps2"><span class="rvts6">reading/editing of the header and of the data;</span></li>
+<li class="rvps2"><span class="rvts6">rendering (creation of a graphic image) of the data.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Terminology:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">The header is a list of records &lt;keyword-separator-value-separator-note&gt;;</span></li>
+<li class="rvps2"><span class="rvts6">The data is a two-dimensional array of integers or real numbers;</span></li>
+<li class="rvps2"><span class="rvts6">The graphic image of data is a two-dimensional array of indexes of a palette (256 colors). Such an array is easy to convert into a known graphic format, for example, </span><a class="rvts14" href="https://en.wikipedia.org/wiki/BMP_file_format" target="_blank">BMP</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6">.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">DeLaFits uses </span><a class="rvts14" href="TRgn.html">regions</a><span class="rvts6"> for data access and creation of a graphic image of data.</span></p>
+<p class="rvps2"><span class="rvts6">DeLaFits supports only </span><a class="rvts13" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">Single Image FITS</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6"> </span><span class="rvts17">−</span><span class="rvts6"> one header and one data unit.</span></p>
+<p class="rvps2"><span class="rvts6">Operations with data and graphics are available only for 2D-files </span><span class="rvts17">−</span><span class="rvts6"> </span><a class="rvts14" href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank">NAXIS</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6"> = 2.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7"><details><summary></span><span class="rvts7">Code Samples</span><span class="rvts7"></summary></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">uses</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;DeLaFitsCommon, DeLaFitsClasses, DeLaFitsGraphics;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">{ 1. Build new file }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">procedure</span><span class="rvts15"> TForm1.Button1Click(Sender: TObject);</span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFileFrame;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Hdu: THduCore2d;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// init header core</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Hdu.Simple := True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Hdu.BitPix := bi16c;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Hdu.NAxis1 := 1024;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Hdu.NAxis2 := 1024;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Hdu.BScale := 1.0;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Hdu.BZero &nbsp;:= 0.0;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// create new file</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFileFrame.CreateMade(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, Hdu);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// ... some code</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">{ 2. Read header value }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">procedure</span><span class="rvts15"> TForm1.Button2Click(Sender: TObject);</span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFileFrame;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index: Integer;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Ra: Extended;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFileFrame.CreateJoin(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileRead);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// search for line with a keyword 'RA'</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineBuilder.IndexOf(</span><span class="rvts16">'RA'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// if found, we read a value</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index&gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Ra := Fit.LineBuilder.ValuesRa[Index];</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;</span><span class="rvts11">// ... some code</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">{ 3. Edit header value }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">procedure</span><span class="rvts15"> TForm1.Button3Click(Sender: TObject);</span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFileFrame;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index: Integer;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item: TLineItem;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read and write</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFileFrame.CreateJoin(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileReadWrite);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// search for line with a keyword 'RA'</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineBuilder.IndexOf(</span><span class="rvts16">'RA'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// if found, we rewrite a value</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineBuilder.ValuesRa[Index] := 123.456;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineBuilder.Notes[Index] &nbsp; &nbsp;:= </span><span class="rvts16">'This is my value'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// &nbsp;if not find, we add a new line</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">else</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;</span><span class="rvts11">// init item</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Item.Keyword &nbsp; &nbsp; &nbsp; := </span><span class="rvts16">'RA'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Item.ValueIndicate := True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Item.Value.Ext &nbsp; &nbsp; := 123.456;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Item.NoteIndicate &nbsp;:= True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Item.Note &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:= </span><span class="rvts16">'This is my value'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;</span><span class="rvts11">// add item to header as RA</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineBuilder.Add(Item, cCastRa);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">{ 4. Read/write data }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">procedure</span><span class="rvts15"> TForm1.Button4Click(Sender: TObject);</span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFileFrame;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn: TRgn;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> Integer;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;X, Y: Integer;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read and write</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFileFrame.CreateJoin(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileReadWrite);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// init data region</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.X1 &nbsp; &nbsp; &nbsp; &nbsp;:= 0;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Y1 &nbsp; &nbsp; &nbsp; &nbsp;:= 0;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.ColsCount := 200;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.RowsCount := 100;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// set of data presentation: Integer</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRep := rep32c;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// prepare data buffer: SetLength(Data, Rgn.ColsCount, Rgn.RowsCount)</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataPrepare(Pointer(Data), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// data read</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRead(Pointer(Data), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// ... some code, example</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">for</span><span class="rvts15"> Y := 0 </span><span class="rvts10">to</span><span class="rvts15"> Rgn.RowsCount - 1 </span><span class="rvts10">do</span><span class="rvts15"> </span><span class="rvts11">// ~ Length(Data[0])</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">for</span><span class="rvts15"> X := 0 </span><span class="rvts10">to</span><span class="rvts15"> Rgn.ColsCount - 1 </span><span class="rvts10">do</span><span class="rvts15"> </span><span class="rvts11">// ~ Length(Data)</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Data[X, Y] := Data[X, Y] + 1;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// data write</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataWrite(Pointer(Data), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// free</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Data := </span><span class="rvts10">nil</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">{ 5. Render of full region of the data }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">procedure</span><span class="rvts15"> TForm1.Button5Click(Sender: TObject);</span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFileBitmap;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp: TBitmap;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFileBitmap.CreateJoin(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileRead);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// create bmp</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp := TBitmap.Create;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// render data</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.BitmapRead(Bmp);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// ... some code</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp.Free;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">{ 6. Render of full region of the data + color correction }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">procedure</span><span class="rvts15"> TForm1.Button6Click(Sender: TObject);</span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFileBitmap;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp: TBitmap;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFileBitmap.CreateJoin(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileRead);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// create bmp</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp := TBitmap.Create; &nbsp;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// set colors: contrast and palette</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.ToneContrast := 1.5;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.Palette := cPaletteHot;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// render data</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.BitmapRead(Bmp);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// ... some code &nbsp; </span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp.Free;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">{ 7. Render of some region of the data + affine transformations }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">procedure</span><span class="rvts15"> TForm1.Button7Click(Sender: TObject);</span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFileBitmap;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp: TBitmap;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn: TRgn; &nbsp;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFileBitmap.CreateJoin(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileRead);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// create bmp</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp := TBitmap.Create; &nbsp;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// affine transformations: scaling and rotation</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicGeom.Clr.Scl(2, 2, xy00).Rot(45, xy00);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// init some region</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.X1 &nbsp; &nbsp; := 0;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Y1 &nbsp; &nbsp; := 0;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Width &nbsp;:= 200;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Height := 200;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// render data</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.BitmapRead(Bmp, Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// ... some code</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp.Free;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"></details></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">General structure DeLaFits</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The library is easy to add to your project </span><span class="rvts17">−</span><span class="rvts6"> DeLaFits a set of modules (pas and inc).</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">For an user three modules are important:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">DeLaFitsCommon.pas </span><span class="rvts17">−</span><span class="rvts6"> the common constants, simple functions;</span></li>
+<li class="rvps2"><span class="rvts6">DeLaFitsClasses.pas </span><span class="rvts17">−</span><span class="rvts6"> access to header and data </span><span class="rvts17">−</span><span class="rvts6"> building, reading, editing;</span></li>
+<li class="rvps2"><span class="rvts6">DeLaFitsGraphics.pas </span><span class="rvts17">−</span><span class="rvts6"> rendering of the data </span><span class="rvts17">−</span><span class="rvts6"> creation of a graphic image.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">These modules contain the description of classes:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a class="rvts14" href="TFitsHeader.html">TFitsHeader</a><span class="rvts6"> </span><span class="rvts17">−</span><span class="rvts6"> access to the header;</span></li>
+<li class="rvps2"><a class="rvts14" href="TFitsFrame.html">TFitsFrame</a><span class="rvts6"> </span><span class="rvts17">−</span><span class="rvts6"> access to the data;</span></li>
+<li class="rvps2"><a class="rvts14" href="TFitsBitmap.html">TFitsBitmap</a><span class="rvts6"> </span><span class="rvts17">−</span><span class="rvts6"> creation of a graphic image of data in the BMP format.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Topic </span><a class="rvts14" href="Design.html">Design</a><span class="rvts6"> contains the Short description of the </span><a class="rvts13" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">Single Image FITS</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6">Topic </span><a class="rvts14" href="Architecture.html">Architecture</a><span class="rvts6"> contains the description of architecture of the classes DeLaFits.</span></p>
+<p class="rvps2"><span class="rvts6">Topic </span><a class="rvts14" href="Compilation.html">Compilation</a><span class="rvts6"> contains the description of directives of the conditional compilation.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Testing</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">DeLaFits tested in Delphi (7, 2010) and Lazarus (1.0.4, 1.0.6, 1.2.2).</span></p>
+<p class="rvps2"><span class="rvts6">OS Windows (XP, 7), Ubuntu(15.10) and Xubuntu (14.04).</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/help-authoring-tool" target="_top">Single source CHM, PDF, DOC and HTML Help creation</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

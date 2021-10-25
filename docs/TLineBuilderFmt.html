@@ -1,0 +1,340 @@
+﻿<html>
+	
+<head>
+	<title>Fmt</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TLineBuilder.Fmt">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TLineBuilderFmt");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Fmt</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Classes.html">Classes</a> &rsaquo;&rsaquo; <a href="TLineBuilder.html">TLineBuilder</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> DeLaFitsClasses</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> property</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Visibility:</span><span class="rvts6"> public</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Member Of:</span><span class="rvts6"> </span><a class="rvts12" href="TLineBuilder.html">TLineBuilder</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">property</span><span class="rvts15"> Fmt: PFormatLine </span><span class="rvts10">read</span><span class="rvts15"> GetFmt;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Reference to the </span><a class="rvts12" href="TFormatLine.html">parameters</a><span class="rvts6"> of parse/compose a header line in the methods and properties of </span><a class="rvts12" href="TLineBuilder.html">TLineBuilder</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Default property values:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaStr.wWidth &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= -cWidthLineValue; &nbsp; &nbsp; &nbsp;</span><span class="rvts11">// -20</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaStr.wWidthQuoteInside = -cWidthLineValueQuote; </span><span class="rvts11">// -8</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaBol.wWidth = cWidthLineValue; </span><span class="rvts11">// 20</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaInt.wWidth = cWidthLineValue; </span><span class="rvts11">// 20</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaInt.wSign &nbsp;= False;</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaInt.wFmt &nbsp; = </span><span class="rvts16">'%d'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaFloat.wWidth = cWidthLineValue; </span><span class="rvts11">// 20</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaFloat.wSign &nbsp;= False;</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaFloat.wFmt &nbsp; = </span><span class="rvts16">'%g'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaDateTime.rFmtShortDate &nbsp; &nbsp; = yymmdd;</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaDateTime.wWidth &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= -cWidthLineValue; &nbsp; &nbsp; &nbsp;</span><span class="rvts11">// -20</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaDateTime.wWidthQuoteInside = -cWidthLineValueQuote; </span><span class="rvts11">// -8</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaCoord.rFmtMeasurRa &nbsp; &nbsp; &nbsp;= cmHour;</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaCoord.wWidth &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= -cWidthLineValue; &nbsp; &nbsp; &nbsp;</span><span class="rvts11">// -20</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaCoord.wWidthQuoteInside = -cWidthLineValueQuote; </span><span class="rvts11">// -8</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaCoord.wPrecRa &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = 4;</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaCoord.wPrecDe &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = 4;</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaCoord.wFmtMeasurRa &nbsp; &nbsp; &nbsp;= cmHour;</span></p>
+<p class="rvps3"><span class="rvts15">Fmt^.vaCoord.wFmtNotate &nbsp; &nbsp; &nbsp; &nbsp;= cmSexagesimal;</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The fields of property define:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">text representation of the String-values</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write default</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesString[10] := </span><span class="rvts16">'text'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write change: length of value and length of value in quote</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaStr.wWidth &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:= -(cWidthLineValue &nbsp; &nbsp; &nbsp;+ 1);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaStr.wWidthQuoteInside := -(cWidthLineValueQuote + 1);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesString[11] := </span><span class="rvts16">'text'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY1= 'text &nbsp; &nbsp;' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; / default &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY2= 'text &nbsp; &nbsp; ' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; / change &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">text representation of the Boolean-values</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write default</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesBoolean[10] := True;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write change: length of value</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaBol.wWidth := cWidthLineValue + 1;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesBoolean[11] := True;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY1= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;T / default &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY2= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; T / change &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">text representation of the Integer-values</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write default</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesInteger[10] := 100;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write change: length of value, sign and format</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaInt.wWidth := cWidthLineValue + 1;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaInt.wSign &nbsp;:= True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaInt.wFmt &nbsp; := </span><span class="rvts16">'%.4d'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesInteger[11] := 100;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY1= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;100 / default &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY2= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; +0100 / change &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">text representation of the Float-values</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write default</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesFloat[10] := 1.0;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write change: length of value, sign and format</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaFloat.wWidth := cWidthLineValue + 1;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaFloat.wSign &nbsp;:= True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaFloat.wFmt &nbsp; := </span><span class="rvts16">'%e'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesFloat[11] := 1.0;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY1= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 / default &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY2= +1.00000000000000E+000 / change &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">text representation of the TDateTime-values</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Input</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">09</span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">DATE &nbsp; &nbsp;= '06/09/11' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; / [old format] UTC date of exposure start &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY1= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/ default &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY2= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/ change &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// read default</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Date1 := Fit.LineBuilder.ValuesDate[09];</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// read change short format</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaDateTime.rFmtShortDate := ddmmyy;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Date2 := Fit.LineBuilder.ValuesDate[09];</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write default</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesDate[10] := EncodeDate(2015, 05, 31);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write change: length of value and length of value in quote</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaDateTime.wWidth &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:= -(cWidthLineValue + 1);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaDateTime.wWidthQuoteInside :=</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-(cWidthLineValueQuote + 5);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesDate[11] := EncodeDate(2015, 05, 31);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">// read</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Date1 = 11.09.2006</span></p>
+<p class="rvps3"><span class="rvts15">Date2 = 06.09.2011</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">// write</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY1= '2015-05-31' &nbsp; &nbsp; &nbsp; &nbsp; / default &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY2= '2015-05-31 &nbsp; ' &nbsp; &nbsp; &nbsp; / change &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">text representation of the values of the coordinates: Ra, De</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write default</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesRa[10] := 15 + 7.5; </span><span class="rvts11">// ~1.5h</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// write change: precision, length of value and length of value in quote</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaCoord.wPrecRa &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; := 5;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaCoord.wWidth &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:= -(cWidthLineValue + 1);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Fmt^.vaCoord.wWidthQuoteInside := -(cWidthLineValueQuote + 5);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.ValuesRa[11] := 15 + 7.5; </span><span class="rvts11">// ~1.5h</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY1= '01:30:00.00' &nbsp; &nbsp; &nbsp; &nbsp;/ default &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY2= '01:30:00.000 ' &nbsp; &nbsp; &nbsp; / change &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps6"><span class="rvts7"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TFormatLine.html">TFormatLine</a></p>
+<p class="rvps2"><a class="rvts12" href="TLineItem.html">TLineItem</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/create-epub-ebooks" target="_top">Free EPub producer</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

@@ -1,0 +1,131 @@
+﻿<html>
+	
+<head>
+	<title>TFitsBitmap</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TFitsBitmap, TFitsBitmap.BitmapRead">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TFitsBitmap");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">TFitsBitmap</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Classes.html">Classes</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> DeLaFitsGraphics</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> class</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Inherited from:</span><span class="rvts6"> </span><a class="rvts12" href="TFitsGraphic.html">TFitsGraphic</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The class is designed to create a </span><a class="rvts12" href="TFitsGraphic.html#principle-creating-gid">graphic image of the data</a><span class="rvts6"> in </span><a class="rvts12" href="https://en.wikipedia.org/wiki/BMP_file_format" target="_blank">BMP format</a><a href="https://en.wikipedia.org/wiki/BMP_file_format" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The graphic image of data - is the two-dimensional array of indexes of the </span><a class="rvts12" href="TGraphicColorPalette.html">palette</a><span class="rvts6">, see </span><a class="rvts12" href="TFitsGraphicGraphicRead.html">TFitsGraphic.GraphicRead</a><span class="rvts6">. TFitsBitmap converts this two-dimensional array into a </span><a class="rvts12" href="https://en.wikipedia.org/wiki/BMP_file_format" target="_blank">BMP format</a><a href="https://en.wikipedia.org/wiki/BMP_file_format" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6">, see </span><a class="rvts12" href="TFitsBitmapBitmapRead.html">TFitsBitmap.BitmapRead</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-bmp-create.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Protected methods</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="180" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Init override</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Initializes the fields of the class</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Constructor &amp; Destructor</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="180" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">destructor Destroy; override</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Destroys an object and all related objects, except stream!</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Public methods</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="180" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TFitsBitmapBitmapRead.html">BitmapRead</a><span class="rvts6"> overload</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Creating the graphic image of the data in BMP format</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="180" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">BitmapRelease</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps6"><span class="rvts6">Frees memory for internal buffer</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="Architecture.html">Architecture</a></p>
+<p class="rvps2"><a class="rvts12" href="TFitsGraphic.html">TFitsGraphic</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com" target="_top">Easy EBook and documentation generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

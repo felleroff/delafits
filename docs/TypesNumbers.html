@@ -1,0 +1,107 @@
+﻿<html>
+	
+<head>
+	<title>Numbers</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="P08u, P08c, P16u, , P16c, P32f, P32u, P32c, P64f, P64c, P80f, T08u, T08c, T16u, T16c, T32f, T32u, T32c, T64f, T64c, T80f">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TypesNumbers");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Numbers</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Types.html">Types</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsCommon</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> type</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">P08u = ^T08u;</span></p>
+<p class="rvps3"><span class="rvts15">P08c = ^T08c;</span></p>
+<p class="rvps3"><span class="rvts15">P16u = ^T16u;</span></p>
+<p class="rvps3"><span class="rvts15">P16c = ^T16c;</span></p>
+<p class="rvps3"><span class="rvts15">P32f = ^T32f;</span></p>
+<p class="rvps3"><span class="rvts15">P32u = ^T32u;</span></p>
+<p class="rvps3"><span class="rvts15">P32c = ^T32c;</span></p>
+<p class="rvps3"><span class="rvts15">P64f = ^T64f;</span></p>
+<p class="rvps3"><span class="rvts15">P64c = ^T64c;</span></p>
+<p class="rvps3"><span class="rvts15">P80f = ^T80f;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">T08u = Byte;</span></p>
+<p class="rvps3"><span class="rvts15">T08c = ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15">T16u = Word;</span></p>
+<p class="rvps3"><span class="rvts15">T16c = SmallInt;</span></p>
+<p class="rvps3"><span class="rvts15">T32f = Single;</span></p>
+<p class="rvps3"><span class="rvts15">T32u = LongWord;</span></p>
+<p class="rvps3"><span class="rvts15">T32c = LongInt;</span></p>
+<p class="rvps3"><span class="rvts15">T64f = Double;</span></p>
+<p class="rvps3"><span class="rvts15">T64c = Int64;</span></p>
+<p class="rvps3"><span class="rvts15">T80f = Extended;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Synonyms of the standard numerical data types. Types are used in methods of read/write data, and also for conversion of standard types to the FITS types, and vice versa.</span><br/><span class="rvts6">Logic of naming types: symbol "T" + data size (byte count) + representation of the number.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Representation of numbers (format):</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">f - floating-point;</span></li>
+<li class="rvps2"><span class="rvts6">u - unsigned binary integer;</span></li>
+<li class="rvps2"><span class="rvts6">c - two's complement binary integer;</span></li>
+</ul>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour/create-ebooks-for-amazon-kindle" target="_top">Full-featured Kindle eBooks generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

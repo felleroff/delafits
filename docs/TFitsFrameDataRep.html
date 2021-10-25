@@ -1,0 +1,245 @@
+﻿<html>
+	
+<head>
+	<title>DataRep</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TFitsFrameDataRep">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TFitsFrameDataRep");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">DataRep</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Classes.html">Classes</a> &rsaquo;&rsaquo; <a href="TFitsFrame.html">TFitsFrame</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> DeLaFitsClasses</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> property</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Visibility:</span><span class="rvts6"> public</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Member Of:</span><span class="rvts6"> </span><a class="rvts12" href="TFitsFrame.html">TFitsFrame</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">property</span><span class="rvts27"> DataRep: TRep </span><span class="rvts10">read</span><span class="rvts27"> FDataRep </span><span class="rvts10">write</span><span class="rvts27"> SetDataRep;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TRep.html">Type</a><span class="rvts6"> of the elements of buffer of user for read/write data.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">By </span><a class="rvts12" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">Standard</a><a href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6">, size and bit depth of the data frame specifies the BITPIX </span><a class="rvts12" href="Keywords.html">keyword</a><span class="rvts6">. However, the user can specify the type of elements of buffer for reading and writing data:</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep80f </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> Extended;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep64f </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> Double;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep32f </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> Single;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep08c </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> ShortInt;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep08u </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> Byte;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep16c </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> SmallInt;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep16u </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> Word;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep32c </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> LongInt;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep32u </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> LongWord;</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li style="margin-left: 0px" class="rvps3"><span class="rvts15">DataRep := rep64c </span><span class="rvts42">⇒</span><span class="rvts15"> Data: </span><span class="rvts10">array of array of</span><span class="rvts15"> Int64;</span></li>
+</ul>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps6"><span class="rvts7">Code Sample:</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Input</span></p>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">00</span></p>
+<p class="rvps2"><span class="rvts29">01</span></p>
+<p class="rvps2"><span class="rvts29">02</span></p>
+<p class="rvps2"><span class="rvts29">03</span></p>
+<p class="rvps2"><span class="rvts29">04</span></p>
+<p class="rvps2"><span class="rvts29">05</span></p>
+<p class="rvps2"><span class="rvts29">06</span></p>
+<p class="rvps2"><span class="rvts29">07</span></p>
+<p class="rvps2"><span class="rvts38">…</span></p>
+<p class="rvps2"><span class="rvts38"><br/></span></p>
+<p class="rvps2"><span class="rvts41">$</span></p>
+<p class="rvps2"><span class="rvts41"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SIMPLE &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;T / conforms to FITS standard &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BITPIX &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 16 / number of bits per data value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">NAXIS &nbsp; = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 / number of axes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">NAXIS1 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7 / length of first axis &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">NAXIS2 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;8 / length of second axis &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BSCALE &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1.0 / data scaling factor &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BZERO &nbsp; = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 / data offset &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">END &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts38">…</span></p>
+<p class="rvps8"><span class="rvts30">data fragment </span></p>
+<p class="rvps2"><span class="rvts29">00 65 00 66 00 67 00 68 00 69 00 6A 00 6B ..</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFrame;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn: TRgn;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;RepAuto: TRep;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Data64f: </span><span class="rvts10">array of array of</span><span class="rvts15"> Double;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Data16c: </span><span class="rvts10">array of array of</span><span class="rvts15"> SmallInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Data32c: </span><span class="rvts10">array of array of</span><span class="rvts15"> Integer;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFrame.CreateJoin(TFileStream.Create(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileRead));</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// define region</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.X1 := 0;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Y1 := 0;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.ColsCount := 4;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.RowsCount := 3;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// get auto representation of data</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;RepAuto := Fit.DataRep;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// read a block of data into array of array of Double</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRep := rep64f;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataPrepare(Pointer(Data64f), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRead(Pointer(Data64f), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// read a block of data into array of array of SmallInt</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRep := rep16c;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataPrepare(Pointer(Data16c), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRead(Pointer(Data16c), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// read a block of data into array of array of Integer</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRep := rep32c;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataPrepare(Pointer(Data32c), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRead(Pointer(Data32c), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// ... some code</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// free</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Stream.Free;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Data64f := </span><span class="rvts10">nil</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Data16c := </span><span class="rvts10">nil</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Data32c := </span><span class="rvts10">nil</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">RepAuto = rep16c</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps3"><table width="650" border="0" cellpadding="0" cellspacing="0" style="border-width: 0px; border-spacing: 0px;">
+<tr valign="top">
+<td width="140" style="padding: 0px;"><p class="rvps2"><span class="rvts41">Data64f [X, Y] = </span></p>
+</td>
+<td style="padding: 0px;"><p class="rvps2"><span class="rvts41">101.0 &nbsp;102.0 &nbsp;103.0 &nbsp;104.0</span></p>
+<p class="rvps2"><span class="rvts41">201.0 &nbsp;202.0 &nbsp;203.0 &nbsp;204.0</span></p>
+<p class="rvps2"><span class="rvts41">301.0 &nbsp;302.0 &nbsp;303.0 &nbsp;304.0</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps3"><table width="650" border="0" cellpadding="0" cellspacing="0" style="border-width: 0px; border-spacing: 0px;">
+<tr valign="top">
+<td width="140" style="padding: 0px;"><p class="rvps2"><span class="rvts41">Data16c [X, Y] = </span></p>
+</td>
+<td style="padding: 0px;"><p class="rvps2"><span class="rvts41">101 &nbsp;102 &nbsp;103 &nbsp;104</span></p>
+<p class="rvps2"><span class="rvts41">201 &nbsp;202 &nbsp;203 &nbsp;204</span></p>
+<p class="rvps2"><span class="rvts41">301 &nbsp;302 &nbsp;303 &nbsp;304</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps3"><table width="650" border="0" cellpadding="0" cellspacing="0" style="border-width: 0px; border-spacing: 0px;">
+<tr valign="top">
+<td width="140" style="padding: 0px;"><p class="rvps2"><span class="rvts41">Data32c [X, Y] = </span></p>
+</td>
+<td style="padding: 0px;"><p class="rvps2"><span class="rvts41">101 &nbsp;102 &nbsp;103 &nbsp;104</span></p>
+<p class="rvps2"><span class="rvts41">201 &nbsp;202 &nbsp;203 &nbsp;204</span></p>
+<p class="rvps2"><span class="rvts41">301 &nbsp;302 &nbsp;303 &nbsp;304</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TRep.html">TRep</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com" target="_top">Free Web Help generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

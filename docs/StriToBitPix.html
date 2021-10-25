@@ -1,0 +1,101 @@
+﻿<html>
+	
+<head>
+	<title>StriToBitPix</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="StriToBitPix">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("StriToBitPix");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">StriToBitPix</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Functions.html">Functions</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsString</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> function</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">function</span><span class="rvts15"> StriToBitPix(</span><span class="rvts10">const</span><span class="rvts15"> Value: </span><span class="rvts10">string</span><span class="rvts15">): TBitPix;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The function converts String into </span><a class="rvts12" href="TBitPix.html">TBitPix</a><span class="rvts6">, by the </span><a class="rvts12" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">standard</a><a href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6">. Value has to be equal to one of values:'-64','-32', '8', '16', '32', '64', in another case the function generates an exception </span><a class="rvts12" href="ErrorCodes.html">2003:ERROR_STRING_BITPIX.</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Code Sample:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;B1, B2, B3: TBitPix;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;B1 := StriToBitPix(</span><span class="rvts16">'-32'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;B2 := StriToBitPix(</span><span class="rvts16">'32'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;B3 := StriToBitPix(</span><span class="rvts16">'Abcd'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">B1 = bi32f</span></p>
+<p class="rvps3"><span class="rvts15">B2 = bi32c</span></p>
+<p class="rvps3"><span class="rvts15">B3 = biUnknown, EFitsStringException, ERROR_STRING_BITPIX:1003</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TBitPix.html">TBitPix</a></p>
+<p class="rvps2"><a class="rvts12" href="BitPixToStri.html">BitPixToStri</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/create-epub-ebooks" target="_top">Free EPub producer</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

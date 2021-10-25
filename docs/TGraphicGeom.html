@@ -1,0 +1,268 @@
+﻿<html>
+	
+<head>
+	<title>TGraphicGeom</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content=", TGraphicGeom, TGraphicGeom.Clr, TGraphicGeom.Mul, TGraphicGeom.Rot, TGraphicGeom.Scl, TGraphicGeom.Trn">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TGraphicGeom");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">TGraphicGeom</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Classes.html">Classes</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> DeLaFitsGraphics</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> class</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Inherited from:</span><span class="rvts6"> System.TObject</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Member Of:</span><span class="rvts6"> </span><a class="rvts12" href="TFitsGraphic.html">TFitsGraphic</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The class is designed for </span><a class="rvts12" href="https://en.wikipedia.org/wiki/Affine_transformation" target="_blank">affine transformation</a><a href="https://en.wikipedia.org/wiki/Affine_transformation" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> of the graphic image of data: shift, rotation, scale, shear.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a name="GeomSysCoord"></a>
+<span class="rvts6">There are two coordinate systems of the frame:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ol style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: decimal;">
+<li value="1" class="rvps2"><span class="rvts6">SysScene - current coordinate system, after a series of affine transformations;</span></li>
+<li value="2" class="rvps2"><span class="rvts6">SysFrame - coordinate system of the frame, associated with NAXIS1, NAXIS2;</span></li>
+</ol>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">By default, after creating an object </span><a class="rvts12" href="TFitsGraphic.html">TFitsGraphic</a><span class="rvts6">, SysScene </span><span class="rvts17">≡</span><span class="rvts6"> SysFrame.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-file-map.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">After a series of </span><a class="rvts12" href="https://en.wikipedia.org/wiki/Affine_transformation" target="_blank">affine transformations</a><a href="https://en.wikipedia.org/wiki/Affine_transformation" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> (see methods </span><a class="rvts12" href="TGraphicGeomTrn.html">Trn</a><span class="rvts6">, </span><a class="rvts12" href="TGraphicGeomScl.html">Scl</a><span class="rvts6">, </span><a class="rvts12" href="TGraphicGeomRot.html">Rot</a><span class="rvts6"> etc.) the frame position as though changes relative to SysScene:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-sys-change.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Method for creating a graphic image of the data - </span><a class="rvts12" href="TFitsGraphicGraphicRead.html">TFitsGraphic.GraphicRead</a><span class="rvts6">, uses the coordinate system a SysScene.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Constructor &amp; Destructor</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="180" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">constructor Create</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">The constructor. </span><a class="rvts12" href="TFitsGraphic.html">TFitsGraphic</a><span class="rvts6"> creates this object</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="180" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">destructor Destroy; override</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">The destructor. </span><a class="rvts12" href="TFitsGraphic.html">TFitsGraphic</a><span class="rvts6"> destroys this object</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Public methods</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">ClipFrmInFrm</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Returns a polygon TClip in system SysFrame - intersection a region </span><a class="rvts12" href="TRgn.html">TRgn</a><span class="rvts6"> of SysFrame and the full region of the frame </span><a class="rvts12" href="TFitsFrameDataRgn.html">DataRgn</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">ClipFrmInScn</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Returns a polygon TClip in system SysScene - intersection a region </span><a class="rvts12" href="TRgn.html">TRgn</a><span class="rvts6"> of SysFrame and the full region of the frame </span><a class="rvts12" href="TFitsFrameDataRgn.html">DataRgn</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">ClipScnInFrm</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Returns a polygon TClip in system SysFrame - intersection a region </span><a class="rvts12" href="TRgn.html">TRgn</a><span class="rvts6"> of SysScene and the full region of the frame </span><a class="rvts12" href="TFitsFrameDataRgn.html">DataRgn</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">ClipScnInScn</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Returns a polygon TClip in system SysScene - intersection a region </span><a class="rvts12" href="TRgn.html">TRgn</a><span class="rvts6"> of SysScene and the full region of the frame </span><a class="rvts12" href="TFitsFrameDataRgn.html">DataRgn</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TGraphicGeomClr.html">Clr</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Set the matrix of affine transformations to the original state:</span></p>
+<p class="rvps2"><span class="rvts6">SysScene </span><span class="rvts17">≡</span><span class="rvts6"> SysFrame</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TGraphicGeomMul.html">Mul</a></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Multiplies the matrix of affine transformations</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">PixFrmToScn</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Converts the coordinates of the pixel out of SysFrame into SysScene</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">PixScnToFrm</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Converts the coordinates of the pixel out of SysScene into SysFrame</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">PntFrmToScn</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Converts the coordinates of the point out of SysFrame into SysScene</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">PntScnToFrm</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Converts the coordinates of the point out of SysScene into SysFrame</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">QuadFrmToScn</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Converts the coordinates of the region </span><a class="rvts12" href="TRgn.html">TRgn</a><span class="rvts6"> of SysFrame into the quadrangle TQuad of SysScene</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">QuadScnToFrm</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Converts the coordinates of the region </span><a class="rvts12" href="TRgn.html">TRgn</a><span class="rvts6"> of SysScene into the quadrangle TQuad of SysFrame</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">RectFrmToScn</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Returns a rectangle TQuad - contour of the region </span><a class="rvts12" href="TRgn.html">TRgn</a><span class="rvts6"> of SysFrame in system a SysScene</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">RectScnToFrm</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Returns a rectangle TQuad - contour of the region </span><a class="rvts12" href="TRgn.html">TRgn</a><span class="rvts6"> of SysScene in system a SysFrame</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TGraphicGeomRot.html">Rot</a><span class="rvts6"> overload</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Rotating: </span><span class="rvts17">±α</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TGraphicGeomScl.html">Scl</a><span class="rvts6"> overload</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Scale: (sX, sY)</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Shx</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Shear (bevel) along the X axis: </span><span class="rvts17">α</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Shy</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Shear (bevel) along the Y axis: </span><span class="rvts17">α</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="TGraphicGeomTrn.html">Trn</a><span class="rvts6"> overload</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Shift: (dX, dY)</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Public property</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Fits reference</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Reference to the owner - </span><a class="rvts12" href="TFitsGraphic.html">TFitsGraphic</a><span class="rvts6">, see topic </span><a class="rvts12" href="Architecture.html">Architecture</a></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">MatrixFrm readonly</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Matrix of affine transformations: describes a coordinate system SysScene in a coordinate system SysFrame</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="140" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">MatrixScn readonly</span></p>
+</td>
+<td style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Inverse matrix of affine transformations: describes a coordinate system SysFrame in a coordinate system SysScene</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="Architecture.html">Architecture</a></p>
+<p class="rvps2"><a class="rvts12" href="TFitsGraphic.html">TFitsGraphic</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour/create-ebooks-for-amazon-kindle" target="_top">Produce Kindle eBooks easily</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

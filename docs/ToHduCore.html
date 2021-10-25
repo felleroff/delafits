@@ -1,0 +1,105 @@
+﻿<html>
+	
+<head>
+	<title>ToHduCore</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="ToHduCore">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("ToHduCore");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">ToHduCore</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Functions.html">Functions</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsCommon</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> function</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">function</span><span class="rvts15"> ToHduCore(Simple: Boolean; BitPix: TBitPix; </span><span class="rvts10">const</span><span class="rvts15"> NAxisn: </span><span class="rvts10">array of</span><span class="rvts15"> Word;</span></p>
+<p class="rvps11"><span class="rvts15">BScale: Double = 1.0; BZero: Double = 0.0): THduCore;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The function creates a record </span><a class="rvts12" href="THduCore.html">THduCore</a><span class="rvts6">. Input parameters is not checked.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Code Sample:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;R: THduCore;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;R := ToHduCore(True, bi32c, [100, 200]);</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">R.Simple &nbsp; &nbsp;= True;</span></p>
+<p class="rvps3"><span class="rvts15">R.BitPix &nbsp; &nbsp;= bi32c;</span></p>
+<p class="rvps3"><span class="rvts15">R.NAxis &nbsp; &nbsp; = 2;</span></p>
+<p class="rvps3"><span class="rvts15">R.NAxisn[0] = 100;</span></p>
+<p class="rvps3"><span class="rvts15">R.NAxisn[1] = 200;</span></p>
+<p class="rvps3"><span class="rvts15">R.BZero &nbsp; &nbsp; = 0.0;</span></p>
+<p class="rvps3"><span class="rvts15">R.BScale &nbsp; &nbsp;= 1.0;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TBitPix.html">TBitPix</a></p>
+<p class="rvps2"><a class="rvts12" href="THduCore.html">THduCore</a></p>
+<p class="rvps2"><a class="rvts12" href="THduCore2d.html">THduCore2d</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com" target="_top">Easy CHM and documentation editor</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

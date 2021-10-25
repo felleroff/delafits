@@ -1,0 +1,115 @@
+﻿<html>
+	
+<head>
+	<title>THduCore2d</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="THduCore2d">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("THduCore2d");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">THduCore2d</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Types.html">Types</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsCommon</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> type</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">THduCore2d = </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Simple: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;BitPix: TBitPix;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;NAxis1, NAxis2: Word;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;BScale: Double;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;BZero: Double;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Main meta information a two-dimensional file: values of basic keywords of header. These values describe data: physical representation, dimensionality, bit depth. Basic keywords: SIMPLE, BITPIX, NAXIS, NAXIS1, NAXIS2, BSCALE and BZERO. See a detailed description of </span><a class="rvts12" href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank">Keywords defined in the FITS Standard</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts27">Simple: Boolean;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Does file conform to the </span><a class="rvts12" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">Standard</a><a href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6">? True - yes, False - no. DeLaFits support access to the data only for Simple files;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts27">BitPix: TBitPix;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Bits per data value, see </span><a class="rvts12" href="TBitPix.html">TBitPix</a><span class="rvts6">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">NAxis1, NAxis2: Word;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The length of two-dimensional array. According to </span><a class="rvts12" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">Standard</a><a href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> (version 3.0, page 14-15) two-dimensional pixel data in the file are arranged as follows (example for frame Naxis1 = 7; Naxis2 = 8):</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><img alt="Карта FITS-файла: расположение пикселей" style="padding : 1px;" src="lib/img-file-map.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Access to the pixels of two-dimensional data array:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Pix := Data[Xmax, Ymax]</span></p>
+<p class="rvps3"><span class="rvts15">Pix := Data[ColsCount - 1, RowsCount - 1]</span></p>
+<p class="rvps3"><span class="rvts15">Pix := Data[NAXIS1 - 1, NAXIS2 - 1]</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">BScale, BZero: Double;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Linear factor and zero point in scaling equation: physical_value = BZERO + BSCALE * array_value.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><a class="rvts26" href="ToHduCore.html"><br/></a></p>
+<p class="rvps2"><a class="rvts12" href="THduCore.html">THduCore</a></p>
+<p class="rvps2"><a class="rvts12" href="ToHduCore2d.html">ToHduCore2d</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour/iphone-website-generation" target="_top">Easily create iPhone documentation</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

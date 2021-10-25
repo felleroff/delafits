@@ -1,0 +1,107 @@
+﻿<html>
+	
+<head>
+	<title>Quoted</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content=", Quoted">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("Quoted");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Quoted</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Functions.html">Functions</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> </span><span class="rvts6">DeLaFitsString</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> function</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">function</span><span class="rvts15"> Quoted(</span><span class="rvts10">const</span><span class="rvts15"> S: </span><span class="rvts10">string</span><span class="rvts15">; Width: Integer = 0): </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The function converts String into String, by the </span><a class="rvts12" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">standard</a><a href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6">: quoted a string S.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps12"><span class="rvts35">"A character string value shall be composed only of the set of restricted ASCII text characters, enclosed by single quote characters. A single quote is represented within a string as two successive single quotes".</span></p>
+<p class="rvps2"><span class="rvts35"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Width defines length of the string S inside the quotes.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Code Sample:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S1, S2, S3, S4: string;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S1 := Quoted(</span><span class="rvts16">'text'</span><span class="rvts15">, -5);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S2 := Quoted(</span><span class="rvts16">'text'</span><span class="rvts15">, ±4);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S3 := Quoted(</span><span class="rvts16">'text'</span><span class="rvts15">, +5);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;S4 := Quoted(</span><span class="rvts16">'d’text'</span><span class="rvts15">, 0);</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">S1 = </span><span class="rvts16">'’text ’'</span></p>
+<p class="rvps3"><span class="rvts15">S2 = </span><span class="rvts16">'’text’'</span></p>
+<p class="rvps3"><span class="rvts15">S3 = </span><span class="rvts16">'’ text’'</span></p>
+<p class="rvps3"><span class="rvts15">S4 = </span><span class="rvts16">'’d’’text’'</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="Alignment.html">Alignment</a></p>
+<p class="rvps2"><a class="rvts12" href="UnQuoted.html">UnQuoted</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour/create-ebooks-for-amazon-kindle" target="_top">Full-featured Kindle eBooks generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

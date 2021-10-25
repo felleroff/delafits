@@ -1,0 +1,195 @@
+﻿<html>
+	
+<head>
+	<title>LineAdd</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TFitsHeader.LineAdd">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TFitsHeaderLineAdd");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">LineAdd</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Classes.html">Classes</a> &rsaquo;&rsaquo; <a href="TFitsHeader.html">TFitsHeader</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> DeLaFitsClasses</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> method</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Visibility</span><span class="rvts6">: public</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Member Of:</span><span class="rvts6"> </span><a class="rvts12" href="TFitsHeader.html">TFitsHeader</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">function</span><span class="rvts15"> LineAdd(Count: Integer; Line: </span><span class="rvts10">string</span><span class="rvts15">): Integer;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Method adds a new line </span><span class="rvts17">−</span><span class="rvts6"> inserts a new line before END.</span></p>
+<p class="rvps2"><span class="rvts6">Count determines the number of the standard 80-character lines in Line.</span></p>
+<p class="rvps2"><span class="rvts6">Line should contain: keyword, separator, value, separator, note.</span></p>
+<p class="rvps2"><span class="rvts6">Method returns the index of new line.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Numbering of lines a header begins with zero.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps6"><span class="rvts7">Code Sample:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Input</span></p>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">00</span></p>
+<p class="rvps2"><span class="rvts29">01</span></p>
+<p class="rvps2"><span class="rvts29">02</span></p>
+<p class="rvps2"><span class="rvts29">03</span></p>
+<p class="rvps2"><span class="rvts29">04</span></p>
+<p class="rvps2"><span class="rvts29">05</span></p>
+<p class="rvps2"><span class="rvts29">06</span></p>
+<p class="rvps2"><span class="rvts29">07</span></p>
+<p class="rvps2"><span class="rvts29">08</span></p>
+<p class="rvps2"><span class="rvts29">09</span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29">12</span></p>
+<p class="rvps2"><span class="rvts29">13</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SIMPLE &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;T / conforms to FITS standard &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BITPIX &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 16 / number of bits per data value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">NAXIS &nbsp; = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 / number of axes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">NAXIS1 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;512 / length of first axis &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">NAXIS2 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;512 / length of second axis &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BSCALE &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1.0 / data scaling factor &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BZERO &nbsp; = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 / data offset &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">TELESCOP= 'Celestron CGE-1400' / telescope type &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">EXPOSURE= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 60.000 / [s] elapsed exposure time &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">TIME-OBS= '19:29:12.401' &nbsp; &nbsp; &nbsp; / exposure end time &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">DATE-OBS= ' 7/ 6/2015' &nbsp; &nbsp; &nbsp; &nbsp; / exposure date &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">RA &nbsp; &nbsp; &nbsp;= ' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;16 13 35' / Right Ascension of image center &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">DEC &nbsp; &nbsp; = ' &nbsp; &nbsp; &nbsp; &nbsp; +48 34 06' / Declination of image center &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">END &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsHeader;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index: Integer;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Line: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read and write</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsHeader.CreateJoin(TFileStream.Create(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileReadWrite));</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Line := </span><span class="rvts16">'SOMEKEY = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;100 / my note'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineAdd(1, Line);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Stream.Free;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">00</span></p>
+<p class="rvps2"><span class="rvts29">01</span></p>
+<p class="rvps2"><span class="rvts29">02</span></p>
+<p class="rvps2"><span class="rvts29">03</span></p>
+<p class="rvps2"><span class="rvts29">04</span></p>
+<p class="rvps2"><span class="rvts29">05</span></p>
+<p class="rvps2"><span class="rvts29">06</span></p>
+<p class="rvps2"><span class="rvts29">07</span></p>
+<p class="rvps2"><span class="rvts29">08</span></p>
+<p class="rvps2"><span class="rvts29">09</span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29">12</span></p>
+<p class="rvps2"><span class="rvts29">13</span></p>
+<p class="rvps2"><span class="rvts29">14</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">SIMPLE &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;T / conforms to FITS standard &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BITPIX &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 16 / number of bits per data value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">NAXIS &nbsp; = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 / number of axes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">NAXIS1 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;512 / length of first axis &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">NAXIS2 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;512 / length of second axis &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BSCALE &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1.0 / data scaling factor &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">BZERO &nbsp; = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 / data offset &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">TELESCOP= 'Celestron CGE-1400' / telescope type &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">EXPOSURE= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 60.000 / [s] elapsed exposure time &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">TIME-OBS= '19:29:12.401' &nbsp; &nbsp; &nbsp; / exposure end time &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">DATE-OBS= ' 7/ 6/2015' &nbsp; &nbsp; &nbsp; &nbsp; / exposure date &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">RA &nbsp; &nbsp; &nbsp;= ' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;16 13 35' / Right Ascension of image center &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">DEC &nbsp; &nbsp; = ' &nbsp; &nbsp; &nbsp; &nbsp; +48 34 06' / Declination of image center &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">SOMEKEY = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;100 / my note &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">END &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Index = 13</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TFitsHeaderLineInsert.html">TFits.LineInsert</a></p>
+<p class="rvps2"><a class="rvts12" href="TLineBuilder.html">TLineBuilder</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour/iphone-website-generation" target="_top">Create iPhone web-based documentation</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

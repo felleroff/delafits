@@ -1,0 +1,347 @@
+﻿<html>
+	
+<head>
+	<title>Design</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("Design");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Design</h1>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">DeLaFits supports structure of the </span><a class="rvts13" href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank">Single Image FITS</a><a href="http://fits.gsfc.nasa.gov/fits_standard.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6">:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">one header;</span></li>
+<li class="rvps2"><span class="rvts6">one data unit.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The header it is a list of lines </span><span class="rvts17">−</span><span class="rvts6"> meta-information about the file. Length of line 80 byte. The number of lines in the header ~36. The header size ~2880 bytes. Line is a container (record) of the form:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><span class="rvts7">&lt;keyword-separator-value-separator-note&gt;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The data it is a two-dimensional array of integers or real numbers - the amplitude of the signal registered in the exposure time. The keyword of </span><a class="rvts13" href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank">NAXIS1</a><a href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> determines width (count of columns) of data array. The keyword of </span><a class="rvts13" href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank">NAXIS2</a><a href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> determines height (count of rows) of data array. Keywords of </span><a class="rvts13" href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank">BITPIX</a><a href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> and </span><a class="rvts13" href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank">BZERO</a><a href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> define data type. Data unit size ~2880 bytes:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><span class="rvts7">NAXIS1 x NAXIS2 x </span><a class="rvts24" href="BitPixByteSize.html">BitPixByteSize</a><span class="rvts7">(BITPIX)</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Operations with data and graphics are available only for 2D-files: </span><a class="rvts13" href="http://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html" target="_blank">NAXIS</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6"> = 2.</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><img alt="" style="padding : 1px;" src="lib/img-file-map.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts13" href="TFitsHeader.html">TFitsHeader</a><span class="rvts6"> and </span><a class="rvts13" href="TLineBuilder.html">TLineBuilder</a><span class="rvts6"> contain methods of processing of header lines: </span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">insert;</span></li>
+<li class="rvps2"><span class="rvts6">delete;</span></li>
+<li class="rvps2"><span class="rvts6">move/exchange;</span></li>
+<li class="rvps2"><span class="rvts6">edit/parse/compose.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts13" href="TFitsFrame.html">TFitsFrame</a><span class="rvts6"> contains access methods to physical values of data </span><span class="rvts17">−</span><span class="rvts6"> read and write. The user defines a </span><a class="rvts13" href="TRgn.html">region</a><span class="rvts6"> and </span><a class="rvts13" href="TRep.html">type</a><span class="rvts6"> of the buffer.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><span class="rvts7">physical_value = BZERO + BSCALE * array_value</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts13" href="TFitsGraphic.html">TFitsGraphic</a><span class="rvts6">, </span><a class="rvts13" href="TGraphicGeom.html">TGraphicGeom</a><span class="rvts6"> and </span><a class="rvts13" href="TGraphicColor.html">TGraphicColor</a><span class="rvts6"> contain methods of creation of a graphic image of data. The user defines a </span><a class="rvts13" href="TRgn.html">region</a><span class="rvts6">, parameters of </span><a class="rvts13" href="https://en.wikipedia.org/wiki/Affine_transformation" target="_blank">affine transformation</a><a href="https://en.wikipedia.org/wiki/Affine_transformation" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6"> and </span><a class="rvts13" href="https://en.wikipedia.org/wiki/Image_editing" target="_blank">color correction</a><a href="https://en.wikipedia.org/wiki/Image_editing" target="_blank"><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"></a><span class="rvts6">. The graphic image of data it is 256-color picture. The analysis result of the dynamic range histogram of physical data values.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><span class="rvts7">Demo</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">uses</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;DeLaFitsCommon, DeLaFitsClasses, DeLaFitsGraphics;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">procedure</span><span class="rvts15"> DeLaFitsDemo;</span></p>
+<p class="rvps3"><span class="rvts10"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsBitmap;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// stream</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Stream: TFileStream;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// Header</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item: TLineItem;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index, Index1, Index2: Integer;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ValueStr: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ValueBol: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ValueInt: Int64;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ValueExt, ValueRa: Extended;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ValueDtm: TDateTime;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// Data</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn: TRgn;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;X, Y: Integer;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ArrayWord &nbsp; : </span><span class="rvts10">array of array of</span><span class="rvts15"> Word;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ArrayInteger: </span><span class="rvts10">array of array of</span><span class="rvts15"> Integer;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ArrayDouble : </span><span class="rvts10">array of array of</span><span class="rvts15"> Double;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// Graphic</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;HimRange: THistogramDynamicRange;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp: TBitmap;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">{ Create objects }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Stream := TFileStream.Create(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, fmOpenReadWrite or fmShareDenyNone);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsBitmap.CreateJoin(Stream);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">{ Access to header }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// line insert (value as datetime)</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := 10;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.Keyword &nbsp; &nbsp; &nbsp; := </span><span class="rvts16">'DATETIME'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.ValueIndicate := True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.Value.Dtm &nbsp; &nbsp; := Now;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.NoteIndicate &nbsp;:= True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.Note &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:= </span><span class="rvts16">'this is my value of date and time'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Insert(Index, Item, cCastDateTime);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// line delete</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineIndexOf(</span><span class="rvts16">'SOMEKEY'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineDelete(Index, 1);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// line move and exchange</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index1 := 10;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index2 := 20;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineMove(Index1, Index2);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineExchange(Index1, Index2);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// line value read/write as string</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineIndexOf(</span><span class="rvts16">'TELESCOP'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueStr := Fit.LineBuilder.ValuesString[Index];</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueStr := ValueStr + </span><span class="rvts16">'-demo'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineBuilder.ValuesString[Index] := ValueStr;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// line value read/write as boolean</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineIndexOf(</span><span class="rvts16">'KEYBOOL'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueBol := Fit.LineBuilder.ValuesBoolean[Index];</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueBol := </span><span class="rvts10">not</span><span class="rvts15"> ValueBol;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineBuilder.ValuesBoolean[Index] := ValueBol;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// line value read/write as integer</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineIndexOf(</span><span class="rvts16">'SNAPSHOT'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueInt := Fit.LineBuilder.ValuesInteger[Index];</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueInt := ValueInt + 1;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineBuilder.ValuesInteger[Index] := ValueInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// line value read/write as extended</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineIndexOf(</span><span class="rvts16">'EXPOSURE'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueExt := Fit.LineBuilder.ValuesFloat[Index];</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueExt := ValueExt / 2;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineBuilder.ValuesFloat[Index] := ValueExt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// line value read/write as extended Right ascension</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// input : RA &nbsp; &nbsp; &nbsp;= '22:27:58.07' &nbsp; &nbsp; &nbsp; &nbsp;/ [hms J2000] Target right ascension</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// output: RA &nbsp; &nbsp; &nbsp;= '23:27:58.07' &nbsp; &nbsp; &nbsp; &nbsp;/ [hms J2000] Target right ascension</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineIndexOf(</span><span class="rvts16">'RA'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueRa := Fit.LineBuilder.ValuesRa[Index]; </span><span class="rvts11">// get in degree [0° .. 360°]</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueRa := ValueRa + 15.000; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts11">// add 15 degree ~ 1 hour</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineBuilder.ValuesRa[Index] := ValueRa; </span><span class="rvts11">// set in hour [0h .. 24h]</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// line value read/write as datetime</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineIndexOf(</span><span class="rvts16">'DATETIME'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueDtm := Fit.LineBuilder.ValuesDateTime[Index];</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;ValueDtm := Now;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Fit.LineBuilder.ValuesDateTime[Index] := ValueDtm;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;{ Access to data:</span></p>
+<p class="rvps3"><span class="rvts11"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;property DataRep:TRep;</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;Defines type of the user buffer.</span></p>
+<p class="rvps3"><span class="rvts11"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;TRep = (repUnknown, rep80f, rep64f, rep32f, rep08c, rep08u, rep16c, rep16u,</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rep32c, rep32u, rep64c);</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;Type of data elements: representation of physical data (user buffer).</span></p>
+<p class="rvps3"><span class="rvts11"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;method DataPrepare();</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;SetLength(Array, Rgn.ColsCount, Rgn.RowsCount).</span></p>
+<p class="rvps3"><span class="rvts11"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;SIMPLE &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;T / conforms to FITS standard</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;BITPIX &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 16 / 8 unsigned int, 16 &amp; 32 int, -32 &amp; -64 real</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;NAXIS &nbsp; = &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 / number of axes</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;NAXIS1 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1024 / fastest changing axis</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;NAXIS2 &nbsp;= &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1024 / next to fastest changing axis</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;BSCALE &nbsp;= &nbsp; 1.0000000000000000 / physical = BZERO + BSCALE*array_value</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp; &nbsp;BZERO &nbsp; = &nbsp; 32768.000000000000 / physical = BZERO + BSCALE*array_value &nbsp; &nbsp; }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// set my region</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.X1 := 100;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Y1 := 100;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.ColsCount := 100;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.RowsCount := 200;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// determine coordinates of center of the given region of Rgn in Array system</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;X := Rgn.ColsCount </span><span class="rvts10">div</span><span class="rvts15"> 2; </span><span class="rvts11">// ~ 150 in Data Fits system</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Y := Rgn.RowsCount </span><span class="rvts10">div</span><span class="rvts15"> 2; </span><span class="rvts11">// ~ 300 in Data Fits system</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// read/write data as word</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRep := rep16c;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataPrepare(Pointer(ArrayWord), Rgn); </span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRead(Pointer(ArrayWord), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ArrayWord[X, Y] := 100;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataWrite(Pointer(ArrayWord), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// read/write data as integer</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRep := rep32c;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataPrepare(Pointer(ArrayInteger), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRead(Pointer(ArrayInteger), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ArrayInteger[X, Y] := 200;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataWrite(Pointer(ArrayInteger), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// read/write data as double</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRep := rep64f;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataPrepare(Pointer(ArrayDouble), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataRead(Pointer(ArrayDouble), Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ArrayDouble[X, Y] := 300;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.DataWrite(Pointer(ArrayDouble), Rgn); </span><span class="rvts11">// ~round</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// array free</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ArrayWord &nbsp; &nbsp;:= </span><span class="rvts10">nil</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ArrayInteger := </span><span class="rvts10">nil</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;ArrayDouble &nbsp;:= </span><span class="rvts10">nil</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;{ Graphics }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// affine transformation:</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// 0) init matrix;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// 1) turn concerning a point [0, 0] &nbsp;: dx = 10.5, dy = -20.5;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// 2) scale concerning a point [0, 0] : sX = 2, sY = 2;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// 3) clockwise rotation &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: Angle = 45°;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// 4) shear along a x axis &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: Angle = 10°;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicGeom.Clr;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicGeom.Trn(10.5, -20.5);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicGeom.Scl(2, 2, xy00);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicGeom.Rot(45, xy00);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicGeom.Shx(10);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// Pay attention, too most it is possible to write one line:</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// Fit.GraphicGeom.Clr.Trn(10.5, -20.5).Scl(2, 2, xy00).Rot(45, xy00).Shx(10);</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// correction color tone</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.ToneBrightness := 0.5; </span><span class="rvts11">// [-1.0 ; +1.0], default ~0.0</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.ToneContrast &nbsp; := 2.0; </span><span class="rvts11">// (+0.0 ; +3.0], default ~1.0</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.ToneGamma &nbsp; &nbsp; &nbsp;:= 1.5; </span><span class="rvts11">// (+0.0 ; +3.0], default ~1.0</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// correction color palette</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.Palette := cPaletteHot;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;// correction of dynamic range of the histogram: in case of the first appeal to</span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;// property of the histogram it is necessary to call a method HistogramUpdate</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.HistogramUpdate;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;HimRange := Fit.GraphicColor.HistogramDynamicRange;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;HimRange.Index1 := HimRange.Index1 - 10;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;HimRange.Index2 := HimRange.Index2 + 10;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.GraphicColor.HistogramDynamicRange := HimRange;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// to define my region: a quarter of the new transformed region</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn := Fit.GraphicRgn;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Height := Rgn.Height </span><span class="rvts10">div</span><span class="rvts15"> 2;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Rgn.Width := Rgn.Width </span><span class="rvts10">div</span><span class="rvts15"> 2;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// create bitmap and build image</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp := TBitmap.Create;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.BitmapRead(Bmp, Rgn);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp.SaveToFile(</span><span class="rvts16">'some.bmp'</span><span class="rvts15">);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Bmp.Free;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11"> &nbsp;{ Free object }</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Stream.Free;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/help-authoring-tool" target="_top">Easy to use tool to create HTML Help files and Help web sites</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

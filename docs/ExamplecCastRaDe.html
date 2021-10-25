@@ -1,0 +1,174 @@
+﻿<html>
+	
+<head>
+	<title>Example cCastRaDe</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="cCastRa, cCastDe">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("ExamplecCastRaDe");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Example cCastRaDe</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Const.html">Const</a> &rsaquo;&rsaquo; <a href="Cast.html">Cast</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">An example of using the constants</span><span class="rvts6"> </span><a class="rvts12" href="Cast.html#DeLaFitsCommon.cCastRa">cCastRa, cCastDe</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Default:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">in the header (text representation): Ra </span><span class="rvts17">∈</span><span class="rvts6"> [0 .. 24h], De </span><span class="rvts17">∈</span><span class="rvts6"> [-90° ... + 90°];</span></li>
+<li class="rvps2"><span class="rvts6">in the </span><a class="rvts12" href="TLineBuilder.html">TLineBuilder</a><span class="rvts6"> (computing): Ra </span><span class="rvts17">∈</span><span class="rvts6"> [0</span><span class="rvts17">°</span><span class="rvts6"> ... 360</span><span class="rvts17">°</span><span class="rvts6">], De </span><span class="rvts17">∈</span><span class="rvts6"> [-90</span><span class="rvts17">°</span><span class="rvts6"> ... +90</span><span class="rvts17">°</span><span class="rvts6">];</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">To change the parameters, see property of </span><a class="rvts12" href="TLineBuilderFmt.html">TLineBuilder.Fmt: PFormatLine</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">1. We will read the line of header as Ra and De</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Input</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">RA &nbsp; &nbsp; &nbsp;= '22 27 58.07' &nbsp; &nbsp; &nbsp; &nbsp;/ [hms J2000] Target right ascension &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p class="rvps2"><span class="rvts29">DEC &nbsp; &nbsp; = '-11 40 26.8' &nbsp; &nbsp; &nbsp; &nbsp;/ [dms +N J2000] Target declination &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts27"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFileFrame;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index: Integer;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item: TLineItem;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Ra, De: Extended;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFileFrame.CreateJoin(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileRead);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// search and read for line with a keyword 'RA'</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineBuilder.IndexOf('RA');</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Item := Fit.LineBuilder.Items[Index, cCastRa];</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Ra &nbsp; := Item.Value.Ext;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// search and read for line with a keyword 'DEC'</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Index := Fit.LineBuilder.IndexOf('DEC');</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">if</span><span class="rvts15"> Index &gt;= 0 </span><span class="rvts10">then</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;Item := Fit.LineBuilder.Items[Index, cCastDe];</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;De &nbsp; := Item.Value.Ext;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// free</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Ra = 336.99195833 &nbsp;</span><span class="rvts11">// in degree [0</span><span class="rvts31">°</span><span class="rvts11"> ... 360</span><span class="rvts31">°</span><span class="rvts11">]</span></p>
+<p class="rvps3"><span class="rvts15">De = -11.674111111 </span><span class="rvts11">// in degree [-90</span><span class="rvts31">°</span><span class="rvts11"> ... +90</span><span class="rvts31">°</span><span class="rvts11">]</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">2. We will add the line of header as Ra and De</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts10">var</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit: TFitsFileFrame;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item: TLineItem;</span></p>
+<p class="rvps3"><span class="rvts10">begin</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// open file for read and write</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit := TFitsFileFrame.CreateJoin(</span><span class="rvts16">'some.fit'</span><span class="rvts15">, cFileReadWrite);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// build and add item as Ra</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.Keyword &nbsp; &nbsp; &nbsp; := </span><span class="rvts16">'RA'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.ValueIndicate := True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.Value.Ext &nbsp; &nbsp; := 336.99195833;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.NoteIndicate &nbsp;:= True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.Note &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:= </span><span class="rvts16">'this is my value of right ascension'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Add(Item, cCastRa);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// build and add item as De</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.Keyword &nbsp; &nbsp; &nbsp; := </span><span class="rvts16">'DEC'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.ValueIndicate := True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.Value.Ext &nbsp; &nbsp; := -11.674111111;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.NoteIndicate &nbsp;:= True;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Item.Note &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:= </span><span class="rvts16">'this is my value of declination'</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.LineBuilder.Add(Item, cCastDe);</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts11">// free</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;Fit.Free;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps3"><span class="rvts11">Output</span></p>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<div class="rvps9"><table width="620" border="1" cellpadding="4" cellspacing="0" style="border-width: 0px; border-spacing: 0px; margin: 0px auto;">
+<tr valign="top">
+<td width="20" style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px; border-right: none;"><p class="rvps2"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts29">10</span></p>
+<p class="rvps2"><span class="rvts29">11</span></p>
+<p class="rvps2"><span class="rvts29"><br/></span></p>
+</td>
+<td style="border-width : 1px; border-color: #c0c0c0; border-style: solid; padding: 4px;"><p class="rvps8"><span class="rvts30">header fragment </span></p>
+<p class="rvps2"><span class="rvts29">RA &nbsp; &nbsp; &nbsp;= '22:27:58.07' &nbsp; &nbsp; &nbsp; &nbsp;/ this is my value of right ascension &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps2"><span class="rvts29">DEC &nbsp; &nbsp; = '-11:40:26.8' &nbsp; &nbsp; &nbsp; &nbsp;/ this is my value of declination &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts15"><br/></span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com" target="_top">Full-featured Documentation generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

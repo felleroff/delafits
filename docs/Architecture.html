@@ -1,0 +1,86 @@
+﻿<html>
+	
+<head>
+	<title>Architecture</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("Architecture");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Architecture</h1>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">DeLaFits does not load into memory the entire stream. Header </span><a class="rvts12" href="TLineItem.html">line</a><span class="rvts6"> and </span><a class="rvts12" href="TRgn.html">region</a><span class="rvts6"> of data are loading by user request. This allows you to work with large files </span><span class="rvts17">−</span><span class="rvts6"> put into memory a necessary fragment of the file. Use a </span><span class="rvts25">TFits.Stream</span><span class="rvts6"> for direct access to the stream.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Names of library modules begin with the prefix "DeLaFits".</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The library uses the style </span><a class="rvts12" href="https://en.wikipedia.org/wiki/CamelCase" target="_blank">CamelCase</a><img alt="" style="padding : 1px;" src="lib/img-link-external.gif"><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Hierarchy of exceptions</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="EFitsException.html">EFitsException</a><span class="rvts6"> (inherited of Exception) is the base class for all run-time exceptions. Each Exception DeLaFits has extra field </span><a class="rvts12" href="EFitsExceptionCode.html">Code</a><span class="rvts6">. The message of Exception DeLaFits has the prefix "DeLaFits", contains the name of Exception, brief message and code.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><img alt="Hierarchy of exceptions" style="padding : 1px;" src="lib/img-map-architecture-exceptions.png" usemap="#93992550A7C54E0A867548723C937CCD"><map name="93992550A7C54E0A867548723C937CCD"><area shape="rect" coords="11,11,96,34" alt="" title="" href="EFitsException.html"></map></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Hierarchy of classes</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TFits.html">TFits</a><span class="rvts6"> (inherited of TObject) is the base class of library. The names of classes in DeLaFits customary to begin with the prefix "TFits".</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><img alt="Hierarchy of classes" style="padding : 1px;" src="lib/img-map-architecture-classes.png" usemap="#54E565DCEBEB4E50A9CD0215460A88D2"><map name="54E565DCEBEB4E50A9CD0215460A88D2"><area shape="rect" coords="14,11,49,35" alt="" title="" href="TFits.html"><area shape="rect" coords="63,62,142,86" alt="" title="" href="TFitsHeader.html"><area shape="rect" coords="249,62,332,86" alt="" title="" href="TLineBuilder.html"><area shape="rect" coords="63,162,142,186" alt="" title="" href="TFitsFrame.html"><area shape="rect" coords="63,280,142,304" alt="" title="" href="TFitsGraphic.html"><area shape="rect" coords="241,265,340,289" alt="" title="" href="TGraphicGeom.html"><area shape="rect" coords="241,298,340,322" alt="" title="" href="TGraphicColor.html"><area shape="rect" coords="63,346,142,370" alt="" title="" href="TFitsBitmap.html"><area shape="rect" coords="162,112,260,136" alt="" title="" href="TFitsFileHeader.html"><area shape="rect" coords="162,212,260,236" alt="" title="" href="TFitsFileFrame.html"><area shape="rect" coords="162,396,260,420" alt="" title="" href="TFitsFileBitmap.html"></map></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/feature-tour/iphone-website-generation" target="_top">Free iPhone documentation generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

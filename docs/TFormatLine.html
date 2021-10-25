@@ -1,0 +1,199 @@
+﻿<html>
+	
+<head>
+	<title>TFormatLine</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="TFormatLine, PFormatLine, TFormatLine">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("TFormatLine");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">TFormatLine</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Types.html">Types</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts7">Unit:</span><span class="rvts6"> DeLaFitsCommon</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Type:</span><span class="rvts6"> type</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15">PFormatLine = ^TFormatLine;</span></p>
+<p class="rvps3"><span class="rvts15">TFormatLine = </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaStr: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidthQuoteInside: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaBol: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaInt: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wSign: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wFmt: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaFloat: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wSign: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wFmt: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaDateTime: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;rFmtShortDate: TFmtShortDate;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidthQuoteInside: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaCoord: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;rFmtMeasurRa: TCoordMeasur;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidthQuoteInside: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wPrecRa: Word;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wPrecDe: Word;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wFmtMeasurRa: TCoordMeasur;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wFmtNotate: TCoordNotate;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">Description:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Line is a container (record) of the form:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps5"><span class="rvts7">&lt;keyword-separator-value-separator-note&gt;</span><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">TFormatLine defines the parameters of parse/compose lines of header, see </span><a class="rvts12" href="TLineBuilderFmt.html">TLineBuilder.Fmt</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaStr: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidthQuoteInside: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Parameters of compose line, </span><a class="rvts12" href="ExamplecCastString.html">String value</a><span class="rvts6">:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">wWidth - minimum quantity of characters for text representation;</span></li>
+<li class="rvps2"><span class="rvts6">wWidthQuoteInside - minimum quantity of characters for text representation in quotes.</span></li>
+</ul>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaBol: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Parameter of compose line, </span><a class="rvts12" href="ExamplecCastBoolean.html">Boolean value</a><span class="rvts6">: minimum quantity of characters for text representation.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaInt: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wSign: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wFmt: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Parameters of compose line, </span><a class="rvts12" href="ExamplecCastInteger.html">Integer value</a><span class="rvts6">:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">wWidth - minimum quantity of characters for text representation;</span></li>
+<li class="rvps2"><span class="rvts6">wSign - to show sign of a number;</span></li>
+<li class="rvps2"><span class="rvts6">wFmt - parameter for the function Format.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaFloat: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wSign: Boolean;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wFmt: </span><span class="rvts10">string</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Parameters of compose line, </span><a class="rvts12" href="ExamplecCastFloat.html">Float value</a><span class="rvts6">:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">wWidth - minimum quantity of characters for text representation;</span></li>
+<li class="rvps2"><span class="rvts6">wSign - to show sign of a number;</span></li>
+<li class="rvps2"><span class="rvts6">wFmt - parameter for the function Format.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaDateTime: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;rFmtShortDate: TFmtShortDate;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidthQuoteInside: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Parameters of parse/compose line, </span><a class="rvts12" href="ExamplecCastDateTime.html">TDateTime value</a><span class="rvts6">:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">rFmtShortDate - short format recording (parse). Default </span><a class="rvts12" href="TLineBuilder.html">TLineBuilder</a><span class="rvts6"> parses short date format YY/MM/DD;</span></li>
+<li class="rvps2"><span class="rvts6">wWidth - minimum quantity of characters for text representation;</span></li>
+<li class="rvps2"><span class="rvts6">wWidthQuoteInside - minimum quantity of characters for text representation in quotes.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;vaCoord: </span><span class="rvts10">record</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;rFmtMeasurRa: </span><span class="rvts15">TCoordMeasur</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidth: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wWidthQuoteInside: ShortInt;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wPrecRa: Word;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wPrecDe: Word;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wFmtMeasurRa: </span><span class="rvts15">TCoordMeasur</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp; &nbsp;wFmtNotate: </span><span class="rvts15">TCoordNotate</span><span class="rvts15">;</span></p>
+<p class="rvps3"><span class="rvts15"> &nbsp;</span><span class="rvts10">end</span><span class="rvts15">;</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Parameters of parse/compose line, </span><a class="rvts12" href="ExamplecCastRaDe.html">Coordinates (Right ascension </a><a class="rvts28" href="ExamplecCastRaDe.html">α</a><a class="rvts12" href="ExamplecCastRaDe.html"> and Declination </a><a class="rvts28" href="ExamplecCastRaDe.html">δ</a><a class="rvts12" href="ExamplecCastRaDe.html">)</a><span class="rvts6">:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><a class="rvts12" href="TCoordMeasur.html">rFmtMeasurRa</a><span class="rvts6"> - text representation (parse) of Right ascension: degree or hour;</span></li>
+<li class="rvps2"><span class="rvts6">wWidth - minimum quantity of characters for text representation;</span></li>
+<li class="rvps2"><span class="rvts6">wWidthQuoteInside - minimum quantity of characters for text representation in quotes;</span></li>
+<li class="rvps2"><span class="rvts6">wPrecRa - precision of the text representation of Right ascension, number of signs after the decimal point;</span></li>
+<li class="rvps2"><span class="rvts6">wPrecDe - precision of the text representation of </span><span class="rvts6">Declination</span><span class="rvts6">, number of signs after the decimal point;</span></li>
+<li class="rvps2"><a class="rvts12" href="TCoordMeasur.html">wFmtMeasurRa</a><span class="rvts6"> - text representation (compose) of Right ascension: degree or hour;</span></li>
+<li class="rvps2"><a class="rvts12" href="TCoordNotate.html">wFmtNotate</a><span class="rvts6"> - text representation (compose) of Right ascension and Declination: decimal or hexadecimal.</span></li>
+</ul>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts7">See Also:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><a class="rvts12" href="TLineItem.html">TLineItem</a></p>
+<p class="rvps2"><a class="rvts12" href="TLineBuilder.html">TLineBuilder</a></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com" target="_top">Easy EBook and documentation generator</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+

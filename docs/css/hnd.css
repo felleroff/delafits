@@ -1,0 +1,357 @@
+﻿/* ========== Text Styles ========== */
+hr { color: #000000}
+body, table, span.rvts0 /* Normal text */
+{
+ font-size: 10pt;
+ font-family: 'Arial', 'Helvetica', sans-serif;
+ font-style: normal;
+ font-weight: normal;
+ color: #000000;
+ text-decoration: none;
+}
+span.rvts1 /* Heading */
+{
+ font-weight: bold;
+ color: #0000ff;
+}
+span.rvts2 /* Subheading */
+{
+ font-weight: bold;
+ color: #000080;
+}
+span.rvts3 /* Keywords */
+{
+ font-style: italic;
+ color: #800000;
+}
+a.rvts4, span.rvts4 /* Jump 1 */
+{
+ color: #008000;
+ text-decoration: underline;
+}
+a.rvts5, span.rvts5 /* Jump 2 */
+{
+ color: #008000;
+ text-decoration: underline;
+}
+span.rvts6
+{
+}
+span.rvts7
+{
+ font-weight: bold;
+}
+span.rvts8
+{
+}
+span.rvts9
+{
+ font-weight: bold;
+ color: ;
+}
+span.rvts10
+{
+ font-family: 'Courier New', 'Courier', monospace;
+ color: #0000ff;
+}
+span.rvts11
+{
+ font-size: 8pt;
+ font-family: 'Courier New', 'Courier', monospace;
+ font-style: italic;
+ color: #008000;
+}
+a.rvts12, span.rvts12
+{
+ color: #333399;
+ text-decoration: none;
+}
+a.rvts12:hover { color: #0000ff; }
+a.rvts13, span.rvts13
+{
+ color: #333399;
+ text-decoration: none;
+}
+a.rvts13:hover { color: #0000ff; }
+a.rvts14, span.rvts14
+{
+ color: #333399;
+ text-decoration: none;
+}
+a.rvts14:hover { color: #0000ff; }
+span.rvts15
+{
+ font-family: 'Courier New', 'Courier', monospace;
+}
+span.rvts16
+{
+ font-family: 'Courier New', 'Courier', monospace;
+ color: #808080;
+}
+span.rvts17
+{
+ font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial', 'Helvetica', sans-serif;
+}
+span.rvts18 /* Font Style */
+{
+ font-family: 'Tahoma', 'Geneva', sans-serif;
+ font-style: italic;
+ color: #c0c0c0;
+}
+a.rvts19, span.rvts19 /* Font Style */
+{
+ font-family: 'Tahoma', 'Geneva', sans-serif;
+ font-style: italic;
+ color: #6666ff;
+ text-decoration: underline;
+}
+span.rvts20
+{
+ font-weight: bold;
+ color: #0000ff;
+}
+span.rvts21
+{
+ font-weight: bold;
+ color: #000080;
+}
+span.rvts22
+{
+ font-style: italic;
+ color: #800000;
+}
+a.rvts23, span.rvts23
+{
+ color: #008000;
+ text-decoration: underline;
+}
+a.rvts24, span.rvts24
+{
+ font-weight: bold;
+ color: #333399;
+ text-decoration: none;
+}
+a.rvts24:hover { color: #0000ff; }
+span.rvts25
+{
+ background-color: #ffff00;
+}
+a.rvts26, span.rvts26
+{
+ color: ;
+ text-decoration: none;
+}
+a.rvts26:hover { color: #0000ff; }
+span.rvts27
+{
+ font-family: 'Courier New', 'Courier', monospace;
+ background-color: #f5f5f5;
+}
+a.rvts28, span.rvts28
+{
+ font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial', 'Helvetica', sans-serif;
+ color: #333399;
+ text-decoration: none;
+}
+a.rvts28:hover { color: #0000ff; }
+span.rvts29
+{
+ font-size: 9pt;
+ font-family: 'Courier New', 'Courier', monospace;
+}
+span.rvts30
+{
+ font-size: 9pt;
+ font-family: 'Courier New', 'Courier', monospace;
+ font-style: italic;
+ color: #008000;
+}
+span.rvts31
+{
+ font-size: 8pt;
+ font-family: 'Courier New', 'Courier', monospace;
+ font-style: italic;
+ color: #008000;
+}
+span.rvts32
+{
+ font-size: 11pt;
+ font-family: 'Calibri';
+ color: #000000;
+}
+span.rvts33
+{
+ color: #000000;
+}
+span.rvts34
+{
+}
+span.rvts35
+{
+ font-style: italic;
+}
+span.rvts36
+{
+ color: ;
+}
+span.rvts37
+{
+ color: ;
+}
+span.rvts38
+{
+ font-size: 9pt;
+ font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial', 'Helvetica', sans-serif;
+}
+span.rvts39
+{
+ font-size: 9pt;
+ font-family: 'Courier New', 'Courier', monospace;
+ color: #808080;
+}
+span.rvts40
+{
+ font-size: 8pt;
+ font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial', 'Helvetica', sans-serif;
+ font-style: italic;
+ color: #008000;
+}
+span.rvts41
+{
+ font-family: 'Courier New', 'Courier', monospace;
+ background-color: #f5f5f5;
+}
+span.rvts42
+{
+ font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial', 'Helvetica', sans-serif;
+}
+span.rvts43
+{
+ font-size: 14pt;
+ font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial', 'Helvetica', sans-serif;
+}
+span.rvts44
+{
+ font-family: 'Courier New', 'Courier', monospace;
+}
+span.rvts45
+{
+ font-size: 9pt;
+ font-family: 'Courier New', 'Courier', monospace;
+ background-color: #f5f5f5;
+}
+span.rvts46
+{
+ font-size: 7pt;
+ font-family: 'Courier New', 'Courier', monospace;
+ vertical-align: sub;
+}
+/* ========== Para Styles ========== */
+p,ul,ol /* Paragraph Style */
+{
+ text-align: left;
+ text-indent: 0px;
+ padding: 0px 0px 0px 0px;
+ margin: 0px 0px 0px 0px;
+}
+.rvps1 /* Centered */
+{
+ text-align: center;
+}
+.rvps2
+{
+}
+.rvps3
+{
+ border-color: #ffdead;
+ border-style: solid;
+ border-width: 1px;
+ border-top: none;
+ border-right: none;
+ border-bottom: none;
+ background: #f5f5f5;
+ padding: 0px 0px 0px 8px;
+ margin: 0px 5px 0px 0px;
+}
+.rvps4 /* Paragraph Style */
+{
+ text-align: center;
+ border-color: #c0c0c0;
+ border-style: solid;
+ border-width: 1px;
+ border-right: none;
+ border-left: none;
+ padding: 2px 0px 2px 0px;
+ margin: 7px 0px 7px 0px;
+}
+.rvps5
+{
+ text-align: center;
+}
+.rvps6
+{
+ text-align: justify;
+ text-justify: inter-word;
+ text-align-last: auto;
+}
+.rvps7
+{
+ border-color: #ffdead;
+ border-style: solid;
+ border-width: 1px;
+ border-top: none;
+ border-right: none;
+ border-bottom: none;
+ background: #f5f5f5;
+ padding: 0px 0px 0px 8px;
+ margin: 0px 5px 0px 0px;
+}
+.rvps8
+{
+ text-align: right;
+}
+.rvps9
+{
+ text-align: center;
+ border-color: #ffdead;
+ border-style: solid;
+ border-width: 1px;
+ border-top: none;
+ border-right: none;
+ border-bottom: none;
+ background: #f5f5f5;
+ padding: 0px 0px 0px 8px;
+ margin: 0px 5px 0px 0px;
+}
+.rvps10
+{
+}
+.rvps11
+{
+ text-indent: 48px;
+ border-color: #ffdead;
+ border-style: solid;
+ border-width: 1px;
+ border-top: none;
+ border-right: none;
+ border-bottom: none;
+ background: #f5f5f5;
+ padding: 0px 0px 0px 8px;
+ margin: 0px 5px 0px 0px;
+}
+.rvps12
+{
+ margin: 0px 0px 0px 24px;
+}
+/* ========== Lists ========== */
+.list0 {text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;}
+.list1 {text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;}
+.list2 {text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: square;}
+.list3 {text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: disc;}
+.list4 {text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: decimal;}
+.list5 {text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: decimal;}
+/* ========== DeLaFits style ========== */
+summary { cursor: pointer; }
+a.copyright { color: #aaaaaa; text-decoration: none; }
+a.copyright:visited { color: #aaaaaa; }
+a.copyright:hover { color: #bbbbbb; }

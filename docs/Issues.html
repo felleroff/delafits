@@ -1,0 +1,121 @@
+﻿<html>
+	
+<head>
+	<title>Issues</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "DeLaFits - Documentation.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("Issues");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Issues</h1>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">This topic contains known issues DeLaFits in Delphi/Lazarus.</span></p>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Legend for the table below:</span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;">
+<li class="rvps2"><span class="rvts6">F(Param1, Param2, ...) </span><span class="rvts17">−</span><span class="rvts6"> call function/method with parameters;</span></li>
+<li class="rvps2"><span class="rvts17">→</span><span class="rvts6"> </span><span class="rvts17">−</span><span class="rvts6"> Expected Result;</span></li>
+<li class="rvps2"><span class="rvts17">⇒</span><span class="rvts6"> </span><span class="rvts17">−</span><span class="rvts6"> Real Result;</span></li>
+</ul>
+<p class="rvps6"><span class="rvts6"><br/></span></p>
+<div class="rvps2"><table width="650" border="0" cellpadding="4" cellspacing="2" style="border-width: 0px; border-spacing: 2px;">
+<tr valign="top">
+<td width="78" valign="middle" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts7">Function</span></p>
+</td>
+<td width="90" valign="middle" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts7">IDE</span></p>
+</td>
+<td width="469" valign="middle" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts7">Error description</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td colspan="3" width="1601" valign="middle" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps8"><span class="rvts6">unit DeLaFitsString</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="78" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="StriToFloat.html">StriToFloat</a></p>
+</td>
+<td width="90" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Lazarus 1.0.4</span></p>
+</td>
+<td width="469" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Error of converting string to real number</span></p>
+<p class="rvps2"><span class="rvts6">F('.') </span><span class="rvts17">→</span><span class="rvts6"> '0' </span><span class="rvts17">⇒</span><span class="rvts6"> Exception</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="78" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="FloatToStri.html">FloatToStri</a></p>
+</td>
+<td width="90" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Lazarus 1.0.4</span></p>
+</td>
+<td width="469" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Incorrect rounding a real number when converting to a string</span></p>
+<p class="rvps2"><span class="rvts6">F(1.015, Sign, '%.2f') </span><span class="rvts17">→</span><span class="rvts6"> '1.02' </span><span class="rvts17">⇒</span><span class="rvts6"> '1.01'</span></p>
+<p class="rvps2"><span class="rvts6">F(1.005, Sign, '%.2f') </span><span class="rvts17">→</span><span class="rvts6"> '1.01' </span><span class="rvts17">⇒</span><span class="rvts6"> '1.00'</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td width="78" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><a class="rvts12" href="RaToStri.html">RaToStri</a></p>
+</td>
+<td width="90" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Lazarus 1.0.4</span></p>
+</td>
+<td width="469" style="padding: 4px; background-color: #f5f5f5;"><p class="rvps2"><span class="rvts6">Incorrect rounding (loss of precision) a real number (coordinate </span><span class="rvts17">α</span><span class="rvts6">) when converting to a string</span></p>
+<p class="rvps2"><span class="rvts6">F([h00:00:01.05], 3, cmSexagesimal, cmHour) </span><span class="rvts17">→</span><span class="rvts6"> </span><span class="rvts6">'00:00:01.1' </span><span class="rvts17">⇒</span><span class="rvts6"> '00:00:01.0'</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p style="font-size: 10px; color: #aaaaaa; line-height: 1.2;">&mdash;<br/>Created with the Personal Edition of HelpNDoc: <a class="copyright" href="http://www.helpndoc.com/create-epub-ebooks" target="_top">Write EPub books for the iPad</a><br/>Copyright &copy; 2013-2016, Evgeniy Dikov<br/>Support: delafits.library@gmail.com<br/>Sources: <a class="copyright" href="https://github.com/felleroff/delafits" target="_top">https://github.com/felleroff/delafits</a></p>
+</div>
+	
+	</body>
+	
+</html>
+
