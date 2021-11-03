@@ -1,95 +1,148 @@
-## DeLaFits
+![DeLaFits](./preview.png)
 
-DeLaFits is a Delphi and Lazarus library for operations with data in [Flexible Image Transport System](http://fits.gsfc.nasa.gov "http://fits.gsfc.nasa.gov") format.  
+DeLaFits is a native [Delphi](https://www.embarcadero.com/products/delphi) and [Lazarus](https://www.lazarus-ide.org) class library for operation with files in the [FITS](https://fits.gsfc.nasa.gov) format:
 
-- building
-- reading 
-- editing
-- rendering  
-
-Uses a regions for data access and creation of a graphic image of data.  
-Supports only Single Image - one header and one data unit.
+- reading, editing and building the HDU (header and data units)
+- high-level access to Standard Extensions
+- data rendering of the IMAGE extension
 
 ### How to use
 
-Just copy and add `Source` directory in your project.  
+Just add the library `source` directory to your project’s [search path](https://wiki.freepascal.org/IDE_Window:_Compiler_Options#Other_Unit_Files)
 
-- DeLaFitsCommon.pas - common constants and simple functions
-- DeLaFitsClasses.pas - access to header and data - building, reading, editing
-- DeLaFitsGraphics.pas - rendering of the data - creation of a graphic image  
+Basic API is in DeLaFitsCommon and DeLaFitsClasses units
 
-For details, see [User's Guide](http://felleroff.github.io/delafits).
-
-### Class Hierarchy
-
-![class-hierarchy.png](https://raw.githubusercontent.com/felleroff/delafits/master/class-hierarchy.png "Class Hierarchy")
+For details, see [User's Manual](https://felleroff.github.io/delafits/)
 
 ### Code Sample
 
-```delphi
+```pascal
+uses
+  SysUtils, Classes, Graphics, DeLaFitsCommon, DeLaFitsClasses, DeLaFitsPicture;
+
 var
-  Fit: TFitsFileBitmap;
-  I, X, Y: Integer;
-  Item: TLineItem;
-  Rgn: TRgn;
-  Data: array of array of Integer;
-  Bmp: TBitmap;
+
+  Stream: TFileStream;
+
+  Container: TFitsContainer;
+  Picture: TFitsPicture;
+  Head: TFitsPictureHead;
+  Data: TFitsPictureData;
+  Frame: TFitsPictureFrame;
+
+  IndexLine: Integer;
+  IndexElems: Int64;
+  X, CountElems: Integer;
+  Elems: array of Double;
+  Region: TRegion;
+  Bitmap: TBitmap;
+
 begin
-  Fit := TFitsFileBitmap.CreateJoin('some.fit', cFileReadWrite);
-  Data := nil;
-  Bmp := nil;
+
+  Stream    := nil;
+  Container := nil;
+  Bitmap    := nil;
+
   try
-    // edit header
-    I := Fit.LineBuilder.IndexOf('DATE-OBS');
-    if I >= 0 then
+
+    // Open FITS file
+
+    Stream := TFileStream.Create('demo-image.fits', fmOpenReadWrite);
+
+    // Create FITS container
+
+    Container := TFitsContainer.Create(Stream);
+
+    // Cast HDU[0] as IMAGE extension
+
+    Picture := Container.Reclass(0, TFitsPicture) as TFitsPicture;
+
+    // Get Objects of IMAGE extension
+
+    Head  := Picture.Head;
+    Data  := Picture.Data;
+    Frame := Picture.Frames[0];
+
+    // Edit Header
+
+    IndexLine := Head.IndexOf('DATE-OBS');
+    if IndexLine < 0 then
     begin
-      Fit.LineBuilder.ValuesDateTime[I] := Now;
-      Fit.LineBuilder.Notes[I] := 'Set datetime';
+      Head.AddDateTime('DATE-OBS', Now, 'Add datetime');
     end
     else
     begin
-      Item.Keyword       := 'DATE-OBS';
-      Item.ValueIndicate := True;
-      Item.Value.Dtm     := Now;
-      Item.NoteIndicate  := True;
-      Item.Note          := 'Add datetime';  
-      Fit.LineBuilder.Add(Item, cCastDateTime);
-    end;   
-    // edit data
-    Rgn.X1        := 0;
-    Rgn.Y1        := 0;
-    Rgn.ColsCount := 200;
-    Rgn.RowsCount := 200;
-    Fit.DataRep := rep32c;
-    Fit.DataPrepare(Pointer(Data), Rgn);
-    Fit.DataRead(Pointer(Data), Rgn); 
-    for Y := 0 to Rgn.RowsCount - 1 do
-    for X := 0 to Rgn.ColsCount - 1 do
-      Data[X, Y] := Data[X, Y] + 1; 
-    Fit.DataWrite(Pointer(Data), Rgn);    
-    // render
-    Bmp := TBitmap.Create;
-    Rgn.X1     := 0;
-    Rgn.Y1     := 0;
-    Rgn.Width  := 200;
-    Rgn.Height := 200;
-    Fit.GraphicColor.ToneContrast := 1.2;
-    Fit.GraphicGeom.Scl(2.0, 2.0, xy00).Rot(45.0, xy00);
-    Fit.BitmapRead(Bmp, Rgn);
-    Bmp.SaveToFile('some.bmp');    
+      Head.ValuesDateTime[IndexLine] := Now;
+      Head.Notes[IndexLine] := 'Set datetime';
+    end;
+
+    // Edit Data
+
+    IndexElems := Frame.IndexElems;
+    CountElems := Frame.LocalWidth;
+    SetLength(Elems, CountElems);
+    Data.ReadElems(IndexElems, CountElems, TA64f(Elems));
+    for X := 0 to CountElems - 1 do
+      Elems[X] := Elems[X] + 1.0;
+    Data.WriteElems(IndexElems, CountElems, TA64f(Elems));
+
+    // Render
+
+    Bitmap := TBitmap.Create;
+    Region := ToRegion(0, 0, 300, 300);
+    Frame.Tone.Contrast := 1.2;
+    Frame.Geometry.Scale(2.0, 2.0, xy00).Rotate(45.0, xy00);
+    Frame.RenderScene(Bitmap, Region);
+    Bitmap.SaveToFile('demo-image.bmp');
+
   finally
-    Fit.Free;
-    if Assigned(Bmp) then
-      Bmp.Free;
-    Data := nil;
+    Stream.Free;
+    Container.Free;
+    Elems := nil;
+    Bitmap.Free;
   end;
-end;
-```  
+
+end.
+```
+
+### Data
+
+The `data` directory contains samples FITS files
+
+| **[Custom Demo Samples](data)** |                                                                                                                                             |
+|:---------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| demo-image.fits        | Single Image: 2-dimensional primary array `1400 x 1000` with `BITPIX = 16`                                                                 |
+| demo-simple.fits       | Single Image: 1-dimensional primary array `1 x 100` with `BITPIX = 8`, data block contains a sequence from 0 to 100                        |
+| **[Official Individual Samples](https://fits.gsfc.nasa.gov/fits_samples.html)** |                                                                                             |
+| 01-HST-WFPC-II.fits    | WFPC II `800 x 800 x 4` primary array data cube containing the 4 CCD images, plus a table extension containing world coordinate parameters. This sample file has been trimmed to `200 x 200 x 4` pixels to save disk space |
+| 02-HST-WFPC-II.fits    | WFPC II `1600 x 1600` primary array mosaic constructed from the 4 individual CCD chips. Image has been trimmed to `100 x 100` pixels to save disk space |
+| 03-HST-FOC.fits        | FOC `1024 x 1024` primary array image, plus a table extension containing world coordinate parameters                                                 |
+| 04-HST-FOS.fits        | FOS `2 x 2064` primary array spectrum containing the flux and wavelength arrays, plus a small table extension                                        |
+| 05-HST-HRS.fits        | HRS `2000 x 4` primary array spectrum, plus a small table extension                                                                                  |
+| 06-HST-NICMOS.fits     | NICMOS null primary array plus 5 image extensions `270 x 263` containing the science, error, data quality, samples, and time images                  |
+| 07-HST-FGS.fits        | FGS file with a `89688 x 7` 2-dimensional primary array and 1 table extension. The primary array contains a time series of 7 astrometric quantities  |
+| 08-ASTRO-UIT.fits      | Astro1 Ultraviolet Imaging Telescope `512 x 512` primary array image                                                                                 |
+| 09-IUE-LWP.fits        | IUE spectrum contained in vector columns of a binary table                                                                                                     |
+| 10-EUVE.fits           | EUVE sky image and 2D spectra, contained in multiple image extensions, with associated binary table extensions                                                 |
+| 11-RANDOM-GROUPS.fits  | This example file illustrates the Random Groups FITS file format which has the keywords `NAXIS1 = 0` and `GROUPS = T`                      |
+
+### Demo
+
+The `demo` directory contains examples of using the library. Each example is located in a separate directory and has two entry points: Delphi and Lazarus project. 
+
+- *editdata* - reading and editing the Data of the FITS file
+- *edithead* - reading and editing the Header of the FITS file
+- *makeimage* - make a new IMAGE extension from a BITMAP file
+- *makeitem* - make a new FITS file
+- *markup* - markup of the Official Individual Samples of FITS files
+- *renderimage* - render the IMAGE extension of the FITS file
 
 ### Credits
 
-DeLaFits is used in the [CoLiTec](http://www.neoastrosoft.com "http://www.neoastrosoft.com") project (software for automated asteroids and comets discoveries).
+DeLaFits is used in the [CoLiTec](http://www.neoastrosoft.com) project - software package for automatic processing of CCD observations for accurate astrometry and photometry.
+
+Link to DelaFits library is published in the official resource of the [FITS Support Office](https://fits.gsfc.nasa.gov/fits_libraries.html) at NASA/GSFC at NASA/GSFC.
 
 ### License
 
-[MIT](https://github.com/felleroff/delafits/blob/master/LICENSE) © 2013-2016, Evgeniy Dikov \<delafits.library@gamil.com\>
+[MIT](LICENSE.md) © 2013-2021, felleroff, delafits.library@gmail.com
