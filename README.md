@@ -109,39 +109,39 @@ end.
 
 The `data` directory contains samples FITS files
 
-| **[Custom Demo Samples](data)** |                                                                                                                                             |
-|:---------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| demo-image.fits        | Single Image: 2-dimensional primary array `1400 x 1000` with `BITPIX = 16`                                                                 |
-| demo-simple.fits       | Single Image: 1-dimensional primary array `1 x 100` with `BITPIX = 8`, data block contains a sequence from 0 to 100                        |
-| **[Official Individual Samples](https://fits.gsfc.nasa.gov/fits_samples.html)** |                                                                                             |
-| 01-HST-WFPC-II.fits    | WFPC II `800 x 800 x 4` primary array data cube containing the 4 CCD images, plus a table extension containing world coordinate parameters. This sample file has been trimmed to `200 x 200 x 4` pixels to save disk space |
-| 02-HST-WFPC-II.fits    | WFPC II `1600 x 1600` primary array mosaic constructed from the 4 individual CCD chips. Image has been trimmed to `100 x 100` pixels to save disk space |
-| 03-HST-FOC.fits        | FOC `1024 x 1024` primary array image, plus a table extension containing world coordinate parameters                                                 |
-| 04-HST-FOS.fits        | FOS `2 x 2064` primary array spectrum containing the flux and wavelength arrays, plus a small table extension                                        |
-| 05-HST-HRS.fits        | HRS `2000 x 4` primary array spectrum, plus a small table extension                                                                                  |
-| 06-HST-NICMOS.fits     | NICMOS null primary array plus 5 image extensions `270 x 263` containing the science, error, data quality, samples, and time images                  |
-| 07-HST-FGS.fits        | FGS file with a `89688 x 7` 2-dimensional primary array and 1 table extension. The primary array contains a time series of 7 astrometric quantities  |
-| 08-ASTRO-UIT.fits      | Astro1 Ultraviolet Imaging Telescope `512 x 512` primary array image                                                                                 |
-| 09-IUE-LWP.fits        | IUE spectrum contained in vector columns of a binary table                                                                                                     |
-| 10-EUVE.fits           | EUVE sky image and 2D spectra, contained in multiple image extensions, with associated binary table extensions                                                 |
-| 11-RANDOM-GROUPS.fits  | This example file illustrates the Random Groups FITS file format which has the keywords `NAXIS1 = 0` and `GROUPS = T`                      |
+| **[Custom Demo Samples](data)** |                                                                                                                                                     |
+|:--------------------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| demo-image.fits       | Single Image: 2-dimensional primary array 1400 x 1000 with BITPIX = 16                                                                              |
+| demo-simple.fits      | Single Image: 1-dimensional primary array 1 x 100 with BITPIX = 8, data block contains a sequence from 0 to 99                                      |
+| **[Official Individual Samples](https://fits.gsfc.nasa.gov/fits_samples.html)** |                                                                                                     |
+| 01-HST-WFPC-II.fits   | WFPC II 800 x 800 x 4 primary array data cube containing the 4 CCD images, plus a table extension containing world coordinate parameters. This sample file has been trimmed to 200 x 200 x 4 pixels to save disk space |
+| 02-HST-WFPC-II.fits   | WFPC II 1600 x 1600 primary array mosaic constructed from the 4 individual CCD chips. Image has been trimmed to 100 x 100 pixels to save disk space |
+| 03-HST-FOC.fits       | FOC 1024 x 1024 primary array image, plus a table extension containing world coordinate parameters                                                            |
+| 04-HST-FOS.fits       | FOS 2 x 2064 primary array spectrum containing the flux and wavelength arrays, plus a small table extension                                                   |
+| 05-HST-HRS.fits       | HRS 2000 x 4 primary array spectrum, plus a small table extension                                                                                             |
+| 06-HST-NICMOS.fits    | NICMOS null primary array plus 5 image extensions 270 x 263 containing the science, error, data quality, samples, and time images                             |
+| 07-HST-FGS.fits       | FGS file with a 89688 x 7 2-dimensional primary array and 1 table extension. The primary array contains a time series of 7 astrometric quantities             |
+| 08-ASTRO-UIT.fits     | Astro1 Ultraviolet Imaging Telescope 512 x 512 primary array image                                                                                            |
+| 09-IUE-LWP.fits       | IUE spectrum contained in vector columns of a binary table                                                                                                              |
+| 10-EUVE.fits          | EUVE sky image and 2D spectra, contained in multiple image extensions, with associated binary table extensions                                                          |
+| 11-RANDOM-GROUPS.fits | This example file illustrates the Random Groups FITS file format which has the keywords NAXIS1 = 0 and GROUPS = T                                   |
 
 ### Demo
 
 The `demo` directory contains examples of using the library. Each example is located in a separate directory and has two entry points: Delphi and Lazarus project. 
 
-- *editdata* - reading and editing the Data of the FITS file
-- *edithead* - reading and editing the Header of the FITS file
-- *makeimage* - make a new IMAGE extension from a BITMAP file
-- *makeitem* - make a new FITS file
-- *markup* - markup of the Official Individual Samples of FITS files
-- *renderimage* - render the IMAGE extension of the FITS file
+- [editdata](demo/editdata) - reading and editing the Data of the FITS file
+- [edithead](demo/edithead) - reading and editing the Header of the FITS file
+- [makeimage](demo/makeimage) - make a new IMAGE extension from a BITMAP file
+- [makeitem](demo/makeitem) - make a new FITS file
+- [markup](demo/markup) - markup of the Official Individual Samples of FITS files
+- [renderimage](demo/renderimage) - render the IMAGE extension of the FITS file
 
 ### Credits
 
 DeLaFits is used in the [CoLiTec](http://www.neoastrosoft.com) project - software package for automatic processing of CCD observations for accurate astrometry and photometry.
 
-Link to DelaFits library is published in the official resource of the [FITS Support Office](https://fits.gsfc.nasa.gov/fits_libraries.html) at NASA/GSFC at NASA/GSFC.
+The list of known FITS I/O libraries (including DeLaFits) is published in the official resource of the [FITS Support Office](https://fits.gsfc.nasa.gov/fits_libraries.html) at NASA/GSFC at NASA/GSFC.
 
 ### License
 
