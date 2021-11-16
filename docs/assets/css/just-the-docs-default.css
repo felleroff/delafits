@@ -1558,7 +1558,7 @@ a[href^="https://fits.gsfc.nasa.gov/standard"]::after, a[href^="https://wiki.fre
 
 pre.highlight { line-height: 1.2; }
 
-code { font-size: 0.9em; }
+code { font-size: 13px; }
 
 .table-wrapper .thead-none thead { display: none; }
 
