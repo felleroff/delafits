@@ -14,7 +14,7 @@ unit umain;
 interface
 
 uses
-  SysUtils, Classes, DeLaFitsCommon, DeLaFitsClasses;
+  SysUtils, Classes, DeLaFitsClasses;
 
   // Entry Point
 
@@ -43,38 +43,26 @@ begin
   Result := ExpandFileName(Result + '../../data/');
 end;
 
-// Returns the extension name of HDU
+// Returns the extension alias of HDU
 
-function GetItemName(AItem: TFitsItem): string;
+function GetUmitAlias(AUmit: TFitsUmit): string;
 begin
-
-  Result := AItem.Name;
-
-  // The FITS Standard (version 4.0), 6. "Random groups structure", page 16
-  // ... NAXIS1 can be zero value, other NAXISn shall contain a non-negative integer ...
-
-  if AItem.Index = 0 then
-    if AItem.Naxis > 1 then
-      if AItem.Naxes[1] = 0 then
-        Result := 'RANDOM GROUP';
-
+  Result := AUmit.AliasFamily;
   // The first HDU is a Primary HDU
-
-  if AItem.Index = 0 then
+  if AUmit.Index = 0 then
     Result := Result + ' (PRIMARY)';
-
 end;
 
 // Returns the dimension of Data Block
 
-function GetItemNaxes(AItem: TFitsItem): string;
+function GetUmitNaxes(AUmit: TFitsUmit): string;
 var
   I, V: Integer;
 begin
   Result := '';
-  for I := 1 to AItem.Naxis do
+  for I := 1 to AUmit.NAXIS do
   begin
-    V := AItem.Naxes[I];
+    V := AUmit.NAXES[I];
     Result := Result + IntToStr(V) + 'x';
   end;
   Delete(Result, Length(Result), 1);
@@ -83,7 +71,7 @@ end;
 
 // Returns a chunk of Header Block: 5 first and last keywords (or all)
 
-function GetItemHeadChunk(AHead: TFitsItemHead): string;
+function GetUmitHeadChunk(AHead: TFitsUmitHead): string;
 const
   ChunkCount = 5;
 var
@@ -122,7 +110,7 @@ end;
 
 // Returns a chunk of Data Block: 5 first and last bytes (or all)
 
-function GetItemDataChunk(AData: TFitsItemData): string;
+function GetUmitDataChunk(AData: TFitsUmitData): string;
 const
   ChunkSize = 5;
 var
@@ -172,14 +160,13 @@ var
   Stream: TFileStream;
 
   Container: TFitsContainer;
-  Item: TFitsItem;
-  Head: TFitsItemHead;
-  Data: TFitsItemData;
+  Umit: TFitsUmit;
+  Head: TFitsUmitHead;
+  Data: TFitsUmitData;
 
   I, Count: Integer;
   Size: Int64;
-  BitPix: Integer;
-  Name, Naxes, Chunk: string;
+  Alias, Naxes, Chunk: string;
 
 begin
 
@@ -209,26 +196,24 @@ begin
 
       // HDU
 
-      Item := Container.Items[I];
+      Umit := Container.Umits[I];
 
-      Name := GetItemName(Item);
-      Log('HDU[%d]       : %s', [Item.Index, Name]);
+      Alias := GetUmitAlias(Umit);
+      Log('HDU[%d]       : %s', [Umit.Index, Alias]);
 
-      Log('Offset       : %d',       [Item.Offset]);
-      Log('Size         : %d bytes', [Item.Size]);
+      Log('Offset       : %d',       [Umit.Offset]);
+      Log('Size         : %d bytes', [Umit.Size]);
 
-      BitPix := BitPixToInt(Item.BitPix);
-      Log('BitPix       : %d', [BitPix]);
+      Log('BITPIX       : %d', [Umit.BITPIX]);
+      Log('GCOUNT       : %d', [Umit.GCOUNT]);
+      Log('PCOUNT       : %d', [Umit.PCOUNT]);
 
-      Log('Gcount       : %d', [Item.Gcount]);
-      Log('Pcount       : %d', [Item.Pcount]);
-
-      Naxes := GetItemNaxes(Item);
-      Log('Naxes        : %s dim', [Naxes]);
+      Naxes := GetUmitNaxes(Umit);
+      Log('NAXES        : %s dim', [Naxes]);
 
       // Header Block
 
-      Head := Item.Head;
+      Head := Umit.Head;
 
       Log('Head Offset  : %d',       [Head.Offset]);
       Log('Head Cize    : %d bytes', [Head.Cize]);
@@ -236,18 +221,18 @@ begin
       Log('Head Count   : %d lines', [Head.Count]);
       Log('Head Capacity: %d lines', [Head.Capacity]);
 
-      Chunk := GetItemHeadChunk(Head);
+      Chunk := GetUmitHeadChunk(Head);
       Log('Head Chunk   : %s', [Chunk]);
 
       // Data Block
 
-      Data := Item.Data;
+      Data := Umit.Data;
 
       Log('Data Offset  : %d',       [Data.Offset]);
       Log('Data Cize    : %d bytes', [Data.Cize]);
       Log('Data Size    : %d bytes', [Data.Size]);
 
-      Chunk := GetItemDataChunk(Data);
+      Chunk := GetUmitDataChunk(Data);
       Log('Data Chunk   : %s', [Chunk]);
 
     end;

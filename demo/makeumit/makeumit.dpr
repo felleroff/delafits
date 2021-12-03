@@ -1,13 +1,11 @@
-program makeitem;
+program makeumit;
 
-{$mode objfpc}{$H+}
+{$APPTYPE CONSOLE}
+
+{$R *.res}
 
 uses
-  {$IFDEF UNIX}{$IFDEF UseCThreads}
-  cthreads,
-  {$ENDIF}{$ENDIF}
-  SysUtils,
-  umain;
+  System.SysUtils, umain;
 
 begin
   try
@@ -18,4 +16,3 @@ begin
   end;
   ReadLn;
 end.
-

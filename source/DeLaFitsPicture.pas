@@ -27,7 +27,7 @@ const
   ERROR_PICTURE                           = 6000;
 
   ERROR_PICTURE_SPEC_INVALID              = 6100;
-  ERROR_PICTURE_SPEC_NAXIS                = 6101;
+  ERROR_PICTURE_SPEC_AXIS                 = 6101;
 
   ERROR_PICTURE_HEAD_INCORRECT_NAXIS      = 6200;
 
@@ -95,29 +95,29 @@ type
 
   TFitsPictureSpec = class(TFitsImageSpec)
   private
-    function GetNaxis: Integer;
-    procedure VerifyNaxis(const Value: Integer);
-    procedure SetNaxis(const Value: Integer);
+    procedure VerifyAxis(const Value: Integer);
+    function GetAxis: Integer;
+    procedure SetAxis(const Value: Integer);
   public
-    constructor Create(ABitPix: TBitPix; const ANaxes: array of Integer; const ABScale: Extended = 1.0; const ABZero: Extended = 0.0); overload;
-    constructor Create(AItem: TFitsPicture); overload;
+    constructor Create(ABitPix: TBitPix; const AAxes: array of Integer; const AScal: Extended = 1.0; const AZero: Extended = 0.0); overload;
+    constructor Create(AUmit: TFitsPicture); overload;
     constructor Create; overload;
-    property Naxis: Integer read GetNaxis write SetNaxis;
+    property Axis: Integer read GetAxis write SetAxis;
   end;
 
   TFitsPictureHead = class(TFitsImageHead)
   private
-    function GetItem: TFitsPicture;
+    function GetUmit: TFitsPicture;
   public
-    constructor CreateExplorer(AItem: TFitsItem; APioneer: Boolean); override;
-    property Item: TFitsPicture read GetItem;
+    constructor CreateExplorer(AUmit: TFitsUmit; APioneer: Boolean); override;
+    property Umit: TFitsPicture read GetUmit;
   end;
 
   TFitsPictureData = class(TFitsImageData)
   private
-    function GetItem: TFitsPicture;
+    function GetUmit: TFitsPicture;
   public
-    property Item: TFitsPicture read GetItem;
+    property Umit: TFitsPicture read GetUmit;
   end;
 
   TFitsPictureFrame = class;
@@ -287,7 +287,7 @@ type
 
   private
 
-    FItem: TFitsPicture;
+    FUmit: TFitsPicture;
     FIndexFrame: Integer;
     FHistogram: TFitsPictureHistogram;
     FTone: TFitsPictureTone;
@@ -297,7 +297,7 @@ type
     FBandaged: Boolean;
 
     procedure Init;
-    procedure Bind(AItem: TFitsPicture; AIndexFrame: Integer);
+    procedure Bind(AUmit: TFitsPicture; AIndexFrame: Integer);
     function GetIndexElems: Int64;
     function GetCountElems: Int64;
     procedure Bandage;
@@ -316,12 +316,12 @@ type
 
   public
 
-    constructor Create(AItem: TFitsPicture; AIndexFrame: Integer);
+    constructor Create(AUmit: TFitsPicture; AIndexFrame: Integer);
     procedure BeforeDestruction; override;
     destructor Destroy; override;
     procedure Drop;
     procedure Remap;
-    property Item: TFitsPicture read FItem;
+    property Umit: TFitsPicture read FUmit;
     property IndexFrame: Integer read FIndexFrame;
     property IndexElems: Int64 read GetIndexElems;
     property CountElems: Int64 read GetCountElems;
@@ -365,15 +365,15 @@ type
 
   TFitsPictureFrames = class(TObject)
   private
-    FItem: TFitsPicture;
+    FUmit: TFitsPicture;
     FFrames: TList;
     procedure Init;
-    procedure Bind(AItem: TFitsPicture);
+    procedure Bind(AUmit: TFitsPicture);
     function GetCount: Integer;
     function GetFrame(Index: Integer): TFitsPictureFrame;
     procedure DropFrame(AFrame: TFitsPictureFrame);
   public
-    constructor Create(AItem: TFitsPicture);
+    constructor Create(AUmit: TFitsPicture);
     procedure BeforeDestruction; override;
     destructor Destroy; override;
     procedure Drop;
@@ -390,11 +390,11 @@ type
     function GetHead: TFitsPictureHead;
     function GetData: TFitsPictureData;
   protected
-    function GetHeadClass: TFitsItemHeadClass; override;
-    function GetDataClass: TFitsItemDataClass; override;
+    function GetHeadClass: TFitsUmitHeadClass; override;
+    function GetDataClass: TFitsUmitDataClass; override;
   public
     constructor CreateExplorer(AContainer: TFitsContainer; APioneer: Boolean); override;
-    constructor CreateNewcomer(AContainer: TFitsContainer; ASpec: TFitsItemSpec); override;
+    constructor CreateNewcomer(AContainer: TFitsContainer; ASpec: TFitsUmitSpec); override;
     destructor Destroy; override;
     property Head: TFitsPictureHead read GetHead;
     property Data: TFitsPictureData read GetData;
@@ -405,63 +405,63 @@ implementation
 
 { TFitsPictureSpec }
 
-constructor TFitsPictureSpec.Create(ABitPix: TBitPix; const ANaxes: array of Integer; const ABScale, ABZero: Extended);
+constructor TFitsPictureSpec.Create(ABitPix: TBitPix; const AAxes: array of Integer; const AScal, AZero: Extended);
 begin
-  VerifyNaxis(Length(ANaxes));
-  inherited Create(ABitPix, ANaxes, ABScale, ABZero);
+  VerifyAxis(Length(AAxes));
+  inherited Create(ABitPix, AAxes, AScal, AZero);
 end;
 
-constructor TFitsPictureSpec.Create(AItem: TFitsPicture);
+constructor TFitsPictureSpec.Create(AUmit: TFitsPicture);
 begin
-  inherited Create(AItem);
-  VerifyNaxis(Naxis);
+  inherited Create(AUmit);
+  VerifyAxis(Axis);
 end;
 
 constructor TFitsPictureSpec.Create;
 begin
   inherited Create;
-  Naxis    := 2;
-  Naxes[1] := 1;
-  Naxes[2] := 1;
+  Axis    := 2;
+  Axes[0] := 1;
+  Axes[1] := 1;
 end;
 
-function TFitsPictureSpec.GetNaxis: Integer;
-begin
-  Result := inherited Naxis;
-end;
-
-procedure TFitsPictureSpec.VerifyNaxis(const Value: Integer);
+procedure TFitsPictureSpec.VerifyAxis(const Value: Integer);
 begin
   if Value < 2 then
-    raise EFitsPictureException.CreateFmt(SPictureSpecIncorrectValue, ['Naxis'], ERROR_PICTURE_SPEC_NAXIS);
+    raise EFitsPictureException.CreateFmt(SPictureSpecIncorrectValue, ['Axis'], ERROR_PICTURE_SPEC_AXIS);
 end;
 
-procedure TFitsPictureSpec.SetNaxis(const Value: Integer);
+function TFitsPictureSpec.GetAxis: Integer;
 begin
-  VerifyNaxis(Value);
-  inherited Naxis := Value;
+  Result := inherited Axis;
+end;
+
+procedure TFitsPictureSpec.SetAxis(const Value: Integer);
+begin
+  VerifyAxis(Value);
+  inherited Axis := Value;
 end;
 
 { TFitsPictureHead }
 
-constructor TFitsPictureHead.CreateExplorer(AItem: TFitsItem; APioneer: Boolean);
+constructor TFitsPictureHead.CreateExplorer(AUmit: TFitsUmit; APioneer: Boolean);
 begin
   inherited;
   // check correct of "NAXIS" value
-  if Item.Naxis < 2 then
-    raise EFitsPictureException.CreateFmt(SImageHeadIncorrectValue, [cNAXIS, Item.Index], ERROR_PICTURE_HEAD_INCORRECT_NAXIS);
+  if Umit.NAXIS < 2 then
+    raise EFitsPictureException.CreateFmt(SImageHeadIncorrectValue, [cNAXIS, Umit.Index], ERROR_PICTURE_HEAD_INCORRECT_NAXIS);
 end;
 
-function TFitsPictureHead.GetItem: TFitsPicture;
+function TFitsPictureHead.GetUmit: TFitsPicture;
 begin
-  Result := inherited Item as TFitsPicture;
+  Result := inherited Umit as TFitsPicture;
 end;
 
 { TFitsPictureData }
 
-function TFitsPictureData.GetItem: TFitsPicture;
+function TFitsPictureData.GetUmit: TFitsPicture;
 begin
-  Result := inherited Item as TFitsPicture;
+  Result := inherited Umit as TFitsPicture;
 end;
 
 { TFitsPictureBinding }
@@ -474,8 +474,8 @@ end;
 procedure TFitsPictureBinding.Bind(AFrame: TFitsPictureFrame);
 begin
   if not Assigned(AFrame) then
-    raise EFitsPictureException.Create(SItemNotAssign, ERROR_PICTURE_BINDING_BIND_ASSIGN);
-  if not AFrame.FItem.FInspect then
+    raise EFitsPictureException.Create(SUmitNotAssign, ERROR_PICTURE_BINDING_BIND_ASSIGN);
+  if not AFrame.FUmit.FInspect then
     raise EFitsPictureException.Create(SBindNoInspect, ERROR_PICTURE_BINDING_BIND_INSPECT);
   FFrame := AFrame;
 end;
@@ -489,8 +489,8 @@ end;
 
 procedure TFitsPictureBinding.BeforeDestruction;
 begin
-  if not FFrame.FItem.FInspect then
-    raise EFitsPictureException.CreateFmt(SFreeNoInspect, [FFrame.FItem.Index], ERROR_PICTURE_BINDING_FREE_INSPECT);
+  if not FFrame.FUmit.FInspect then
+    raise EFitsPictureException.CreateFmt(SFreeNoInspect, [FFrame.FUmit.Index], ERROR_PICTURE_BINDING_FREE_INSPECT);
   inherited;
 end;
 
@@ -522,8 +522,8 @@ end;
 procedure TFitsPictureHistogram.Build;
 var
   BitPix: TBitPix;
-  BitSize: Byte;
-  BScale, BZero: Extended;
+  SizBit: Byte;
+  Scal, Zero: Extended;
   Swapper: TSwapper;
   CountElems, SizeChunk, UffsetChunk: Int64;
   CountChunk, QuotaElems, QuotaChunk: Integer;
@@ -538,23 +538,23 @@ var
   Elem: Extended;
 begin
 
-  BitPix  := FFrame.Item.BitPix;
-  BitSize := BitPixSize(BitPix);
-  BScale  := FFrame.Item.BScale;
-  BZero   := FFrame.Item.BZero;
+  BitPix := FFrame.Umit.Data.BitPix;
+  SizBit := FFrame.Umit.Data.SizPix;
+  Scal   := FFrame.Umit.Data.Scal;
+  Zero   := FFrame.Umit.Data.Zero;
 
   Swapper := GetSwapper();
 
   // count of data elements
 
-  CountElems := Int64(FFrame.Item.Naxes[1]) * FFrame.Item.Naxes[2];
+  CountElems := Int64(FFrame.Umit.NAXES[1]) * FFrame.Umit.NAXES[2];
 
   // count and size read-chunk of data elements
 
-  CountChunk := cMaxSizeBuffer div BitSize;
+  CountChunk := cMaxSizeBuffer div SizBit;
   if CountChunk > CountElems then
     CountChunk := CountElems;
-  SizeChunk := Int64(CountChunk) * BitSize;
+  SizeChunk := Int64(CountChunk) * SizBit;
 
   // count of data elements to append in brackets array (simple random sample)
 
@@ -580,9 +580,9 @@ begin
     Randomize;
 
     Chunk := nil;
-    FFrame.Item.Container.Content.Buffer.Allocate(Pointer(Chunk), SizeChunk);
+    FFrame.Umit.Container.Content.Buffer.Allocate(Pointer(Chunk), SizeChunk);
 
-    UffsetChunk := FFrame.IndexElems * BitSize;
+    UffsetChunk := FFrame.IndexElems * SizBit;
 
     while CountElems > 0 do
     begin
@@ -592,7 +592,7 @@ begin
       if CountElems < CountChunk then
       begin
         CountChunk := CountElems;
-        SizeChunk  := CountElems * BitSize;
+        SizeChunk  := CountElems * SizBit;
         QuotaChunk := QuotaElems;
         if QuotaChunk < 1 then
           QuotaChunk := 1;
@@ -602,7 +602,7 @@ begin
 
       // read a chunk of data elements
 
-      FFrame.Item.Data.Read(UffsetChunk, SizeChunk, Chunk[0]);
+      FFrame.Umit.Data.Read(UffsetChunk, SizeChunk, Chunk[0]);
 
       // select a random data elements from chunk
       // and insert a selected elements in buckets
@@ -615,7 +615,7 @@ begin
             for I := 0 to QuotaChunk - 1 do
             begin
               Elem := Swapper.Swap64f(Chunk64f[I]);
-              Elem := UnNan64f(Elem) * BScale + BZero;
+              Elem := UnNan64f(Elem) * Scal + Zero;
               AddBucket(Elem);
             end;
           end;
@@ -626,7 +626,7 @@ begin
             for I := 0 to QuotaChunk - 1 do
             begin
               Elem := Swapper.Swap32f(Chunk32f[I]);
-              Elem := UnNan64f(Elem) * BScale + BZero;
+              Elem := UnNan64f(Elem) * Scal + Zero;
               AddBucket(Elem);
             end;
           end;
@@ -636,7 +636,7 @@ begin
             Shake08u(Chunk08u, CountChunk, QuotaChunk);
             for I := 0 to QuotaChunk - 1 do
             begin
-              Elem := Chunk08u[I] * BScale + BZero;
+              Elem := Chunk08u[I] * Scal + Zero;
               AddBucket(Elem);
             end;
           end;
@@ -646,7 +646,7 @@ begin
             Shake16c(Chunk16c, CountChunk, QuotaChunk);
             for I := 0 to QuotaChunk - 1 do
             begin
-              Elem := Swapper.Swap16c(Chunk16c[I]) * BScale + BZero;
+              Elem := Swapper.Swap16c(Chunk16c[I]) * Scal + Zero;
               AddBucket(Elem);
             end;
           end;
@@ -656,7 +656,7 @@ begin
             Shake32c(Chunk32c, CountChunk, QuotaChunk);
             for I := 0 to QuotaChunk - 1 do
             begin
-              Elem := Swapper.Swap32c(Chunk32c[I]) * BScale + BZero;
+              Elem := Swapper.Swap32c(Chunk32c[I]) * Scal + Zero;
               AddBucket(Elem);
             end;
           end;
@@ -666,7 +666,7 @@ begin
             Shake64c(Chunk64c, CountChunk, QuotaChunk);
             for I := 0 to QuotaChunk - 1 do
             begin
-              Elem := Swapper.Swap64c(Chunk64c[I]) * BScale + BZero;
+              Elem := Swapper.Swap64c(Chunk64c[I]) * Scal + Zero;
               AddBucket(Elem);
             end;
           end;
@@ -694,7 +694,7 @@ begin
     Chunk16c := nil;
     Chunk32c := nil;
     Chunk64c := nil;
-    FFrame.Item.Container.Content.Buffer.Release(Pointer(Chunk));
+    FFrame.Umit.Container.Content.Buffer.Release(Pointer(Chunk));
     Chunk := nil;
   end;
 end;
@@ -1038,7 +1038,7 @@ begin
   Appear;
   if Value.Black > Value.White then
     raise EFitsPictureException.CreateFmt(SPictureHistogramIncorrectRange,
-      [Value.Black, Value.White, FFrame.FIndexFrame, FFrame.FItem.Index],
+      [Value.Black, Value.White, FFrame.FIndexFrame, FFrame.FUmit.Index],
       ERROR_PICTURE_HISTOGRAM_INCORRECT_RANGE);
   if (Value.Black <> FIndexBlack) or (Value.White <> FIndexWhite) then
   begin
@@ -1069,7 +1069,7 @@ procedure TFitsPictureTone.SetBrightness(const Value: Double);
 begin
   if Math.IsNan(Value) or (Value < cBrightnessMin) or (Value > cBrightnessMax) then
     raise EFitsPictureException.CreateFmt(SPicturePropIncorrectValue,
-      ['brightness', Value, Frame.FIndexFrame, FFrame.FItem.Index],
+      ['brightness', Value, Frame.FIndexFrame, FFrame.FUmit.Index],
       ERROR_PICTURE_TONE_INCORRECT_BRIGHTNESS);
   if FBrightness <> Value then
   begin
@@ -1082,7 +1082,7 @@ procedure TFitsPictureTone.SetContrast(const Value: Double);
 begin
   if Math.IsNan(Value) or (Value < cContrastMin) or (Value > cContrastMax) then
     raise EFitsPictureException.CreateFmt(SPicturePropIncorrectValue,
-      ['contrast', Value, Frame.FIndexFrame, FFrame.FItem.Index],
+      ['contrast', Value, Frame.FIndexFrame, FFrame.FUmit.Index],
       ERROR_PICTURE_TONE_INCORRECT_CONTRAST);
   if FContrast <> Value then
   begin
@@ -1095,7 +1095,7 @@ procedure TFitsPictureTone.SetGamma(const Value: Double);
 begin
   if Math.IsNan(Value) or (Value < cGammaMin) or (Value > cGammaMax) then
     raise EFitsPictureException.CreateFmt(SPicturePropIncorrectValue,
-      ['gamma', Value, Frame.FIndexFrame, FFrame.FItem.Index],
+      ['gamma', Value, Frame.FIndexFrame, FFrame.FUmit.Index],
       ERROR_PICTURE_TONE_INCORRECT_GAMMA);
   if FGamma <> Value then
   begin
@@ -1124,7 +1124,7 @@ procedure TFitsPicturePalette.SetTuples(const Value: PPaletteTuples);
 begin
   if Value = nil then
     raise EFitsPictureException.CreateFmt(SPicturePaletteInvalidTuples,
-      [FFrame.FIndexFrame, FFrame.FItem.Index], ERROR_PICTURE_PALETTE_INVALID_TUPLES);
+      [FFrame.FIndexFrame, FFrame.FUmit.Index], ERROR_PICTURE_PALETTE_INVALID_TUPLES);
   FTuples := Value;
 end;
 
@@ -1552,7 +1552,7 @@ var
   I: Integer;
 begin
   FPixmap     := nil;
-  FItem       := nil;
+  FUmit       := nil;
   FIndexFrame := -1;
   FHistogram  := nil;
   FTone       := nil;
@@ -1563,26 +1563,26 @@ begin
   FBandaged := False;
 end;
 
-procedure TFitsPictureFrame.Bind(AItem: TFitsPicture; AIndexFrame: Integer);
+procedure TFitsPictureFrame.Bind(AUmit: TFitsPicture; AIndexFrame: Integer);
 begin
-  if not Assigned(AItem) then
-    raise EFitsPictureException.Create(SItemNotAssign, ERROR_PICTURE_FRAME_BIND_ASSIGN);
-  if not AItem.FInspect then
+  if not Assigned(AUmit) then
+    raise EFitsPictureException.Create(SUmitNotAssign, ERROR_PICTURE_FRAME_BIND_ASSIGN);
+  if not AUmit.FInspect then
     raise EFitsPictureException.Create(SBindNoInspect, ERROR_PICTURE_FRAME_BIND_INSPECT);
   if AIndexFrame < 0 then
     raise EFitsPictureException.CreateFmt(SPictureFrameInvalidBind, [AIndexFrame], ERROR_PICTURE_FRAME_BIND_INDEX);
-  FItem := AItem;
+  FUmit := AUmit;
   FIndexFrame := AIndexFrame;
 end;
 
 function TFitsPictureFrame.GetIndexElems: Int64;
 begin
-  Result := Int64(FIndexFrame) * Item.Naxes[1] * Item.Naxes[2];
+  Result := Int64(FIndexFrame) * Umit.Data.Axes[0] * Umit.Data.Axes[1];
 end;
 
 function TFitsPictureFrame.GetCountElems: Int64;
 begin
-  Result := Int64(Item.Naxes[1]) * Item.Naxes[2];
+  Result := Int64(Umit.Data.Axes[0]) * Umit.Data.Axes[1];
 end;
 
 procedure TFitsPictureFrame.Bandage;
@@ -1701,12 +1701,12 @@ end;
 
 function TFitsPictureFrame.GetLocalWidth: Integer;
 begin
-  Result := Item.Naxes[1];
+  Result := Umit.Data.Axes[0];
 end;
 
 function TFitsPictureFrame.GetLocalHeight: Integer;
 begin
-  Result := Item.Naxes[2];
+  Result := Umit.Data.Axes[1];
 end;
 
 function TFitsPictureFrame.GetLocalPixel(X, Y: Integer): Extended;
@@ -1714,7 +1714,7 @@ var
   Index: Int64;
 begin
   Index := Self.IndexElems + Int64(Y) * Self.LocalWidth + X;
-  Result := Item.Data.Elems[Index];
+  Result := Umit.Data.Elems[Index];
 end;
 
 procedure TFitsPictureFrame.SetLocalPixel(X, Y: Integer; const Value: Extended);
@@ -1722,7 +1722,7 @@ var
   Index: Int64;
 begin
   Index := Self.IndexElems + Int64(Y) * Self.LocalWidth + X;
-  Item.Data.Elems[Index] := Value;
+  Umit.Data.Elems[Index] := Value;
 end;
 
 function TFitsPictureFrame.GetSceneRegion: TRegion;
@@ -1752,12 +1752,12 @@ begin
     Result := Math.NaN;
 end;
 
-constructor TFitsPictureFrame.Create(AItem: TFitsPicture; AIndexFrame: Integer);
+constructor TFitsPictureFrame.Create(AUmit: TFitsPicture; AIndexFrame: Integer);
 begin
   inherited Create;
   Init;
   FPixmap    := TFitsManagerPixmap.Create;
-  Bind(AItem, AIndexFrame);
+  Bind(AUmit, AIndexFrame);
   FHistogram := TFitsPictureHistogram.Create(Self);
   FTone      := TFitsPictureTone.Create(Self);
   FPalette   := TFitsPicturePalette.Create(Self);
@@ -1766,8 +1766,8 @@ end;
 
 procedure TFitsPictureFrame.BeforeDestruction;
 begin
-  if not FItem.FInspect then
-    raise EFitsPictureException.CreateFmt(SFreeNoInspect, [FItem.Index], ERROR_PICTURE_FRAME_FREE_INSPECT);
+  if not FUmit.FInspect then
+    raise EFitsPictureException.CreateFmt(SFreeNoInspect, [FUmit.Index], ERROR_PICTURE_FRAME_FREE_INSPECT);
   inherited;
 end;
 
@@ -1793,7 +1793,7 @@ begin
     FGeometry.Free;
     FGeometry := nil;
   end;
-  FItem := nil;
+  FUmit := nil;
   if Assigned(FPixmap) then
   begin
     FPixmap.Free;
@@ -1804,7 +1804,7 @@ end;
 
 procedure TFitsPictureFrame.Drop;
 begin
-  FItem.FFrames.DropFrame(Self);
+  FUmit.FFrames.DropFrame(Self);
 end;
 
 procedure TFitsPictureFrame.Remap;
@@ -1816,13 +1816,13 @@ procedure TFitsPictureFrame.AllowRender(const ASceneRegion: TRegion; const APix:
 begin
   if (ASceneRegion.Width <= 0) or (ASceneRegion.Height <= 0) then
     raise EFitsPictureException.CreateFmt(SPictureFrameIncorrectScene,
-      [FIndexFrame, FItem.Index], ERROR_PICTURE_FRAME_INCORRECT_SCENE);
+      [FIndexFrame, FUmit.Index], ERROR_PICTURE_FRAME_INCORRECT_SCENE);
   if Length(APix) < ASceneRegion.Width then
     raise EFitsPictureException.CreateFmt(SPictureFrameIncorrectPixmap,
-      [FIndexFrame, FItem.Index], ERROR_PICTURE_FRAME_INCORRECT_PIXMAP);
+      [FIndexFrame, FUmit.Index], ERROR_PICTURE_FRAME_INCORRECT_PIXMAP);
   if Length(APix[0]) < ASceneRegion.Height then
     raise EFitsPictureException.CreateFmt(SPictureFrameIncorrectPixmap,
-      [FIndexFrame, FItem.Index], ERROR_PICTURE_FRAME_INCORRECT_PIXMAP);
+      [FIndexFrame, FUmit.Index], ERROR_PICTURE_FRAME_INCORRECT_PIXMAP);
 end;
 
 procedure TFitsPictureFrame.RenderMap(var AMap: TPaletteTuples);
@@ -2081,8 +2081,8 @@ begin
 
       // read data a local row fragment
 
-      Item.Data.ReadElems(IndElems + Int64(LocW) * LocY + LocBnd.Xmin, LocBnd.Xcount, LocRow1);
-      Item.Data.ReadElems(IndElems + Int64(LocW) * Math.Min(LocY + 1, LocBnd.Ymax) + LocBnd.Xmin, LocBnd.Xcount, LocRow2);
+      Umit.Data.ReadElems(IndElems + Int64(LocW) * LocY + LocBnd.Xmin, LocBnd.Xcount, LocRow1);
+      Umit.Data.ReadElems(IndElems + Int64(LocW) * Math.Min(LocY + 1, LocBnd.Ymax) + LocBnd.Xmin, LocBnd.Xcount, LocRow2);
       for I := 0 to LocBnd.Xcount - 1 do
       begin
         LocRow1[I] := UnNan64f(LocRow1[I]);
@@ -2273,35 +2273,35 @@ end;
 procedure TFitsPictureFrame.SetBitmapPixels(ABitmap: TBitmap; const AMap: TPaletteTuples;
   const APix: TPaletteIndexs; const AWidth, AHeight: Integer);
 type
-  TLine24Item = packed record
+  TLine24Umit = packed record
     iB, iG, iR: Byte;
   end;
 
   {$IFDEF FPC}
-  PLine24Item = ^TLine24Item;
+  PLine24Umit = ^TLine24Umit;
   {$ENDIF}
 
   {$IFDEF DCC}
   // pf8bit
-  TLine08Item = Byte;
+  TLine08Umit = Byte;
   PLine08 = ^TLine08;
-  TLine08 = array [0 .. 0] of TLine08Item;
+  TLine08 = array [0 .. 0] of TLine08Umit;
   // pf24bit
   PLine24 = ^TLine24;
-  TLine24 = array [0 .. 0] of TLine24Item;
+  TLine24 = array [0 .. 0] of TLine24Umit;
   // pf32bit
-  TLine32Item = packed record
+  TLine32Umit = packed record
     iB, iG, iR, iReserved: Byte;
   end;
   PLine32 = ^TLine32;
-  TLine32 = array [0 .. 0] of TLine32Item;
+  TLine32 = array [0 .. 0] of TLine32Umit;
   {$ENDIF}
 
 var
   I, J: Integer;
 
   {$IFDEF FPC}
-  Line24Item: PLine24Item;
+  Line24Umit: PLine24Umit;
   IncPix, IncRow: Integer;
   {$ENDIF}
 
@@ -2319,17 +2319,17 @@ begin
   IncRow := ABitmap.RawImage.Description.BytesPerLine;
   for I := 0 to AHeight - 1 do
   begin;
-    Line24Item := PLine24Item(ABitmap.RawImage.Data);
-    Inc(PByte(Line24Item), IncRow * I);
+    Line24Umit := PLine24Umit(ABitmap.RawImage.Data);
+    Inc(PByte(Line24Umit), IncRow * I);
     for J := 0 to AWidth - 1 do
     begin
-      with Line24Item^, AMap[APix[J, I]] do
+      with Line24Umit^, AMap[APix[J, I]] do
       begin
         iB := B;
         iG := G;
         iR := R;
       end;
-      Inc(PByte(Line24Item), IncPix);
+      Inc(PByte(Line24Umit), IncPix);
     end;
   end;
   {$IFDEF HAS_RANGE_CHECK}
@@ -2386,7 +2386,7 @@ var
 begin
   if not Assigned(ABitmap) then
     raise EFitsPictureException.CreateFmt(SPictureFrameIncorrectBitmap,
-      [FIndexFrame, FItem.Index], ERROR_PICTURE_FRAME_INCORRECT_BITMAP);
+      [FIndexFrame, FUmit.Index], ERROR_PICTURE_FRAME_INCORRECT_BITMAP);
 
   Pixmap.Pix := nil;
   FPixmap.Allocate(Pixmap, ASceneRegion.Width, ASceneRegion.Height);
@@ -2423,7 +2423,7 @@ end;
 
 procedure TFitsPictureFrames.Init;
 begin
-  FItem := nil;
+  FUmit := nil;
   FFrames := TList.Create;
 end;
 
@@ -2432,8 +2432,8 @@ var
   Number: Integer;
 begin
   Result := 1;
-  for Number := 3 to FItem.Naxis do
-    Result := Result * FItem.Naxes[Number];
+  for Number := 3 to FUmit.NAXIS do
+    Result := Result * FUmit.NAXES[Number];
 end;
 
 function TFitsPictureFrames.GetFrame(Index: Integer): TFitsPictureFrame;
@@ -2454,37 +2454,37 @@ begin
   end;
   if not Assigned(Result) then
   begin
-    Inspect := FItem.FInspect;
+    Inspect := FUmit.FInspect;
     try
-      FItem.FInspect := True;
-      Result := TFitsPictureFrame.Create(FItem, Index);
+      FUmit.FInspect := True;
+      Result := TFitsPictureFrame.Create(FUmit, Index);
       FFrames.Add(Result);
     finally
-      FItem.FInspect := Inspect;
+      FUmit.FInspect := Inspect;
     end;
   end;
 end;
 
-procedure TFitsPictureFrames.Bind(AItem: TFitsPicture);
+procedure TFitsPictureFrames.Bind(AUmit: TFitsPicture);
 begin
-  if not Assigned(AItem) then
-    raise EFitsPictureException.Create(SItemNotAssign, ERROR_PICTURE_FRAMES_BIND_ASSIGN);
-  if not AItem.FInspect then
+  if not Assigned(AUmit) then
+    raise EFitsPictureException.Create(SUmitNotAssign, ERROR_PICTURE_FRAMES_BIND_ASSIGN);
+  if not AUmit.FInspect then
     raise EFitsPictureException.Create(SBindNoInspect, ERROR_PICTURE_FRAMES_BIND_INSPECT);
-  FItem := AItem;
+  FUmit := AUmit;
 end;
 
-constructor TFitsPictureFrames.Create(AItem: TFitsPicture);
+constructor TFitsPictureFrames.Create(AUmit: TFitsPicture);
 begin
   inherited Create;
   Init();
-  Bind(AItem);
+  Bind(AUmit);
 end;
 
 procedure TFitsPictureFrames.BeforeDestruction;
 begin
-  if not FItem.FInspect then
-    raise EFitsPictureException.CreateFmt(SFreeNoInspect, [FItem.Index], ERROR_PICTURE_FRAMES_FREE_INSPECT);
+  if not FUmit.FInspect then
+    raise EFitsPictureException.CreateFmt(SFreeNoInspect, [FUmit.Index], ERROR_PICTURE_FRAMES_FREE_INSPECT);
   inherited;
 end;
 
@@ -2503,7 +2503,7 @@ begin
     FFrames.Free;
     FFrames := nil;
   end;
-  FItem := nil;
+  FUmit := nil;
   inherited;
 end;
 
@@ -2512,16 +2512,16 @@ var
   Index: Integer;
   Inspect: Boolean;
 begin
-  Inspect := FItem.FInspect;
+  Inspect := FUmit.FInspect;
   try
-    FItem.FInspect := True;
+    FUmit.FInspect := True;
     // ! because "FFrames.Remove(AFrame)" requires [dcc64 Hint] unit System.Types
     Index := FFrames.IndexOf(AFrame);
     if Index >= 0 then
       FFrames.Delete(Index);
     AFrame.Free;
   finally
-    FItem.FInspect := Inspect;
+    FUmit.FInspect := Inspect;
   end;
 end;
 
@@ -2530,9 +2530,9 @@ var
   I: Integer;
   Inspect: Boolean;
 begin
-  Inspect := FItem.FInspect;
+  Inspect := FUmit.FInspect;
   try
-    FItem.FInspect := True;
+    FUmit.FInspect := True;
     for I := 0 to FFrames.Count - 1 do
     begin
       TFitsPictureFrame(FFrames[I]).Free;
@@ -2540,7 +2540,7 @@ begin
     end;
     FFrames.Clear;
   finally
-    FItem.FInspect := Inspect;
+    FUmit.FInspect := Inspect;
   end;
 end;
 
@@ -2569,7 +2569,7 @@ begin
   end;
 end;
 
-constructor TFitsPicture.CreateNewcomer(AContainer: TFitsContainer;  ASpec: TFitsItemSpec);
+constructor TFitsPicture.CreateNewcomer(AContainer: TFitsContainer;  ASpec: TFitsUmitSpec);
 var
   Spec: TFitsPictureSpec;
 begin
@@ -2616,7 +2616,7 @@ begin
   Result := inherited Data as TFitsPictureData;
 end;
 
-function TFitsPicture.GetDataClass: TFitsItemDataClass;
+function TFitsPicture.GetDataClass: TFitsUmitDataClass;
 begin
   Result := TFitsPictureData;
 end;
@@ -2626,7 +2626,7 @@ begin
   Result := inherited Head as TFitsPictureHead;
 end;
 
-function TFitsPicture.GetHeadClass: TFitsItemHeadClass;
+function TFitsPicture.GetHeadClass: TFitsUmitHeadClass;
 begin
   Result := TFitsPictureHead;
 end;

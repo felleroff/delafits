@@ -111,6 +111,7 @@ The `data` directory contains samples FITS files
 
 | **[Custom Demo Samples](data)** |                                                                                                                                                     |
 |:--------------------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| demo-asctable.fits    | Primary HDU without data block and  ASCII-TABLE extension: 5 x 10 table                                                                                       |
 | demo-image.fits       | Single Image: 2-dimensional primary array 1400 x 1000 with BITPIX = 16                                                                              |
 | demo-simple.fits      | Single Image: 1-dimensional primary array 1 x 100 with BITPIX = 8, data block contains a sequence from 0 to 99                                      |
 | **[Official Individual Samples](https://fits.gsfc.nasa.gov/fits_samples.html)** |                                                                                                     |
@@ -132,8 +133,9 @@ The `demo` directory contains examples of using the library. Each example is loc
 
 - [editdata](demo/editdata) - reading and editing the Data of the FITS file
 - [edithead](demo/edithead) - reading and editing the Header of the FITS file
+- [makeasctable](demo/makeasctable) - make a new ASCII-TABLE extension
 - [makeimage](demo/makeimage) - make a new IMAGE extension from a BITMAP file
-- [makeitem](demo/makeitem) - make a new FITS file
+- [makeumit](demo/makeumit) - make a new FITS file
 - [markup](demo/markup) - markup of the Official Individual Samples of FITS files
 - [renderimage](demo/renderimage) - render the IMAGE extension of the FITS file
 

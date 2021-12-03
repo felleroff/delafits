@@ -314,6 +314,11 @@ const
 
   procedure YCross(const Clip: TClip; const Y: Double; out X1, X2: Double);
 
+  // Check a boundaries of stream content
+
+  function InContent(const Offset, Size: Int64; const SubOffset, SubSize: Int64): Boolean; overload;
+  function InContent(const Offset, Size: Int64; const SubOffset: Int64): Boolean; overload;
+
 implementation
 
 { TSwapper }
@@ -1584,6 +1589,27 @@ begin
     X1 := X2;
     X2 := X;
   end;
+end;
+
+function InContent(const Offset, Size: Int64; const SubOffset, SubSize: Int64): Boolean; overload;
+var
+  A1, A2: Int64;
+  B1, B2: Int64;
+begin
+  A1 := Offset;
+  A2 := Math.IfThen(Size = 0, Offset, Offset + Size - 1);
+  B1 := SubOffset;
+  B2 := Math.IfThen(SubSize = 0, SubOffset, SubOffset + SubSize - 1);
+  Result := (A1 >= 0) and (B1 >= 0) and (A1 <= A2) and (B1 <= B2) and (A1 <= B1) and (A2 >= B2);
+end;
+
+function InContent(const Offset, Size: Int64; const SubOffset: Int64): Boolean; overload;
+var
+  A1, A2: Int64;
+begin
+  A1 := Offset;
+  A2 := Math.IfThen(Size = 0, Offset, Offset + Size - 1);
+  Result := Math.InRange(SubOffset, A1, A2);
 end;
 
 end.

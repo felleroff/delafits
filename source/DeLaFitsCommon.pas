@@ -33,10 +33,11 @@ const
   cCountLinesInBlock = cSizeBlock div cSizeLine; // 36
   cSizeKeyword = 08;
 
-  cChrValueIndicator: Char = '=';  // $3D
-  cChrNoteIndicator : Char = '/';  // $2F
-  cChrBlank         : Char = ' ';  // $20
-  cChrQuote         : Char = ''''; // $27
+  cChrValueIndicator: Char = '=';     // $3D
+  cChrNoteIndicator : Char = '/';     // $2F
+  cChrBlank         : Char = ' ';     // $20
+  cChrNull          : Char = Char(0); // $00
+  cChrQuote         : Char = '''';    // $27
 
   cWidthLineValue = 20;
   cWidthLineValueQuote = 08;
@@ -45,7 +46,13 @@ const
     to the elements in a rectilinear, n-dimension matrix (1 <= n <= 999,
     or n = 0 in the case of a null array) }
 
-  cMaxNaxis = 999;
+  cMaxAxis = 999;
+
+  { FITS Standard. The ASCII-table extension / Binary-table extension. The value
+    field TFIELDS shall contain a non-negative integer representing the number
+    of fields in each row. The maximum permissible value is 999 }
+
+  cMaxFields = 999;
 
 const
 
@@ -54,9 +61,14 @@ const
     https://heasarc.gsfc.nasa.gov/docs/fcg/common_dict.html }
 
   cSIMPLE   = 'SIMPLE';
+
   cEXTEND   = 'EXTEND';   // Boolean: may the FITS file contain extensions? optional
+
   cXTENSION = 'XTENSION'; // String: name of the extension type
   cEXTNAME  = 'EXTNAME';  // String: for distinguish among different extensions of the same type, i.e., with the same value of XTENSION
+  cEXTVER   = 'EXTVER';   // Integer: for distinguish among different extensions in a FITS file with the same type and name, i.e., the same values for XTENSION and EXTNAME , default = 1
+  cEXTLEVEL = 'EXTLEVEL'; // Integer: specifying the level in a hierarchy of extension levels of the extension header containing it, default = 1
+
   cBITPIX   = 'BITPIX';
   cGCOUNT   = 'GCOUNT';   // Integer: group count, optional, default = 1
   cPCOUNT   = 'PCOUNT';   // Integer: parameter count, optional, default = 0
@@ -65,10 +77,24 @@ const
   cNAXIS1   = 'NAXIS1';
   cNAXIS2   = 'NAXIS2';
   cNAXIS3   = 'NAXIS3';
+
   cGROUPS   = 'GROUPS';   // Boolean: indicates random groups structure
   cBSCALE   = 'BSCALE';
   cBZERO    = 'BZERO';
-  cEND      = 'END';
+
+  cTFIELDS  = 'TFIELDS';
+  cTBCOLn   = 'TBCOL%d';
+  cTFORMn   = 'TFORM%d';
+  cTTYPEn   = 'TTYPE%d';
+  cTUNITn   = 'TUNIT%d';
+  cTSCALn   = 'TSCAL%d';
+  cTZEROn   = 'TZERO%d';
+  cTNULLn   = 'TNULL%d';
+  cTDISPn   = 'TDISP%d';
+  cTDMINn   = 'TDMIN%d';
+  cTDMAXn   = 'TDMAX%d';
+  cTLMINn   = 'TLMIN%d';
+  cTLMAXn   = 'TLMAX%d';
 
   cAUTHOR   = 'AUTHOR';
   cBLANK    = '';
@@ -102,6 +128,8 @@ const
   cRA       = 'RA';       // String or Double: 'ddd(.d)' or 'ddd:mm:ss(.s)' or 'hh(.h)' or 'hh:mm:ss(.sss)'
   cTIME_OBS = 'TIME-OBS'; // String: start time of observation
 
+  cEND      = 'END';
+
 type
 
   { Numbers: f ~ floating-point, u ~ unsigned binary integer, c ~ two's
@@ -130,6 +158,10 @@ type
   TA64f = array of T64f;
   TA64c = array of T64c;
   TA80f = array of T80f;
+
+  TABol = array of Boolean;
+
+  TAStr = array of string;
 
 type
 
@@ -181,15 +213,16 @@ type
   function BitPixToRep(Value: TBitPix): TRepNumber; {$IFDEF HAS_INLINE} inline; {$ENDIF}
 
   // Returns size BitPix in bytes
-  function BitPixSize(Value: TBitPix): Byte; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+  function BitPixSize(Value: TBitPix): Byte; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
+  function BitPixSize(Value: Integer): Byte; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
 
 const
 
   { Usage of BZERO to represent non-default integer data types }
 
-  cBZero08c = -$80;
-  cBZero16u = +$8000;
-  cBZero32u = +$80000000;
+  cZero08c = -$80;
+  cZero16u = +$8000;
+  cZero32u = +$80000000;
 
 const
 
@@ -556,6 +589,14 @@ begin
     bi64c: Result := 8;
     else   Result := 0;
   end;
+end;
+
+function BitPixSize(Value: Integer): Byte;
+var
+  BitPix: TBitPix;
+begin
+  BitPix := IntToBitPix(Value);
+  Result := BitPixSize(BitPix);
 end;
 
 { TCard }

@@ -81,7 +81,7 @@ end;
 
 // Reading all useful header lines (without a parsing)
 
-procedure ReadLines(AHead: TFitsItemHead);
+procedure ReadLines(AHead: TFitsUmitHead);
 var
   I: Integer;
   Line: string;
@@ -103,7 +103,7 @@ end;
 
 // Reading all useful header cards (lines parsing as string)
 
-procedure ReadCards(AHead: TFitsItemHead);
+procedure ReadCards(AHead: TFitsUmitHead);
 var
   I: Integer;
   Card: TCard;
@@ -138,7 +138,7 @@ end;
 
 // Reading header values
 
-procedure ReadValues(AHead: TFitsItemHead);
+procedure ReadValues(AHead: TFitsUmitHead);
 var
   Key: string;
   Index: Integer;
@@ -225,7 +225,7 @@ end;
 
 // Rewrite header values
 
-procedure RewriteValues(AHead: TFitsItemHead);
+procedure RewriteValues(AHead: TFitsUmitHead);
 var
   Key: string;
   Index: Integer;
@@ -290,7 +290,7 @@ end;
 
 // Add new header cards
 
-procedure AddCards(AHead: TFitsItemHead);
+procedure AddCards(AHead: TFitsUmitHead);
 var
   Key: string;
   Index: Integer;
@@ -374,7 +374,7 @@ end;
 
 // Remove header cards
 
-procedure RemoveCards(AHead: TFitsItemHead);
+procedure RemoveCards(AHead: TFitsUmitHead);
 var
   Key: string;
   Index: Integer;
@@ -401,7 +401,7 @@ procedure Edit(const AFileName: string);
 var
   Stream: TFileStream;
   Container: TFitsContainer;
-  Head: TFitsItemHead;
+  Head: TFitsUmitHead;
 begin
 
   Stream := nil;

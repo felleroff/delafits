@@ -1,4 +1,4 @@
-program makeitem;
+program makeasctable;
 
 {$APPTYPE CONSOLE}
 

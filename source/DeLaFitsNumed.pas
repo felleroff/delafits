@@ -4,9 +4,9 @@
 {         Numbers Binary Editor of Data Block          }
 {                                                      }
 { Read and Write physical data values to custom buffer }
-{     Elems[Index] = Terms[Index] * BScale + BZero     }
+{      Elems[Index] = Terms[Index] * Scal + Zero       }
 {                                                      }
-{   Interface name semantics: [RW]_BITPIX_SCALE_REP    }
+{  Interface name semantics: [RW]_BITPIX_SCALE_REPPIX  }
 {                                                      }
 {          Copyright(c) 2013-2021, felleroff           }
 {              delafits.library@gmail.com              }
@@ -45,16 +45,16 @@ type
   procedure R_64F_ONE_32C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32c);
   procedure R_64F_ONE_32U(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32u);
   procedure R_64F_ONE_64C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64c);
-  procedure R_64F_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
-  procedure R_64F_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
-  procedure R_64F_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
-  procedure R_64F_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
-  procedure R_64F_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
-  procedure R_64F_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
-  procedure R_64F_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
-  procedure R_64F_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
-  procedure R_64F_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
-  procedure R_64F_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+  procedure R_64F_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+  procedure R_64F_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+  procedure R_64F_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+  procedure R_64F_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+  procedure R_64F_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+  procedure R_64F_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+  procedure R_64F_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+  procedure R_64F_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+  procedure R_64F_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+  procedure R_64F_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 
   procedure R_32F_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA80f);
   procedure R_32F_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64f);
@@ -66,16 +66,16 @@ type
   procedure R_32F_ONE_32C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32c);
   procedure R_32F_ONE_32U(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32u);
   procedure R_32F_ONE_64C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64c);
-  procedure R_32F_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
-  procedure R_32F_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
-  procedure R_32F_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
-  procedure R_32F_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
-  procedure R_32F_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
-  procedure R_32F_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
-  procedure R_32F_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
-  procedure R_32F_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
-  procedure R_32F_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
-  procedure R_32F_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+  procedure R_32F_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+  procedure R_32F_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+  procedure R_32F_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+  procedure R_32F_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+  procedure R_32F_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+  procedure R_32F_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+  procedure R_32F_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+  procedure R_32F_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+  procedure R_32F_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+  procedure R_32F_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 
   procedure R_08U_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA80f);
   procedure R_08U_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64f);
@@ -97,16 +97,16 @@ type
   procedure R_08U_OFF_32C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32c);
   procedure R_08U_OFF_32U(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32u);
   procedure R_08U_OFF_64C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64c);
-  procedure R_08U_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
-  procedure R_08U_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
-  procedure R_08U_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
-  procedure R_08U_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
-  procedure R_08U_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
-  procedure R_08U_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
-  procedure R_08U_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
-  procedure R_08U_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
-  procedure R_08U_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
-  procedure R_08U_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+  procedure R_08U_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+  procedure R_08U_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+  procedure R_08U_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+  procedure R_08U_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+  procedure R_08U_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+  procedure R_08U_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+  procedure R_08U_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+  procedure R_08U_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+  procedure R_08U_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+  procedure R_08U_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 
   procedure R_16C_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA80f);
   procedure R_16C_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64f);
@@ -128,16 +128,16 @@ type
   procedure R_16C_OFF_32C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32c);
   procedure R_16C_OFF_32U(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32u);
   procedure R_16C_OFF_64C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64c);
-  procedure R_16C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
-  procedure R_16C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
-  procedure R_16C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
-  procedure R_16C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
-  procedure R_16C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
-  procedure R_16C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
-  procedure R_16C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
-  procedure R_16C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
-  procedure R_16C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
-  procedure R_16C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+  procedure R_16C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+  procedure R_16C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+  procedure R_16C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+  procedure R_16C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+  procedure R_16C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+  procedure R_16C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+  procedure R_16C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+  procedure R_16C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+  procedure R_16C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+  procedure R_16C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 
   procedure R_32C_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA80f);
   procedure R_32C_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64f);
@@ -159,16 +159,16 @@ type
   procedure R_32C_OFF_32C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32c);
   procedure R_32C_OFF_32U(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32u);
   procedure R_32C_OFF_64C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64c);
-  procedure R_32C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
-  procedure R_32C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
-  procedure R_32C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
-  procedure R_32C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
-  procedure R_32C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
-  procedure R_32C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
-  procedure R_32C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
-  procedure R_32C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
-  procedure R_32C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
-  procedure R_32C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+  procedure R_32C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+  procedure R_32C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+  procedure R_32C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+  procedure R_32C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+  procedure R_32C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+  procedure R_32C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+  procedure R_32C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+  procedure R_32C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+  procedure R_32C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+  procedure R_32C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 
   procedure R_64C_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA80f);
   procedure R_64C_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64f);
@@ -180,16 +180,16 @@ type
   procedure R_64C_ONE_32C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32c);
   procedure R_64C_ONE_32U(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA32u);
   procedure R_64C_ONE_64C(const AEditor: TEditor; const AIndex, ACount: Int64; var AElems: TA64c);
-  procedure R_64C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
-  procedure R_64C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
-  procedure R_64C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
-  procedure R_64C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
-  procedure R_64C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
-  procedure R_64C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
-  procedure R_64C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
-  procedure R_64C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
-  procedure R_64C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
-  procedure R_64C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+  procedure R_64C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+  procedure R_64C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+  procedure R_64C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+  procedure R_64C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+  procedure R_64C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+  procedure R_64C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+  procedure R_64C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+  procedure R_64C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+  procedure R_64C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+  procedure R_64C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 
   { Write }
 
@@ -203,16 +203,16 @@ type
   procedure W_64F_ONE_32C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32c);
   procedure W_64F_ONE_32U(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32u);
   procedure W_64F_ONE_64C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64c);
-  procedure W_64F_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
-  procedure W_64F_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
-  procedure W_64F_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
-  procedure W_64F_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
-  procedure W_64F_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
-  procedure W_64F_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
-  procedure W_64F_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
-  procedure W_64F_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
-  procedure W_64F_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
-  procedure W_64F_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+  procedure W_64F_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+  procedure W_64F_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+  procedure W_64F_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+  procedure W_64F_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+  procedure W_64F_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+  procedure W_64F_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+  procedure W_64F_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+  procedure W_64F_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+  procedure W_64F_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+  procedure W_64F_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 
   procedure W_32F_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA80f);
   procedure W_32F_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64f);
@@ -224,16 +224,16 @@ type
   procedure W_32F_ONE_32C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32c);
   procedure W_32F_ONE_32U(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32u);
   procedure W_32F_ONE_64C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64c);
-  procedure W_32F_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
-  procedure W_32F_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
-  procedure W_32F_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
-  procedure W_32F_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
-  procedure W_32F_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
-  procedure W_32F_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
-  procedure W_32F_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
-  procedure W_32F_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
-  procedure W_32F_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
-  procedure W_32F_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+  procedure W_32F_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+  procedure W_32F_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+  procedure W_32F_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+  procedure W_32F_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+  procedure W_32F_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+  procedure W_32F_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+  procedure W_32F_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+  procedure W_32F_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+  procedure W_32F_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+  procedure W_32F_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
   procedure W_08U_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA80f);
   procedure W_08U_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64f);
   procedure W_08U_ONE_32F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32f);
@@ -254,16 +254,16 @@ type
   procedure W_08U_OFF_32C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32c);
   procedure W_08U_OFF_32U(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32u);
   procedure W_08U_OFF_64C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64c);
-  procedure W_08U_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
-  procedure W_08U_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
-  procedure W_08U_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
-  procedure W_08U_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
-  procedure W_08U_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
-  procedure W_08U_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
-  procedure W_08U_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
-  procedure W_08U_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
-  procedure W_08U_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
-  procedure W_08U_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+  procedure W_08U_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+  procedure W_08U_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+  procedure W_08U_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+  procedure W_08U_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+  procedure W_08U_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+  procedure W_08U_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+  procedure W_08U_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+  procedure W_08U_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+  procedure W_08U_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+  procedure W_08U_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 
   procedure W_16C_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA80f);
   procedure W_16C_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64f);
@@ -285,16 +285,16 @@ type
   procedure W_16C_OFF_32C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32c);
   procedure W_16C_OFF_32U(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32u);
   procedure W_16C_OFF_64C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64c);
-  procedure W_16C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
-  procedure W_16C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
-  procedure W_16C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
-  procedure W_16C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
-  procedure W_16C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
-  procedure W_16C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
-  procedure W_16C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
-  procedure W_16C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
-  procedure W_16C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
-  procedure W_16C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+  procedure W_16C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+  procedure W_16C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+  procedure W_16C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+  procedure W_16C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+  procedure W_16C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+  procedure W_16C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+  procedure W_16C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+  procedure W_16C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+  procedure W_16C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+  procedure W_16C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 
   procedure W_32C_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA80f);
   procedure W_32C_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64f);
@@ -316,16 +316,16 @@ type
   procedure W_32C_OFF_32C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32c);
   procedure W_32C_OFF_32U(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32u);
   procedure W_32C_OFF_64C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64c);
-  procedure W_32C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
-  procedure W_32C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
-  procedure W_32C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
-  procedure W_32C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
-  procedure W_32C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
-  procedure W_32C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
-  procedure W_32C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
-  procedure W_32C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
-  procedure W_32C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
-  procedure W_32C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+  procedure W_32C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+  procedure W_32C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+  procedure W_32C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+  procedure W_32C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+  procedure W_32C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+  procedure W_32C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+  procedure W_32C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+  procedure W_32C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+  procedure W_32C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+  procedure W_32C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 
   procedure W_64C_ONE_80F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA80f);
   procedure W_64C_ONE_64F(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64f);
@@ -337,16 +337,16 @@ type
   procedure W_64C_ONE_32C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32c);
   procedure W_64C_ONE_32U(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA32u);
   procedure W_64C_ONE_64C(const AEditor: TEditor; const AIndex, ACount: Int64; const AElems: TA64c);
-  procedure W_64C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
-  procedure W_64C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
-  procedure W_64C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
-  procedure W_64C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
-  procedure W_64C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
-  procedure W_64C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
-  procedure W_64C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
-  procedure W_64C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
-  procedure W_64C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
-  procedure W_64C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+  procedure W_64C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+  procedure W_64C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+  procedure W_64C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+  procedure W_64C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+  procedure W_64C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+  procedure W_64C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+  procedure W_64C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+  procedure W_64C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+  procedure W_64C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+  procedure W_64C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 
 implementation
 
@@ -370,9 +370,9 @@ const
 
   { Explicit type casting }
 
-  cBZero16u_T32c: T32c = cBZero16u;
-  cBZero32u_T64c: T64c = cBZero32u;
-  cBZero32u_T64f: T64f = cBZero32u;
+  cZero16u_T32c: T32c = cZero16u;
+  cZero32u_T64c: T64c = cZero32u;
+  cZero32u_T64f: T64f = cZero32u;
 
 { Read }
 
@@ -676,7 +676,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+procedure R_64F_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
 type
   TTerm = T64f;
 const
@@ -697,7 +697,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap64f(Terms[I]) * ABScale + ABZero;
+        AElems[CountRead + I] := Swapper.Swap64f(Terms[I]) * AScal + AZero;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -706,7 +706,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+procedure R_64F_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
 type
   TTerm = T64f;
 const
@@ -727,7 +727,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure64f(Swapper.Swap64f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure64f(Swapper.Swap64f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -736,7 +736,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+procedure R_64F_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
 type
   TTerm = T64f;
 const
@@ -757,7 +757,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure32f(Swapper.Swap64f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure32f(Swapper.Swap64f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -766,7 +766,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+procedure R_64F_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
 type
   TTerm = T64f;
 const
@@ -787,7 +787,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08c(Swapper.Swap64f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08c(Swapper.Swap64f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -796,7 +796,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+procedure R_64F_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
 type
   TTerm = T64f;
 const
@@ -817,7 +817,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08u(Swapper.Swap64f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08u(Swapper.Swap64f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -826,7 +826,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+procedure R_64F_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
 type
   TTerm = T64f;
 const
@@ -847,7 +847,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16c(Swapper.Swap64f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16c(Swapper.Swap64f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -856,7 +856,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+procedure R_64F_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
 type
   TTerm = T64f;
 const
@@ -877,7 +877,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16u(Swapper.Swap64f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16u(Swapper.Swap64f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -886,7 +886,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+procedure R_64F_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
 type
   TTerm = T64f;
 const
@@ -907,7 +907,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32c(Swapper.Swap64f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32c(Swapper.Swap64f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -916,7 +916,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+procedure R_64F_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
 type
   TTerm = T64f;
 const
@@ -937,7 +937,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32u(Swapper.Swap64f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32u(Swapper.Swap64f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -946,7 +946,7 @@ begin
   end;
 end;
 
-procedure R_64F_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+procedure R_64F_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 type
   TTerm = T64f;
 const
@@ -967,7 +967,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round64c(Swapper.Swap64f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round64c(Swapper.Swap64f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1277,7 +1277,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+procedure R_32F_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
 type
   TTerm = T32f;
 const
@@ -1298,7 +1298,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap32f(Terms[I]) * ABScale + ABZero;
+        AElems[CountRead + I] := Swapper.Swap32f(Terms[I]) * AScal + AZero;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1307,7 +1307,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+procedure R_32F_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
 type
   TTerm = T32f;
 const
@@ -1328,7 +1328,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure64f(Swapper.Swap32f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure64f(Swapper.Swap32f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1337,7 +1337,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+procedure R_32F_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
 type
   TTerm = T32f;
 const
@@ -1358,7 +1358,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure32f(Swapper.Swap32f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure32f(Swapper.Swap32f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1367,7 +1367,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+procedure R_32F_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
 type
   TTerm = T32f;
 const
@@ -1388,7 +1388,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08c(Swapper.Swap32f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08c(Swapper.Swap32f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1397,7 +1397,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+procedure R_32F_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
 type
   TTerm = T32f;
 const
@@ -1418,7 +1418,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08u(Swapper.Swap32f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08u(Swapper.Swap32f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1427,7 +1427,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+procedure R_32F_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
 type
   TTerm = T32f;
 const
@@ -1448,7 +1448,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16c(Swapper.Swap32f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16c(Swapper.Swap32f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1457,7 +1457,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+procedure R_32F_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
 type
   TTerm = T32f;
 const
@@ -1478,7 +1478,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16u(Swapper.Swap32f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16u(Swapper.Swap32f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1487,7 +1487,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+procedure R_32F_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
 type
   TTerm = T32f;
 const
@@ -1508,7 +1508,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32c(Swapper.Swap32f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32c(Swapper.Swap32f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1517,7 +1517,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+procedure R_32F_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
 type
   TTerm = T32f;
 const
@@ -1538,7 +1538,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32u(Swapper.Swap32f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32u(Swapper.Swap32f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1547,7 +1547,7 @@ begin
   end;
 end;
 
-procedure R_32F_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+procedure R_32F_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 type
   TTerm = T32f;
 const
@@ -1568,7 +1568,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round64c(Swapper.Swap32f(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round64c(Swapper.Swap32f(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1899,7 +1899,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Terms[I] + cBZero08c;
+        AElems[CountRead + I] := Terms[I] + cZero08c;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1929,7 +1929,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Terms[I] + cBZero08c;
+        AElems[CountRead + I] := Terms[I] + cZero08c;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1959,7 +1959,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Terms[I] + cBZero08c;
+        AElems[CountRead + I] := Terms[I] + cZero08c;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -1989,7 +1989,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Terms[I] + cBZero08c;
+        AElems[CountRead + I] := Terms[I] + cZero08c;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2019,7 +2019,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure08u(Terms[I] + cBZero08c);
+        AElems[CountRead + I] := Ensure08u(Terms[I] + cZero08c);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2049,7 +2049,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Terms[I] + cBZero08c;
+        AElems[CountRead + I] := Terms[I] + cZero08c;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2079,7 +2079,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure16u(Terms[I] + cBZero08c);
+        AElems[CountRead + I] := Ensure16u(Terms[I] + cZero08c);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2109,7 +2109,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Terms[I] + cBZero08c;
+        AElems[CountRead + I] := Terms[I] + cZero08c;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2139,7 +2139,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure32u(Terms[I] + cBZero08c);
+        AElems[CountRead + I] := Ensure32u(Terms[I] + cZero08c);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2169,7 +2169,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Terms[I] + cBZero08c;
+        AElems[CountRead + I] := Terms[I] + cZero08c;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2178,7 +2178,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+procedure R_08U_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
 type
   TTerm = T08u;
 const
@@ -2199,7 +2199,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Terms[I] * ABScale + ABZero;
+        AElems[CountRead + I] := Terms[I] * AScal + AZero;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2208,7 +2208,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+procedure R_08U_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
 type
   TTerm = T08u;
 const
@@ -2229,7 +2229,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure64f(Terms[I] * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure64f(Terms[I] * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2238,7 +2238,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+procedure R_08U_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
 type
   TTerm = T08u;
 const
@@ -2259,7 +2259,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure32f(Terms[I] * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure32f(Terms[I] * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2268,7 +2268,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+procedure R_08U_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
 type
   TTerm = T08u;
 const
@@ -2289,7 +2289,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08c(Terms[I] * ABScale + ABZero);
+        AElems[CountRead + I] := Round08c(Terms[I] * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2298,7 +2298,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+procedure R_08U_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
 type
   TTerm = T08u;
 const
@@ -2319,7 +2319,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08u(Terms[I] * ABScale + ABZero);
+        AElems[CountRead + I] := Round08u(Terms[I] * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2328,7 +2328,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+procedure R_08U_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
 type
   TTerm = T08u;
 const
@@ -2349,7 +2349,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16c(Terms[I] * ABScale + ABZero);
+        AElems[CountRead + I] := Round16c(Terms[I] * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2358,7 +2358,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+procedure R_08U_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
 type
   TTerm = T08u;
 const
@@ -2379,7 +2379,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16u(Terms[I] * ABScale + ABZero);
+        AElems[CountRead + I] := Round16u(Terms[I] * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2388,7 +2388,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+procedure R_08U_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
 type
   TTerm = T08u;
 const
@@ -2409,7 +2409,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32c(Terms[I] * ABScale + ABZero);
+        AElems[CountRead + I] := Round32c(Terms[I] * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2418,7 +2418,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+procedure R_08U_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
 type
   TTerm = T08u;
 const
@@ -2439,7 +2439,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32u(Terms[I] * ABScale + ABZero);
+        AElems[CountRead + I] := Round32u(Terms[I] * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2448,7 +2448,7 @@ begin
   end;
 end;
 
-procedure R_08U_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+procedure R_08U_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 type
   TTerm = T08u;
 const
@@ -2469,7 +2469,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round64c(Terms[I] * ABScale + ABZero);
+        AElems[CountRead + I] := Round64c(Terms[I] * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2800,7 +2800,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cBZero16u;
+        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cZero16u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2830,7 +2830,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cBZero16u;
+        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cZero16u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2860,7 +2860,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cBZero16u;
+        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cZero16u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2890,7 +2890,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure08c(Swapper.Swap16c(Terms[I]) + cBZero16u);
+        AElems[CountRead + I] := Ensure08c(Swapper.Swap16c(Terms[I]) + cZero16u);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2920,7 +2920,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure08u(Swapper.Swap16c(Terms[I]) + cBZero16u);
+        AElems[CountRead + I] := Ensure08u(Swapper.Swap16c(Terms[I]) + cZero16u);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2950,7 +2950,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure16c(Swapper.Swap16c(Terms[I]) + cBZero16u);
+        AElems[CountRead + I] := Ensure16c(Swapper.Swap16c(Terms[I]) + cZero16u);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -2980,7 +2980,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cBZero16u;
+        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cZero16u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3010,7 +3010,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cBZero16u;
+        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cZero16u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3040,7 +3040,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cBZero16u;
+        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cZero16u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3070,7 +3070,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cBZero16u;
+        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) + cZero16u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3079,7 +3079,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+procedure R_16C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
 type
   TTerm = T16c;
 const
@@ -3100,7 +3100,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) * ABScale + ABZero;
+        AElems[CountRead + I] := Swapper.Swap16c(Terms[I]) * AScal + AZero;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3109,7 +3109,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+procedure R_16C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
 type
   TTerm = T16c;
 const
@@ -3130,7 +3130,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure64f(Swapper.Swap16c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure64f(Swapper.Swap16c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3139,7 +3139,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+procedure R_16C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
 type
   TTerm = T16c;
 const
@@ -3160,7 +3160,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure32f(Swapper.Swap16c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure32f(Swapper.Swap16c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3169,7 +3169,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+procedure R_16C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
 type
   TTerm = T16c;
 const
@@ -3190,7 +3190,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08c(Swapper.Swap16c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08c(Swapper.Swap16c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3199,7 +3199,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+procedure R_16C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
 type
   TTerm = T16c;
 const
@@ -3220,7 +3220,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08u(Swapper.Swap16c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08u(Swapper.Swap16c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3229,7 +3229,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+procedure R_16C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
 type
   TTerm = T16c;
 const
@@ -3250,7 +3250,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16c(Swapper.Swap16c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16c(Swapper.Swap16c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3259,7 +3259,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+procedure R_16C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
 type
   TTerm = T16c;
 const
@@ -3280,7 +3280,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16u(Swapper.Swap16c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16u(Swapper.Swap16c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3289,7 +3289,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+procedure R_16C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
 type
   TTerm = T16c;
 const
@@ -3310,7 +3310,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32c(Swapper.Swap16c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32c(Swapper.Swap16c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3319,7 +3319,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+procedure R_16C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
 type
   TTerm = T16c;
 const
@@ -3340,7 +3340,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32u(Swapper.Swap16c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32u(Swapper.Swap16c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3349,7 +3349,7 @@ begin
   end;
 end;
 
-procedure R_16C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+procedure R_16C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 type
   TTerm = T16c;
 const
@@ -3370,7 +3370,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round64c(Swapper.Swap16c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round64c(Swapper.Swap16c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3701,7 +3701,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cBZero32u;
+        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cZero32u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3731,7 +3731,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cBZero32u;
+        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cZero32u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3761,7 +3761,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cBZero32u;
+        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cZero32u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3791,7 +3791,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure08c(Swapper.Swap32c(Terms[I]) + cBZero32u);
+        AElems[CountRead + I] := Ensure08c(Swapper.Swap32c(Terms[I]) + cZero32u);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3821,7 +3821,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure08u(Swapper.Swap32c(Terms[I]) + cBZero32u);
+        AElems[CountRead + I] := Ensure08u(Swapper.Swap32c(Terms[I]) + cZero32u);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3851,7 +3851,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure16c(Swapper.Swap32c(Terms[I]) + cBZero32u);
+        AElems[CountRead + I] := Ensure16c(Swapper.Swap32c(Terms[I]) + cZero32u);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3881,7 +3881,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure16u(Swapper.Swap32c(Terms[I]) + cBZero32u);
+        AElems[CountRead + I] := Ensure16u(Swapper.Swap32c(Terms[I]) + cZero32u);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3911,7 +3911,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure32c(Swapper.Swap32c(Terms[I]) + cBZero32u);
+        AElems[CountRead + I] := Ensure32c(Swapper.Swap32c(Terms[I]) + cZero32u);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3941,7 +3941,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cBZero32u;
+        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cZero32u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3971,7 +3971,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cBZero32u;
+        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) + cZero32u;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -3980,7 +3980,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+procedure R_32C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
 type
   TTerm = T32c;
 const
@@ -4001,7 +4001,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) * ABScale + ABZero;
+        AElems[CountRead + I] := Swapper.Swap32c(Terms[I]) * AScal + AZero;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4010,7 +4010,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+procedure R_32C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
 type
   TTerm = T32c;
 const
@@ -4031,7 +4031,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure64f(Swapper.Swap32c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure64f(Swapper.Swap32c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4040,7 +4040,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+procedure R_32C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
 type
   TTerm = T32c;
 const
@@ -4061,7 +4061,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure32f(Swapper.Swap32c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure32f(Swapper.Swap32c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4070,7 +4070,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+procedure R_32C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
 type
   TTerm = T32c;
 const
@@ -4091,7 +4091,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08c(Swapper.Swap32c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08c(Swapper.Swap32c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4100,7 +4100,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+procedure R_32C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
 type
   TTerm = T32c;
 const
@@ -4121,7 +4121,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08u(Swapper.Swap32c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08u(Swapper.Swap32c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4130,7 +4130,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+procedure R_32C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
 type
   TTerm = T32c;
 const
@@ -4151,7 +4151,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16c(Swapper.Swap32c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16c(Swapper.Swap32c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4160,7 +4160,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+procedure R_32C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
 type
   TTerm = T32c;
 const
@@ -4181,7 +4181,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16u(Swapper.Swap32c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16u(Swapper.Swap32c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4190,7 +4190,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+procedure R_32C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
 type
   TTerm = T32c;
 const
@@ -4211,7 +4211,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32c(Swapper.Swap32c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32c(Swapper.Swap32c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4220,7 +4220,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+procedure R_32C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
 type
   TTerm = T32c;
 const
@@ -4241,7 +4241,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32u(Swapper.Swap32c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32u(Swapper.Swap32c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4250,7 +4250,7 @@ begin
   end;
 end;
 
-procedure R_32C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+procedure R_32C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 type
   TTerm = T32c;
 const
@@ -4271,7 +4271,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round64c(Swapper.Swap32c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round64c(Swapper.Swap32c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4581,7 +4581,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
+procedure R_64C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA80f);
 type
   TTerm = T64c;
 const
@@ -4602,7 +4602,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Swapper.Swap64c(Terms[I]) * ABScale + ABZero;
+        AElems[CountRead + I] := Swapper.Swap64c(Terms[I]) * AScal + AZero;
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4611,7 +4611,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
+procedure R_64C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64f);
 type
   TTerm = T64c;
 const
@@ -4632,7 +4632,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure64f(Swapper.Swap64c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure64f(Swapper.Swap64c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4641,7 +4641,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
+procedure R_64C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32f);
 type
   TTerm = T64c;
 const
@@ -4662,7 +4662,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Ensure32f(Swapper.Swap64c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Ensure32f(Swapper.Swap64c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4671,7 +4671,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
+procedure R_64C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08c);
 type
   TTerm = T64c;
 const
@@ -4692,7 +4692,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08c(Swapper.Swap64c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08c(Swapper.Swap64c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4701,7 +4701,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
+procedure R_64C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA08u);
 type
   TTerm = T64c;
 const
@@ -4722,7 +4722,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round08u(Swapper.Swap64c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round08u(Swapper.Swap64c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4731,7 +4731,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
+procedure R_64C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16c);
 type
   TTerm = T64c;
 const
@@ -4752,7 +4752,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16c(Swapper.Swap64c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16c(Swapper.Swap64c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4761,7 +4761,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
+procedure R_64C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA16u);
 type
   TTerm = T64c;
 const
@@ -4782,7 +4782,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round16u(Swapper.Swap64c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round16u(Swapper.Swap64c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4791,7 +4791,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
+procedure R_64C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32c);
 type
   TTerm = T64c;
 const
@@ -4812,7 +4812,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32c(Swapper.Swap64c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32c(Swapper.Swap64c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4821,7 +4821,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
+procedure R_64C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA32u);
 type
   TTerm = T64c;
 const
@@ -4842,7 +4842,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round32u(Swapper.Swap64c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round32u(Swapper.Swap64c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -4851,7 +4851,7 @@ begin
   end;
 end;
 
-procedure R_64C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
+procedure R_64C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; var AElems: TA64c);
 type
   TTerm = T64c;
 const
@@ -4872,7 +4872,7 @@ begin
       CountTerms := Math.Min(ACount - CountRead, CountTerms);
       AEditor.DataRead((AIndex + CountRead) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       for I := 0 to CountTerms - 1 do
-        AElems[CountRead + I] := Round64c(Swapper.Swap64c(Terms[I]) * ABScale + ABZero);
+        AElems[CountRead + I] := Round64c(Swapper.Swap64c(Terms[I]) * AScal + AZero);
       Inc(CountRead, CountTerms);
     end;
   finally
@@ -5183,7 +5183,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+procedure W_64F_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
 type
   TTerm = T64f;
 const
@@ -5203,7 +5203,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5213,7 +5213,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+procedure W_64F_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
 type
   TTerm = T64f;
 const
@@ -5233,7 +5233,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5243,7 +5243,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+procedure W_64F_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
 type
   TTerm = T64f;
 const
@@ -5263,7 +5263,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5273,7 +5273,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+procedure W_64F_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
 type
   TTerm = T64f;
 const
@@ -5293,7 +5293,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5303,7 +5303,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+procedure W_64F_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
 type
   TTerm = T64f;
 const
@@ -5323,7 +5323,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5333,7 +5333,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+procedure W_64F_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
 type
   TTerm = T64f;
 const
@@ -5353,7 +5353,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5363,7 +5363,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+procedure W_64F_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
 type
   TTerm = T64f;
 const
@@ -5383,7 +5383,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5393,7 +5393,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+procedure W_64F_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
 type
   TTerm = T64f;
 const
@@ -5413,7 +5413,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5423,7 +5423,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+procedure W_64F_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
 type
   TTerm = T64f;
 const
@@ -5443,7 +5443,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5453,7 +5453,7 @@ begin
   end;
 end;
 
-procedure W_64F_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+procedure W_64F_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 type
   TTerm = T64f;
 const
@@ -5473,7 +5473,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64f(Ensure64f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5784,7 +5784,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+procedure W_32F_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
 type
   TTerm = T32f;
 const
@@ -5804,7 +5804,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5814,7 +5814,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+procedure W_32F_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
 type
   TTerm = T32f;
 const
@@ -5834,7 +5834,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5844,7 +5844,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+procedure W_32F_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
 type
   TTerm = T32f;
 const
@@ -5864,7 +5864,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5874,7 +5874,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+procedure W_32F_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
 type
   TTerm = T32f;
 const
@@ -5894,7 +5894,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5904,7 +5904,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+procedure W_32F_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
 type
   TTerm = T32f;
 const
@@ -5924,7 +5924,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5934,7 +5934,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+procedure W_32F_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
 type
   TTerm = T32f;
 const
@@ -5954,7 +5954,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5964,7 +5964,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+procedure W_32F_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
 type
   TTerm = T32f;
 const
@@ -5984,7 +5984,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -5994,7 +5994,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+procedure W_32F_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
 type
   TTerm = T32f;
 const
@@ -6014,7 +6014,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6024,7 +6024,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+procedure W_32F_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
 type
   TTerm = T32f;
 const
@@ -6044,7 +6044,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6054,7 +6054,7 @@ begin
   end;
 end;
 
-procedure W_32F_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+procedure W_32F_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 type
   TTerm = T32f;
 const
@@ -6074,7 +6074,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32f(Ensure32f((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6404,7 +6404,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u(AElems[CountWrite + I] - cBZero08c);
+        Terms[I] := Round08u(AElems[CountWrite + I] - cZero08c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6434,7 +6434,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u(AElems[CountWrite + I] - cBZero08c);
+        Terms[I] := Round08u(AElems[CountWrite + I] - cZero08c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6464,7 +6464,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u(AElems[CountWrite + I] - cBZero08c);
+        Terms[I] := Round08u(AElems[CountWrite + I] - cZero08c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6494,7 +6494,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := AElems[CountWrite + I] - cBZero08c;
+        Terms[I] := AElems[CountWrite + I] - cZero08c;
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6524,7 +6524,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Ensure08u(AElems[CountWrite + I] - cBZero08c);
+        Terms[I] := Ensure08u(AElems[CountWrite + I] - cZero08c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6554,7 +6554,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Ensure08u(AElems[CountWrite + I] - cBZero08c);
+        Terms[I] := Ensure08u(AElems[CountWrite + I] - cZero08c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6584,7 +6584,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Ensure08u(AElems[CountWrite + I] - cBZero08c);
+        Terms[I] := Ensure08u(AElems[CountWrite + I] - cZero08c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6614,7 +6614,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Ensure08u(AElems[CountWrite + I] - cBZero08c);
+        Terms[I] := Ensure08u(AElems[CountWrite + I] - cZero08c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6644,7 +6644,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Ensure08u(AElems[CountWrite + I] - cBZero08c);
+        Terms[I] := Ensure08u(AElems[CountWrite + I] - cZero08c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6674,7 +6674,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Ensure08u(AElems[CountWrite + I] - cBZero08c);
+        Terms[I] := Ensure08u(AElems[CountWrite + I] - cZero08c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6684,7 +6684,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+procedure W_08U_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
 type
   TTerm = T08u;
 const
@@ -6704,7 +6704,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6714,7 +6714,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+procedure W_08U_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
 type
   TTerm = T08u;
 const
@@ -6734,7 +6734,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6744,7 +6744,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+procedure W_08U_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
 type
   TTerm = T08u;
 const
@@ -6764,7 +6764,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6774,7 +6774,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+procedure W_08U_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
 type
   TTerm = T08u;
 const
@@ -6794,7 +6794,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6804,7 +6804,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+procedure W_08U_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
 type
   TTerm = T08u;
 const
@@ -6824,7 +6824,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6834,7 +6834,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+procedure W_08U_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
 type
   TTerm = T08u;
 const
@@ -6854,7 +6854,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6864,7 +6864,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+procedure W_08U_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
 type
   TTerm = T08u;
 const
@@ -6884,7 +6884,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6894,7 +6894,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+procedure W_08U_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
 type
   TTerm = T08u;
 const
@@ -6914,7 +6914,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6924,7 +6924,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+procedure W_08U_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
 type
   TTerm = T08u;
 const
@@ -6944,7 +6944,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -6954,7 +6954,7 @@ begin
   end;
 end;
 
-procedure W_08U_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+procedure W_08U_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 type
   TTerm = T08u;
 const
@@ -6974,7 +6974,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Round08u((AElems[CountWrite + I] - ABZero) / ABScale);
+        Terms[I] := Round08u((AElems[CountWrite + I] - AZero) / AScal);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7305,7 +7305,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c(AElems[CountWrite + I] - cBZero16u));
+        Terms[I] := Swapper.Swap16c(Round16c(AElems[CountWrite + I] - cZero16u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7335,7 +7335,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c(AElems[CountWrite + I] - cBZero16u));
+        Terms[I] := Swapper.Swap16c(Round16c(AElems[CountWrite + I] - cZero16u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7365,7 +7365,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c(AElems[CountWrite + I] - cBZero16u));
+        Terms[I] := Swapper.Swap16c(Round16c(AElems[CountWrite + I] - cZero16u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7395,7 +7395,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cBZero16u));
+        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cZero16u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7425,7 +7425,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(AElems[CountWrite + I] - cBZero16u);
+        Terms[I] := Swapper.Swap16c(AElems[CountWrite + I] - cZero16u);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7455,7 +7455,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cBZero16u));
+        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cZero16u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7485,7 +7485,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(AElems[CountWrite + I] - cBZero16u);
+        Terms[I] := Swapper.Swap16c(AElems[CountWrite + I] - cZero16u);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7515,7 +7515,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cBZero16u));
+        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cZero16u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7545,7 +7545,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cBZero16u_T32c));
+        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cZero16u_T32c));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7575,7 +7575,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cBZero16u));
+        Terms[I] := Swapper.Swap16c(Ensure16c(AElems[CountWrite + I] - cZero16u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7585,7 +7585,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+procedure W_16C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
 type
   TTerm = T16c;
 const
@@ -7605,7 +7605,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7615,7 +7615,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+procedure W_16C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
 type
   TTerm = T16c;
 const
@@ -7635,7 +7635,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7645,7 +7645,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+procedure W_16C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
 type
   TTerm = T16c;
 const
@@ -7665,7 +7665,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7675,7 +7675,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+procedure W_16C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
 type
   TTerm = T16c;
 const
@@ -7695,7 +7695,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7705,7 +7705,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+procedure W_16C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
 type
   TTerm = T16c;
 const
@@ -7725,7 +7725,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7735,7 +7735,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+procedure W_16C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
 type
   TTerm = T16c;
 const
@@ -7755,7 +7755,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7765,7 +7765,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+procedure W_16C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
 type
   TTerm = T16c;
 const
@@ -7785,7 +7785,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7795,7 +7795,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+procedure W_16C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
 type
   TTerm = T16c;
 const
@@ -7815,7 +7815,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7825,7 +7825,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+procedure W_16C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
 type
   TTerm = T16c;
 const
@@ -7845,7 +7845,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -7855,7 +7855,7 @@ begin
   end;
 end;
 
-procedure W_16C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+procedure W_16C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 type
   TTerm = T16c;
 const
@@ -7875,7 +7875,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap16c(Round16c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8206,7 +8206,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c(AElems[CountWrite + I] - cBZero32u));
+        Terms[I] := Swapper.Swap32c(Round32c(AElems[CountWrite + I] - cZero32u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8236,7 +8236,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c(AElems[CountWrite + I] - cBZero32u));
+        Terms[I] := Swapper.Swap32c(Round32c(AElems[CountWrite + I] - cZero32u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8266,7 +8266,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c(AElems[CountWrite + I] - cBZero32u_T64f));
+        Terms[I] := Swapper.Swap32c(Round32c(AElems[CountWrite + I] - cZero32u_T64f));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8296,7 +8296,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Ensure32c(AElems[CountWrite + I] - cBZero32u));
+        Terms[I] := Swapper.Swap32c(Ensure32c(AElems[CountWrite + I] - cZero32u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8326,7 +8326,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(AElems[CountWrite + I] - cBZero32u_T64c);
+        Terms[I] := Swapper.Swap32c(AElems[CountWrite + I] - cZero32u_T64c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8356,7 +8356,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Ensure32c(AElems[CountWrite + I] - cBZero32u));
+        Terms[I] := Swapper.Swap32c(Ensure32c(AElems[CountWrite + I] - cZero32u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8386,7 +8386,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(AElems[CountWrite + I] - cBZero32u_T64c);
+        Terms[I] := Swapper.Swap32c(AElems[CountWrite + I] - cZero32u_T64c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8416,7 +8416,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Ensure32c(AElems[CountWrite + I] - cBZero32u));
+        Terms[I] := Swapper.Swap32c(Ensure32c(AElems[CountWrite + I] - cZero32u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8446,7 +8446,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(AElems[CountWrite + I] - cBZero32u_T64c);
+        Terms[I] := Swapper.Swap32c(AElems[CountWrite + I] - cZero32u_T64c);
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8476,7 +8476,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Ensure32c(AElems[CountWrite + I] - cBZero32u));
+        Terms[I] := Swapper.Swap32c(Ensure32c(AElems[CountWrite + I] - cZero32u));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8486,7 +8486,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+procedure W_32C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
 type
   TTerm = T32c;
 const
@@ -8506,7 +8506,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8516,7 +8516,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+procedure W_32C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
 type
   TTerm = T32c;
 const
@@ -8536,7 +8536,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8546,7 +8546,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+procedure W_32C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
 type
   TTerm = T32c;
 const
@@ -8566,7 +8566,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8576,7 +8576,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+procedure W_32C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
 type
   TTerm = T32c;
 const
@@ -8596,7 +8596,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8606,7 +8606,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+procedure W_32C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
 type
   TTerm = T32c;
 const
@@ -8626,7 +8626,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8636,7 +8636,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+procedure W_32C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
 type
   TTerm = T32c;
 const
@@ -8656,7 +8656,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8666,7 +8666,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+procedure W_32C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
 type
   TTerm = T32c;
 const
@@ -8686,7 +8686,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8696,7 +8696,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+procedure W_32C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
 type
   TTerm = T32c;
 const
@@ -8716,7 +8716,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8726,7 +8726,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+procedure W_32C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
 type
   TTerm = T32c;
 const
@@ -8746,7 +8746,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -8756,7 +8756,7 @@ begin
   end;
 end;
 
-procedure W_32C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+procedure W_32C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 type
   TTerm = T32c;
 const
@@ -8776,7 +8776,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap32c(Round32c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9087,7 +9087,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_80F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
+procedure W_64C_EXT_80F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA80f);
 type
   TTerm = T64c;
 const
@@ -9107,7 +9107,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9117,7 +9117,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_64F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
+procedure W_64C_EXT_64F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64f);
 type
   TTerm = T64c;
 const
@@ -9137,7 +9137,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9147,7 +9147,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_32F(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
+procedure W_64C_EXT_32F(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32f);
 type
   TTerm = T64c;
 const
@@ -9167,7 +9167,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9177,7 +9177,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_08C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
+procedure W_64C_EXT_08C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08c);
 type
   TTerm = T64c;
 const
@@ -9197,7 +9197,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9207,7 +9207,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_08U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
+procedure W_64C_EXT_08U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA08u);
 type
   TTerm = T64c;
 const
@@ -9227,7 +9227,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9237,7 +9237,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_16C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
+procedure W_64C_EXT_16C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16c);
 type
   TTerm = T64c;
 const
@@ -9257,7 +9257,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9267,7 +9267,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_16U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
+procedure W_64C_EXT_16U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA16u);
 type
   TTerm = T64c;
 const
@@ -9287,7 +9287,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9297,7 +9297,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_32C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
+procedure W_64C_EXT_32C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32c);
 type
   TTerm = T64c;
 const
@@ -9317,7 +9317,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9327,7 +9327,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_32U(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
+procedure W_64C_EXT_32U(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA32u);
 type
   TTerm = T64c;
 const
@@ -9347,7 +9347,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;
@@ -9357,7 +9357,7 @@ begin
   end;
 end;
 
-procedure W_64C_EXT_64C(const AEditor: TEditor; const ABScale, ABZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
+procedure W_64C_EXT_64C(const AEditor: TEditor; const AScal, AZero: Extended; const AIndex, ACount: Int64; const AElems: TA64c);
 type
   TTerm = T64c;
 const
@@ -9377,7 +9377,7 @@ begin
     begin
       CountTerms := Math.Min(ACount - CountWrite, CountTerms);
       for I := 0 to CountTerms - 1 do
-        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - ABZero) / ABScale));
+        Terms[I] := Swapper.Swap64c(Round64c((AElems[CountWrite + I] - AZero) / AScal));
       AEditor.DataWrite((AIndex + CountWrite) * SizeTerm, CountTerms * SizeTerm, Terms[0]);
       Inc(CountWrite, CountTerms);
     end;

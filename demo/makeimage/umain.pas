@@ -45,7 +45,7 @@ end;
 
 // Add the copyright of the demo project to the header
 
-procedure AddCopyright(AHead: TFitsItemHead; const AText: string);
+procedure AddCopyright(AHead: TFitsUmitHead; const AText: string);
 var
   Comment: string;
 begin
@@ -61,21 +61,21 @@ procedure GetGrayscaleDataRow(BitMap: TBitMap; const Row: Integer; var Buffer: T
 
 type
 
-  PItem = ^TItem;
-  TItem = packed record
+  PUmit = ^TUmit;
+  TUmit = packed record
     B, G, R: Byte;
   end;
 
 {$IFNDEF FPC}
   PLine = ^TLine;
-  TLine = array [0 .. 0] of TItem;
+  TLine = array [0 .. 0] of TUmit;
 {$ENDIF}
 
-  function Luminance(const Item: TItem): T16u;
+  function Luminance(const Umit: TUmit): T16u;
   var
     Lum: Double;
   begin
-    Lum := 0.2126 * Item.R + 0.7152 * Item.G + 0.0722 * Item.B;
+    Lum := 0.2126 * Umit.R + 0.7152 * Umit.G + 0.0722 * Umit.B;
     Result := Round(Lum * 100);
   end;
 
@@ -83,8 +83,8 @@ var
   I: Integer;
 
 {$IFDEF FPC}
-  BitItem, BitLine: Integer;
-  Item: PItem;
+  BitUmit, BitLine: Integer;
+  Umit: PUmit;
 {$ELSE}
   Line: PLine;
 {$ENDIF}
@@ -95,14 +95,14 @@ begin
 
 {$IFDEF FPC}
 
-  BitItem := BitMap.RawImage.Description.BitsPerPixel div 8;
+  BitUmit := BitMap.RawImage.Description.BitsPerPixel div 8;
   BitLine := BitMap.RawImage.Description.BytesPerLine;
-  Item := PItem(BitMap.RawImage.Data);
-  Inc(PByte(Item), Row * BitLine);
+  Umit := PUmit(BitMap.RawImage.Data);
+  Inc(PByte(Umit), Row * BitLine);
   for I := 0 to BitMap.Width - 1 do
   begin
-    Buffer[I] := Luminance(Item^);
-    Inc(PByte(Item), BitItem);
+    Buffer[I] := Luminance(Umit^);
+    Inc(PByte(Umit), BitUmit);
   end;
 
 {$ELSE}
@@ -153,7 +153,7 @@ begin
 
     // Prepare the specification of standard IMAGE extension
 
-    Spec := TFitsImageSpec.Create(bi16c, [Width, Height], 1.0, cBZero16u);
+    Spec := TFitsImageSpec.Create(bi16c, [Width, Height], 1.0, cZero16u);
 
     // Add standard IMAGE extension
 

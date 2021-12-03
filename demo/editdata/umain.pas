@@ -82,7 +82,7 @@ end;
 
 // Reading all Data Block as raw bytes
 
-procedure ReadBytes(AData: TFitsItemData);
+procedure ReadBytes(AData: TFitsUmitData);
 const
   Chunk = 10;
 var
@@ -124,7 +124,7 @@ end;
 
 // Rewrite 10 bytes of data block
 
-procedure RewriteBytes(AData: TFitsItemData);
+procedure RewriteBytes(AData: TFitsUmitData);
 const
   Chunk = 10;
   Offset = 10;
@@ -145,11 +145,11 @@ end;
 
 // Add a new 10 bytes of the data chunk
 
-procedure AddBytes(AData: TFitsItemData);
+procedure AddBytes(AData: TFitsUmitData);
 const
   Chunk = 10;
 var
-  Head: TFitsItemHead;
+  Head: TFitsUmitHead;
   Buffer: array[0 .. Chunk - 1] of Byte;
   Index: Integer;
 begin
@@ -166,7 +166,7 @@ begin
 
   // Edit a size of the axis
 
-  Head := AData.Item.Head;
+  Head := AData.Umit.Head;
   Index := Head.IndexOf(cNAXIS1);
   if Index < 0 then
     raise EDemo.CreateFmt('Keyword %s not found', [cNAXIS1]);
@@ -178,7 +178,7 @@ procedure Edit(const AFileName: string);
 var
   Stream: TFileStream;
   Container: TFitsContainer;
-  Data: TFitsItemData;
+  Data: TFitsUmitData;
 begin
 
   Stream := nil;

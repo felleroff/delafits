@@ -11,7 +11,7 @@
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <Title Value="makeitem"/>
+      <Title Value="makeumit"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
     </General>
@@ -28,7 +28,7 @@
     </RunParams>
     <Units Count="1">
       <Unit0>
-        <Filename Value="makeitem.lpr"/>
+        <Filename Value="makeumit.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
     </Units>
@@ -37,7 +37,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="makeitem.fpc"/>
+      <Filename Value="makeumit.fpc"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>

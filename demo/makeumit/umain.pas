@@ -34,7 +34,7 @@ begin
   Log(Text);
 end;
 
-procedure Log(AHead: TFitsItemHead); overload;
+procedure Log(AHead: TFitsUmitHead); overload;
 var
   I: Integer;
   Card: TCard;
@@ -66,7 +66,7 @@ begin
   Log('');
 end;
 
-procedure Log(AData: TFitsItemData); overload;
+procedure Log(AData: TFitsUmitData); overload;
 var
   I, N, Chunk: Integer;
   S: string;
@@ -108,14 +108,14 @@ end;
 
 function GetNewFileName: string;
 begin
-  Result := ExtractFilePath(ParamStr(0)) + 'demo-makeitem.fits';
+  Result := ExtractFilePath(ParamStr(0)) + 'demo-makeumit.fits';
   if FileExists(Result) then
     DeleteFile(Result);
 end;
 
 // Add the copyright of the demo project to the header
 
-procedure AddCopyright(AHead: TFitsItemHead; const AText: string);
+procedure AddCopyright(AHead: TFitsUmitHead; const AText: string);
 var
   Comment: string;
 begin
@@ -129,9 +129,9 @@ var
   Stream: TFileStream;
 
   Container: TFitsContainer;
-  Item: TFitsItem;
-  Head: TFitsItemHead;
-  Data: TFitsItemData;
+  Umit: TFitsUmit;
+  Head: TFitsUmitHead;
+  Data: TFitsUmitData;
 
   I: Integer;
 
@@ -153,13 +153,13 @@ begin
     Log('Create new FITS container');
     Log('');
 
-    Item := Container.Add(TFitsItem, nil);
+    Umit := Container.Add(TFitsUmit, nil);
     Log('Add new HDU to FITS container');
     Log('');
 
-    // Edit Item Head
+    // Edit Umit Head
 
-    Head := Item.Head;
+    Head := Umit.Head;
 
     // BITPIX default is 8
 
@@ -186,9 +186,9 @@ begin
 
     Log(Head);
 
-    // Edit Item Data
+    // Edit Umit Data
 
-    Data := Item.Data;
+    Data := Umit.Data;
 
     // Add a 100 byte chunk
 
