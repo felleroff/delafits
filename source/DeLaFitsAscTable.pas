@@ -349,12 +349,12 @@ type
 
     function GetHeadClass: TFitsUmitHeadClass; override;
     function GetDataClass: TFitsUmitDataClass; override;
-    function GetStateFamily: string; override;
 
   public
 
     constructor CreateExplorer(AContainer: TFitsContainer; APioneer: Boolean); override;
     constructor CreateNewcomer(AContainer: TFitsContainer; ASpec: TFitsUmitSpec); override;
+    class function ClassFamily: string; override;
     property Head: TFitsAscTableHead read GetHead;
     property Data: TFitsAscTableData read GetData;
 
@@ -898,7 +898,7 @@ begin
 
   // check required cards
 
-  if Umit.Family <> Umit.StateFamily then
+  if not SameText(Umit.Family, Umit.ClassFamily) then
     raise EFitsAscTableException.CreateFmt(SAscTableHeadIncorrectValue, [cXTENSION, Umit.Index], ERROR_ASCTABLE_HEAD_INCORRECT_NAME);
 
   if Umit.BITPIX <> 8 then
@@ -1620,6 +1620,11 @@ begin
 
 end;
 
+class function TFitsAscTable.ClassFamily: string;
+begin
+  Result := 'TABLE';
+end;
+
 function TFitsAscTable.GetData: TFitsAscTableData;
 begin
   Result := inherited Data as TFitsAscTableData;
@@ -1638,11 +1643,6 @@ end;
 function TFitsAscTable.GetHeadClass: TFitsUmitHeadClass;
 begin
   Result := TFitsAscTableHead;
-end;
-
-function TFitsAscTable.GetStateFamily: string;
-begin
-  Result := 'TABLE';
 end;
 
 function TFitsAscTable.GetTFIELDS: Integer;

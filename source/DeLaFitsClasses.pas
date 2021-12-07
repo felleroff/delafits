@@ -113,12 +113,13 @@ const
   ERROR_CONTAINER_GETUMIT_INDEX        = 4500;
   ERROR_CONTAINER_INSERT_INDEX         = 4501;
   ERROR_CONTAINER_RECLASS_INDEX        = 4502;
-  ERROR_CONTAINER_DELETE_INDEX         = 4503;
-  ERROR_CONTAINER_DELETE_REORDER       = 4504;
-  ERROR_CONTAINER_EXCHANGE_INDEX       = 4505;
-  ERROR_CONTAINER_EXCHANGE_REORDER     = 4506;
-  ERROR_CONTAINER_MOVE_INDEX           = 4507;
-  ERROR_CONTAINER_MOVE_REORDER         = 4508;
+  ERROR_CONTAINER_COCLASS_INDEX        = 4503;
+  ERROR_CONTAINER_DELETE_INDEX         = 4504;
+  ERROR_CONTAINER_DELETE_REORDER       = 4505;
+  ERROR_CONTAINER_EXCHANGE_INDEX       = 4506;
+  ERROR_CONTAINER_EXCHANGE_REORDER     = 4507;
+  ERROR_CONTAINER_MOVE_INDEX           = 4508;
+  ERROR_CONTAINER_MOVE_REORDER         = 4509;
 
 resourcestring
 
@@ -469,8 +470,8 @@ type
 
     function GetHeadClass: TFitsUmitHeadClass; virtual;
     function GetDataClass: TFitsUmitDataClass; virtual;
-    function GetStateFamily: string; virtual;
-    function GetAliasFamily: string; virtual;
+
+    function GetAlias: string; virtual;
 
   public
 
@@ -479,6 +480,7 @@ type
     procedure BeforeDestruction; override;
     destructor Destroy; override;
 
+    function Coclass(UmitClass: TFitsUmitClass): Boolean;
     function Reclass(UmitClass: TFitsUmitClass): TFitsUmit;
     procedure Delete;
     procedure Exchange(Index2: Integer);
@@ -494,8 +496,10 @@ type
     property Data: TFitsUmitData read FData;
 
     property Family: string read GetFamily;
-    property AliasFamily: string read GetAliasFamily;
-    property StateFamily: string read GetStateFamily;
+
+    class function ClassFamily: string; virtual;
+
+    property Alias: string read GetAlias;
 
     property Name: string read GetName;
     property Version: Integer read GetVersion;
@@ -604,6 +608,7 @@ type
     constructor Create(AStream: TStream);
     destructor Destroy; override;
 
+    function Coclass(Index: Integer; UmitClass: TFitsUmitClass): Boolean;
     function Reclass(Index: Integer; UmitClass: TFitsUmitClass): TFitsUmit;
 
     function Add(UmitClass: TFitsUmitClass; UmitSpec: TFitsUmitSpec): TFitsUmit;
@@ -819,7 +824,7 @@ begin
   end
   else
   begin
-    Write(0, CardXtension(FUmit.StateFamily), cCastString);
+    Write(0, CardXtension(FUmit.ClassFamily), cCastString);
     Write(1, CardBITPIX(bi08u), cCastInteger);
     Write(2, CardNAXIS(0), cCastInteger);
     Write(3, CardPCOUNT(0), cCastInteger);
@@ -2008,7 +2013,7 @@ begin
       end;
     otXten:
       begin
-        FHead.Write(0, CardXtension(StateFamily), cCastString);
+        FHead.Write(0, CardXtension(ClassFamily), cCastString);
         FHead_Delete(cEXTEND);
         // append 'PCOUNT' header line
         I := FHead.IndexOfLastNaxes;
@@ -2068,12 +2073,7 @@ begin
   Result := Self.XTENSION;
 end;
 
-function TFitsUmit.GetStateFamily: string;
-begin
-  Result := cImageXtension;
-end;
-
-function TFitsUmit.GetAliasFamily: string;
+function TFitsUmit.GetAlias: string;
 begin
   Result := Family;
   // The FITS Standard (version 4.0), 6. "Random groups structure", page 16
@@ -2081,6 +2081,11 @@ begin
   if NAXIS > 1 then
     if NAXES[1] = 0 then
       Result := 'RANDOM GROUP';
+end;
+
+class function TFitsUmit.ClassFamily: string;
+begin
+  Result := cImageXtension;
 end;
 
 function TFitsUmit.GetName: string;
@@ -2330,6 +2335,11 @@ begin
   end;
   FContainer := nil;
   inherited;
+end;
+
+function TFitsUmit.Coclass(UmitClass: TFitsUmitClass): Boolean;
+begin
+  Result := FContainer.Coclass(Index, UmitClass);
 end;
 
 function TFitsUmit.Reclass(UmitClass: TFitsUmitClass): TFitsUmit;
@@ -2890,6 +2900,13 @@ begin
       FUmits.Delete(FEmbindex);
       raise;
     end;
+end;
+
+function TFitsContainer.Coclass(Index: Integer; UmitClass: TFitsUmitClass): Boolean;
+begin
+  if (Index < 0) or (Index >= Count) then
+    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_CONTAINER_COCLASS_INDEX);
+  Result := (UmitClass = TFitsUmit) or SameText(Umits[Index].Family, UmitClass.ClassFamily);
 end;
 
 function TFitsContainer.Reclass(Index: Integer; UmitClass: TFitsUmitClass): TFitsUmit;

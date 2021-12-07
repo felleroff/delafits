@@ -47,7 +47,7 @@ end;
 
 function GetUmitAlias(AUmit: TFitsUmit): string;
 begin
-  Result := AUmit.AliasFamily;
+  Result := AUmit.Alias;
   // The first HDU is a Primary HDU
   if AUmit.Index = 0 then
     Result := Result + ' (PRIMARY)';

@@ -183,10 +183,10 @@ type
   protected
     function GetHeadClass: TFitsUmitHeadClass; override;
     function GetDataClass: TFitsUmitDataClass; override;
-    function GetStateFamily: string; override;
   public
     constructor CreateExplorer(AContainer: TFitsContainer; APioneer: Boolean); override;
     constructor CreateNewcomer(AContainer: TFitsContainer; ASpec: TFitsUmitSpec); override;
+    class function ClassFamily: string; override;
     property Head: TFitsImageHead read GetHead;
     property Data: TFitsImageData read GetData;
     property BSCALE: Extended read GetBSCALE;
@@ -367,7 +367,7 @@ begin
 
   // check required cards
 
-  if Umit.Family <> Umit.StateFamily then
+  if not SameText(Umit.Family, Umit.ClassFamily) then
     raise EFitsImageException.CreateFmt(SImageHeadIncorrectValue, [cXTENSION, Umit.Index], ERROR_IMAGE_HEAD_INCORRECT_NAME);
 
   for Number := 1 to Umit.NAXIS do
@@ -1696,6 +1696,11 @@ begin
 
 end;
 
+class function TFitsImage.ClassFamily: string;
+begin
+  Result := 'IMAGE';
+end;
+
 function TFitsImage.GetBSCALE: Extended;
 const
   Key = cBSCALE;
@@ -1754,11 +1759,6 @@ end;
 function TFitsImage.GetHeadClass: TFitsUmitHeadClass;
 begin
    Result := TFitsImageHead;
-end;
-
-function TFitsImage.GetStateFamily: string;
-begin
-  Result := 'IMAGE';
 end;
 
 end.
