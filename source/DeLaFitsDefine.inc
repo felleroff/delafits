@@ -3,12 +3,12 @@
 {                                                      }
 {             Compiler conditional defines             }
 {                                                      }
-{          Copyright(c) 2013-2021, felleroff           }
+{          Copyright(c) 2013-2026, felleroff           }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }
 
-// platform: delphi and lazarus symbol
+// [platform] delphi and lazarus symbol
 
 {$IFNDEF FPC}
   {$IFNDEF DCC}
@@ -16,7 +16,7 @@
   {$ENDIF}
 {$ENDIF}
 
-// platform: supports 'inline' directive?
+// [platform] supports "inline" directive
 
 {$DEFINE HAS_INLINE}
 {$IFDEF DCC}
@@ -25,7 +25,7 @@
   {$IFEND}
 {$ENDIF}
 
-// platform: supports 10-bytes 'extended' type floating point numbers?
+// [platform] support for 10-byte floating point numbers of the "extended" type
 
 {$IFDEF FPC}
   {$IFDEF FPC_HAS_TYPE_EXTENDED}
@@ -39,35 +39,34 @@
   {$IFEND}
 {$ENDIF}
 
-// platform: overflow checking
+// [platform] overflow checking
 
 {$IFOPT Q+}
   {$DEFINE HAS_OVERFLOW_CHECK}
 {$ENDIF}
 
-// platform: range checking
+// [platform] range checking
 
 {$IFOPT R+}
   {$DEFINE HAS_RANGE_CHECK}
 {$ENDIF}
 
-// project: memory manager behavior
+// [project] memory allocation for temporary buffer
 
-{$IF NOT (DEFINED(DELA_MEMORY_SHARED) OR DEFINED(DELA_MEMORY_PRIVATE) OR DEFINED(DELA_MEMORY_TEMP))}
-  {$DEFINE DELA_MEMORY_SHARED}
+{$IF NOT (DEFINED(DELAFITS_MEMORY_SHARED) OR DEFINED(DELAFITS_MEMORY_OBJECT) OR DEFINED(DELAFITS_MEMORY_LOCAL))}
+  {$DEFINE DELAFITS_MEMORY_SHARED}
 {$IFEND}
 
-// project: support NaN math
+// [project] support NaN math
 
-{$IF NOT (DEFINED(DELA_MATH_NAN_OFF))}
-  {$DEFINE DELA_MATH_NAN}
+{$IF NOT (DEFINED(DELAFITS_MATH_NAN_OFF))}
+  {$DEFINE DELAFITS_MATH_NAN}
 {$IFEND}
 
-// project: custom interface of the pseudorandom number generator
+// [project] support for customizing the pseudo-random number generator
 
-// {$DEFINE DELA_CUSTOM_RANDOM}
+{.$DEFINE DELAFITS_CUSTOM_RANDOM}
 
-// project: round a pixel value in the picture render routine
+// [project] round a pixel value in the picture render routine
 
-// {$DEFINE DELA_ROUND_RENDER}
-
+{.$DEFINE DELAFITS_ROUND_RENDER}

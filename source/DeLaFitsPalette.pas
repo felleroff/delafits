@@ -3,7 +3,7 @@
 {                                                      }
 {  Standard IMAGE extension: palette tuples constants  }
 {                                                      }
-{          Copyright(c) 2013-2021, felleroff           }
+{          Copyright(c) 2013-2026, felleroff           }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }
@@ -19,7 +19,7 @@ uses
 
 {$I DeLaFitsSuppress.inc}
 
-const    
+const
 
   cPalGrayScale: TPaletteTuples = (
     (r: $00; g: $00; b: $00), (r: $01; g: $01; b: $01), (r: $02; g: $02; b: $02), (r: $03; g: $03; b: $03), 

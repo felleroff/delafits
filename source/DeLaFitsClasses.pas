@@ -3,7 +3,7 @@
 {                                                      }
 {           Container of Head and Data Units           }
 {                                                      }
-{          Copyright(c) 2013-2021, felleroff           }
+{          Copyright(c) 2013-2026, felleroff           }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }
@@ -15,7 +15,8 @@ unit DeLaFitsClasses;
 interface
 
 uses
-  SysUtils, Classes, Math, DeLaFitsCommon, DeLaFitsString, DeLaFitsMath;
+  SysUtils, Classes, Math, DeLaFitsCommon, DeLaFitsMath, DeLaFitsString,
+  DeLaFitsProp, DeLaFitsCard;
 
 {$I DeLaFitsSuppress.inc}
 
@@ -23,2403 +24,2837 @@ const
 
   { The codes of exceptions }
 
-  ERROR_CLASSES                        = 4000;
+  ERROR_CLASSES                            = 6000;
 
-  ERROR_UMIT_HEAD_BIND_ASSIGN          = 4100;
-  ERROR_UMIT_HEAD_BIND_INSPECT         = 4101;
-  ERROR_UMIT_HEAD_MAKE_SIZE_SMALL      = 4102;
-  ERROR_UMIT_HEAD_MAKE_SIZE_MULTIPLE   = 4103;
-  ERROR_UMIT_HEAD_MAKE_SIMPLE_PARSE    = 4104;
-  ERROR_UMIT_HEAD_MAKE_SIMPLE_KEY      = 4105;
-  ERROR_UMIT_HEAD_MAKE_SIMPLE_VALUE    = 4106;
-  ERROR_UMIT_HEAD_MAKE_XTENSION_PARSE  = 4107;
-  ERROR_UMIT_HEAD_MAKE_XTENSION_KEY    = 4108;
-  ERROR_UMIT_HEAD_MAKE_XTENSION_VALUE  = 4109;
-  ERROR_UMIT_HEAD_MAKE_KEYEND_NOTFOUND = 4110;
-  ERROR_UMIT_HEAD_GET_KEYWORD_INDEX    = 4111;
-  ERROR_UMIT_HEAD_SET_KEYWORD_INDEX    = 4112;
-  ERROR_UMIT_HEAD_CAST_CARD            = 4113;
-  ERROR_UMIT_HEAD_CAST_LINE            = 4114;
-  ERROR_UMIT_HEAD_READ_INDEX           = 4115;
-  ERROR_UMIT_HEAD_READ_COUNT           = 4116;
-  ERROR_UMIT_HEAD_WRITE_INDEX          = 4117;
-  ERROR_UMIT_HEAD_WRITE_COUNT          = 4118;
-  ERROR_UMIT_HEAD_INSERT_INDEX         = 4119;
-  ERROR_UMIT_HEAD_DELETE_INDEX         = 4120;
-  ERROR_UMIT_HEAD_DELETE_COUNT         = 4121;
-  ERROR_UMIT_HEAD_EXCHANGE_INDEX       = 4122;
-  ERROR_UMIT_HEAD_MOVE_INDEX           = 4123;
-  ERROR_UMIT_HEAD_FREE_INSPECT         = 4124;
+  ERROR_ITEMHEAD_BIND_NO_ITEM              = 6200;
+  ERROR_ITEMHEAD_BIND_NO_INSPECT           = 6201;
+  ERROR_ITEMHEAD_MAKE_SIMPLE_NOT_MATCH     = 6202;
+  ERROR_ITEMHEAD_MAKE_SIMPLE_VALUE         = 6203;
+  ERROR_ITEMHEAD_MAKE_XTENSIONE_NOT_MATCH  = 6204;
+  ERROR_ITEMHEAD_MAKE_XTENSION_VALUE       = 6205;
+  ERROR_ITEMHEAD_MAKE_KEYWORDEND_NOT_FOUND = 6206;
+  ERROR_ITEMHEAD_MAKE_MINIMUM_SIZE         = 6207;
+  ERROR_ITEMHEAD_MAKE_RECOGNIZED_SIZE      = 6208;
+  ERROR_ITEMHEAD_READLINES_BOUNDS          = 6209;
+  ERROR_ITEMHEAD_WRITELINES_BOUNDS         = 6210;
+  ERROR_ITEMHEAD_WRITELINES_KEYWORD        = 6211;
+  ERROR_ITEMHEAD_EXCHANGELINES_BOUNDS      = 6212;
+  ERROR_ITEMHEAD_MOVELINES_BOUNDS          = 6213;
+  ERROR_ITEMHEAD_ERASELINES_BOUNDS         = 6214;
+  ERROR_ITEMHEAD_DELETELINES_BOUNDS        = 6215;
+  ERROR_ITEMHEAD_INSERTLINES_BOUNDS        = 6216;
+  ERROR_ITEMHEAD_INSERTLINES_KEYWORD       = 6217;
+  ERROR_ITEMHEAD_GETLINEKEYWORD_INDEX      = 6218;
+  ERROR_ITEMHEAD_SETLINEKEYWORD_INDEX      = 6219;
+  ERROR_ITEMHEAD_SETLINEKEYWORD_KEYWORD    = 6220;
+  ERROR_ITEMHEAD_LINEINDEXOFKEYWORDS       = 6221;
+  ERROR_ITEMHEAD_LOCATECARDS_NEXT          = 6222;
+  ERROR_ITEMHEAD_LOCATECARDS_PRIOR         = 6223;
+  ERROR_ITEMHEAD_NEXTCARD                  = 6224;
+  ERROR_ITEMHEAD_PRIORCARD                 = 6225;
+  ERROR_ITEMHEAD_MOVECARD_CURSPOT          = 6226;
+  ERROR_ITEMHEAD_MOVECARD_NEWSPOT          = 6227;
+  ERROR_ITEMHEAD_ERASECARD                 = 6228;
+  ERROR_ITEMHEAD_DELETECARD                = 6229;
+  ERROR_ITEMHEAD_INSERTCARD_CURSOR         = 6230;
+  ERROR_ITEMHEAD_INSERTCARD_CONTENT        = 6231;
+  ERROR_ITEMHEAD_ADDCARD                   = 6232;
+  ERROR_ITEMHEAD_GETCARD                   = 6233;
+  ERROR_ITEMHEAD_SETCARD_CURSOR            = 6234;
+  ERROR_ITEMHEAD_SETCARD_CONTENT           = 6235;
+  ERROR_ITEMHEAD_GETCARDKEYWORD            = 6236;
 
-  ERROR_UMIT_DATA_BIND_ASSIGN          = 4200;
-  ERROR_UMIT_DATA_BIND_INSPECT         = 4201;
-  ERROR_UMIT_DATA_BIND_NOHEAD          = 4202;
-  ERROR_UMIT_DATA_MAKE_SIZE            = 4203;
-  ERROR_UMIT_DATA_READ_BOUNDS          = 4204;
-  ERROR_UMIT_DATA_WRITE_BOUNDS         = 4205;
-  ERROR_UMIT_DATA_ERASE_BOUNDS         = 4206;
-  ERROR_UMIT_DATA_DELETE_BOUNDS        = 4207;
-  ERROR_UMIT_DATA_TRUNCATE_SIZE        = 4208;
-  ERROR_UMIT_DATA_ERASE_UFSSET         = 4209;
-  ERROR_UMIT_DATA_ERASE_SIZE           = 4210;
-  ERROR_UMIT_DATA_ADD_SIZE             = 4211;
-  ERROR_UMIT_DATA_FREE_INSPECT         = 4212;
+  ERROR_ITEMDATA_BIND_NO_ITEM              = 6300;
+  ERROR_ITEMDATA_BIND_NO_INSPECT           = 6301;
+  ERROR_ITEMDATA_BIND_NO_HEAD              = 6302;
+  ERROR_ITEMDATA_MAKE_RECOGNIZED_SIZE      = 6303;
 
-  ERROR_UMIT_BIND_ASSIGN               = 4300;
-  ERROR_UMIT_BIND_INSPECT              = 4301;
-  ERROR_UMIT_GETEXTNAME_INVALID        = 4302;
-  ERROR_UMIT_GETEXTVER_INVALID         = 4303;
-  ERROR_UMIT_GETLEVEL_INVALID          = 4304;
-  ERROR_UMIT_GETBITPIX_NOHEAD          = 4305;
-  ERROR_UMIT_GETBITPIX_NOTFOUND        = 4306;
-  ERROR_UMIT_GETBITPIX_INVALID         = 4307;
-  ERROR_UMIT_GETBITPIX_INCORRECT       = 4308;
-  ERROR_UMIT_GETGCOUNT_NOHEAD          = 4309;
-  ERROR_UMIT_GETGCOUNT_INVALID         = 4310;
-  ERROR_UMIT_GETGCOUNT_INCORRECT       = 4311;
-  ERROR_UMIT_GETPCOUNT_NOHEAD          = 4312;
-  ERROR_UMIT_GETPCOUNT_INVALID         = 4313;
-  ERROR_UMIT_GETPCOUNT_INCORRECT       = 4314;
-  ERROR_UMIT_GETNAXIS_NOHEAD           = 4315;
-  ERROR_UMIT_GETNAXIS_NOTFOUND         = 4316;
-  ERROR_UMIT_GETNAXIS_INVALID          = 4317;
-  ERROR_UMIT_GETNAXIS_INCORRECT        = 4318;
-  ERROR_UMIT_GETNAXES_NOHEAD           = 4319;
-  ERROR_UMIT_GETNAXES_NUMBER           = 4320;
-  ERROR_UMIT_GETNAXES_NOTFOUND         = 4321;
-  ERROR_UMIT_GETNAXES_INVALID          = 4322;
-  ERROR_UMIT_GETNAXES_INCORRECT        = 4323;
-  ERROR_UMIT_FREE_INSPECT              = 4324;
+  ERROR_ITEM_BIND_NO_CONTAINER             = 6400;
+  ERROR_ITEM_BIND_NO_INSPECT               = 6401;
+  ERROR_ITEM_GETBITPIX_NOT_FOUND           = 6402;
+  ERROR_ITEM_GETNAXIS_NOT_FOUND            = 6403;
+  ERROR_ITEM_GETNAXIS_VALUE                = 6404;
+  ERROR_ITEM_GETNAXES_NUMBER               = 6405;
+  ERROR_ITEM_GETNAXES_NOT_FOUND            = 6406;
+  ERROR_ITEM_GETNAXES_VALUE                = 6407;
+  ERROR_ITEM_GETPCOUNT_VALUE               = 6408;
+  ERROR_ITEM_GETGCOUNT_VALUE               = 6409;
+  ERROR_ITEM_READCHUNK_BOUNDS              = 6410;
+  ERROR_ITEM_WRITECHUNK_BOUNDS             = 6411;
+  ERROR_ITEM_EXCHANGECHUNK_BOUNDS          = 6412;
+  ERROR_ITEM_EXCHANGECHUNK_OVERLAP         = 6413;
+  ERROR_ITEM_MOVECHUNK_BOUNDS              = 6414;
+  ERROR_ITEM_MOVECHUNK_OFFSET              = 6415;
+  ERROR_ITEM_MOVECHUNK_OVERLAP             = 6416;
+  ERROR_ITEM_ERASECHUNK_BOUNDS             = 6417;
+  ERROR_ITEM_DELETECHUNK_BOUNDS            = 6418;
+  ERROR_ITEM_INSERTCHUNK_OFFSET            = 6419;
+  ERROR_ITEM_INSERTCHUNK_SIZE              = 6420;
+  ERROR_ITEM_ADDCHUNK_SIZE                 = 6421;
 
-  ERROR_CONTENT_ASSIGN_STREAM          = 4400;
-  ERROR_CONTENT_READ                   = 4401;
-  ERROR_CONTENT_READ_BUFFER            = 4402;
-  ERROR_CONTENT_WRITE                  = 4403;
-  ERROR_CONTENT_WRITE_BUFFER           = 4404;
-  ERROR_CONTENT_FILL_BOUNDS            = 4405;
-  ERROR_CONTENT_SHIFT_BOUNDS           = 4406;
-  ERROR_CONTENT_SHIFT_SIZE             = 4407;
-  ERROR_CONTENT_ROTATE_BOUNDS          = 4408;
-  ERROR_CONTENT_ROTATE_SIZE            = 4409;
-  ERROR_CONTENT_EXCHANGE_BOUNDS        = 4410;
-  ERROR_CONTENT_EXCHANGE_SIZE          = 4411;
-  ERROR_CONTENT_EXCHANGE_INTER         = 4412;
-  ERROR_CONTENT_MOVE_BOUNDS            = 4413;
-  ERROR_CONTENT_MOVE_SIZE              = 4414;
-  ERROR_CONTENT_MOVE_INTER             = 4415;
-  ERROR_CONTENT_RESIZE_BOUNDS          = 4416;
-  ERROR_CONTENT_RESIZE_SIZE            = 4417;
+  ERROR_MEMORY_BIND_NO_CONTAINER           = 6500;
 
-  ERROR_CONTAINER_GETUMIT_INDEX        = 4500;
-  ERROR_CONTAINER_INSERT_INDEX         = 4501;
-  ERROR_CONTAINER_RECLASS_INDEX        = 4502;
-  ERROR_CONTAINER_COCLASS_INDEX        = 4503;
-  ERROR_CONTAINER_DELETE_INDEX         = 4504;
-  ERROR_CONTAINER_DELETE_REORDER       = 4505;
-  ERROR_CONTAINER_EXCHANGE_INDEX       = 4506;
-  ERROR_CONTAINER_EXCHANGE_REORDER     = 4507;
-  ERROR_CONTAINER_MOVE_INDEX           = 4508;
-  ERROR_CONTAINER_MOVE_REORDER         = 4509;
+  ERROR_CONTENT_BIND_NO_CONTAINER          = 6600;
+  ERROR_CONTENT_BIND_NO_STREAM             = 6601;
+  ERROR_CONTENT_READ                       = 6602;
+  ERROR_CONTENT_READ_BOUNDS                = 6603;
+  ERROR_CONTENT_WRITE                      = 6604;
+  ERROR_CONTENT_WRITE_BOUNDS               = 6605;
+  ERROR_CONTENT_WRITEBUFFER_SIZE           = 6606;
+  ERROR_CONTENT_WRITESTRING_SIZE           = 6607;
+  ERROR_CONTENT_FILL_BOUNDS                = 6608;
+  ERROR_CONTENT_SHIFT_BOUNDS               = 6609;
+  ERROR_CONTENT_ROTATE_BOUNDS              = 6610;
+  ERROR_CONTENT_EXCHANGE_BOUNDS            = 6611;
+  ERROR_CONTENT_EXCHANGE_OVERLAP           = 6612;
+  ERROR_CONTENT_MOVE_BOUNDS                = 6613;
+  ERROR_CONTENT_MOVE_OFFSET                = 6614;
+  ERROR_CONTENT_MOVE_OVERLAP               = 6615;
+  ERROR_CONTENT_RESIZE_BOUNDS              = 6616;
+  ERROR_CONTENT_RESIZE_ZERO_SIZE           = 6617;
+  ERROR_CONTENT_RESIZE_OFFSET              = 6618;
+
+  ERROR_CONTAINER_GETITEMCLASS_INDEX       = 6700;
+  ERROR_CONTAINER_SETITEMCLASS_INDEX       = 6701;
+  ERROR_CONTAINER_SETITEMCLASS_EXTENSION   = 6702;
+  ERROR_CONTAINER_GETITEM_INDEX            = 6703;
+  ERROR_CONTAINER_DELETE_INDEX             = 6704;
+  ERROR_CONTAINER_DELETE_ORDER             = 6705;
+  ERROR_CONTAINER_EXCHANGE_INDEX           = 6706;
+  ERROR_CONTAINER_EXCHANGE_ORDER           = 6707;
+  ERROR_CONTAINER_MOVE_INDEX               = 6708;
+  ERROR_CONTAINER_MOVE_ORDER               = 6709;
+  ERROR_CONTAINER_EXTENSIONTYPEIS_INDEX    = 6710;
 
 resourcestring
 
   { The messages of exceptions }
 
-  SListIndexOutBounds     = 'List index out of bounds "%d"';
-  SCountValueOutBounds    = 'Count value out of bounds "%d"';
+  SSpecNotAssigned            = 'Specification object not assigned';
+  SSpecInvalidClass           = '"%s" is an invalid specification class';
+  SSpecInvalidItem            = 'Invalid HDU object to create specification';
+  SSpecIncorrectValue         = 'Incorrect value "%s=%s" in specification';
 
-  SBufferIncorrectSize    = 'Incorrect buffer size "%d"';
+  SHeadNotAssigned            = 'Header object not assigned';
+  SHeadLinesRangeOutBounds    = 'Range "INDEX=%d;COUNT=%d" is out of the lines list bounds "COUNT=%d"';
+  SHeadLinesRangeAtLowerBound = 'Range "INDEX=%d;COUNT=%d" matches the lower bound of the lines list "COUNT=%d"';
+  SHeadLineIndexOutBounds     = 'Index "%d" is out of the lines list bounds "COUNT=%d"';
+  SHeadLineIndexAtLowerBound  = 'Index "%d" matches the lower bound of the lines list "COUNT=%d"';
+  SHeadLineCannotChanged      = 'Line with keyword "%s" cannot be changed';
+  SHeadLineNotFound           = 'Line with keyword "%s" not found';
+  SHeadLineKeywordNotMatch    = 'Keyword in line "%s" does not match "%s"';
+  SHeadLineValueIncorrect     = 'Value in line "%s" is incorrect';
+  SHeadCardCursorOutBounds    = 'Card cursor "START=%d;COUNT=%d" is out of the lines list bounds "COUNT=%d"';
+  SHeadCardCursorAtLowerBound = 'Card cursor "START=%d;COUNT=%d" matches the lower bound of the lines list "COUNT=%d"';
 
-  SBindNoInspect          = 'Binding error: no owner inspection';
-  SFreeNoInspect          = 'Error destroying HDU[%d]: no owner inspection';
+  SItemNotAssigned            = 'HDU object not assigned';
+  SItemNotMatchMinimumSize    = 'Upper estimate of HDU[%d] size is "%d" bytes and does not match the minimum size of 2880 bytes';
+  SItemNotMatchRecognizedSize = 'Upper estimate of HDU[%d] size is "%d" bytes and does not match the recognized size of "%d" bytes';
+  SItemCannotPrimary          = 'HDU[%d] cannot be primary';
+  SItemInvalidExtension       = 'Class "%s" cannot work with HDU extension "%s"';
+  SItemIndexOutBounds         = 'Index "%d" is out of HDU list bounds "COUNT=%d"';
 
-  SKeywordNotFound        = 'Keyword "%s" not found in HDU[%d] header';
+  SStreamNotAssigned          = 'Stream object not assigned';
 
-  SLineErrorParse         = 'Error parsing of the header line[%d] in HDU[%d]';
-  SLineKeywordNotMatch    = 'Keyword[%d] in HDU[%d] header does not match "%s"';
-  SLineValueIncorrect     = 'Incorrect value[%d] in HDU[%d] header';
+  SContentReadError           = 'Content read error';
+  SContentWriteError          = 'Content write error';
+  SContentWriteLowBufferSize  = 'A "%d"-byte buffer is not enough to write "%d" bytes of content';
+  SContentWriteLowStringSize  = 'A "%d"-character string is not enough to write "%d" bytes of content';
+  SContentChunkOutBounds      = 'Chunk "OFFSET=%d;SIZE=%d" is out of content bounds "SIZE=%d"';
+  SContentChunksOverlap       = 'Chunks "OFFSET=%d;SIZE=%d" and "OFFSET=%d;SIZE=%d" of content overlap each other';
+  SContentOffsetOutBounds     = 'Offset "%d" is out of content bounds "SIZE=%d"';
+  SContentInvalidSize         = '"%d" bytes is an invalid content size';
+  SContentZeroSize            = 'Zero content size';
 
-  SUnknownCastCard        = 'Unknown identifier "%d" for header line assembly';
-  SUnknownCastLine        = 'Unknown identifier "%d" for header line parse';
-
-  SHeadNotAssign          = 'Header Object is not assigned';
-  SHeadMakeSmallSize      = 'Small stream size to identify HDU[%d] header';
-  SHeadMakeMultipleSize   = 'Violation of the multiplicity of the stream size in HDU[%d] header';
-
-  SDataIncorrectSize      = 'Incorrect HDU[%d] data size "%d"';
-  SDataIncorrectUffset    = 'Incorrect HDU[%d] data uffset "%d"';
-  SDataIncorrectBounds    = 'Incorrect HDU[%d] data boundary "[%d, %d)"';
-
-  SUmitNotAssign          = 'Umit of fits-container (owner) is not assigned';
-  SUmitCannotPrimary      = 'HDU[%d] cannot be primary';
-
-  SStreamNotAssign        = 'Stream Object is not assigned';
-
-  SContentAccessError     = 'Error accessing to content';
-  SContentIncorrectBounds = 'Incorrect content boundary';
-  SContentInterBlocks     = 'Intersection of content blocks';
-  SContentIncorrectSize   = 'Incorrect content size';
-
-  SContainerNotAssign     = 'Fits-container (owner) is not assigned';
-
-type
-
-  { Exception classes }
-
-  EFitsClassesException = class(EFitsException);
+  SContainerNotAssigned       = 'Container object (owner) not assigned';
+  SContainerNotControlBind    = 'Container does not control object binding';
 
 type
 
-  { Type of umit order }
-
-  TOrderType = (otNone, otSing, otPrim, otXten);
-
-  TFitsUmit = class;
-
-  { HDU specification: required parameters to create a new HDU }
-
-  TFitsUmitSpec = class(TObject);
-
-  { Header block of HDU }
-
-  TFitsUmitHead = class(TObject)
-
-  private
-
-    FUmit: TFitsUmit;
-    FSize: Int64;
-    FFormatLine: TFormatLine;
-
-  protected
-
-    procedure Init; virtual;
-
-  private
-
-    procedure Bind(AUmit: TFitsUmit);
-    procedure MakeExplorer(APioneer: Boolean);
-    procedure MakeNewcomer(ASpec: TFitsUmitSpec);
-
-    function GetOffset: Int64;
-    function GetCize: Int64;
-
-    function GetFormatLine: PFormatLine;
-
-    function GetLine(Index: Integer): string;
-    procedure SetLine(Index: Integer; Line: string);
-
-    function GetCard(Index, Cast: Integer): TCard;
-    procedure SetCard(Index, Cast: Integer; Card: TCard);
-
-    function GetKeyword(Index: Integer): string;
-    procedure SetKeyword(Index: Integer; Keyword: string);
-
-    function GetValueStr(Index: Integer; Cast: Integer): string;
-    procedure SetValueStr(Index: Integer; Cast: Integer; Value: string);
-    function GetValueBol(Index: Integer; Cast: Integer): Boolean;
-    procedure SetValueBol(Index: Integer; Cast: Integer; Value: Boolean);
-    function GetValueInt(Index: Integer; Cast: Integer): Int64;
-    procedure SetValueInt(Index: Integer; Cast: Integer; Value: Int64);
-    function GetValueExt(Index: Integer; Cast: Integer): Extended;
-    procedure SetValueExt(Index: Integer; Cast: Integer; Value: Extended);
-    function GetValueDtm(Index: Integer; Cast: Integer): TDateTime;
-    procedure SetValueDtm(Index: Integer; Cast: Integer; Value: TDateTime);
-
-    function GetNote(Index: Integer): string;
-    procedure SetNote(Index: Integer; Note: string);
-
-    function GetText: string;
-
-    function GetCount: Integer;
-    function GetCapacity: Integer;
-
-  public
-
-    constructor CreateExplorer(AUmit: TFitsUmit; APioneer: Boolean); virtual;
-    constructor CreateNewcomer(AUmit: TFitsUmit; ASpec: TFitsUmitSpec); virtual;
-    procedure BeforeDestruction; override;
-    destructor Destroy; override;
-
-    property Umit: TFitsUmit read FUmit;
-
-    // Cize <= Size
-
-    property Offset: Int64 read GetOffset;
-    property Cize: Int64 read GetCize;
-    property Size: Int64 read FSize;
-
-  public
-
-    function CardToLine(Card: TCard; Cast: Integer): string; virtual;
-    function LineToCard(Line: string; Cast: Integer): TCard; virtual;
-
-    property FormatLine: PFormatLine read GetFormatLine;
-
-  public
-
-    procedure Read(Index: Integer; out Line: string; ACount: Integer); overload;
-    procedure Read(Index: Integer; out Card: TCard; Cast: Integer); overload;
-    procedure Write(Index: Integer; Line: string); overload;
-    procedure Write(Index: Integer; Card: TCard; Cast: Integer); overload;
-
-    function IndexOf(const Keyword: string; StartIndex: Integer = 0): Integer;
-    function IndexOfLastNaxes: Integer;
-
-    function Add(const Line: string): Integer; overload;
-    function Add(const Card: TCard; Cast: Integer): Integer; overload;
-    function AddChars(Keyword: string; Value: string; Note: string): Integer;
-    function AddString(Keyword: string; Value: string; Note: string): Integer;
-    function AddText(Keyword: string; Value: string): Integer;
-    function AddHistory(Value: string): Integer;
-    function AddComment(Value: string): Integer;
-    function AddBlank: Integer;
-    function AddBoolean(Keyword: string; Value: Boolean; Note: string): Integer;
-    function AddInteger(Keyword: string; Value: Int64; Note: string): Integer;
-    function AddFloat(Keyword: string; Value: Extended; Note: string): Integer;
-    function AddRa(Keyword: string; Value: Extended; Note: string): Integer;
-    function AddDe(Keyword: string; Value: Extended; Note: string): Integer;
-    function AddDateTime(Keyword: string; Value: TDateTime; Note: string): Integer;
-    function AddDate(Keyword: string; Value: TDateTime; Note: string): Integer;
-    function AddTime(Keyword: string; Value: TDateTime; Note: string): Integer;
-
-    procedure Insert(Index: Integer; Line: string); overload;
-    procedure Insert(Index: Integer; const Card: TCard; Cast: Integer); overload;
-    procedure InsertChars(Index: Integer; Keyword: string; Value: string; Note: string);
-    procedure InsertString(Index: Integer; Keyword: string; Value: string; Note: string);
-    procedure InsertText(Index: Integer; Keyword: string; Value: string);
-    procedure InsertHistory(Index: Integer; Value: string);
-    procedure InsertComment(Index: Integer; Value: string);
-    procedure InsertBlank(Index: Integer);
-    procedure InsertBoolean(Index: Integer; Keyword: string; Value: Boolean; Note: string);
-    procedure InsertInteger(Index: Integer; Keyword: string; Value: Int64; Note: string);
-    procedure InsertFloat(Index: Integer; Keyword: string; Value: Extended; Note: string);
-    procedure InsertRa(Index: Integer; Keyword: string; Value: Extended; Note: string);
-    procedure InsertDe(Index: Integer; Keyword: string; Value: Extended; Note: string);
-    procedure InsertDateTime(Index: Integer; Keyword: string; Value: TDateTime; Note: string);
-    procedure InsertDate(Index: Integer; Keyword: string; Value: TDateTime; Note: string);
-    procedure InsertTime(Index: Integer; Keyword: string; Value: TDateTime; Note: string);
-
-  protected
-
-    function AppendString(Keyword: string; Value: string; Note: string; HopIndex: Integer = -1): Integer;
-    function AppendInteger(Keyword: string; Value: Int64; Note: string; HopIndex: Integer = -1): Integer;
-    function AppendFloat(Keyword: string; Value: Extended; Note: string; HopIndex: Integer = -1): Integer;
-
-  public
-
-    procedure Delete(AIndex: Integer; ACount: Integer = 1); overload;
-    procedure Delete(const Keys: array of string); overload;
-
-    procedure Exchange(Index1, Index2: Integer);
-    procedure Move(CurIndex, NewIndex: Integer);
-
-    property Lines[Index: Integer]: string read GetLine write SetLine;
-
-    property Cards[Index, Cast: Integer]: TCard read GetCard write SetCard;
-
-    property Keywords[Index: Integer]: string read GetKeyword write SetKeyword;
-
-    property ValuesChars[Index: Integer]: string Index cCastChars read GetValueStr write SetValueStr;
-    property ValuesString[Index: Integer]: string Index cCastString read GetValueStr write SetValueStr;
-    property ValuesBoolean[Index: Integer]: Boolean Index cCastBoolean read GetValueBol write SetValueBol;
-    property ValuesInteger[Index: Integer]: Int64 Index cCastInteger read GetValueInt write SetValueInt;
-    property ValuesFloat[Index: Integer]: Extended Index cCastFloat read GetValueExt write SetValueExt;
-    property ValuesRa[Index: Integer]: Extended Index cCastRa read GetValueExt write SetValueExt;
-    property ValuesDe[Index: Integer]: Extended Index cCastDe read GetValueExt write SetValueExt;
-    property ValuesDateTime[Index: Integer]: TDateTime Index cCastDateTime read GetValueDtm write SetValueDtm;
-    property ValuesDate[Index: Integer]: TDateTime Index cCastDate read GetValueDtm write SetValueDtm;
-    property ValuesTime[Index: Integer]: TDateTime Index cCastTime read GetValueDtm write SetValueDtm;
-
-    property Notes[Index: Integer]: string read GetNote write SetNote;
-
-    property Text: string read GetText;
-
-    // Count <= Capacity
-
-    property Count: Integer read GetCount;
-    property Capacity: Integer read GetCapacity;
-
-  end;
-
-  { Data block of HDU }
-
-  TFitsUmitData = class(TObject)
-
-  private
-
-    FUmit: TFitsUmit;
-    FSize: Int64;
-
-  protected
-
-    procedure Init; virtual;
-
-  private
-
-    procedure Bind(AUmit: TFitsUmit);
-    procedure MakeExplorer(APioneer: Boolean);
-    procedure MakeNewcomer(ASpec: TFitsUmitSpec);
-
-    function GetOffset: Int64;
-    function GetCize: Int64;
-
-    function GetBitPix: TBitPix;
-    function GetSizPix: Byte;
-    function GetGcount: Integer;
-    function GetPcount: Integer;
-    function GetAxis: Integer;
-    function GetAxes(Index: Integer): Integer;
-
-  public
-
-    constructor CreateExplorer(AUmit: TFitsUmit; APioneer: Boolean); virtual;
-    constructor CreateNewcomer(AUmit: TFitsUmit; ASpec: TFitsUmitSpec); virtual;
-    procedure BeforeDestruction; override;
-    destructor Destroy; override;
-
-    property Umit: TFitsUmit read FUmit;
-
-    // Cize <= Size
-
-    property Offset: Int64 read GetOffset;
-    property Cize: Int64 read GetCize;
-    property Size: Int64 read FSize;
-
-  protected
-
-    function Filler: Char; virtual;
-
-  public
-
-    procedure Read(const Uffset, ASize: Int64; var ABuffer);
-
-    procedure Write(const Uffset, ASize: Int64; const ABuffer);
-    procedure Erase(const Uffset, ASize: Int64);
-
-    procedure Delete(const Uffset, ASize: Int64);
-    procedure Truncate(const ASize: Int64);
-
-    procedure Insert(const Uffset, ASize: Int64);
-    procedure Add(const ASize: Int64);
-
- public
-
-    property BitPix: TBitPix read GetBitPix;
-    property SizPix: Byte read GetSizPix;
-
-    property Gcount: Integer read GetGcount;
-    property Pcount: Integer read GetPcount;
-
-    property Axis: Integer read GetAxis;
-    property Axes[Index: Integer]: Integer read GetAxes;
-
-  end;
-
+  TFitsItemHead  = class;
+  TFitsItemData  = class;
+  TFitsItem      = class;
   TFitsContainer = class;
 
-  TFitsUmitHeadClass = class of TFitsUmitHead;
-  TFitsUmitDataClass = class of TFitsUmitData;
+  TKeywordDynArray = TAstr;
 
-  TFitsUmitClass = class of TFitsUmit;
+  { TFitsItemSpec: specification to create a new HDU }
 
-  { HDU }
-
-  TFitsUmit = class(TObject)
-
-  private
-
-    FContainer: TFitsContainer;
-    FHead: TFitsUmitHead;
-    FData: TFitsUmitData;
-
+  EFitsItemSpecException = class(EFitsException)
   protected
+    function GetTopic: string; override;
+  end;
 
-    procedure Init; virtual;
+  TFitsItemSpec = class(TFitsObject)
+  protected
+    function GetExceptionClass: EFitsExceptionClass; override;
+    function ExtractProp(AItem: TFitsItem; AProp: IFitsPropContext): Boolean;
+  end;
 
+  { TFitsItemHead: HDU header section }
+
+  EFitsItemHeadException = class(EFitsException)
+  protected
+    function GetTopic: string; override;
+  end;
+
+  TFitsItemHead = class(TFitsObject)
   private
+    FItem: TFitsItem;
+    FInternalSize: Int64;
+    FSize: Int64;
+    FCardCursor: TCardSpot;
+    procedure Bind(AItem: TFitsItem);
+    procedure UnBind;
+    procedure Make;
+    procedure MakeNew;
+    function GetOffset: Int64;
+    function GetInternalSize: Int64;
+    procedure SetSize(const ASize: Int64);
+    procedure CheckLines(const ACheck: string; const AArgs: array of const; ACodeError: Integer);
+    function GetLineOffset(AIndex: Integer): Int64;
+    function GetLineSize(ACount: Integer): Int64;
+    function GetLineCapacity: Integer;
+    function GetLineCount: Integer;
+    procedure ReadLinesBy(AIndex, ACount: Integer; var ALines: string);
+    procedure WriteLinesBy(AIndex: Integer; const ALines: string);
+    procedure MoveLinesBy(ACurIndex, ACurCount: Integer; var ANewIndex: Integer; ANewCount: Integer);
+    procedure EraseLinesBy(AIndex, ACount: Integer);
+    procedure DeleteLinesBy(AIndex, ACount: Integer);
+    procedure InsertLinesBy(AIndex: Integer; const ALines: string);
+    function GetLineBy(AIndex: Integer): string;
+    function GetLineKeywordBy(AIndex: Integer): string;
+    function GetLine(AIndex: Integer): string;
+    procedure SetLine(AIndex: Integer; const ALine: string);
+    function GetLineKeyword(AIndex: Integer): string;
+    procedure SetLineKeyword(AIndex: Integer; const AKeyword: string);
+    function GetLineRecord(AIndex: Integer): TLineRecord;
+    procedure SetLineRecord(AIndex: Integer; const ARecord: TLineRecord);
+    procedure CheckCard(const ACheck: string; const AArgs: array of const; ACodeError: Integer);
+    function LookupCard(ALineSeed: Integer): TCardSpot;
+    procedure AddCardBy(const ACard: string); overload;
+    procedure AddCardBy(const AKeyword, AValue: string); overload;
+    function GetCard: string;
+    procedure SetCard(const ACard: string);
+    function GetCardType: TCardType;
+    function GetCardKeyword: string;
+  protected
+    procedure Init; override;
+    function GetExceptionClass: EFitsExceptionClass; override;
+    procedure Customize; virtual;
+    procedure CustomizeNew(ASpec: TFitsItemSpec); virtual;
+    procedure Invalidate; virtual;
+    function ExtractInternalSize: Int64; virtual;
+  public
+    constructor Create(AItem: TFitsItem); virtual;
+    constructor CreateNew(AItem: TFitsItem; ASpec: TFitsItemSpec); virtual;
+    destructor Destroy; override;
+    // [Chunk] Access to the header section content. The methods do not check
+    // keywords. The methods keep the minimum content size at 2880 bytes, and
+    // ensure that it is a multiple of 2880 bytes. The methods use an internal
+    // offset, i.e. an offset from the beginning of the header section. The
+    // internal offset ranges [0..Size-1]
+    procedure ReadChunk(const AInternalOffset, ASize: Int64; var ABuffer: string);
+    procedure WriteChunk(const AInternalOffset, ASize: Int64; const ABuffer: string);
+    procedure ExchangeChunk(var AInternalOffset1: Int64; const ASize1: Int64; var AInternalOffset2: Int64; const ASize2: Int64);
+    procedure MoveChunk(const AInternalOffset, ASize: Int64; var ANewInternalOffset: Int64);
+    procedure EraseChunk(const AInternalOffset, ASize: Int64);
+    procedure DeleteChunk(const AInternalOffset, ASize: Int64);
+    procedure InsertChunk(const AInternalOffset, ASize: Int64);
+    function AddChunk(const ASize: Int64): Int64;
+    // [Line] Access to the header lines: 80-character keyword record. The "end line"
+    // is the line with the keyword "END". The methods work with the meaningful
+    // lines: from the first line to the end line inclusively. The methods allow
+    // editing the first line but prohibit adding or editing the end line. The
+    // methods keep at least one line (this is the end line) and ensure that the
+    // header size is a multiple of 2880 bytes. The index range [0..LineCount-1]
+    procedure ReadLines(AIndex, ACount: Integer; var ALines: string);
+    procedure WriteLines(AIndex: Integer; const ALines: string);
+    procedure ExchangeLines(AIndex1, AIndex2: Integer);
+    procedure MoveLines(ACurIndex, ANewIndex: Integer);
+    procedure EraseLines(AIndex, ACount: Integer);
+    procedure DeleteLines(AIndex, ACount: Integer);
+    procedure InsertLines(AIndex: Integer; const ALines: string);
+    function AddLines(const ALines: string): Integer;
+    // Search for line index by keyword and access to keywords occurs in the
+    // range [0..LineCount-1]. Editing the keyword "END" is prohibited
+    function LineIndexOfKeyword(const AKeyword: string; AScope: Integer = 0): Integer;
+    function LineIndexOfKeywords(const AKeywords: array of string; AScope: Integer = 0): Integer;
+    // Return the max index of the line with the keyword "NAXISXXX"
+    function LineIndexOfLastAxis: Integer;
+    // Return the array of keywords by line
+    function ExtractLineKeywords: TKeywordDynArray;
+    // [Card] A card is a high-level entity for accessing header values,
+    // consisting of one or more 80-character keyword record (line). The
+    // number of cards and their values depend on the position and meaning
+    // of the keywords. The keywords are not a dictionary, they can be
+    // duplicated. One empty line defines one card
+    function LocateCard(const AKeyword: string; AScope: TSearchScope = searchFirstForward): Boolean;
+    function LocateCards(const AKeywords: array of string; AScope: TSearchScope = searchFirstForward): Boolean;
+    function FirstCard: Boolean;
+    function LastCard: Boolean;
+    function NextCard: Boolean;
+    function PriorCard: Boolean;
+    function GotoCard(ALineSeed: Integer): Boolean;
+    procedure MoveCard(ADistance: Integer);
+    procedure EraseCard;
+    procedure DeleteCard;
+    procedure InsertCard(const ACard: string);
+    procedure AddCard(const ACard: string);
+    // Add a COMMENT or HISTORY card of data processing
+    procedure AddComment(const AValue: string);
+    procedure AddHistory(const AValue: string);
+    function ExtractCardKeywords: TKeywordDynArray;
+    property Item: TFitsItem read FItem;
+    property Offset: Int64 read GetOffset;
+    // The minimum content size is 2880 bytes and a multiple of 2880 bytes
+    property Size: Int64 read FSize write SetSize;
+    // The exact number of meaningful bytes in the header section (exclusive
+    // of fill that is needed after the data to complete the last 2880-byte
+    // header block). The internal size is less than or equal to the size of
+    // the header section
+    property InternalSize: Int64 read GetInternalSize;
+    // The number of lines in the header, including blank lines
+    // after the end line. Equivalent to the header size
+    property LineCapacity: Integer read GetLineCapacity;
+    // The number of meaningful lines in the header, excluding the blank
+    // lines after the end line. Equivalent to the internal header size
+    property LineCount: Integer read GetLineCount;
+    property Lines[Index: Integer]: string read GetLine write SetLine;
+    property LineKeywords[Index: Integer]: string read GetLineKeyword write SetLineKeyword;
+    property LineRecords[Index: Integer]: TLineRecord read GetLineRecord write SetLineRecord;
+    property Card: string read GetCard write SetCard;
+    property CardType: TCardType read GetCardType;
+    property CardKeyword: string read GetCardKeyword;
+    property CardCursor: TCardSpot read FCardCursor;
+  end;
 
+  TFitsItemHeadClass = class of TFitsItemHead;
+
+  { TFitsItemData: HDU data section }
+
+  EFitsItemDataException = class(EFitsException)
+  protected
+    function GetTopic: string; override;
+  end;
+
+  TFitsItemData = class(TFitsObject)
+  private
+    FItem: TFitsItem;
+    FInternalSize: Int64;
+    FSize: Int64;
+    procedure Bind(AItem: TFitsItem);
+    procedure UnBind;
+    procedure Make;
+    procedure MakeNew;
+    function GetOffset: Int64;
+    function GetInternalSize: Int64;
+    procedure SetSize(const ASize: Int64);
+    function GetBitPix: TBitPix;
+    function GetAxesCount: Integer;
+    function GetAxesLength(ANumber: Integer): Integer;
+    function GetPCount: Integer;
+    function GetGCount: Integer;
+    function GetPixelSize: Byte;
+  protected
+    procedure Init; override;
+    function GetExceptionClass: EFitsExceptionClass; override;
+    procedure Customize; virtual;
+    procedure CustomizeNew(ASpec: TFitsItemSpec); virtual;
+    procedure Invalidate; virtual;
+    function ExtractInternalSize: Int64; virtual;
+    function Filler: Char; virtual;
+  public
+    constructor Create(AItem: TFitsItem); virtual;
+    constructor CreateNew(AItem: TFitsItem; ASpec: TFitsItemSpec); virtual;
+    destructor Destroy; override;
+    // Access to the data section content. The methods ensure that the content
+    // size is a multiple of 2880 bytes. The methods use an internal offset,
+    // i.e. an offset from the beginning of the data section. The internal
+    // offset ranges [0..Size-1]
+    procedure ReadChunk(const AInternalOffset, ASize: Int64; var ABuffer);
+    procedure WriteChunk(const AInternalOffset, ASize: Int64; const ABuffer);
+    procedure ExchangeChunk(var AInternalOffset1: Int64; const ASize1: Int64; var AInternalOffset2: Int64; const ASize2: Int64);
+    procedure MoveChunk(const AInternalOffset, ASize: Int64; var ANewInternalOffset: Int64);
+    procedure EraseChunk(const AInternalOffset, ASize: Int64);
+    procedure DeleteChunk(const AInternalOffset, ASize: Int64);
+    procedure InsertChunk(const AInternalOffset, ASize: Int64);
+    function AddChunk(const ASize: Int64): Int64;
+    property Item: TFitsItem read FItem;
+    property Offset: Int64 read GetOffset;
+    // The minimum content size is 0 bytes and a multiple of 2880 bytes
+    property Size: Int64 read FSize write SetSize;
+    // The exact number of meaningful bytes in the data section (exclusive
+    // of fill that is needed after the data to complete the last 2880-byte
+    // data block). The internal size is less than or equal to the size of
+    // the data section
+    property InternalSize: Int64 read GetInternalSize;
+    property BitPix: TBitPix read GetBitPix;
+    property AxesCount: Integer read GetAxesCount;
+    property AxesLength[Number: Integer]: Integer read GetAxesLength;
+    property PCount: Integer read GetPCount;
+    property GCount: Integer read GetGCount;
+    property PixelSize: Byte read GetPixelSize;
+  end;
+
+  TFitsItemDataClass = class of TFitsItemData;
+
+  { TFitsItem: Header and Data Unit (HDU) }
+
+  EFitsItemException = class(EFitsException)
+  protected
+    function GetTopic: string; override;
+  end;
+
+  TFitsItemOrder = (ioSingle, ioPrimary, ioExtension);
+
+  TFitsItem = class(TFitsObject)
+  private
+    FContainer: TFitsContainer;
+    FHead: TFitsItemHead;
+    FData: TFitsItemData;
+    FCacheProp: TFitsPropList;
     procedure Bind(AContainer: TFitsContainer);
-    procedure MakeExplorer(APioneer: Boolean);
-    procedure MakeNewcomer(ASpec: TFitsUmitSpec);
-
     function CanPrimary: Boolean;
-    procedure Reorder(AType: TOrderType);
-
+    procedure SetOrder(AOrder: TFitsItemOrder);
     function GetIndex: Integer;
-
     function GetOffset: Int64;
     function GetSize: Int64;
     function GetEstimateSize: Int64;
-
-    function GetFamily: string;
-    function GetName: string;
-    function GetVersion: Integer;
-    function GetLevel: Integer;
-
+  protected
+    procedure Init; override;
+    function GetExceptionClass: EFitsExceptionClass; override;
+    procedure AppendCacheProp(AProp: IFitsPropContext);
+    function ExtractCacheProp(AProp: IFitsPropContext): Boolean;
+    function ExtractHeadProp(AProp: IFitsPropContext): Boolean;
+    procedure DoGetXTENSION(AProp: IXTENSION); virtual;
+    procedure DoGetEXTNAME(AProp: IEXTNAME); virtual;
+    procedure DoGetEXTVER(AProp: IEXTVER); virtual;
+    procedure DoGetEXTLEVEL(AProp: IEXTLEVEL); virtual;
+    procedure DoGetBITPIX(AProp: IBITPIX); virtual;
+    procedure DoGetNAXIS(AProp: INAXIS); virtual;
+    procedure DoGetNAXES(AProp: INAXES); virtual;
+    procedure DoGetPCOUNT(AProp: IPCOUNT); virtual;
+    procedure DoGetGCOUNT(AProp: IGCOUNT); virtual;
+    procedure ChangeContent(const AOffset, ASize: Int64); virtual;
+    function GetHeadClass: TFitsItemHeadClass; virtual;
+    function GetDataClass: TFitsItemDataClass; virtual;
+  public
+    constructor Create(AContainer: TFitsContainer); virtual;
+    constructor CreateNew(AContainer: TFitsContainer; ASpec: TFitsItemSpec); virtual;
+    destructor Destroy; override;
+    class function ExtensionType: string; virtual;
+    class function ExtensionTypeIs(AItem: TFitsItem): Boolean; virtual;
+    // Extract, set default, calculate and validate the values of mandatory
+    // and optional (reserved) keyword records. Methods may throw exceptions
     function GetXTENSION: string;
     function GetEXTNAME: string;
     function GetEXTVER: Integer;
     function GetEXTLEVEL: Integer;
-    function GetBITPIX: Integer;
-    function GetGCOUNT: Integer;
-    function GetPCOUNT: Integer;
+    function GetBITPIX: TBitPix;
     function GetNAXIS: Integer;
-    function GetNAXES(Number: Integer): Integer;
-
-  protected
-
-    function GetHeadClass: TFitsUmitHeadClass; virtual;
-    function GetDataClass: TFitsUmitDataClass; virtual;
-
-    function GetAlias: string; virtual;
-
-  public
-
-    constructor CreateExplorer(AContainer: TFitsContainer; APioneer: Boolean); virtual;
-    constructor CreateNewcomer(AContainer: TFitsContainer; ASpec: TFitsUmitSpec); virtual;
-    procedure BeforeDestruction; override;
-    destructor Destroy; override;
-
-    function Coclass(UmitClass: TFitsUmitClass): Boolean;
-    function Reclass(UmitClass: TFitsUmitClass): TFitsUmit;
-    procedure Delete;
-    procedure Exchange(Index2: Integer);
-    procedure Move(NewIndex: Integer);
-
+    // Dimension of the data section axis, numbering range is [1..NAXIS]
+    function GetNAXES(ANumber: Integer): Integer;
+    function GetPCOUNT: Integer;
+    function GetGCOUNT: Integer;
     property Container: TFitsContainer read FContainer;
     property Index: Integer read GetIndex;
-
     property Offset: Int64 read GetOffset;
     property Size: Int64 read GetSize;
-
-    property Head: TFitsUmitHead read FHead;
-    property Data: TFitsUmitData read FData;
-
-    property Family: string read GetFamily;
-
-    class function ClassFamily: string; virtual;
-
-    property Alias: string read GetAlias;
-
-    property Name: string read GetName;
-    property Version: Integer read GetVersion;
-    property Level: Integer read GetLevel;
-
-    property XTENSION: string read GetXTENSION;
-    property EXTNAME: string read GetEXTNAME;
-    property EXTVER: Integer read GetEXTVER;
-    property EXTLEVEL: Integer read GetEXTLEVEL;
-    property BITPIX: Integer read GetBITPIX;
-    property GCOUNT: Integer read GetGCOUNT;
-    property PCOUNT: Integer read GetPCOUNT;
-    property NAXIS: Integer read GetNAXIS;
-    property NAXES[Number: Integer]: Integer read GetNAXES;
-
+    property Head: TFitsItemHead read FHead;
+    property Data: TFitsItemData read FData;
   end;
 
-  { Memory Manager: buffer for operations of reading and writing }
+  TFitsItemClass = class of TFitsItem;
 
-  TFitsManagerBuffer = class(TObject)
+  { TFitsMemory: memory manager for allocating some buffers. Important!
+    The calling procedure must ensure that Allocate() is not called on
+    more than one variable at a time }
 
-  {$IFDEF DELA_MEMORY_PRIVATE}
-  private
-    FBuffer: TBuffer;
-  {$ENDIF}
+  EFitsMemoryException = class(EFitsException)
+  protected
+    function GetTopic: string; override;
+  end;
 
+  TFitsMemory = class(TFitsObject)
+  protected
+    FContainer: TFitsContainer;
+{$IFDEF DELAFITS_MEMORY_OBJECT}
+    FBytes1: TBytes1;
+    FBytes2: TBytes2;
+{$ENDIF}
+    function GetExceptionClass: EFitsExceptionClass; override;
   public
-
-    constructor Create;
-    destructor Destroy; override;
-
-    procedure Allocate(var ABuffer: Pointer; ASizeInBytes: Integer);
-    procedure Release(var ABuffer: Pointer);
-    procedure Reset;
-
+    constructor Create(AContainer: TFitsContainer); virtual;
+    procedure Allocate(out ABytes: TBytes1; ASize: Integer); overload; virtual;
+    procedure Allocate(out ABytes: TBytes2; ASize1, ASize2: Integer); overload; virtual;
+    procedure Reset; virtual;
   end;
 
-  { Content access }
+  TFitsMemoryClass = class of TFitsMemory;
 
-  TFitsContent = class(TObject)
+  { TFitsContent: access to content (raw stream) }
 
+  EFitsContentException = class(EFitsException)
+  protected
+    function GetTopic: string; override;
+  end;
+
+  TFitsContent = class(TFitsObject)
   private
-
+    FContainer: TFitsContainer;
     FStream: TStream;
-    FBuffer: TFitsManagerBuffer;
-
     function GetSize: Int64;
-
+    procedure Change(const AOffset, ASize: Int64);
+  protected
+    function GetExceptionClass: EFitsExceptionClass; override;
   public
-
-    constructor Create(AStream: TStream);
-    destructor Destroy; override;
-
-    procedure Read(const AOffset, ASize: Int64; var ABuffer);
+    constructor Create(AContainer: TFitsContainer; AStream: TStream); virtual;
+    procedure Read(const AOffset, ASize: Int64; var ABuffer); virtual;
     procedure ReadBuffer(const AOffset, ACount: Int64; var ABuffer: TBuffer);
     procedure ReadString(const AOffset, ACount: Int64; var ABuffer: string);
-
-    procedure Write(const AOffset, ASize: Int64; const ABuffer);
+    procedure Write(const AOffset, ASize: Int64; const ABuffer); virtual;
     procedure WriteBuffer(const AOffset, ACount: Int64; const ABuffer: TBuffer);
     procedure WriteString(const AOffset, ACount: Int64; const ABuffer: string);
-
+    // [Uses TFitsMemory]
     procedure Fill(const AOffset, ASize: Int64; AChar: Char);
-
-    // Rewrite content: AShift > 0 - shift content down, AShift < 0 - shift content up
-
+    // [Uses TFitsMemory] Rewrite content: AShift > 0 - shift content down, AShift < 0 - shift content up
     procedure Shift(const AOffset, ASize, AShift: Int64);
-
+    // [Uses TFitsMemory]
     procedure Rotate(const AOffset, ASize: Int64);
+    // [Uses TFitsMemory]
     procedure Exchange(var AOffset1: Int64; const ASize1: Int64; var AOffset2: Int64; const ASize2: Int64);
+    // [Uses TFitsMemory]
     procedure Move(const AOffset, ASize: Int64; var ANewOffset: Int64);
-
-    // Resize content: ASize > 0 - grow size content, ASize < 0 - reduce size content
-
+    // [Uses TFitsMemory] Resize content: ASize > 0 - grow size content, ASize < 0 - reduce size content
     procedure Resize(const AOffset, ASize: Int64);
-
     property Size: Int64 read GetSize;
-
     property Stream: TStream read FStream;
-    property Buffer: TFitsManagerBuffer read FBuffer;
-
   end;
 
-  { Container HDUs }
+  TFitsContentClass = class of TFitsContent;
 
-  TFitsContainer = class(TObject)
+  { TFitsItemList: list owns TFitsItem instances (HDU) }
 
+  TFitsItemList = class(TList)
   private
-
-    FContent: TFitsContent;
-    FUmits: TList;
-    FInspect: Boolean;
-    FEmbindex: Integer;
-
-    procedure Embed(NewUmit: TFitsUmit);
-
-    function GetCount: Integer;
-    function GetUmit(Index: Integer): TFitsUmit;
-    function GetPrimary: TFitsUmit;
-
-    procedure Explore;
-
-    procedure Clear;
-
+    function GetItem(AIndex: Integer): TFitsItem;
+    procedure SetItem(AIndex: Integer; AItem: TFitsItem);
   public
+    destructor Destroy; override;
+    function IndexOf(AItem: TFitsItem): Integer;
+    procedure Remove(AIndex: Integer);
+    procedure Delete(AIndex: Integer); overload;
+    procedure Delete(AItem: TFitsItem); overload;
+    property Items[Index: Integer]: TFitsItem read GetItem write SetItem; default;
+  end;
 
+  { TFitsContainer: container with a collection of TFitsItem instances (HDU) }
+
+  EFitsContainerException = class(EFitsException)
+  protected
+    function GetTopic: string; override;
+  end;
+
+  TFitsContainer = class(TFitsObject)
+  private
+    FMemory: TFitsMemory;
+    FContent: TFitsContent;
+    FItems: TFitsItemList;
+    FItemsCursor: Integer;
+    procedure MakeItems;
+    procedure ReorderItems;
+    function GetItemClass(AIndex: Integer): TFitsItemClass;
+    procedure SetItemClass(AIndex: Integer; AItemClass: TFitsItemClass);
+    function GetItem(AIndex: Integer): TFitsItem;
+    function GetPrimary: TFitsItem;
+    function GetCount: Integer;
+    procedure Check(const ACheck: string; const AArgs: array of const; ACodeError: Integer);
+  protected
+    function GetExceptionClass: EFitsExceptionClass; override;
+    function GetMemoryClass: TFitsMemoryClass; virtual;
+    function GetContentClass: TFitsContentClass; virtual;
+  public
     constructor Create(AStream: TStream);
     destructor Destroy; override;
-
-    function Coclass(Index: Integer; UmitClass: TFitsUmitClass): Boolean;
-    function Reclass(Index: Integer; UmitClass: TFitsUmitClass): TFitsUmit;
-
-    function Add(UmitClass: TFitsUmitClass; UmitSpec: TFitsUmitSpec): TFitsUmit;
-
-    procedure Delete(Index: Integer);
-
-    procedure Exchange(Index1, Index2: Integer);
-    procedure Move(CurIndex, NewIndex: Integer);
-
-    function IndexOf(Umit: TFitsUmit): Integer;
-
-    property Umits[Index: Integer]: TFitsUmit read GetUmit; default;
-    property Primary: TFitsUmit read GetPrimary;
+    function Add(AItemClass: TFitsItemClass; AItemSpec: TFitsItemSpec): TFitsItem;
+    procedure Delete(AIndex: Integer);
+    procedure Exchange(AIndex1, AIndex2: Integer);
+    procedure Move(ACurIndex, ANewIndex: Integer);
+    function IndexOf(AItem: TFitsItem): Integer;
+    // The method checks whether the specified class can work with this HDU
+    function ItemExtensionTypeIs(AIndex: Integer; AItemClass: TFitsItemClass): Boolean;
+    property ItemClasses[Index: Integer]: TFitsItemClass read GetItemClass write SetItemClass;
+    property Items[Index: Integer]: TFitsItem read GetItem; default;
+    property Primary: TFitsItem read GetPrimary;
     property Count: Integer read GetCount;
-
+    // Memory manager for temporary data, internal use object
+    property Memory: TFitsMemory read FMemory;
+    // Access to stream data
     property Content: TFitsContent read FContent;
-
   end;
 
 implementation
 
-function IfThen(AValue: Boolean; const ATrue, AFalse: TOrderType): TOrderType; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
+{ EFitsItemSpecException }
+
+function EFitsItemSpecException.GetTopic: string;
 begin
-  if AValue then
-    Result := ATrue
-  else
-    Result := AFalse;
+  Result := 'SPEC';
 end;
 
-procedure Swap(var V1, V2: Integer); {$IFDEF HAS_INLINE} inline; {$ENDIF}
-var
-  O: Integer;
+{ TFitsItemSpec }
+
+function TFitsItemSpec.GetExceptionClass: EFitsExceptionClass;
 begin
-  O  := V1;
-  V1 := V2;
-  V2 := O;
+  Result := EFitsItemSpecException;
 end;
 
-function CeilToRank(const Value: Int64; Rank: Integer): Int64; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+function TFitsItemSpec.ExtractProp(AItem: TFitsItem; AProp: IFitsPropContext): Boolean;
 var
-  Modulo: Integer;
+  LIndex: Integer;
 begin
-  if Rank <= 0 then
+  LIndex := AItem.Head.LineIndexOfKeyword(AProp.Keyword);
+  if LIndex >= 0 then
+    AProp.AssignValue(AItem.Head.Lines[LIndex]);
+  Result := LIndex >= 0;
+end;
+
+{ Header prop }
+
+function DefaultPCOUNT: Integer; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  // [FITS_STANDARD_4.0, SECT_4.4.1.2] Conforming extensions ... PCOUNT keyword
+  Result := 0;
+end;
+
+function CorrectPCOUNT(AValue: Integer): Boolean; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := AValue >= 0;
+end;
+
+function DefaultGCOUNT: Integer; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  // [FITS_STANDARD_4.0, SECT_4.4.1.2] Conforming extensions ... PCOUNT keyword
+  Result := 1;
+end;
+
+function CorrectGCOUNT(AValue: Integer): Boolean; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := AValue >= 1;
+end;
+
+{ Header line }
+
+type
+  TLineType = (lineEmpty, lineTypical, lineContinuedStart, lineContinuedChain, lineContinuedFinal, lineGrouped);
+
+function LineTypeOf(const ALine: string; out LKeyword: string): TLineType;
+var
+  LRecord: TLineRecord;
+begin
+  if Trim(ALine) = '' then
   begin
-    Result := 0;
+    LKeyword := '';
+    Result := lineEmpty;
     Exit;
   end;
-  if Value < 0 then
+  LRecord := LineToRecord(ALine);
+  LKeyword := LRecord.Keyword;
+  if LRecord.ValueIndicate then
   begin
-    Result := 0;
-    Exit;
-  end;
-  if Value = 0 then
+    Result := lineTypical;
+    if IsQuotedAmpersandString(LRecord.Value) then
+      Result := lineContinuedStart;
+  end else
   begin
-    Result := Rank;
-    Exit;
-  end;
-  Modulo := Value mod Rank;
-  if Modulo = 0 then
-    Result := Value
-  else
-    Result := Value + Rank - Modulo;
-end;
-
-function ZeroToRank(const Value: Int64; Rank: Integer): Int64; {$IFDEF HAS_INLINE} inline; {$ENDIF}
-begin
-  if Value = 0 then
-    Result := 0
-  else
-    Result := CeilToRank(Value, Rank);
-end;
-
-function CardSimple: TCard; {$IFDEF HAS_INLINE} inline; {$ENDIF}
-begin
-  Result := ToCard(cSIMPLE, True, True, True, 'Conforms to FITS standard');
-end;
-
-function CardExtend: TCard; {$IFDEF HAS_INLINE} inline; {$ENDIF}
-begin
-  Result := ToCard(cEXTEND, True, True, True, 'Extensions are present');
-end;
-
-function CardXtension(AName: string): TCard; {$IFDEF HAS_INLINE} inline; {$ENDIF}
-begin
-  Result := ToCard(cXTENSION, True, AName, True, 'Name of extension');
-end;
-
-function CardBITPIX(ABitBix: TBitPix): TCard; {$IFDEF HAS_INLINE} inline; {$ENDIF}
-begin
-  Result := ToCard(cBITPIX, True, BitPixToInt(ABitBix), True, 'Number of bits per data value');
-end;
-
-function CardNAXIS(ANaxis: Integer): TCard; {$IFDEF HAS_INLINE} inline; {$ENDIF}
-begin
-  Result := ToCard(cNAXIS, True, ANaxis, True, 'Number of axes');
-end;
-
-function CardPCOUNT(PCount: Integer): TCard; {$IFDEF HAS_INLINE} inline; {$ENDIF}
-begin
-  Result := ToCard(cPCOUNT, True, PCount, True, 'Parameter count');
-end;
-
-function CardGCOUNT(GCount: Integer): TCard; {$IFDEF HAS_INLINE} inline; {$ENDIF}
-begin
-  Result := ToCard(cGCOUNT, True, GCount, True, 'Group count');
-end;
-
-{ TFitsUmitHead }
-
-procedure TFitsUmitHead.Bind(AUmit: TFitsUmit);
-begin
-  if not Assigned(AUmit) then
-    raise EFitsClassesException.Create(SUmitNotAssign, ERROR_UMIT_HEAD_BIND_ASSIGN);
-  if not AUmit.Container.FInspect then
-    raise EFitsClassesException.Create(SBindNoInspect, ERROR_UMIT_HEAD_BIND_INSPECT);
-  FUmit := AUmit;
-  FUmit.FHead := Self;
-end;
-
-procedure TFitsUmitHead.MakeExplorer(APioneer: Boolean);
-
-var
-  Key: string;
-  Card: TCard;
-  lFind: Boolean;
-  lSize: Int64;
-
-  function ReadFirstCard(Cast: Integer; Error: Integer): TCard;
-  begin
-    try
-      Read(0, Result, Cast);
-    except
-      on E: Exception do
-        raise EFitsClassesException.CreateFmt(SLineErrorParse, [0, FUmit.Index], E.Message, Error);
+    Result := lineGrouped;
+    if LKeyword = cCONTINUE then
+    begin
+      if IsQuotedAmpersandString(LRecord.Value) then
+        Result := lineContinuedChain
+      else if IsQuotedString(LRecord.Value) then
+        Result := lineContinuedFinal;
     end;
   end;
-
-begin
-
-  // suppress hint
-
-  if APioneer then
-    ;
-
-  // presize
-
-  FSize := FUmit.GetEstimateSize;
-  if FSize < cSizeBlock then
-    raise EFitsClassesException.CreateFmt(SHeadMakeSmallSize, [FUmit.Index], ERROR_UMIT_HEAD_MAKE_SIZE_SMALL);
-
-  // check first card SIMPLE or XTENSION
-
-  if FUmit.Index = 0 then
-  begin
-    Card := ReadFirstCard(cCastBoolean, ERROR_UMIT_HEAD_MAKE_SIMPLE_PARSE);
-    if not SameText(Card.Keyword, cSIMPLE) then
-      raise EFitsClassesException.CreateFmt(SLineKeywordNotMatch, [0, FUmit.Index, cSIMPLE], ERROR_UMIT_HEAD_MAKE_SIMPLE_KEY);
-    if Card.Value.Bol = False then
-      raise EFitsClassesException.CreateFmt(SLineValueIncorrect, [0, FUmit.Index], ERROR_UMIT_HEAD_MAKE_SIMPLE_VALUE);
-  end
-  else
-  begin
-    Card := ReadFirstCard(cCastString, ERROR_UMIT_HEAD_MAKE_XTENSION_PARSE);
-    if not SameText(Card.Keyword, cXTENSION) then
-      raise EFitsClassesException.CreateFmt(SLineKeywordNotMatch, [0, FUmit.Index, cXTENSION], ERROR_UMIT_HEAD_MAKE_XTENSION_KEY);
-    if Card.Value.Str = '' then
-      raise EFitsClassesException.CreateFmt(SLineValueIncorrect, [0, FUmit.Index], ERROR_UMIT_HEAD_MAKE_XTENSION_VALUE);
-  end;
-
-  // search END keyword and set size of header
-
-  Key := DeLaFitsString.Blank(cSizeKeyword);
-  lSize := 0;
-  lFind := False;
-  while (lSize < FSize) and (not lFind) do
-  begin
-    FUmit.Container.Content.ReadString(Offset + lSize, cSizeKeyword, Key);
-    lSize := lSize + cSizeLine;
-    lFind := SameText(Trim(Key), cEND);
-  end;
-  if not lFind then
-    raise EFitsClassesException.CreateFmt(SKeywordNotFound, [cEND, FUmit.Index], ERROR_UMIT_HEAD_MAKE_KEYEND_NOTFOUND);
-  lSize := CeilToRank(lSize, cSizeBlock);
-  if lSize > FSize then
-    raise EFitsClassesException.CreateFmt(SHeadMakeMultipleSize, [FUmit.Index], ERROR_UMIT_HEAD_MAKE_SIZE_MULTIPLE);
-  FSize := lSize;
-
 end;
 
-procedure TFitsUmitHead.MakeNewcomer(ASpec: TFitsUmitSpec);
+function EnsureLine(const ALine: string): string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
 begin
+  Result := EnsureString(ALine, -cSizeLine);
+end;
 
-  // suppress hint
+function NewLineProp(AProp: IFitsPropContext): string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := AProp.NewLine;
+end;
 
+function NewLineSIMPLE: string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := NewLineProp(TFitsSIMPLE.CreateValue(True));
+end;
+
+function NewLineEXTEND: string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := NewLineProp(TFitsEXTEND.CreateValue(True));
+end;
+
+function NewLineXTENSION(const AValue: string): string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := NewLineProp(TFitsXTENSION.CreateValue(AValue));
+end;
+
+function NewLineBITPIX: string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := NewLineProp(TFitsBITPIX.CreateValue(bi08u));
+end;
+
+function NewLineNAXIS: string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := NewLineProp(TFitsNAXIS.CreateValue(0));
+end;
+
+function NewLinePCOUNT: string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := NewLineProp(TFitsPCOUNT.CreateValue(DefaultPCOUNT));
+end;
+
+function NewLineGCOUNT: string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := NewLineProp(TFitsGCOUNT.CreateValue(DefaultGCOUNT));
+end;
+
+function NewLineEND: string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := PadString(cEND, -cSizeLine);
+end;
+
+{ Header line keyword }
+
+function ExistsKeyword(const ALines, AKeyword: string): Boolean; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+var
+  LPosition: Integer;
+  LKeyword: string;
+begin
+  Result := False;
+  LPosition := 1;
+  while (not Result) and (LPosition <= Length(ALines)) do
+  begin
+    LKeyword := Trim(Copy(ALines, LPosition, cSizeKeyword));
+    Result := SameText(LKeyword, AKeyword);
+    Inc(LPosition, cSizeLine);
+  end;
+end;
+
+function EnsureKeyword(const AKeyword: string): string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+begin
+  Result := UpperCase(EnsureString(AKeyword, -cSizeKeyword));
+end;
+
+{ Header card }
+
+function CardTypeOf(const ACard: string): TCardType;
+var
+  LKeyword, LMainKeyword: string;
+  LWidth, LPosition: Integer;
+begin
+  Result := cardUnknown;
+  LWidth := Length(ACard);
+  LKeyword := '';
+  LMainKeyword := '';
+  case LineTypeOf(Copy(ACard, 1, cSizeLine), {out} LMainKeyword) of
+    lineEmpty:
+      begin
+        if LWidth = cSizeLine then
+          Result := cardEmpty;
+      end;
+    lineTypical:
+      begin
+        if LWidth = cSizeLine then
+          Result := cardTypical;
+      end;
+    lineContinuedStart:
+      begin
+        LPosition := cSizeLine + 1;
+        while (LPosition <= (LWidth - 2 * cSizeLine + 1)) and
+          (LineTypeOf(Copy(ACard, LPosition, cSizeLine), {out} LKeyword) = lineContinuedChain) do
+          Inc(LPosition, cSizeLine);
+        if (LPosition = (LWidth - cSizeLine + 1)) and
+          (LineTypeOf(Copy(ACard, LPosition, cSizeLine), {out} LKeyword) in [lineContinuedChain, lineContinuedFinal]) then
+          Inc(LPosition, cSizeLine);
+        if LPosition = (LWidth + 1) then
+          Result := cardContinued;
+      end;
+    lineGrouped:
+      begin
+        LPosition := cSizeLine + 1;
+        while (LPosition <= (LWidth - cSizeLine + 1)) and
+          (LineTypeOf(Copy(ACard, LPosition, cSizeLine), {out} LKeyword) = lineGrouped) and SameText(LMainKeyword, LKeyword) do
+          Inc(LPosition, cSizeLine);
+        if LPosition = (LWidth + 1) then
+          Result := cardGrouped;
+      end;
+  end;
+end;
+
+{ Snippet: access to content within specified boundaries }
+
+type
+  ISnippet = interface(IInterface)
+    ['{13803F6C-1F3D-49E6-953E-C5CCCC9B7416}']
+    procedure Read(const AInternalOffset, ASize: Int64; var ABuffer);
+    procedure Write(const AInternalOffset, ASize: Int64; const ABuffer);
+    procedure ReadString(const AInternalOffset, ASize: Int64; var ABuffer: string);
+    procedure WriteString(const AInternalOffset, ASize: Int64; const ABuffer: string);
+    procedure Exchange(var AInternalOffset1: Int64; const ASize1: Int64; var AInternalOffset2: Int64; const ASize2: Int64);
+    procedure Move(const AInternalOffset, ASize: Int64; var ANewInternalOffset: Int64);
+    procedure Erase(const AInternalOffset, ASize: Int64);
+    function Ensure(const ASize: Int64): Int64;
+    function Delete(const AInternalOffset, ASize: Int64): Int64;
+    function Insert(const AInternalOffset, ASize: Int64): Int64;
+    function Add(const ASize: Int64; out AInternalOffset: Int64): Int64;
+  end;
+
+  TSnippet = class(TFitsInterfacedObject, ISnippet)
+  private
+    FExceptionClass: EFitsExceptionClass;
+    FContent: TFitsContent;
+    FOffset: Int64;
+    FSize: Int64;
+    FMinSize: Int64;
+    FFiller: Char;
+    procedure Check(const ACheck: string; const AArgs: array of const; ACodeError: Integer);
+    // Raw access
+    procedure Read(const AInternalOffset, ASize: Int64; var ABuffer);
+    procedure Write(const AInternalOffset, ASize: Int64; const ABuffer);
+    procedure ReadString(const AInternalOffset, ASize: Int64; var ABuffer: string);
+    procedure WriteString(const AInternalOffset, ASize: Int64; const ABuffer: string);
+    procedure Exchange(var AInternalOffset1: Int64; const ASize1: Int64; var AInternalOffset2: Int64; const ASize2: Int64);
+    procedure Move(const AInternalOffset, ASize: Int64; var ANewInternalOffset: Int64);
+    procedure Erase(const AInternalOffset, ASize: Int64);
+    // Ensures that size changes are multiples of 2880 bytes
+    function Ensure(const ASize: Int64): Int64;
+    function Delete(const AInternalOffset, ASize: Int64): Int64;
+    function Insert(const AInternalOffset, ASize: Int64): Int64;
+    function Add(const ASize: Int64; out AInternalOffset: Int64): Int64;
+  protected
+    function GetExceptionClass: EFitsExceptionClass; override;
+  public
+    class function Make(AObject: TFitsObject): ISnippet;
+  end;
+
+{ TSnippet }
+
+class function TSnippet.Make(AObject: TFitsObject): ISnippet;
+var
+  LHead: TFitsItemHead;
+  LData: TFitsItemData;
+  LSnippet: TSnippet;
+begin
+  LSnippet := TSnippet.Create;
+  if AObject is TFitsItemHead then
+  begin
+    LHead := AObject as TFitsItemHead;
+    LSnippet.FExceptionClass := LHead.GetExceptionClass;
+    LSnippet.FContent := LHead.Item.Container.Content;
+    LSnippet.FOffset := LHead.Offset;
+    LSnippet.FSize := LHead.Size;
+    LSnippet.FMinSize := cSizeBlock;
+    LSnippet.FFiller := cChrBlank;
+  end else
+  if AObject is TFitsItemData then
+  begin
+    LData := AObject as TFitsItemData;
+    LSnippet.FExceptionClass := LData.GetExceptionClass;
+    LSnippet.FContent := LData.Item.Container.Content;
+    LSnippet.FOffset := LData.Offset;
+    LSnippet.FSize := LData.Size;
+    LSnippet.FMinSize := 0;
+    LSnippet.FFiller := LData.Filler;
+  end else
+  begin
+    FreeAndNil(LSnippet);
+    Assert(False, SAssertionFailure);
+  end;
+  Result := LSnippet;
+end;
+
+function TSnippet.GetExceptionClass: EFitsExceptionClass;
+begin
+  Result := FExceptionClass;
+end;
+
+procedure TSnippet.Check(const ACheck: string; const AArgs: array of const; ACodeError: Integer);
+var
+  LArgOffset, LArgSize, LArgOffset2, LArgSize2: Int64;
+begin
+  if ACheck = 'bounds' then
+  begin
+    LArgOffset := AArgs[0].VInt64^;
+    LArgSize := AArgs[1].VInt64^;
+    if not InSegmentBound({ASegmentPosition:} 0, FSize, LArgOffset, LArgSize) then
+      Error(SContentChunkOutBounds, [LArgOffset, LArgSize, FSize], ACodeError);
+  end else
+  if ACheck = 'offset' then
+  begin
+    LArgOffset := AArgs[0].VInt64^;
+    if not InSegmentBound({ASegmentPosition:} 0, FSize, LArgOffset) then
+      Error(SContentOffsetOutBounds, [LArgOffset, FSize], ACodeError);
+  end else
+  if ACheck = 'offset.new' then
+  begin
+    LArgOffset := AArgs[0].VInt64^;
+    if not InSegmentBound({ASegmentPosition:} 0, FSize + 1, LArgOffset) then
+      Error(SContentOffsetOutBounds, [LArgOffset, FSize], ACodeError);
+  end else
+  if ACheck = 'size' then
+  begin
+    LArgSize := AArgs[0].VInt64^;
+    if LArgSize <= 0 then
+      Error(SContentInvalidSize, [LArgSize], ACodeError);
+  end else
+  if ACheck = 'overlap' then
+  begin
+    LArgOffset := AArgs[0].VInt64^;
+    LArgSize := AArgs[1].VInt64^;
+    LArgOffset2 := AArgs[2].VInt64^;
+    LArgSize2 := AArgs[3].VInt64^;
+    if InSegmentBound(LArgOffset, LArgSize, LArgOffset2) or
+       InSegmentBound(LArgOffset, LArgSize, LArgOffset2 + LArgSize2 - 1) then
+      Error(SContentChunksOverlap, [LArgOffset, LArgSize, LArgOffset2, LArgSize2],
+        ACodeError);
+  end else
+    Assert(False, SAssertionFailureArgs(AArgs));
+end;
+
+procedure TSnippet.Read(const AInternalOffset, ASize: Int64; var ABuffer);
+begin
+  Check('bounds', [AInternalOffset, ASize], ERROR_ITEM_READCHUNK_BOUNDS);
+  FContent.Read(FOffset + AInternalOffset, ASize, {var} ABuffer);
+end;
+
+procedure TSnippet.ReadString(const AInternalOffset, ASize: Int64; var ABuffer: string);
+begin
+  Check('bounds', [AInternalOffset, ASize], ERROR_ITEM_READCHUNK_BOUNDS);
+  FContent.ReadString(FOffset + AInternalOffset, ASize, {var} ABuffer);
+end;
+
+procedure TSnippet.Write(const AInternalOffset, ASize: Int64; const ABuffer);
+begin
+  Check('bounds', [AInternalOffset, ASize], ERROR_ITEM_WRITECHUNK_BOUNDS);
+  FContent.Write(FOffset + AInternalOffset, ASize, ABuffer);
+end;
+
+procedure TSnippet.WriteString(const AInternalOffset, ASize: Int64; const ABuffer: string);
+begin
+  Check('bounds', [AInternalOffset, ASize], ERROR_ITEM_WRITECHUNK_BOUNDS);
+  FContent.WriteString(FOffset + AInternalOffset, ASize, ABuffer);
+end;
+
+procedure TSnippet.Exchange(var AInternalOffset1: Int64; const ASize1: Int64; var AInternalOffset2: Int64; const ASize2: Int64);
+var
+  LOffset1, LOffset2: Int64;
+begin
+  Check('bounds', [AInternalOffset1, ASize1], ERROR_ITEM_EXCHANGECHUNK_BOUNDS);
+  Check('bounds', [AInternalOffset2, ASize2], ERROR_ITEM_EXCHANGECHUNK_BOUNDS);
+  Check('overlap', [AInternalOffset1, ASize1, AInternalOffset2, ASize2], ERROR_ITEM_EXCHANGECHUNK_OVERLAP);
+  LOffset1 := FOffset + AInternalOffset1;
+  LOffset2 := FOffset + AInternalOffset2;
+  FContent.Exchange({var} LOffset1, ASize1, {var} LOffset2, ASize2);
+  AInternalOffset1 := LOffset1 - FOffset;
+  AInternalOffset2 := LOffset2 - FOffset;
+end;
+
+procedure TSnippet.Move(const AInternalOffset, ASize: Int64; var ANewInternalOffset: Int64);
+var
+  LCurOffset, LNewOffset: Int64;
+begin
+  Check('bounds', [AInternalOffset, ASize], ERROR_ITEM_MOVECHUNK_BOUNDS);
+  Check('offset', [ANewInternalOffset], ERROR_ITEM_MOVECHUNK_OFFSET);
+  Check('overlap', [AInternalOffset, ASize, ANewInternalOffset, Int64(1)], ERROR_ITEM_MOVECHUNK_OVERLAP);
+  LCurOffset := FOffset + AInternalOffset;
+  LNewOffset := FOffset + ANewInternalOffset;
+  FContent.Move(LCurOffset, ASize, {var} LNewOffset);
+  ANewInternalOffset := LNewOffset - FOffset;
+end;
+
+procedure TSnippet.Erase(const AInternalOffset, ASize: Int64);
+begin
+  Check('bounds', [AInternalOffset, ASize], ERROR_ITEM_ERASECHUNK_BOUNDS);
+  FContent.Fill(FOffset + AInternalOffset, ASize, FFiller);
+end;
+
+function TSnippet.Ensure(const ASize: Int64): Int64;
+var
+  LSize, LRank: Int64;
+begin
+  // Grow or reduce snippet size
+  LSize := EnsureMultiply(Math.Max(ASize, 0), cSizeBlock, {ARetainZeroValue:} FMinSize = 0);
+  if LSize > FSize then
+    FContent.Resize(FOffset + FSize, LSize - FSize);
+  if LSize < FSize then
+    FContent.Resize(FOffset + LSize, LSize - FSize);
+  // Erase meaningless bytes
+  LRank := LSize - Math.Max(ASize, 0);
+  if LRank > 0 then
+    FContent.Fill(FOffset + LSize - LRank, LRank, FFiller);
+  // Return new snippet size
+  Result := LSize;
+end;
+
+function TSnippet.Delete(const AInternalOffset, ASize: Int64): Int64;
+var
+  LSize, LRank: Int64;
+begin
+  Check('bounds', [AInternalOffset, ASize], ERROR_ITEM_DELETECHUNK_BOUNDS);
+  // Delete custom block
+  FContent.Resize(FOffset + AInternalOffset, -ASize);
+  LSize := FSize - ASize;
+  // Ensure snippet size
+  LRank := EnsureMultiply(LSize, cSizeBlock, {ARetainZeroValue:} FMinSize = 0) - LSize;
+  if LRank > 0 then
+  begin
+    FContent.Resize(FOffset + LSize, LRank);
+    FContent.Fill(FOffset + LSize, LRank, FFiller);
+    LSize := LSize + LRank;
+  end;
+  // Return new snippet size
+  Result := LSize;
+end;
+
+function TSnippet.Insert(const AInternalOffset, ASize: Int64): Int64;
+var
+  LSize, LRank: Int64;
+begin
+  Check('offset.new', [AInternalOffset], ERROR_ITEM_INSERTCHUNK_OFFSET);
+  Check('size', [ASize], ERROR_ITEM_INSERTCHUNK_SIZE);
+  // Insert custom block
+  FContent.Resize(FOffset + AInternalOffset, ASize);
+  LSize := FSize + ASize;
+  // Ensure snippet size
+  LRank := EnsureMultiply(ASize, cSizeBlock, {ARetainZeroValue:} True) - ASize;
+  if LRank > 0 then
+  begin
+    FContent.Resize(FOffset + LSize, LRank);
+    FContent.Fill(FOffset + LSize, LRank, FFiller);
+    LSize := LSize + LRank;
+  end;
+  // Return new snippet size
+  Result := LSize;
+end;
+
+function TSnippet.Add(const ASize: Int64; out AInternalOffset: Int64): Int64;
+var
+  LSize, LRank: Int64;
+begin
+  Check('size', [ASize], ERROR_ITEM_ADDCHUNK_SIZE);
+  // Added aligned block
+  LSize := EnsureMultiply(ASize, cSizeBlock, {ARetainZeroValue:} True);
+  FContent.Resize(FOffset + FSize, LSize);
+  // Erase to an aligned block
+  LRank := EnsureMultiply(ASize, cSizeBlock, {ARetainZeroValue:} True) - ASize;
+  if LRank > 0 then
+    FContent.Fill(FOffset + FSize + ASize, LRank, FFiller);
+  // Returns the internal offset of the new block and the new snippet size
+  AInternalOffset := FSize;
+  Result := FSize + LSize;
+end;
+
+{ EFitsItemHeadException }
+
+function EFitsItemHeadException.GetTopic: string;
+begin
+  Result := 'ITEMHEAD';
+end;
+
+{ TFitsItemHead }
+
+procedure TFitsItemHead.Init;
+begin
+  inherited;
+  FInternalSize := cInternalSizeNull;
+  FCardCursor := cCardSpotNull;
+end;
+
+function TFitsItemHead.GetExceptionClass: EFitsExceptionClass;
+begin
+  Result := EFitsItemHeadException;
+end;
+
+procedure TFitsItemHead.Bind(AItem: TFitsItem);
+begin
+  if not Assigned(AItem) then
+    Error(SItemNotAssigned, ERROR_ITEMHEAD_BIND_NO_ITEM);
+  if AItem.Container.FItemsCursor < 0 then
+    Error(SContainerNotControlBind, ERROR_ITEMHEAD_BIND_NO_INSPECT);
+  FItem := AItem;
+  FItem.FHead := Self;
+end;
+
+procedure TFitsItemHead.UnBind;
+begin
+  if Assigned(FItem) then
+    FItem.FHead := nil;
+end;
+
+procedure TFitsItemHead.Make;
+var
+  LOffset, LEstimateSize, LInternalSize, LSize: Int64;
+  LLine, LKeyword, LXtension: string;
+  LSimple, LFindEnd: Boolean;
+  LRecord: TLineRecord;
+begin
+  LOffset := GetOffset;
+  // Get information (maximum estimate) about the size of the header
+  LEstimateSize := FItem.GetEstimateSize;
+  if LEstimateSize < cSizeBlock then
+    Error(SItemNotMatchMinimumSize, [FItem.Index, LEstimateSize],
+      ERROR_ITEMHEAD_MAKE_MINIMUM_SIZE);
+  // Check the first line "SIMPLE" or "XTENSION"
+  LLine := '';
+  FItem.Container.Content.ReadString(LOffset, cSizeLine, {var} LLine);
+  LRecord := LineToRecord(LLine);
+  if FItem.Index = 0 then
+  begin
+    if not SameText(LRecord.Keyword, cSIMPLE) then
+      Error(SHeadLineKeywordNotMatch, [LLine, cSIMPLE],
+        ERROR_ITEMHEAD_MAKE_SIMPLE_NOT_MATCH);
+    LSimple := StringToBool(LRecord.Value);
+    if LSimple = False then
+      Error(SHeadLineValueIncorrect, [LLine], ERROR_ITEMHEAD_MAKE_SIMPLE_VALUE);
+  end else
+  // if FItem.Index > 0 then
+  begin
+    if not SameText(LRecord.Keyword, cXTENSION) then
+      Error(SHeadLineKeywordNotMatch, [LLine, cXTENSION],
+        ERROR_ITEMHEAD_MAKE_XTENSIONE_NOT_MATCH);
+    LXtension := UnquotedString(LRecord.Value);
+    if LXtension = '' then
+      Error(SHeadLineValueIncorrect, [LLine], ERROR_ITEMHEAD_MAKE_XTENSION_VALUE);
+  end;
+  // Find the keyword "END" and determine the internal size of the header
+  LInternalSize := 0;
+  LFindEnd := False;
+  LKeyword := '';
+  while (LInternalSize < LEstimateSize) and (not LFindEnd) do
+  begin
+    FItem.Container.Content.ReadString(LOffset + LInternalSize, cSizeKeyword, {var} LKeyword);
+    LFindEnd := SameText(Trim(LKeyword), cEND);
+    Inc(LInternalSize, cSizeLine);
+  end;
+  if not LFindEnd then
+    Error(SHeadLineNotFound, [cEND], ERROR_ITEMHEAD_MAKE_KEYWORDEND_NOT_FOUND);
+  // Set size of the header
+  LSize := EnsureMultiply(LInternalSize, cSizeBlock, {ARetainZeroValue:} False);
+  if LSize > LEstimateSize then
+    Error(SItemNotMatchRecognizedSize, [FItem.Index, LEstimateSize, LSize],
+      ERROR_ITEMHEAD_MAKE_RECOGNIZED_SIZE);
+  FSize := LSize;
+end;
+
+procedure TFitsItemHead.MakeNew;
+var
+  LOffset, LEstimateSize, LSize: Int64;
+  LContent: TFitsContent;
+begin
+  LOffset := GetOffset;
+  LContent := FItem.Container.Content;
+  // Get the available size for the new header section
+  LEstimateSize := FItem.GetEstimateSize;
+  // Get the required minimum size (2880 bytes) of the new header section
+  LSize := cSizeBlock;
+  // Prepare the content of the new header section
+  if LEstimateSize < LSize then
+    LContent.Resize(LOffset + LEstimateSize, LSize - LEstimateSize);
+  LContent.Fill(LOffset, LSize, cChrBlank);
+  // Initialize the new header content: add a minimal set of lines
+  if FItem.Index = 0 then
+  begin
+    LContent.WriteString(LOffset + 0 * cSizeLine, cSizeLine, NewLineSIMPLE);
+    LContent.WriteString(LOffset + 1 * cSizeLine, cSizeLine, NewLineBITPIX);
+    LContent.WriteString(LOffset + 2 * cSizeLine, cSizeLine, NewLineNAXIS);
+    LContent.WriteString(LOffset + 3 * cSizeLine, cSizeLine, NewLineEND);
+  end else
+  // if FItem.Index > 0 then
+  begin
+    LContent.WriteString(LOffset + 0 * cSizeLine, cSizeLine, NewLineXTENSION(FItem.ExtensionType));
+    LContent.WriteString(LOffset + 1 * cSizeLine, cSizeLine, NewLineBITPIX);
+    LContent.WriteString(LOffset + 2 * cSizeLine, cSizeLine, NewLineNAXIS);
+    LContent.WriteString(LOffset + 3 * cSizeLine, cSizeLine, NewLinePCOUNT);
+    LContent.WriteString(LOffset + 4 * cSizeLine, cSizeLine, NewLineGCOUNT);
+    LContent.WriteString(LOffset + 5 * cSizeLine, cSizeLine, NewLineEND);
+  end;
+  // Set size of the new header
+  FSize := LSize;
+end;
+
+procedure TFitsItemHead.Customize;
+begin
+  // Do nothing
+end;
+
+procedure TFitsItemHead.CustomizeNew(ASpec: TFitsItemSpec);
+begin
+  // Specification not used
   if Assigned(ASpec) then
     ;
-
-  // presize
-
-  FSize := FUmit.GetEstimateSize;
-  if FSize < cSizeBlock then
-    raise EFitsClassesException.CreateFmt(SHeadMakeSmallSize, [FUmit.Index], ERROR_UMIT_HEAD_MAKE_SIZE_SMALL);
-
-  // initialize a header
-
-  if FUmit.Index = 0 then
-  begin
-    Write(0, CardSimple, cCastBoolean);
-    Write(1, CardBITPIX(bi08u), cCastInteger);
-    Write(2, CardNAXIS(0), cCastInteger);
-    // Write(3, CardExtend, cCastBoolean);
-    Write(3, cEND);
-  end
-  else
-  begin
-    Write(0, CardXtension(FUmit.ClassFamily), cCastString);
-    Write(1, CardBITPIX(bi08u), cCastInteger);
-    Write(2, CardNAXIS(0), cCastInteger);
-    Write(3, CardPCOUNT(0), cCastInteger);
-    Write(4, CardGCOUNT(1), cCastInteger);
-    Write(5, cEND);
-  end;
-
 end;
 
-function TFitsUmitHead.GetOffset: Int64;
+function TFitsItemHead.GetOffset: Int64;
 begin
-  Result := FUmit.Offset;
+  Result := FItem.Offset;
 end;
 
-function TFitsUmitHead.GetCize: Int64;
+function TFitsItemHead.ExtractInternalSize: Int64;
 var
-  Key: string;
+  LKeyword, LKeywordEnd: string;
 begin
+  // 0 <= Result <= (FSize - cSizeLine)
   Result := FSize;
-  Key := DeLaFitsString.Blank(cSizeKeyword);
-  while Result > cSizeLine do
+  LKeyword := BlankString(cSizeKeyword);
+  LKeywordEnd := EnsureKeyword(cEND);
+  while Result >= cSizeLine do
   begin
-    FUmit.Container.Content.ReadString(Offset + Result - cSizeLine, cSizeKeyword, Key);
-    if SameText(Trim(Key), cEND) then
+    FItem.Container.Content.ReadString(Offset + Result - cSizeLine, cSizeKeyword, {var} LKeyword);
+    if SameText(LKeyword, LKeywordEnd) then
       Break;
     Dec(Result, cSizeLine);
   end;
 end;
 
-function TFitsUmitHead.GetFormatLine: PFormatLine;
+function TFitsItemHead.GetInternalSize: Int64;
 begin
-  Result := @FFormatLine;
+  if FInternalSize = cInternalSizeNull then
+    FInternalSize := ExtractInternalSize;
+  Result := FInternalSize;
 end;
 
-function TFitsUmitHead.GetLine(Index: Integer): string;
+procedure TFitsItemHead.SetSize(const ASize: Int64);
 begin
-  Read(Index, Result, 1);
+  FSize := TSnippet.Make(Self).Ensure(ASize);
 end;
 
-procedure TFitsUmitHead.SetLine(Index: Integer; Line: string);
+function TFitsItemHead.GetLineOffset(AIndex: Integer): Int64;
 begin
-  Line := AlignStrict(Line, -cSizeLine);
-  Write(Index, Line);
+  Result := FItem.Offset + Int64(AIndex) * cSizeLine;
 end;
 
-function TFitsUmitHead.GetCard(Index, Cast: Integer): TCard;
+function TFitsItemHead.GetLineSize(ACount: Integer): Int64;
 begin
-  Read(Index, Result, Cast);
+  Result := Int64(ACount) * cSizeLine;
 end;
 
-procedure TFitsUmitHead.SetCard(Index, Cast: Integer; Card: TCard);
+function TFitsItemHead.GetLineCapacity: Integer;
 begin
-  Write(Index, Card, Cast);
+  Result := FSize div cSizeLine;
 end;
 
-function TFitsUmitHead.GetKeyword(Index: Integer): string;
+function TFitsItemHead.GetLineCount: Integer;
 begin
-  if (Index < 0) or (Index >= Capacity) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_UMIT_HEAD_GET_KEYWORD_INDEX);
-  Result := DeLaFitsString.Blank(cSizeKeyword);
-  FUmit.Container.Content.ReadString(Offset + Int64(Index) * cSizeLine, cSizeKeyword, Result);
+  Result := GetInternalSize div cSizeLine;
+end;
+
+procedure TFitsItemHead.Invalidate;
+begin
+  FInternalSize := cInternalSizeNull;
+end;
+
+constructor TFitsItemHead.Create(AItem: TFitsItem);
+begin
+  inherited Create;
+  Bind(AItem);
+  Make;
+  Customize;
+end;
+
+constructor TFitsItemHead.CreateNew(AItem: TFitsItem; ASpec: TFitsItemSpec);
+begin
+  inherited Create;
+  Bind(AItem);
+  MakeNew;
+  CustomizeNew(ASpec);
+end;
+
+destructor TFitsItemHead.Destroy;
+begin
+  UnBind;
+  inherited;
+end;
+
+procedure TFitsItemHead.ReadChunk(const AInternalOffset, ASize: Int64; var ABuffer: string);
+begin
+  TSnippet.Make(Self).ReadString(AInternalOffset, ASize, {var} ABuffer);
+end;
+
+procedure TFitsItemHead.WriteChunk(const AInternalOffset, ASize: Int64; const ABuffer: string);
+begin
+  TSnippet.Make(Self).WriteString(AInternalOffset, ASize, ABuffer);
+end;
+
+procedure TFitsItemHead.ExchangeChunk(var AInternalOffset1: Int64; const ASize1: Int64; var AInternalOffset2: Int64; const ASize2: Int64);
+begin
+  TSnippet.Make(Self).Exchange({var} AInternalOffset1, ASize1, {var} AInternalOffset2, ASize2);
+end;
+
+procedure TFitsItemHead.MoveChunk(const AInternalOffset, ASize: Int64; var ANewInternalOffset: Int64);
+begin
+  TSnippet.Make(Self).Move(AInternalOffset, ASize, {var} ANewInternalOffset);
+end;
+
+procedure TFitsItemHead.EraseChunk(const AInternalOffset, ASize: Int64);
+begin
+  TSnippet.Make(Self).Erase(AInternalOffset, ASize);
+end;
+
+procedure TFitsItemHead.DeleteChunk(const AInternalOffset, ASize: Int64);
+begin
+  FSize := TSnippet.Make(Self).Delete(AInternalOffset, ASize);
+end;
+
+procedure TFitsItemHead.InsertChunk(const AInternalOffset, ASize: Int64);
+begin
+  FSize := TSnippet.Make(Self).Insert(AInternalOffset, ASize);
+end;
+
+function TFitsItemHead.AddChunk(const ASize: Int64): Int64;
+begin
+  FSize := TSnippet.Make(Self).Add(ASize, {out} Result);
+end;
+
+procedure TFitsItemHead.CheckLines(const ACheck: string; const AArgs: array of const; ACodeError: Integer);
+var
+  LArgIndex, LArgCount, LLineCount: Integer;
+  LArgString: string;
+begin
+  if ACheck = 'bounds' then
+  begin
+    LArgIndex := AArgs[0].VInteger;
+    LArgCount := AArgs[1].VInteger;
+    LLineCount := GetLineCount;
+    if not InSegmentBound({ASegmentPosition:} 0, LLineCount, LArgIndex, LArgCount) then
+      Error(SHeadLinesRangeOutBounds, [LArgIndex, LArgCount, LLineCount], ACodeError);
+  end else
+  if ACheck = 'bounds.inner' then
+  begin
+    LArgIndex := AArgs[0].VInteger;
+    LArgCount := AArgs[1].VInteger;
+    LLineCount := GetLineCount;
+    if not InSegmentBound({ASegmentPosition:} 0, LLineCount, LArgIndex, LArgCount) then
+      Error(SHeadLinesRangeOutBounds, [LArgIndex, LArgCount, LLineCount], ACodeError);
+    if (LArgIndex + LArgCount) = LLineCount then
+      Error(SHeadLinesRangeAtLowerBound, [LArgIndex, LArgCount, LLineCount], ACodeError);
+  end else
+  if ACheck = 'index' then
+  begin
+    LArgIndex := AArgs[0].VInteger;
+    LLineCount := GetLineCount;
+    if not InSegmentBound({ASegmentPosition:} 0, LLineCount, LArgIndex) then
+      Error(SHeadLineIndexOutBounds, [LArgIndex, LLineCount], ACodeError);
+  end else
+  if ACheck = 'index.inner' then
+  begin
+    LArgIndex := AArgs[0].VInteger;
+    LLineCount := GetLineCount;
+    if not InSegmentBound({ASegmentPosition:} 0, LLineCount, LArgIndex) then
+      Error(SHeadLineIndexOutBounds, [LArgIndex, LLineCount], ACodeError);
+    if LArgIndex = LLineCount - 1 then
+      Error(SHeadLineIndexAtLowerBound, [LArgIndex, LLineCount], ACodeError);
+  end else
+  if ACheck = 'keyword' then
+  begin
+    LArgString := string(AArgs[0].VWideString);
+    if ExistsKeyword(LArgString, cEND) then
+      Error(SHeadLineCannotChanged, [cEND], ACodeError);
+  end else
+    Assert(False, SAssertionFailureArgs(AArgs));
+end;
+
+function TFitsItemHead.GetLineBy(AIndex: Integer): string;
+begin
+  Result := '';
+  FItem.Container.Content.ReadString(GetLineOffset(AIndex), cSizeLine, {var} Result);
+end;
+
+function TFitsItemHead.GetLine(AIndex: Integer): string;
+begin
+  Result := '';
+  ReadLines(AIndex, {ACount:} 1, {var} Result);
+end;
+
+procedure TFitsItemHead.SetLine(AIndex: Integer; const ALine: string);
+var
+  LLine: string;
+begin
+  LLine := EnsureLine(ALine);
+  WriteLines(AIndex, LLine);
+end;
+
+procedure TFitsItemHead.ReadLinesBy(AIndex, ACount: Integer; var ALines: string);
+begin
+  FItem.Container.Content.ReadString(GetLineOffset(AIndex), GetLineSize(ACount), {var} ALines);
+end;
+
+procedure TFitsItemHead.ReadLines(AIndex, ACount: Integer; var ALines: string);
+begin
+  // It is allowed to read a line from the end position
+  CheckLines('bounds', [AIndex, ACount], ERROR_ITEMHEAD_READLINES_BOUNDS);
+  ReadLinesBy(AIndex, ACount, {var} ALines);
+end;
+
+procedure TFitsItemHead.WriteLinesBy(AIndex: Integer; const ALines: string);
+begin
+  FItem.Container.Content.WriteString(GetLineOffset(AIndex), Length(ALines), ALines);
+end;
+
+procedure TFitsItemHead.WriteLines(AIndex: Integer; const ALines: string);
+var
+  LWidth: Integer;
+  LLines: string;
+begin
+  LWidth := Integer(EnsureMultiply(Length(ALines), cSizeLine, {ARetainZeroValue:} False));
+  CheckLines('bounds.inner', [AIndex, Integer(LWidth div cSizeLine)], ERROR_ITEMHEAD_WRITELINES_BOUNDS);
+  CheckLines('keyword', [ALines], ERROR_ITEMHEAD_WRITELINES_KEYWORD);
+  LLines := PadString(ALines, -LWidth);
+  WriteLinesBy(AIndex, LLines);
+end;
+
+procedure TFitsItemHead.ExchangeLines(AIndex1, AIndex2: Integer);
+var
+  LOffset1, LOffset2: Int64;
+begin
+  CheckLines('index.inner', [AIndex1], ERROR_ITEMHEAD_EXCHANGELINES_BOUNDS);
+  CheckLines('index.inner', [AIndex2], ERROR_ITEMHEAD_EXCHANGELINES_BOUNDS);
+  LOffset1 := GetLineOffset(AIndex1);
+  LOffset2 := GetLineOffset(AIndex2);
+  FItem.Container.Content.Exchange({var} LOffset1, cSizeLine, {var} LOffset2, cSizeLine);
+end;
+
+procedure TFitsItemHead.MoveLinesBy(ACurIndex, ACurCount: Integer; var ANewIndex: Integer; ANewCount: Integer);
+var
+  LCurOffset, LNewOffset, LCurSize, LNewSize: Int64;
+begin
+  LCurOffset := GetLineOffset(ACurIndex);
+  LNewOffset := GetLineOffset(ANewIndex);
+  LCurSize := GetLineSize(ACurCount);
+  LNewSize := GetLineSize(ANewCount);
+  // Correction for moving the line "down"
+  if ACurIndex < ANewIndex then
+    LNewOffset := LNewOffset + LNewSize - 1;
+  FItem.Container.Content.Move(LCurOffset, LCurSize, {var} LNewOffset);
+  ANewIndex := (LNewOffset - FItem.Offset) div cSizeLine;
+end;
+
+procedure TFitsItemHead.MoveLines(ACurIndex, ANewIndex: Integer);
+var
+  LNewIndex: Integer;
+begin
+  CheckLines('index.inner', [ACurIndex], ERROR_ITEMHEAD_MOVELINES_BOUNDS);
+  CheckLines('index.inner', [ANewIndex], ERROR_ITEMHEAD_MOVELINES_BOUNDS);
+  LNewIndex := ANewIndex;
+  MoveLinesBy(ACurIndex, {ACurCount:} 1, {var} LNewIndex, {ANewCount:} 1);
+end;
+
+procedure TFitsItemHead.EraseLinesBy(AIndex, ACount: Integer);
+begin
+  FItem.Container.Content.Fill(GetLineOffset(AIndex), GetLineSize(ACount), {AChar:} cChrBlank);
+end;
+
+procedure TFitsItemHead.EraseLines(AIndex, ACount: Integer);
+begin
+  CheckLines('bounds.inner', [AIndex, ACount], ERROR_ITEMHEAD_ERASELINES_BOUNDS);
+  EraseLinesBy(AIndex, ACount);
+end;
+
+procedure TFitsItemHead.DeleteLinesBy(AIndex, ACount: Integer);
+var
+  LOffset, LInternalSize, LCountSize, LSize, LRank: Int64;
+  LContent: TFitsContent;
+begin
+  // Shift up the meaningful lines (below the deleted lines)
+  LContent := FItem.Container.Content;
+  LOffset := GetOffset;
+  LInternalSize := GetInternalSize;
+  LCountSize := GetLineSize(ACount);
+  LSize := LInternalSize - GetLineSize(AIndex + ACount); // shift block size
+  LContent.Shift(LOffset + GetLineSize(AIndex + ACount), LSize, {AShift:} -LCountSize);
+  // Calculate new size
+  LInternalSize := LInternalSize - LCountSize; // new internal size
+  LSize := EnsureMultiply(LInternalSize, cSizeBlock, {ARetainZeroValue:} False); // new size
+  // Delete unnecessary 2880-byte blocks after the end line
+  if FSize > LSize then
+    LContent.Resize(LOffset + LSize, LSize - FSize);
+  // Erase unnecessary lines after the end line
+  LRank := Math.IfThen(FSize > LSize, LSize - LInternalSize, LCountSize);
+  if LRank > 0 then
+    LContent.Fill(LOffset + LInternalSize, LRank, {AChar:} cChrBlank);
+  // Set new size
+  FSize := LSize;
+end;
+
+procedure TFitsItemHead.DeleteLines(AIndex, ACount: Integer);
+begin
+  CheckLines('bounds.inner', [AIndex, ACount], ERROR_ITEMHEAD_DELETELINES_BOUNDS);
+  DeleteLinesBy(AIndex, ACount);
+end;
+
+procedure TFitsItemHead.InsertLinesBy(AIndex: Integer; const ALines: string);
+var
+  LInternalSize, LSize, LOffset, LWidth, LRank: Int64;
+  LContent: TFitsContent;
+begin
+  LWidth := Length(ALines);
+  // Determine if there is enough space for new lines after
+  // the end line, or if new 2880-byte blocks need to be added
+  LContent := FItem.Container.Content;
+  LInternalSize := GetInternalSize;
+  if LWidth <= (FSize - LInternalSize) then
+  begin
+    LOffset := GetLineOffset(AIndex);
+    LContent.Shift(LOffset, LInternalSize - GetLineSize(AIndex), {AShift:} +LWidth);
+    LContent.WriteString(LOffset, LWidth, ALines);
+  end else
+  // if LWidth > (FSize - LInternalSize) then
+  begin
+    LOffset := GetOffset;
+    LSize := EnsureMultiply(LInternalSize + LWidth, cSizeBlock, {ARetainZeroValue:} False); // new size
+    LContent.Resize(LOffset + FSize, LSize - FSize);
+    LContent.Shift(LOffset + GetLineSize(AIndex), LInternalSize - GetLineSize(AIndex), {AShift:} +LWidth);
+    LContent.WriteString(LOffset + GetLineSize(AIndex), LWidth, ALines);
+    LRank := LSize - (LInternalSize + LWidth);
+    if LRank > 0 then
+      LContent.Fill(LOffset + (LInternalSize + LWidth), LRank, {AChar:} cChrBlank);
+    FSize := LSize;
+  end;
+end;
+
+procedure TFitsItemHead.InsertLines(AIndex: Integer; const ALines: string);
+var
+  LWidth: Integer;
+  LLines: string;
+begin
+  // It is allowed to insert a new line at the end position
+  CheckLines('index', [AIndex], ERROR_ITEMHEAD_INSERTLINES_BOUNDS);
+  CheckLines('keyword', [ALines], ERROR_ITEMHEAD_INSERTLINES_KEYWORD);
+  LWidth := EnsureMultiply(Length(ALines), cSizeLine, {ARetainZeroValue:} False);
+  LLines := PadString(ALines, -Integer(LWidth));
+  InsertLinesBy(AIndex, LLines);
+end;
+
+function TFitsItemHead.AddLines(const ALines: string): Integer;
+begin
+  Result := GetLineCount - 1;
+  InsertLines(Result, ALines);
+end;
+
+function TFitsItemHead.GetLineKeywordBy(AIndex: Integer): string;
+begin
+  Result := '';
+  FItem.Container.Content.ReadString(GetLineOffset(AIndex), cSizeKeyword, {var} Result);
   Result := Trim(Result);
 end;
 
-procedure TFitsUmitHead.SetKeyword(Index: Integer; Keyword: string);
+function TFitsItemHead.GetLineKeyword(AIndex: Integer): string;
 begin
-  if (Index < 0) or (Index >= Capacity) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_UMIT_HEAD_SET_KEYWORD_INDEX);
-  Keyword := AlignStrict(Keyword, -cSizeKeyword);
-  Keyword := UpperCase(Keyword);
-  FUmit.Container.Content.WriteString(Offset + Int64(Index) * cSizeLine, cSizeKeyword, Keyword);
+  // It is allowed to read the keyword "END"
+  CheckLines('index', [AIndex], ERROR_ITEMHEAD_GETLINEKEYWORD_INDEX);
+  Result := GetLineKeywordBy(AIndex);
 end;
 
-function TFitsUmitHead.GetValueStr(Index: Integer; Cast: Integer): string;
-begin
-  Result := Cards[Index, Cast].Value.Str;
-end;
-
-procedure TFitsUmitHead.SetValueStr(Index: Integer; Cast: Integer; Value: string);
+procedure TFitsItemHead.SetLineKeyword(AIndex: Integer; const AKeyword: string);
 var
-  Card: TCard;
+  LKeyword: string;
 begin
-  Card := Cards[Index, cCastChars];
-  Card.Value.Str := Value;
-  Cards[Index, Cast] := Card;
+  CheckLines('index.inner', [AIndex], ERROR_ITEMHEAD_SETLINEKEYWORD_INDEX);
+  LKeyword := EnsureKeyword(AKeyword);
+  CheckLines('keyword', [LKeyword], ERROR_ITEMHEAD_SETLINEKEYWORD_KEYWORD);
+  FItem.Container.Content.WriteString(GetLineOffset(AIndex), cSizeKeyword, LKeyword);
 end;
 
-function TFitsUmitHead.GetValueBol(Index: Integer; Cast: Integer): Boolean;
+function TFitsItemHead.GetLineRecord(AIndex: Integer): TLineRecord;
 begin
-  Result := Cards[Index, Cast].Value.Bol;
+  Result := LineToRecord(Lines[AIndex]);
 end;
 
-procedure TFitsUmitHead.SetValueBol(Index: Integer; Cast: Integer; Value: Boolean);
+procedure TFitsItemHead.SetLineRecord(AIndex: Integer; const ARecord: TLineRecord);
+begin
+  Lines[AIndex] := RecordToLine(ARecord);
+end;
+
+function TFitsItemHead.LineIndexOfKeyword(const AKeyword: string; AScope: Integer): Integer;
+begin
+  Result := LineIndexOfKeywords([AKeyword], AScope);
+end;
+
+function TFitsItemHead.LineIndexOfKeywords(const AKeywords: array of string; AScope: Integer): Integer;
 var
-  Card: TCard;
-begin
-  Card := Cards[Index, cCastChars];
-  Card.Value.Bol := Value;
-  Cards[Index, Cast] := Card;
-end;
-
-function TFitsUmitHead.GetValueInt(Index: Integer; Cast: Integer): Int64;
-begin
-  Result := Cards[Index, Cast].Value.Int;
-end;
-
-procedure TFitsUmitHead.SetValueInt(Index: Integer; Cast: Integer; Value: Int64);
-var
-  Card: TCard;
-begin
-  Card := Cards[Index, cCastChars];
-  Card.Value.Int := Value;
-  Cards[Index, Cast] := Card;
-end;
-
-function TFitsUmitHead.GetValueExt(Index: Integer; Cast: Integer): Extended;
-begin
-  Result := Cards[Index, Cast].Value.Ext;
-end;
-
-procedure TFitsUmitHead.SetValueExt(Index: Integer; Cast: Integer; Value: Extended);
-var
-  Card: TCard;
-begin
-  Card := Cards[Index, cCastChars];
-  Card.Value.Ext := Value;
-  Cards[Index, Cast] := Card;
-end;
-
-function TFitsUmitHead.GetValueDtm(Index: Integer; Cast: Integer): TDateTime;
-begin
-  Result := Cards[Index, Cast].Value.Dtm;
-end;
-
-procedure TFitsUmitHead.SetValueDtm(Index: Integer; Cast: Integer; Value: TDateTime);
-var
-  Card: TCard;
-begin
-  Card := Cards[Index, cCastChars];
-  Card.Value.Dtm := Value;
-  Cards[Index, Cast] := Card;
-end;
-
-function TFitsUmitHead.GetNote(Index: Integer): string;
-begin
-  Result := Cards[Index, cCastChars].Note;
-end;
-
-procedure TFitsUmitHead.SetNote(Index: Integer; Note: string);
-var
-  Card: TCard;
-begin
-  Card := Cards[Index, cCastChars];
-  Note := Trim(Note);
-  Card.Note := Note;
-  Card.NoteIndicate := Note <> '';
-  Cards[Index, cCastChars] := Card;
-end;
-
-function TFitsUmitHead.GetText: string;
-begin
-  Read(0, Result, Count);
-end;
-
-function TFitsUmitHead.GetCount: Integer;
-begin
-  Result := Cize div cSizeLine;
-end;
-
-function TFitsUmitHead.GetCapacity: Integer;
-begin
-  Result := Size div cSizeLine;
-end;
-
-procedure TFitsUmitHead.Init;
-begin
-  FUmit := nil;
-  FSize := 0;
-  FFormatLine := FormatLineDefault;
-end;
-
-constructor TFitsUmitHead.CreateExplorer(AUmit: TFitsUmit; APioneer: Boolean);
-begin
-  inherited Create;
-  Init;
-  Bind(AUmit);
-  MakeExplorer(APioneer);
-end;
-
-constructor TFitsUmitHead.CreateNewcomer(AUmit: TFitsUmit; ASpec: TFitsUmitSpec);
-begin
-  inherited Create;
-  Init;
-  Bind(AUmit);
-  MakeNewcomer(ASpec);
-end;
-
-procedure TFitsUmitHead.BeforeDestruction;
-begin
-  if not FUmit.Container.FInspect then
-    raise EFitsClassesException.CreateFmt(SFreeNoInspect, [FUmit.Index], ERROR_UMIT_HEAD_FREE_INSPECT);
-  inherited;
-end;
-
-destructor TFitsUmitHead.Destroy;
-begin
-  FUmit := nil;
-  inherited;
-end;
-
-function TFitsUmitHead.CardToLine(Card: TCard; Cast: Integer): string;
-var
-  S: string;
-  I, L, N: Integer;
-begin
-  case Cast of
-    cCastChars:
-      begin
-        S := DeLaFitsString.Align(Card.Value.Str, FFormatLine.vaStr.wWidth);
-      end;
-    cCastText:
-      begin
-        S := Card.Value.Str;
-        L := Length(S);
-        N := cSizeLine - cSizeKeyword - 2;
-        I := 1;
-        Result := '';
-        repeat
-          Card.Value.Str := Copy(S, I, N);
-          Card.Value.Str := DeLaFitsString.Align(Card.Value.Str, FFormatLine.vaStr.wWidth);
-          Result := Result + DeLaFitsString.CardToLine(Card);
-          Inc(I, N);
-        until I > L;
-        Exit;
-      end;
-    cCastString:
-      begin
-        S := DeLaFitsString.Quoted(Card.Value.Str, FFormatLine.vaStr.wWidthQuoteInside);
-        S := DeLaFitsString.Align(S, FFormatLine.vaStr.wWidth);
-      end;
-    cCastBoolean:
-      begin
-        S := DeLaFitsString.BolToStri(Card.Value.Bol);
-        S := DeLaFitsString.Align(S, FFormatLine.vaBol.wWidth);
-      end;
-    cCastInteger:
-      begin
-        S := DeLaFitsString.IntToStri(Card.Value.Int, FFormatLine.vaInt.wSign, FFormatLine.vaInt.wFmt);
-        S := DeLaFitsString.Align(S, FFormatLine.vaInt.wWidth);
-      end;
-    cCastFloat:
-      begin
-        S := DeLaFitsString.FloatToStri(Card.Value.Ext, FFormatLine.vaFloat.wSign, FFormatLine.vaFloat.wFmt);
-        S := DeLaFitsString.Align(S, FFormatLine.vaFloat.wWidth);
-      end;
-    cCastRa:
-      begin
-        S := DeLaFitsString.RaToStri(Card.Value.Ext, FFormatLine.vaCoord.wPrecRa, FFormatLine.vaCoord.wFmtRepCoord, FFormatLine.vaCoord.wFmtMeaRa);
-        S := DeLaFitsString.Quoted(S, FFormatLine.vaCoord.wWidthQuoteInside);
-        S := DeLaFitsString.Align(S, FFormatLine.vaCoord.wWidth);
-      end;
-    cCastDe:
-      begin
-        S := DeLaFitsString.DeToStri(Card.Value.Ext, FFormatLine.vaCoord.wPrecDe, FFormatLine.vaCoord.wFmtRepCoord);
-        S := DeLaFitsString.Quoted(S, FFormatLine.vaCoord.wWidthQuoteInside);
-        S := DeLaFitsString.Align(S, FFormatLine.vaCoord.wWidth);
-      end;
-    cCastDateTime, cCastDate, cCastTime:
-      begin
-        S := DeLaFitsString.DateTimeToStri(Card.Value.Dtm, Cast);
-        S := DeLaFitsString.Quoted(S, FFormatLine.vaDateTime.wWidthQuoteInside);
-        S := DeLaFitsString.Align(S, FFormatLine.vaDateTime.wWidth);
-      end;
-    else
-      begin
-        S := '';
-        raise EFitsClassesException.CreateFmt(SUnknownCastCard, [Cast], ERROR_UMIT_HEAD_CAST_CARD);
-      end;
-  end;
-  Card.Value.Str := S;
-  Result := DeLaFitsString.CardToLine(Card);
-end;
-
-function TFitsUmitHead.LineToCard(Line: string; Cast: Integer): TCard;
-var
-  S: string;
-  I, L, N: Integer;
-  IsFirstChrBlank: Boolean;
-begin
-  Result := DeLaFitsString.LineToCard(Line);
-  S := Result.Value.Str;
-  Result.Value.Str := '';
-  case Cast of
-    cCastChars:
-      begin
-        Result.Value.Str := S;
-      end;
-    cCastText:
-      begin
-        L := Length(Line);
-        N := cSizeLine;
-        I := cSizeLine + 1;
-        IsFirstChrBlank := Pos(cChrBlank, S) = 1;
-        if IsFirstChrBlank then
-          S := Copy(S, 2, Length(S));
-        while I <= L do
-        begin
-          Result := DeLaFitsString.LineToCard(Copy(Line, I, cSizeLine));
-          if IsFirstChrBlank and (Pos(cChrBlank, Result.Value.Str) = 1) then
-            S := S + Copy(Result.Value.Str, 2, Length(Result.Value.Str))
-          else
-            S := S + Result.Value.Str;
-          Inc(I, N);
-        end;
-        Result.Value.Str := S;
-      end;
-    cCastString:
-      begin
-        Result.Value.Str := DeLaFitsString.UnQuoted(S);
-      end;
-    cCastBoolean:
-      begin
-        Result.Value.Bol := DeLaFitsString.StriToBol(S);
-      end;
-    cCastInteger:
-      begin
-        Result.Value.Int := DeLaFitsString.StriToInt(S);
-      end;
-    cCastFloat:
-      begin
-        Result.Value.Ext := DeLaFitsString.StriToFloat(S);
-      end;
-    cCastRa:
-      begin
-        S := DeLaFitsString.UnQuoted(S);
-        Result.Value.Ext := DeLaFitsString.StriToRa(S);
-      end;
-    cCastDe:
-      begin
-        S := DeLaFitsString.UnQuoted(S);
-        Result.Value.Ext := DeLaFitsString.StriToDe(S);
-      end;
-    cCastDateTime, cCastDate, cCastTime:
-      begin
-        S := DeLaFitsString.UnQuoted(S);
-        Result.Value.Dtm := DeLaFitsString.StriToDateTime(S, Cast, FFormatLine.vaDateTime.rFmtShortDate);
-      end;
-    else
-      begin
-        raise EFitsClassesException.CreateFmt(SUnknownCastLine, [Cast], ERROR_UMIT_HEAD_CAST_LINE);
-      end;
-  end;
-end;
-
-procedure TFitsUmitHead.Read(Index: Integer; out Line: string; ACount: Integer);
-var
-  lOffset, lCount: Int64;
-begin
-  if (Index < 0) or (Index >= Capacity) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_UMIT_HEAD_READ_INDEX);
-  if (ACount < 0) or ((Index + ACount) > Capacity) then
-    raise EFitsClassesException.CreateFmt(SCountValueOutBounds, [ACount], ERROR_UMIT_HEAD_READ_COUNT);
-  if ACount = 0 then
-  begin
-    Line := '';
-    Exit;
-  end;
-  lCount := Int64(ACount) * cSizeLine;
-  lOffset := Offset + Int64(Index) * cSizeLine;
-  Line := DeLaFitsString.Blank(lCount);
-  FUmit.Container.Content.ReadString(lOffset, lCount, Line);
-end;
-
-procedure TFitsUmitHead.Read(Index: Integer; out Card: TCard; Cast: Integer);
-var
-  Line, Key, Line1, Key1: string;
-  lOffset, lOffsetMax: Int64;
-begin
-  if (Index < 0) or (Index >= Capacity) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_UMIT_HEAD_READ_INDEX);
-  lOffset := Offset +  Int64(Index) * cSizeLine;
-  Line := DeLaFitsString.Blank(cSizeLine);
-  FUmit.Container.Content.ReadString(lOffset, cSizeLine, Line);
-  if Cast = cCastText then
-  begin
-    Key := Copy(Line, 1, cSizeKeyword);
-    lOffset := lOffset + cSizeLine;
-    lOffsetMax := Offset + Size;
-    Line1 := DeLaFitsString.Blank(cSizeLine);
-    while lOffset < lOffsetMax do
-    begin
-      FUmit.Container.Content.ReadString(lOffset, cSizeLine, Line1);
-      Key1 := Copy(Line1, 1, cSizeKeyword);
-      if Key <> Key1 then
-        Break;
-      Line := Line + Line1;
-      Inc(lOffset, cSizeLine);
-    end;
-  end;
-  Card := LineToCard(Line, Cast);
-end;
-
-procedure TFitsUmitHead.Write(Index: Integer; Line: string);
-var
-  lOffset, lCount: Int64;
-begin
-  if (Index < 0) or (Index >= Capacity) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_UMIT_HEAD_WRITE_INDEX);
-  if Line = '' then
-    Exit;
-  lCount := CeilToRank(Length(Line), cSizeLine);
-  lOffset := Offset + Int64(Index) * cSizeLine;
-  if (lOffset + lCount) > (Offset + Size) then
-    raise EFitsClassesException.CreateFmt(SCountValueOutBounds, [lCount], ERROR_UMIT_HEAD_WRITE_COUNT);
-  Line := AlignStrict(Line, -lCount);
-  FUmit.Container.Content.WriteString(lOffset, lCount, Line);
-end;
-
-procedure TFitsUmitHead.Write(Index: Integer; Card: TCard; Cast: Integer);
-var
-  Line: string;
-begin
-  if (Index < 0) or (Index >= Capacity) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_UMIT_HEAD_WRITE_INDEX);
-  Line := CardToLine(Card, Cast);
-  Write(Index, Line);
-end;
-
-function TFitsUmitHead.IndexOf(const Keyword: string; StartIndex: Integer = 0): Integer;
-var
-  I: Integer;
-  lOffset: Int64;
-  Key: string;
+  LStart, LIndex: Integer;
 begin
   Result := -1;
-  if StartIndex < 0 then
-    Exit;
-  lOffset := Offset;
-  Key := DeLaFitsString.Blank(cSizeKeyword);
-  for I := StartIndex to Count - 1 do
+  LStart := Abs(AScope);
+  CheckLines('index', [LStart], ERROR_ITEMHEAD_LINEINDEXOFKEYWORDS);
+  if AScope >= 0 then
   begin
-    FUmit.Container.Content.ReadString(lOffset + Int64(I) * cSizeLine, cSizeKeyword, Key);
-    if SameText(Trim(Key), Keyword) then
-    begin
-      Result := I;
-      Break;
-    end;
+    for LIndex := LStart to GetLineCount - 1 do
+      if MatchText(GetLineKeywordBy(LIndex), AKeywords) then
+      begin
+        Result := LIndex;
+        Break;
+      end;
+  end else
+  begin
+    for LIndex := LStart downto 0 do
+      if MatchText(GetLineKeywordBy(LIndex), AKeywords) then
+      begin
+        Result := LIndex;
+        Break;
+      end;
   end;
 end;
 
-function TFitsUmitHead.IndexOfLastNaxes: Integer;
+function TFitsItemHead.LineIndexOfLastAxis: Integer;
 var
-  I, N, Res: Integer;
-  Key: string;
+  LAxesCount, LNumber, LIndex: Integer;
+  LLine, LKeyword, LAxesKeyword: string;
+  LRecord: TLineRecord;
+  LContent: TFitsContent;
 begin
-  Result := IndexOf(cNAXIS);
+  Result := LineIndexOfKeyword(cNAXIS);
   if Result >= 0 then
   begin
-    N := ValuesInteger[Result];
-    for I := N downto 1 do
+    LContent := FItem.Container.Content;
+    // Get NAXIS value
+    LLine := '';
+    LContent.ReadString(GetLineOffset(Result), cSizeLine, {var} LLine);
+    LRecord := LineToRecord(LLine);
+    LAxesCount := StringToInteger(LRecord.Value);
+    // Find keyword NAXISn
+    LKeyword := '';
+    for LIndex := GetLineCount - 1 downto 1 do
     begin
-      Key := Format(cNAXISn, [I]);
-      Res := IndexOf(Key);
-      if Res >= 0 then
+      LKeyword := GetLineKeywordBy(LIndex);
+      for LNumber := LAxesCount downto 1 do
       begin
-        Result := Res;
-        Break;
+        LAxesKeyword := Format(cNAXISn, [LNumber]);
+        if SameText(LKeyword, LAxesKeyword) then
+        begin
+          Result := LIndex;
+          Exit;
+        end;
       end;
     end;
   end;
 end;
 
-function TFitsUmitHead.Add(const Line: string): Integer;
-begin
-  Result := Count - 1;
-  Insert(Result, Line);
-end;
-
-function TFitsUmitHead.Add(const Card: TCard; Cast: Integer): Integer;
+function TFitsItemHead.ExtractLineKeywords: TKeywordDynArray;
 var
-  Line: string;
+  LIndex: Integer;
 begin
-  Line := CardToLine(Card, Cast);
-  Result := Add(Line);
+  Result := nil;
+  SetLength(Result, GetLineCount);
+  for LIndex := 0 to Length(Result) - 1 do
+    Result[LIndex] := GetLineKeywordBy(LIndex);
 end;
 
-function TFitsUmitHead.AddChars(Keyword, Value, Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastChars);
-end;
-
-function TFitsUmitHead.AddString(Keyword, Value, Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastString);
-end;
-
-function TFitsUmitHead.AddText(Keyword, Value: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, False, Value, False, ''), cCastText);
-end;
-
-function TFitsUmitHead.AddHistory(Value: string): Integer;
-begin
-  Result := AddText(cHISTORY, Value);
-end;
-
-function TFitsUmitHead.AddComment(Value: string): Integer;
-begin
-  Result := AddText(cCOMMENT, Value);
-end;
-
-function TFitsUmitHead.AddBlank: Integer;
-begin
-  Result := Add(cChrBlank);
-end;
-
-function TFitsUmitHead.AddBoolean(Keyword: string; Value: Boolean; Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastBoolean);
-end;
-
-function TFitsUmitHead.AddInteger(Keyword: string; Value: Int64; Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastInteger);
-end;
-
-function TFitsUmitHead.AddFloat(Keyword: string; Value: Extended; Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastFloat);
-end;
-
-function TFitsUmitHead.AddRa(Keyword: string; Value: Extended; Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastRa);
-end;
-
-function TFitsUmitHead.AddDe(Keyword: string; Value: Extended; Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastDe);
-end;
-
-function TFitsUmitHead.AddDateTime(Keyword: string; Value: TDateTime; Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastDateTime);
-end;
-
-function TFitsUmitHead.AddDate(Keyword: string; Value: TDateTime; Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastDate);
-end;
-
-function TFitsUmitHead.AddTime(Keyword: string; Value: TDateTime; Note: string): Integer;
-begin
-  Result := Add(ToCard(Keyword, True, Value, Note <> '', Note), cCastTime);
-end;
-
-procedure TFitsUmitHead.Insert(Index: Integer; Line: string);
+procedure TFitsItemHead.CheckCard(const ACheck: string; const AArgs: array of const; ACodeError: Integer);
 var
-  lOffset, lCount, lShiftCount: Int64;
-  lStock, lGrow: Int64;
+  LArgStart, LArgCount, LLineCount, LSize: Integer;
+  LArgString: string;
 begin
-  if (Index < 0) or (Index >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_UMIT_HEAD_INSERT_INDEX);
-  if Line = '' then
-    Exit;
-  // get offset and size a new block for write
-  lCount := CeilToRank(Length(Line), cSizeLine);
-  lOffset := Offset + Int64(Index) * cSizeLine;
-  Line := AlignStrict(Line, -lCount);
-  // get size a block for shift
-  lShiftCount := (Count - Int64(Index)) * cSizeLine;
-  // get real stock size after END
-  lStock := Size - Cize;
-  if lCount > lStock then
+  if ACheck = 'cursor' then
   begin
-    lGrow := lCount - lStock;
-    lGrow := CeilToRank(lGrow, cSizeBlock);
-    FUmit.Container.Content.Resize(Offset + Size, lGrow);
-    FUmit.Container.Content.Fill(Offset + Size, lGrow, cChrBlank);
-    FSize := FSize + lGrow;
-  end;
-  FUmit.Container.Content.Shift(lOffset, lShiftCount, lCount);
-  FUmit.Container.Content.WriteString(lOffset, lCount, Line);
+    LArgStart := AArgs[0].VInteger;
+    LArgCount := AArgs[1].VInteger;
+    LLineCount := GetLineCount;
+    if not InSegmentBound({ASegmentPosition:} 0, LLineCount, LArgStart, LArgCount) then
+      Error(SHeadCardCursorOutBounds, [LArgStart, LArgCount, LLineCount], ACodeError);
+  end else
+  if ACheck = 'cursor.inner' then
+  begin
+    LArgStart := AArgs[0].VInteger;
+    LArgCount := AArgs[1].VInteger;
+    LLineCount := GetLineCount;
+    if not InSegmentBound({ASegmentPosition:} 0, LLineCount, LArgStart, LArgCount) then
+      Error(SHeadCardCursorOutBounds, [LArgStart, LArgCount, LLineCount], ACodeError);
+    if (LArgStart + LArgCount) = LLineCount then
+      Error(SHeadCardCursorAtLowerBound, [LArgStart, LArgCount, LLineCount], ACodeError);
+  end else
+  if ACheck = 'content' then
+  begin
+    LArgString := string(AArgs[0].VWideString);
+    if ExistsKeyword(LArgString, cEND) then
+      Error(SHeadLineCannotChanged, [cEND], ACodeError);
+    LSize := Length(LArgString);
+    if (LSize < cSizeLine) or ((LSize mod cSizeLine) <> 0) then
+      Error(SCardInvalidMultiSize, [LSize], ACodeError);
+    if CardTypeOf(LArgString) = cardUnknown then
+      Error(SCardInvalidContent, [LArgString], ACodeError);
+  end else
+    Assert(False, SAssertionFailureArgs(AArgs));
 end;
 
-procedure TFitsUmitHead.Insert(Index: Integer; const Card: TCard; Cast: Integer);
+function TFitsItemHead.LookupCard(ALineSeed: Integer): TCardSpot;
+{ TODO -cTFitsItemHeader : process the orphaned "CONTINUE" keyword records similar to a "COMMENT" keyword records (as multi-line) }
+{ TODO -cTFitsItemHeader : add support for the keyword "INHERIT" }
 var
-  Line: string;
+  LKeyword, LMainKeyword: string;
+  LIndex, LStart, LCount: Integer;
 begin
-  if (Index < 0) or (Index >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_UMIT_HEAD_INSERT_INDEX);
-  Line := CardToLine(Card, Cast);
-  Insert(Index, Line);
-end;
-
-procedure TFitsUmitHead.InsertChars(Index: Integer; Keyword: string; Value: string; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastChars);
-end;
-
-procedure TFitsUmitHead.InsertString(Index: Integer; Keyword: string; Value: string; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastString);
-end;
-
-procedure TFitsUmitHead.InsertText(Index: Integer; Keyword: string; Value: string);
-begin
-  Insert(Index, ToCard(Keyword, False, Value, False, ''), cCastText);
-end;
-
-procedure TFitsUmitHead.InsertHistory(Index: Integer; Value: string);
-begin
-  InsertText(Index, cHISTORY, Value);
-end;
-
-procedure TFitsUmitHead.InsertComment(Index: Integer; Value: string);
-begin
-  InsertText(Index, cCOMMENT, Value);
-end;
-
-procedure TFitsUmitHead.InsertBlank(Index: Integer);
-begin
-  Insert(Index, cChrBlank);
-end;
-
-procedure TFitsUmitHead.InsertBoolean(Index: Integer; Keyword: string; Value: Boolean; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastBoolean);
-end;
-
-procedure TFitsUmitHead.InsertInteger(Index: Integer; Keyword: string; Value: Int64; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastInteger);
-end;
-
-procedure TFitsUmitHead.InsertFloat(Index: Integer; Keyword: string; Value: Extended; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastFloat);
-end;
-
-procedure TFitsUmitHead.InsertRa(Index: Integer; Keyword: string; Value: Extended; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastRa);
-end;
-
-procedure TFitsUmitHead.InsertDe(Index: Integer; Keyword: string; Value: Extended; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastDe);
-end;
-
-procedure TFitsUmitHead.InsertDateTime(Index: Integer; Keyword: string; Value: TDateTime; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastDateTime);
-end;
-
-procedure TFitsUmitHead.InsertDate(Index: Integer; Keyword: string; Value: TDateTime; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastDate);
-end;
-
-procedure TFitsUmitHead.InsertTime(Index: Integer; Keyword: string; Value: TDateTime; Note: string);
-begin
-  Insert(Index, ToCard(Keyword, True, Value, Note <> '', Note), cCastTime);
-end;
-
-function TFitsUmitHead.AppendString(Keyword, Value, Note: string; HopIndex: Integer = -1): Integer;
-begin
-  Result := IndexOf(Keyword);
-  if Result >= 0 then
-  begin
-    ValuesString[Result] := Value;
-    Exit;
+  LStart := ALineSeed;
+  LCount := 1;
+  LKeyword := '';
+  LMainKeyword := '';
+  case LineTypeOf(GetLineBy(ALineSeed), {out} LMainKeyword) of
+    lineContinuedStart:
+      begin
+        for LIndex := ALineSeed + 1 to GetLineCount - 1 do
+          case LineTypeOf(GetLineBy(LIndex), {out} LKeyword) of
+            lineContinuedChain:
+              Inc(LCount);
+            lineContinuedFinal:
+              begin
+                Inc(LCount);
+                Break;
+              end;
+          else
+            Break;
+          end;
+      end;
+    lineContinuedChain:
+      begin
+        for LIndex := ALineSeed - 1 downto 0 do
+          case LineTypeOf(GetLineBy(LIndex), {out} LKeyword) of
+            lineContinuedStart:
+              begin
+                Dec(LStart);
+                Inc(LCount);
+                Break;
+              end;
+            lineContinuedChain:
+              begin
+                Dec(LStart);
+                Inc(LCount);
+                if LIndex = 0 then
+                begin
+                  LStart := ALineSeed;
+                  LCount := 1;
+                end;
+              end;
+          else
+            LStart := ALineSeed;
+            LCount := 1;
+            Break;
+          end;
+        if LCount > 1 then
+          for LIndex := ALineSeed + 1 to GetLineCount - 1 do
+            case LineTypeOf(GetLineBy(LIndex), {out} LKeyword) of
+              lineContinuedChain:
+                Inc(LCount);
+              lineContinuedFinal:
+                begin
+                  Inc(LCount);
+                  Break;
+                end;
+            else
+              Break;
+            end;
+      end;
+    lineContinuedFinal:
+      begin
+        for LIndex := ALineSeed - 1 downto 0 do
+          case LineTypeOf(GetLineBy(LIndex), {out} LKeyword) of
+            lineContinuedStart:
+              begin
+                Dec(LStart);
+                Inc(LCount);
+                Break;
+              end;
+            lineContinuedChain:
+              begin
+                Dec(LStart);
+                Inc(LCount);
+                if LIndex = 0 then
+                begin
+                  LStart := ALineSeed;
+                  LCount := 1;
+                end;
+              end;
+          else
+            LStart := ALineSeed;
+            LCount := 1;
+            Break;
+          end;
+      end;
+    lineGrouped:
+      begin
+        for LIndex := ALineSeed - 1 downto 0 do
+          if (LineTypeOf(GetLineBy(LIndex), {out} LKeyword) = lineGrouped) and SameText(LMainKeyword, LKeyword) then
+          begin
+            Dec(LStart);
+            Inc(LCount);
+          end else
+            Break;
+        for LIndex := ALineSeed + 1 to GetLineCount - 1 do
+          if (LineTypeOf(GetLineBy(LIndex), {out} LKeyword) = lineGrouped) and SameText(LMainKeyword, LKeyword) then
+            Inc(LCount)
+          else
+            Break;
+      end;
   end;
-  Result := HopIndex;
-  if Result >= 0 then
-  begin
-    InsertString(Result, Keyword, Value, Note);
-    Exit;
-  end;
-  Result := AddString(Keyword, Value, Note);
+  Result.Start := LStart;
+  Result.Count := LCount;
 end;
 
-function TFitsUmitHead.AppendInteger(Keyword: string; Value: Int64; Note: string; HopIndex: Integer = -1): Integer;
+function TFitsItemHead.GetCardType: TCardType;
 begin
-  Result := IndexOf(Keyword);
-  if Result >= 0 then
-  begin
-    ValuesInteger[Result] := Value;
-    Exit;
-  end;
-  Result := HopIndex;
-  if Result >= 0 then
-  begin
-    InsertInteger(Result, Keyword, Value, Note);
-    Exit;
-  end;
-  Result := AddInteger(Keyword, Value, Note);
+  Result := CardTypeOf(GetCard);
 end;
 
-function TFitsUmitHead.AppendFloat(Keyword: string; Value: Extended; Note: string; HopIndex: Integer = -1): Integer;
+function TFitsItemHead.LocateCard(const AKeyword: string; AScope: TSearchScope): Boolean;
+begin
+  Result := LocateCards([AKeyword], AScope);
+end;
+
+function TFitsItemHead.LocateCards(const AKeywords: array of string; AScope: TSearchScope): Boolean;
 var
-  wFmt: string;
+  LLineIndex, LLineStart: Integer;
+  LForward: Boolean;
 begin
-  wFmt := FormatLine^.vaFloat.wFmt;
-  FormatLine^.vaFloat.wFmt := '%e';
+  LLineStart := 0;
+  LForward := True;
+  case AScope of
+    searchFirstForward :
+      begin
+        LLineStart := 0;
+        LForward := True;
+      end;
+    searchLastBackward:
+      begin
+        LLineStart := GetLineCount - 1;
+        LForward := False;
+      end;
+    searchNextForward:
+      begin
+        CheckCard('cursor', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_LOCATECARDS_NEXT);
+        LLineStart := FCardCursor.Start + FCardCursor.Count;
+        LForward := True;
+      end;
+    searchPriorBackward:
+      begin
+        CheckCard('cursor', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_LOCATECARDS_PRIOR);
+        LLineStart := FCardCursor.Start - 1;
+        LForward := False;
+      end;
+  end;
+  Result := False;
+  case LForward of
+    True:
+      for LLineIndex := LLineStart to GetLineCount - 1 do
+        if MatchText(GetLineKeywordBy(LLineIndex), AKeywords) then
+        begin
+          FCardCursor := LookupCard(LLineIndex);
+          Result := True;
+          Break;
+        end;
+    False:
+      for LLineIndex := LLineStart downto 0 do
+        if MatchText(GetLineKeywordBy(LLineIndex), AKeywords) then
+        begin
+          FCardCursor := LookupCard(LLineIndex);
+          Result := True;
+          Break;
+        end;
+  end;
+end;
+
+function TFitsItemHead.FirstCard: Boolean;
+begin
+  if GetLineCount > 0 then
+  begin
+    FCardCursor := LookupCard({ALineSeed:} 0);
+    Result := True;
+  end else
+  begin
+    FCardCursor := cCardSpotNull;
+    Result := False;
+  end;
+end;
+
+function TFitsItemHead.LastCard: Boolean;
+begin
+  if GetLineCount > 0 then
+  begin
+    FCardCursor := LookupCard({ALineSeed:} GetLineCount - 1);
+    Result := True;
+  end else
+  begin
+    FCardCursor := cCardSpotNull;
+    Result := False;
+  end;
+end;
+
+function TFitsItemHead.NextCard: Boolean;
+var
+  LLineSeed: Integer;
+begin
+  CheckCard('cursor', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_NEXTCARD);
+  LLineSeed := FCardCursor.Start + FCardCursor.Count;
+  if LLineSeed < GetLineCount then
+  begin
+    FCardCursor := LookupCard(LLineSeed);
+    Result := True;
+  end else
+    Result := False;
+end;
+
+function TFitsItemHead.PriorCard: Boolean;
+var
+  LLineSeed: Integer;
+begin
+  CheckCard('cursor', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_PRIORCARD);
+  LLineSeed := FCardCursor.Start - 1;
+  if LLineSeed >= 0 then
+  begin
+    FCardCursor := LookupCard(LLineSeed);
+    Result := True;
+  end else
+    Result := False;
+end;
+
+function TFitsItemHead.GotoCard(ALineSeed: Integer): Boolean;
+var
+  LLineSeed, LLineCount: Integer;
+begin
+  LLineCount := GetLineCount;
+  if LLineCount > 0 then
+  begin
+    LLineSeed := EnsureRange(ALineSeed, 0, LLineCount - 1);
+    FCardCursor := LookupCard(LLineSeed);
+    Result := True;
+  end else
+  begin
+    FCardCursor := cCardSpotNull;
+    Result := False;
+  end;
+end;
+
+procedure TFitsItemHead.MoveCard(ADistance: Integer);
+var
+  LLineSeed, LDistance: Integer;
+  LNewSpot: TCardSpot;
+begin
+  CheckCard('cursor.inner', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_MOVECARD_CURSPOT);
+  // Get a new position at a distance of "ADistance" cards from the current one
+  LNewSpot := FCardCursor;
+  if ADistance > 0 then
+  begin
+    LDistance := ADistance;
+    while LDistance > 0 do
+    begin
+      LLineSeed := LNewSpot.Start + LNewSpot.Count;
+      if LLineSeed > (GetLineCount - 1) then
+      begin
+        LNewSpot.Start := LLineSeed;
+        LNewSpot.Count := 0;
+        Break;
+      end;
+      LNewSpot := LookupCard(LLineSeed);
+      Dec(LDistance);
+    end;
+  end else
+  if ADistance < 0 then
+  begin
+    LDistance := abs(ADistance);
+    while LDistance > 0 do
+    begin
+      LLineSeed := LNewSpot.Start - 1;
+      if LLineSeed < 0 then
+      begin
+        LNewSpot.Start := LLineSeed;
+        LNewSpot.Count := 0;
+        Break;
+      end;
+      LNewSpot := LookupCard(LLineSeed);
+      Dec(LDistance);
+    end;
+  end;
+  CheckCard('cursor.inner', [LNewSpot.Start, LNewSpot.Count], ERROR_ITEMHEAD_MOVECARD_NEWSPOT);
+  // Move
+  MoveLinesBy(FCardCursor.Start, FCardCursor.Count, {var} LNewSpot.Start, LNewSpot.Count);
+  FCardCursor := LookupCard({ALineSeed:} LNewSpot.Start);
+end;
+
+procedure TFitsItemHead.EraseCard;
+begin
+  CheckCard('cursor.inner', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_ERASECARD);
+  if FCardCursor.Count > 1 then
+    DeleteLinesBy(FCardCursor.Start + 1, FCardCursor.Count - 1);
+  EraseLinesBy(FCardCursor.Start, {ACount:} 1);
+  FCardCursor := LookupCard(FCardCursor.Start);
+end;
+
+procedure TFitsItemHead.DeleteCard;
+begin
+  CheckCard('cursor.inner', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_DELETECARD);
+  DeleteLinesBy(FCardCursor.Start, FCardCursor.Count);
+  FCardCursor := LookupCard(FCardCursor.Start);
+end;
+
+procedure TFitsItemHead.InsertCard(const ACard: string);
+begin
+  CheckCard('cursor', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_INSERTCARD_CURSOR);
+  CheckCard('content', [ACard], ERROR_ITEMHEAD_INSERTCARD_CONTENT);
+  InsertLinesBy(FCardCursor.Start, ACard);
+  FCardCursor := LookupCard(FCardCursor.Start);
+end;
+
+procedure TFitsItemHead.AddCardBy(const ACard: string);
+var
+  LLineSeed: Integer;
+begin
+  LLineSeed := GetLineCount - 1;
+  if LLineSeed > 0 then
+  begin
+    InsertLinesBy(LLineSeed, ACard);
+    FCardCursor := LookupCard(LLineSeed);
+  end;
+end;
+
+procedure TFitsItemHead.AddCardBy(const AKeyword, AValue: string);
+var
+  LCard: TFitsGroupCard;
+begin
+  LCard := TFitsGroupCard.Create;
   try
-    Result := IndexOf(Keyword);
-    if Result >= 0 then
-    begin
-      ValuesFloat[Result] := Value;
-      Exit;
-    end;
-    Result := HopIndex;
-    if Result >= 0 then
-    begin
-      InsertFloat(Result, Keyword, Value, Note);
-      Exit;
-    end;
-    Result := AddFloat(Keyword, Value, Note);
+    LCard.Encode(AKeyword, AValue);
+    AddCardBy(LCard.Card);
   finally
-     FormatLine^.vaFloat.wFmt := wFmt;
+    LCard.Free;
   end;
 end;
 
-procedure TFitsUmitHead.Delete(AIndex, ACount: Integer);
-var
-  Offset1, Count1, Offset2, Count2, Offset3, Count3: Int64;
+procedure TFitsItemHead.AddCard(const ACard: string);
 begin
-  if (AIndex < 0) or (AIndex >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [AIndex], ERROR_UMIT_HEAD_DELETE_INDEX);
-  if (ACount < 0) or ((AIndex + ACount) > Count) then
-    raise EFitsClassesException.CreateFmt(SCountValueOutBounds, [ACount], ERROR_UMIT_HEAD_DELETE_COUNT);
-  if ACount = 0 then
-    Exit;
-  // |block1-block2-block3-...|
-  // ~ block2 candidate on remove
-  Offset1 := Offset;
-  Count1  := Int64(AIndex) * cSizeLine;
-  Offset2 := Offset1 + Count1;
-  Count2  := Int64(ACount) * cSizeLine;
-  Offset3 := Offset2 + Count2;
-  Count3  := Cize - (Count1 + Count2);
-  // shift block3
-  FUmit.Container.Content.Shift(Offset3, Count3, -Count2);
-  // |block1-block2|
-  // ~ block2 ~ candidate on reduction
-  Offset1 := Offset;
-  Count1  := Count1 + Count3;
-  Offset2 := Offset1 + Count1;
-  Count2  := Size - Count1;
-  // expand block1
-  Offset1 := Offset2;
-  Count1  := CeilToRank(Count1, cSizeBlock) - Count1;
-  FUmit.Container.Content.Fill(Offset1, Count1, cChrBlank);
-  // reduction block2
-  Offset2 := Offset2 - Count1;
-  Count2  := Count2 - Count1;
-  if Count2 > 0 then
+  CheckCard('content', [ACard], ERROR_ITEMHEAD_ADDCARD);
+  AddCardBy(ACard);
+end;
+
+procedure TFitsItemHead.AddComment(const AValue: string);
+begin
+  AddCardBy(cCOMMENT, AValue);
+end;
+
+procedure TFitsItemHead.AddHistory(const AValue: string);
+begin
+  AddCardBy(cHISTORY, AValue);
+end;
+
+function TFitsItemHead.GetCard: string;
+begin
+  CheckCard('cursor', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_GETCARD);
+  Result := '';
+  ReadLinesBy(FCardCursor.Start, FCardCursor.Count, {var} Result);
+end;
+
+procedure TFitsItemHead.SetCard(const ACard: string);
+var
+  LCardCount: Integer;
+begin
+  CheckCard('cursor.inner', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_SETCARD_CURSOR);
+  CheckCard('content', [ACard], ERROR_ITEMHEAD_SETCARD_CONTENT);
+  LCardCount := Length(ACard) div cSizeLine;
+  if LCardCount > FCardCursor.Count then
+    InsertLinesBy(FCardCursor.Start, BlankString((LCardCount - FCardCursor.Count) * cSizeLine));
+  if LCardCount < FCardCursor.Count then
+    DeleteLinesBy(FCardCursor.Start, FCardCursor.Count - LCardCount);
+  WriteLinesBy(FCardCursor.Start, ACard);
+  FCardCursor := LookupCard(FCardCursor.Start);
+end;
+
+function TFitsItemHead.GetCardKeyword: string;
+begin
+  CheckCard('cursor', [FCardCursor.Start, FCardCursor.Count], ERROR_ITEMHEAD_GETCARDKEYWORD);
+  Result := GetLineKeywordBy(FCardCursor.Start);
+end;
+
+function TFitsItemHead.ExtractCardKeywords: TKeywordDynArray;
+var
+  LCount, LLineSeed, LLineCount: Integer;
+  LSpot: TCardSpot;
+begin
+  LCount := 0;
+  LLineSeed := 0;
+  LLineCount := GetLineCount;
+  Result := nil;
+  SetLength(Result, LLineCount);
+  while LLineSeed < LLineCount do
   begin
-    FUmit.Container.Content.Resize(Offset2, -Count2);
-    FSize := FSize - Count2;
+    LSpot := LookupCard(LLineSeed);
+    LLineSeed := LSpot.Start + LSpot.Count;
+    Result[LCount] := GetLineKeywordBy(LSpot.Start);
+    Inc(LCount);
   end;
+  SetLength(Result, LCount);
 end;
 
-procedure TFitsUmitHead.Delete(const Keys: array of string);
+{ EFitsItemDataException }
+
+function EFitsItemDataException.GetTopic: string;
+begin
+  Result := 'ITEMDATA';
+end;
+
+{ TFitsItemData }
+
+procedure TFitsItemData.Init;
+begin
+  inherited;
+  FInternalSize := cInternalSizeNull;
+end;
+
+function TFitsItemData.GetExceptionClass: EFitsExceptionClass;
+begin
+  Result := EFitsItemDataException;
+end;
+
+procedure TFitsItemData.Bind(AItem: TFitsItem);
+begin
+  if not Assigned(AItem) then
+    Error(SItemNotAssigned, ERROR_ITEMDATA_BIND_NO_ITEM);
+  if AItem.Container.FItemsCursor < 0 then
+    Error(SContainerNotControlBind, ERROR_ITEMDATA_BIND_NO_INSPECT);
+  if not Assigned(AItem.Head) then
+    Error(SHeadNotAssigned, ERROR_ITEMDATA_BIND_NO_HEAD);
+  FItem := AItem;
+  FItem.FData := Self;
+end;
+
+procedure TFitsItemData.UnBind;
+begin
+  if Assigned(FItem) then
+    FItem.FData := nil;
+end;
+
+procedure TFitsItemData.Make;
 var
-  I, N, lCount: Integer;
-  Key: string;
+  LEstimateSize, LSize: Int64;
+  LIsCorrectSize: Boolean;
 begin
-  I := 0;
-  N := Count;
-  lCount := 0;
-  Key := DeLaFitsString.Blank(cSizeKeyword);
-  while I < N do
-  begin
-    FUmit.Container.Content.ReadString(Offset + Int64(I) * cSizeLine, cSizeKeyword, Key);
-    if MatchIndex(Trim(Key), Keys) >= 0 then
-    begin
-      Inc(lCount);
-      Inc(I);
-    end
-    else if lCount > 0 then
-    begin
-      Dec(I, lCount);
-      Dec(N, lCount);
-      Delete(I, lCount);
-      lCount := 0;
-    end
-    else
-      Inc(I);
-  end;
-end;
-
-procedure TFitsUmitHead.Exchange(Index1, Index2: Integer);
-var
-  lOffset1, lOffset2: Int64;
-begin
-  if (Index1 < 0) or (Index1 >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index1], ERROR_UMIT_HEAD_EXCHANGE_INDEX);
-  if (Index2 < 0) or (Index2 >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index2], ERROR_UMIT_HEAD_EXCHANGE_INDEX);
-  if Index1 = Index2 then
-    Exit;
-  lOffset1 := Offset + Int64(Index1) * cSizeLine;
-  lOffset2 := Offset + Int64(Index2) * cSizeLine;
-  FUmit.Container.Content.Exchange(lOffset1, cSizeLine, lOffset2, cSizeLine);
-end;
-
-procedure TFitsUmitHead.Move(CurIndex, NewIndex: Integer);
-var
-  lCurOffset, lNewOffset: Int64;
-begin
-  if (CurIndex < 0) or (CurIndex >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [CurIndex], ERROR_UMIT_HEAD_MOVE_INDEX);
-  if (NewIndex < 0) or (NewIndex >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [NewIndex], ERROR_UMIT_HEAD_MOVE_INDEX);
-  if CurIndex = NewIndex then
-    Exit;
-  lCurOffset := Offset + Int64(CurIndex) * cSizeLine;
-  lNewOffset := Offset + Int64(NewIndex) * cSizeLine;
-  if CurIndex < NewIndex then
-    lNewOffset := lNewOffset + cSizeLine - 1;
-  FUmit.Container.Content.Move(lCurOffset, cSizeLine, lNewOffset);
-end;
-
-{ TFitsUmitData }
-
-procedure TFitsUmitData.Bind(AUmit: TFitsUmit);
-begin
-  if not Assigned(AUmit) then
-    raise EFitsClassesException.Create(SUmitNotAssign, ERROR_UMIT_DATA_BIND_ASSIGN);
-  if not AUmit.Container.FInspect then
-    raise EFitsClassesException.Create(SBindNoInspect, ERROR_UMIT_DATA_BIND_INSPECT);
-  if not Assigned(AUmit.Head) then
-    raise EFitsClassesException.Create(SHeadNotAssign, ERROR_UMIT_DATA_BIND_NOHEAD);
-  FUmit := AUmit;
-  FUmit.FData := Self;
-end;
-
-procedure TFitsUmitData.MakeExplorer(APioneer: Boolean);
-var
-  DeclareSize: Int64;
-  EstimateSize: Int64;
-  CorrectSize: Boolean;
-begin
-  // compute and set a data size
-  DeclareSize := ZeroToRank(Cize, cSizeBlock);
-  EstimateSize := FUmit.GetEstimateSize - FUmit.Head.Size;
-  if APioneer then
-    CorrectSize := DeclareSize <= EstimateSize
+  // Get the available size for the data section
+  LEstimateSize := FItem.GetEstimateSize - FItem.Head.Size;
+  // Get the required size of the data section
+  LSize := EnsureMultiply(GetInternalSize, cSizeBlock, {ARetainZeroValue:} True);
+  // Check content size
+  if FItem.Index = (FItem.Container.Count - 1) then
+    LIsCorrectSize := LSize <= LEstimateSize // last item
   else
-    CorrectSize := DeclareSize = EstimateSize;
-  if not CorrectSize then
-    raise EFitsClassesException.CreateFmt(SDataIncorrectSize, [FUmit.Index, DeclareSize], ERROR_UMIT_DATA_MAKE_SIZE);
-  FSize := DeclareSize;
+    LIsCorrectSize := LSize = LEstimateSize; // not last item
+  if not LIsCorrectSize then
+    Error(SItemNotMatchRecognizedSize, [FItem.Index, LEstimateSize, LSize],
+      ERROR_ITEMDATA_MAKE_RECOGNIZED_SIZE);
+  FSize := LSize;
 end;
 
-procedure TFitsUmitData.MakeNewcomer(ASpec: TFitsUmitSpec);
+procedure TFitsItemData.MakeNew;
+var
+  LOffset, LEstimateSize, LSize: Int64;
+  LContent: TFitsContent;
 begin
-  // suppress hint
+  LOffset := GetOffset;
+  LContent := FItem.Container.Content;
+  // Get the available size for the new data section
+  LEstimateSize := FItem.GetEstimateSize - FItem.Head.Size;
+  // Get the required size of the new data section
+  LSize := EnsureMultiply(GetInternalSize, cSizeBlock, {ARetainZeroValue:} True);
+  // Prepare the content of the new data section
+  if LSize > LEstimateSize then
+    LContent.Resize(LOffset + LEstimateSize, LSize - LEstimateSize);
+  if LSize > 0 then
+    LContent.Fill(LOffset, LSize, {AChar:} Filler);
+  FSize := LSize;
+end;
+
+procedure TFitsItemData.Customize;
+begin
+  // Do nothing
+end;
+
+procedure TFitsItemData.CustomizeNew(ASpec: TFitsItemSpec);
+begin
+  // Specification not used
   if Assigned(ASpec) then
     ;
-  // presize ~ 0
-  FSize := FUmit.GetEstimateSize - FUmit.Head.Size;
 end;
 
-function TFitsUmitData.GetOffset: Int64;
+function TFitsItemData.GetOffset: Int64;
 begin
-  Result := FUmit.Head.Offset + FUmit.Head.Size;
+  Result := FItem.Head.Offset + FItem.Head.Size;
 end;
 
-function TFitsUmitData.GetPcount: Integer;
-begin
-  Result := FUmit.PCOUNT;
-end;
-
-function TFitsUmitData.GetAxes(Index: Integer): Integer;
-begin
-  Result := FUmit.NAXES[Index + 1];
-end;
-
-function TFitsUmitData.GetAxis: Integer;
-begin
-  Result := FUmit.NAXIS;
-end;
-
-function TFitsUmitData.GetBitPix: TBitPix;
-begin
-  Result := IntToBitPix(FUmit.BITPIX);
-end;
-
-function TFitsUmitData.GetSizPix: Byte;
-begin
-  Result := BitPixSize(FUmit.BITPIX);
-end;
-
-function TFitsUmitData.GetCize: Int64;
+function TFitsItemData.ExtractInternalSize: Int64;
 var
-  I: Integer;
-  lAxes: array of Integer;
+  LNumber, LAxesCount: Integer;
 begin
-
-  if Axis = 0 then
+  // [FITS_STANDARD_4.0, SECT_4.4.1.1] Primary header ... The total number of
+  // bits in the primary data array, exclusive of fill that is needed after the
+  // data to complete the last 2880-byte data block, is given by the following
+  // expression: Nbits = |BITPIX| * (NAXIS1 * NAXIS2 * ...)
+  // +
+  // [FITS_STANDARD_4.0, SECT_4.4.1.2] Conforming extensions ... The total number
+  // of bits in the extension data array (exclusive of fill that is needed after
+  // the data to complete the last 2880-byte data block) is given by the following
+  // expression: Nbits = |BITPIX| * GCOUNT * (PCOUNT + NAXIS1 * NAXIS2 * ...)
+  // +
+  // [FITS_STANDARD_4.0, SECT_6.1.1] Random-groups structure ... The total
+  // number of bits in the random-groups records is given by the following
+  // expression: Nbits = |BITPIX| * GCOUNT * (PCOUNT + NAXIS2 * NAXIS3 * ...)
+  LAxesCount := GetAxesCount;
+  if LAxesCount > 0 then
   begin
+    // [FITS_STANDARD_4.0, SECT_6.1.1] Random-groups structure ... NAXIS1 keyword.
+    // The value field shall contain the integer 0, a signature of random-groups
+    // format indicating that there is no primary data array
+    Result := AxesLength[1];
+    if Result = 0 then
+      Result := 1;
+    for LNumber := 2 to LAxesCount do
+      Result := Result * AxesLength[LNumber];
+  end else
+  // if LAxesCount = 0 then
     Result := 0;
-    Exit;
-  end;
-
-  lAxes := nil;
-  try
-    SetLength(lAxes, Axis);
-    for I := 0 to Axis - 1 do
-      lAxes[I] := Axes[I];
-    // NAXIS1 can be zero value for random groups structure
-    if lAxes[0] = 0 then
-      lAxes[0] := 1;
-    // The FITS Standard (version 4.0), 4.4.1.2. "Conforming extensions", page 12
-    // Nbits = |BITPIX|  * GCOUNT * (PCOUNT + NAXIS1 * NAXIS2 * ...)
-    Result := 1;
-    for I := 0 to Axis - 1 do
-      Result := Result * Int64(lAxes[I]);
-    Result := Int64(SizPix) * Int64(Gcount) * (Int64(Pcount) + Result);
-  finally
-    lAxes := nil;
-  end;
-
+  Result := Int64(PixelSize) * Int64(GCount) * (Int64(PCount) + Result);
 end;
 
-function TFitsUmitData.GetGcount: Integer;
+function TFitsItemData.GetInternalSize: Int64;
 begin
-  Result := FUmit.GCOUNT;
+  if FInternalSize = cInternalSizeNull then
+    FInternalSize := ExtractInternalSize;
+  Result := FInternalSize;
 end;
 
-procedure TFitsUmitData.Init;
+procedure TFitsItemData.SetSize(const ASize: Int64);
 begin
-  FUmit := nil;
-  FSize := 0;
+  FSize := TSnippet.Make(Self).Ensure(ASize);
 end;
 
-constructor TFitsUmitData.CreateExplorer(AUmit: TFitsUmit; APioneer: Boolean);
+function TFitsItemData.GetBitPix: TBitPix;
 begin
-  inherited Create;
-  Init;
-  Bind(AUmit);
-  MakeExplorer(APioneer);
+  Result := FItem.GetBITPIX;
 end;
 
-constructor TFitsUmitData.CreateNewcomer(AUmit: TFitsUmit; ASpec: TFitsUmitSpec);
+function TFitsItemData.GetAxesCount: Integer;
 begin
-  inherited Create;
-  Init;
-  Bind(AUmit);
-  MakeNewcomer(ASpec);
+  Result := FItem.GetNAXIS;
 end;
 
-procedure TFitsUmitData.BeforeDestruction;
+function TFitsItemData.GetAxesLength(ANumber: Integer): Integer;
 begin
-  if not FUmit.Container.FInspect then
-    raise EFitsClassesException.CreateFmt(SFreeNoInspect, [FUmit.Index], ERROR_UMIT_DATA_FREE_INSPECT);
-  inherited;
+  Result := FItem.GetNAXES(ANumber);
 end;
 
-destructor TFitsUmitData.Destroy;
+function TFitsItemData.GetPCount: Integer;
 begin
-  FUmit := nil;
-  inherited;
+  Result := FItem.GetPCOUNT;
 end;
 
-function TFitsUmitData.Filler: Char;
+function TFitsItemData.GetGCount: Integer;
+begin
+  Result := FItem.GetGCOUNT;
+end;
+
+function TFitsItemData.GetPixelSize: Byte;
+begin
+  Result := BitPixSize(FItem.GetBITPIX);
+end;
+
+procedure TFitsItemData.Invalidate;
+begin
+  FInternalSize := cInternalSizeNull;
+end;
+
+function TFitsItemData.Filler: Char;
 begin
   Result := cChrNull;
 end;
 
-procedure TFitsUmitData.Read(const Uffset, ASize: Int64; var ABuffer);
+constructor TFitsItemData.Create(AItem: TFitsItem);
 begin
-  if not DeLaFitsMath.InContent(0, Size, Uffset, ASize) then
-    raise EFitsClassesException.CreateFmt(SDataIncorrectBounds, [FUmit.Index, Uffset, ASize], ERROR_UMIT_DATA_READ_BOUNDS);
-  FUmit.Container.Content.Read(Offset + Uffset, ASize, ABuffer);
+  inherited Create;
+  Bind(AItem);
+  Make;
+  Customize;
 end;
 
-procedure TFitsUmitData.Write(const Uffset, ASize: Int64; const ABuffer);
+constructor TFitsItemData.CreateNew(AItem: TFitsItem; ASpec: TFitsItemSpec);
 begin
-  if not DeLaFitsMath.InContent(0, Size, Uffset, ASize) then
-    raise EFitsClassesException.CreateFmt(SDataIncorrectBounds, [FUmit.Index, Uffset, ASize], ERROR_UMIT_DATA_WRITE_BOUNDS);
-  FUmit.Container.Content.Write(Offset + Uffset, ASize, ABuffer);
+  inherited Create;
+  Bind(AItem);
+  MakeNew;
+  CustomizeNew(ASpec);
 end;
 
-procedure TFitsUmitData.Erase(const Uffset, ASize: Int64);
+destructor TFitsItemData.Destroy;
 begin
-  if not DeLaFitsMath.InContent(0, Size, Uffset, ASize) then
-    raise EFitsClassesException.CreateFmt(SDataIncorrectBounds, [FUmit.Index, Uffset, ASize], ERROR_UMIT_DATA_ERASE_BOUNDS);
-  FUmit.Container.Content.Fill(Offset + Uffset, ASize, Filler);
+  UnBind;
+  inherited;
 end;
 
-procedure TFitsUmitData.Delete(const Uffset, ASize: Int64);
-var
-  Rank: Int64;
-
+procedure TFitsItemData.ReadChunk(const AInternalOffset, ASize: Int64; var ABuffer);
 begin
-
-  if not DeLaFitsMath.InContent(0, Size, Uffset, ASize) then
-    raise EFitsClassesException.CreateFmt(SDataIncorrectBounds, [FUmit.Index, Uffset, ASize], ERROR_UMIT_DATA_DELETE_BOUNDS);
-
-  // delete custom block
-
-  FUmit.Container.Content.Resize(Offset + Uffset, -ASize);
-  FSize := FSize - ASize;
-
-  // align content size
-
-  Rank := ZeroToRank(FSize, cSizeBlock) - FSize;
-  FUmit.Container.Content.Resize(Offset + FSize, Rank);
-  FUmit.Container.Content.Fill(Offset + FSize, Rank, Filler);
-  FSize := FSize + Rank;
-
+  TSnippet.Make(Self).Read(AInternalOffset, ASize, {var} ABuffer);
 end;
 
-procedure TFitsUmitData.Truncate(const ASize: Int64);
-var
-  lSize: Int64;
+procedure TFitsItemData.WriteChunk(const AInternalOffset, ASize: Int64; const ABuffer);
 begin
-
-  if not InRange(ASize, 0, Size) then
-    raise EFitsClassesException.CreateFmt(SDataIncorrectSize, [FUmit.Index, ASize], ERROR_UMIT_DATA_TRUNCATE_SIZE);
-
-  // truncate an integer number of blocks
-
-  lSize := (ASize div cSizeBlock) * cSizeBlock;
-  FUmit.Container.Content.Resize(Offset + (FSize - lSize), -lSize);
-  FSize := FSize - lSize;
-
-  // erase to an aligned block
-  // mod function behavior: if ASize < cSizeBlock then mod return ASize value
-
-  lSize := ASize mod cSizeBlock;
-  FUmit.Container.Content.Fill(Offset + (FSize - lSize), lSize, Filler);
-
+  TSnippet.Make(Self).Write(AInternalOffset, ASize, ABuffer);
 end;
 
-procedure TFitsUmitData.Insert(const Uffset, ASize: Int64);
-var
-  Rank: Int64;
+procedure TFitsItemData.ExchangeChunk(var AInternalOffset1: Int64; const ASize1: Int64; var AInternalOffset2: Int64; const ASize2: Int64);
 begin
-
-  if not DeLaFitsMath.InContent(0, Size, Uffset) then
-    raise EFitsClassesException.CreateFmt(SDataIncorrectUffset, [FUmit.Index, Uffset], ERROR_UMIT_DATA_ERASE_UFSSET);
-
-  if ASize < 0 then
-    raise EFitsClassesException.CreateFmt(SDataIncorrectSize, [FUmit.Index, ASize], ERROR_UMIT_DATA_ERASE_SIZE);
-
-  // insert custom block
-
-  FUmit.Container.Content.Resize(Offset + Uffset, ASize);
-  FSize := FSize + ASize;
-
-  // align content size
-
-  Rank := ZeroToRank(FSize, cSizeBlock) - FSize;
-  FUmit.Container.Content.Resize(Offset + FSize, Rank);
-  FUmit.Container.Content.Fill(Offset + FSize, Rank, Filler);
-  FSize := FSize + Rank;
-
+  TSnippet.Make(Self).Exchange({var} AInternalOffset1, ASize1, {var} AInternalOffset2, ASize2);
 end;
 
-procedure TFitsUmitData.Add(const ASize: Int64);
-var
-  lSize: Int64;
+procedure TFitsItemData.MoveChunk(const AInternalOffset, ASize: Int64; var ANewInternalOffset: Int64);
 begin
-
-  if ASize < 0 then
-    raise EFitsClassesException.CreateFmt(SDataIncorrectSize, [FUmit.Index, ASize], ERROR_UMIT_DATA_ADD_SIZE);
-
-  // added aligned block
-
-  lSize := ZeroToRank(ASize, cSizeBlock);
-  FUmit.Container.Content.Resize(Offset + FSize, lSize);
-  FSize := FSize + lSize;
-
-  // erase to an aligned block
-
-  lSize := ZeroToRank(ASize, cSizeBlock) - ASize;
-  FUmit.Container.Content.Fill(Offset + (FSize - lSize), lSize, Filler);
-
+  TSnippet.Make(Self).Move(AInternalOffset, ASize, {var} ANewInternalOffset);
 end;
 
-{ TFitsUmit }
+procedure TFitsItemData.EraseChunk(const AInternalOffset, ASize: Int64);
+begin
+  TSnippet.Make(Self).Erase(AInternalOffset, ASize);
+end;
 
-const
-  cImageXtension = 'IMAGE';
+procedure TFitsItemData.DeleteChunk(const AInternalOffset, ASize: Int64);
+begin
+  FSize := TSnippet.Make(Self).Delete(AInternalOffset, ASize);
+end;
 
-procedure TFitsUmit.Bind(AContainer: TFitsContainer);
+procedure TFitsItemData.InsertChunk(const AInternalOffset, ASize: Int64);
+begin
+  FSize := TSnippet.Make(Self).Insert(AInternalOffset, ASize);
+end;
+
+function TFitsItemData.AddChunk(const ASize: Int64): Int64;
+begin
+  FSize := TSnippet.Make(Self).Add(ASize, {out} Result);
+end;
+
+{ EFitsItemException }
+
+function EFitsItemException.GetTopic: string;
+begin
+  Result := 'ITEM';
+end;
+
+{ TFitsItem }
+
+procedure TFitsItem.Init;
+begin
+  inherited;
+  FCacheProp := TFitsPropList.Create;
+end;
+
+function TFitsItem.GetExceptionClass: EFitsExceptionClass;
+begin
+  Result := EFitsItemException;
+end;
+
+procedure TFitsItem.Bind(AContainer: TFitsContainer);
 begin
   if not Assigned(AContainer) then
-    raise EFitsClassesException.Create(SContainerNotAssign, ERROR_UMIT_BIND_ASSIGN);
-  if not AContainer.FInspect then
-    raise EFitsClassesException.Create(SBindNoInspect, ERROR_UMIT_BIND_INSPECT);
+    Error(SContainerNotAssigned, ERROR_ITEM_BIND_NO_CONTAINER);
+  if AContainer.FItemsCursor < 0 then
+    Error(SContainerNotControlBind, ERROR_ITEM_BIND_NO_INSPECT);
   FContainer := AContainer;
-  FContainer.Embed(Self);
+  FContainer.FItems[FContainer.FItemsCursor] := Self;
 end;
 
-procedure TFitsUmit.MakeExplorer(APioneer: Boolean);
-begin
-  // FHead is set in GetHeadClass.Bind() method
-  try
-    FHead := GetHeadClass.CreateExplorer(Self, APioneer);
-  except
-    FHead := nil;
-    raise;
-  end;
-  // FData is set in GetDataClass.Bind() method
-  try
-    FData := GetDataClass.CreateExplorer(Self, APioneer);
-  except
-    FData := nil;
-    raise;
-  end;
-end;
-
-procedure TFitsUmit.MakeNewcomer(ASpec: TFitsUmitSpec);
-begin
-  // FHead is set in GetHeadClass.Bind() method
-  try
-    FHead := GetHeadClass.CreateNewcomer(Self, ASpec);
-  except
-    FHead := nil;
-    raise;
-  end;
-  // FData is set in GetDataClass.Bind() method
-  try
-    FData := GetDataClass.CreateNewcomer(Self, ASpec);
-  except
-    FData := nil;
-    raise;
-  end;
-end;
-
-function TFitsUmit.CanPrimary: Boolean;
-begin
-  Result := AnsiSameText(Family, cImageXtension);
-end;
-
-procedure TFitsUmit.Reorder(AType: TOrderType);
-
-  procedure FHead_Delete(const Keyword: string);
-  var
-    I: Integer;
-  begin
-    I := FHead.IndexOf(Keyword, 1);
-    if I > 0 then
-      FHead.Delete(I);
-  end;
-
+function TFitsItem.CanPrimary: Boolean;
 var
-  I, J: Integer;
-
+  LXtension: string;
 begin
-  if not Assigned(FHead) then
-    Exit;
-  case AType of
-    otNone:
-      ;
-    otSing:
+  LXtension := GetXTENSION;
+  Result := SameText(LXtension, 'IMAGE') or SameText(LXtension, 'RANDOM GROUP');
+end;
+
+procedure TFitsItem.SetOrder(AOrder: TFitsItemOrder);
+var
+  LIndex: Integer;
+begin
+  Assert(Assigned(FHead), SAssertionFailure);
+  case AOrder of
+    ioSingle:
       begin
-        FHead.Write(0, CardSimple, cCastBoolean);
-        FHead_Delete(cEXTEND);
-        FHead_Delete(cPCOUNT);
-        FHead_Delete(cGCOUNT);
+        FHead.Lines[0] := NewLineSIMPLE;
+        // Delete "EXTEND" header line
+        LIndex := FHead.LineIndexOfKeyword(cEXTEND, {AScope:} 1);
+        if LIndex > 0 then
+          FHead.DeleteLines(LIndex, {ACount:} 1);
       end;
-    otPrim:
+    ioPrimary:
       begin
-        FHead.Write(0, CardSimple, cCastBoolean);
-        FHead_Delete(cPCOUNT);
-        FHead_Delete(cGCOUNT);
-        // append 'EXTEND' header line
-        I := FHead.IndexOf(cEXTEND, 1);
-        if I > 0 then
+        FHead.Lines[0] := NewLineSIMPLE;
+        // Append "EXTEND" header line
+        LIndex := FHead.LineIndexOfKeyword(cEXTEND, {AScope:} 1);
+        if LIndex > 0 then
+          FHead.Lines[LIndex] := NewLineEXTEND
+        else // if LIndex < 0 then
         begin
-          FHead.Write(I, CardExtend, cCastBoolean);
-        end
-        else
-        begin
-          I := FHead.IndexOfLastNaxes;
-          I := Math.IfThen(I > 0, I + 1, FHead.Count - 1);
-          FHead.Insert(I, CardExtend, cCastBoolean);
+          LIndex := FHead.LineIndexOfLastAxis;
+          LIndex := IfThen(LIndex > 0, LIndex + 1, FHead.LineCount - 1);
+          FHead.InsertLines(LIndex, NewLineEXTEND);
         end;
       end;
-    otXten:
+    ioExtension:
       begin
-        FHead.Write(0, CardXtension(ClassFamily), cCastString);
-        FHead_Delete(cEXTEND);
-        // append 'PCOUNT' header line
-        I := FHead.IndexOfLastNaxes;
-        I := Math.IfThen(I > 0, I + 1, FHead.Count - 1);
-        J := FHead.IndexOf(cPCOUNT);
-        if J < 0 then
-          FHead.Insert(I, CardPCOUNT(0), cCastInteger)
-        else
-          I := J;
-        Inc(I);
-        // append 'GCOUNT' header line
-        if FHead.IndexOf(cGCOUNT) < 0 then
-          FHead.Insert(I, CardGCOUNT(1), cCastInteger);
+        if not SameText(FHead.LineKeywords[0], cXTENSION) then
+          FHead.Lines[0] := NewLineXTENSION(ExtensionType);
+        // Delete "EXTEND" header line
+        LIndex := FHead.LineIndexOfKeyword(cEXTEND, {AScope:} 1);
+        if LIndex > 0 then
+          FHead.DeleteLines(LIndex, {ACount:} 1);
+        // Append "PCOUNT" header line
+        LIndex := FHead.LineIndexOfKeyword(cPCOUNT, {AScope:} 1);
+        if LIndex < 0 then
+        begin
+          LIndex := FHead.LineIndexOfLastAxis;
+          LIndex := IfThen(LIndex > 0, LIndex + 1, FHead.LineCount - 1);
+          FHead.InsertLines(LIndex, NewLinePCOUNT);
+        end;
+        // Append "GCOUNT" header line
+        LIndex := FHead.LineIndexOfKeyword(cGCOUNT, {AScope:} 1);
+        if LIndex < 0 then
+        begin
+          LIndex := FHead.LineIndexOfKeyword(cPCOUNT, {AScope:} 1);
+          LIndex := IfThen(LIndex > 0, LIndex + 1, FHead.LineCount - 1);
+          FHead.InsertLines(LIndex, NewLineGCOUNT);
+        end;
       end;
   end;
 end;
 
-function TFitsUmit.GetIndex: Integer;
+function TFitsItem.GetIndex: Integer;
 begin
   Result := FContainer.IndexOf(Self);
 end;
 
-function TFitsUmit.GetOffset: Int64;
+function TFitsItem.GetOffset: Int64;
 var
-  Ind: Integer;
-  Pre: TFitsUmit;
+  LIndex: Integer;
+  LPreItem: TFitsItem;
 begin
-  Result := 0;
-  Ind := Index;
-  if Ind > 0 then
+  LIndex := GetIndex;
+  if LIndex > 0 then
   begin
-    Pre := FContainer.Umits[Ind - 1];
-    Result := Pre.Offset + Pre.Size;
-  end;
+    LPreItem := FContainer[LIndex - 1];
+    Result := LPreItem.Offset + LPreItem.Size;
+  end else
+    Result := 0;
 end;
 
-function TFitsUmit.GetSize: Int64;
+function TFitsItem.GetSize: Int64;
 begin
   Result := 0;
   if Assigned(FHead) and Assigned(FData) then
     Result := FHead.Size + FData.Size;
 end;
 
-function TFitsUmit.GetEstimateSize: Int64;
+function TFitsItem.GetEstimateSize: Int64;
 var
-  I, Ind: Integer;
+  LIndex, LCurIndex: Integer;
 begin
-  Ind := Index;
+  LCurIndex := GetIndex;
   Result := FContainer.Content.Size;
-  for I := 0 to FContainer.Count - 1 do
-    if I <> Ind then
-      Result := Result - FContainer.Umits[I].Size;
+  for LIndex := 0 to FContainer.Count - 1 do
+    if LIndex <> LCurIndex then
+      Result := Result - FContainer[LIndex].Size;
 end;
 
-function TFitsUmit.GetFamily: string;
+procedure TFitsItem.AppendCacheProp(AProp: IFitsPropContext);
 begin
-  Result := Self.XTENSION;
+  FCacheProp.Append(AProp.NewProp);
 end;
 
-function TFitsUmit.GetAlias: string;
-begin
-  Result := Family;
-  // The FITS Standard (version 4.0), 6. "Random groups structure", page 16
-  // NAXIS1 can be zero value, other NAXISn shall contain a non-negative integer
-  if NAXIS > 1 then
-    if NAXES[1] = 0 then
-      Result := 'RANDOM GROUP';
-end;
-
-class function TFitsUmit.ClassFamily: string;
-begin
-  Result := cImageXtension;
-end;
-
-function TFitsUmit.GetName: string;
-begin
-  Result := Self.EXTNAME;
-end;
-
-function TFitsUmit.GetVersion: Integer;
-begin
-  Result := Self.EXTVER;
-end;
-
-function TFitsUmit.GetLevel: Integer;
-begin
-  Result := Self.EXTVER;
-end;
-
-function TFitsUmit.GetXTENSION: string;
+function TFitsItem.ExtractCacheProp(AProp: IFitsPropContext): Boolean;
 var
-  Ind: Integer;
+  LIndex: Integer;
 begin
-  Result := cImageXtension;
-  if Index > 0 then
+  LIndex := FCacheProp.IndexOf(AProp.Keyword);
+  if LIndex >= 0 then
+    AProp.AssignValue(FCacheProp[LIndex]);
+  Result := LIndex >= 0;
+end;
+
+function TFitsItem.ExtractHeadProp(AProp: IFitsPropContext): Boolean;
+var
+  LIndex: Integer;
+begin
+  Assert(Assigned(FHead), SAssertionFailure);
+  LIndex := FHead.LineIndexOfKeyword(AProp.Keyword);
+  if LIndex >= 0 then
+    AProp.AssignValue(FHead.Lines[LIndex]);
+  Result := LIndex >= 0;
+end;
+
+procedure TFitsItem.DoGetXTENSION(AProp: IXTENSION);
+begin
+  if not ExtractHeadProp(AProp) then
   begin
-    Ind := FHead.IndexOf(cXTENSION);
-    if Ind >= 0 then
-      try
-        Result := FHead.ValuesString[Ind];
-      except
-        Result := cImageXtension;
-      end;
-  end;
-end;
-
-function TFitsUmit.GetEXTNAME: string;
-var
-  Ind: Integer;
-begin
-  Ind := FHead.IndexOf(cEXTNAME);
-  try
-    if Ind >= 0 then
-      Result := FHead.ValuesString[Ind]
+    if (GetNAXIS > 1) and (GetNAXES(1) = 0) then
+      // [FITS_STANDARD_4.0, SECT_6.1.1] Random-groups structure ... NAXIS1 keyword.
+      // The value field shall contain the integer 0, a signature of random-groups
+      // format indicating that there is no primary data array
+      AProp.Value := 'RANDOM GROUP'
     else
-      Result := ''
-  except
-    on E: Exception do
-      raise EFitsClassesException.CreateFmt(SLineErrorParse, [Ind, Self.Index], E.Message, ERROR_UMIT_GETEXTNAME_INVALID);
-  end
-end;
-
-function TFitsUmit.GetEXTVER: Integer;
-var
-  Ind: Integer;
-begin
-  Ind := FHead.IndexOf(cEXTVER);
-  try
-    if Ind >= 0 then
-      Result := Integer(FHead.ValuesInteger[Ind])
-    else
-      Result := 1
-  except
-    on E: Exception do
-      raise EFitsClassesException.CreateFmt(SLineErrorParse, [Ind, Self.Index], E.Message, ERROR_UMIT_GETEXTVER_INVALID);
-  end
-end;
-
-function TFitsUmit.GetEXTLEVEL: Integer;
-var
-  Ind: Integer;
-begin
-  Ind := FHead.IndexOf(cEXTLEVEL);
-  try
-    if Ind >= 0 then
-      Result := Integer(FHead.ValuesInteger[Ind])
-    else
-      Result := 1
-  except
-    on E: Exception do
-      raise EFitsClassesException.CreateFmt(SLineErrorParse, [Ind, Self.Index], E.Message, ERROR_UMIT_GETLEVEL_INVALID);
-  end
-end;
-
-function TFitsUmit.GetBITPIX: Integer;
-const
-  Key = cBITPIX;
-var
-  Ind: Integer;
-begin
-  if not Assigned(FHead) then
-    raise EFitsClassesException.Create(SHeadNotAssign, ERROR_UMIT_GETBITPIX_NOHEAD);
-  Ind := FHead.IndexOf(Key);
-  if Ind < 0 then
-    raise EFitsClassesException.CreateFmt(SKeywordNotFound, [Key, Self.Index], ERROR_UMIT_GETBITPIX_NOTFOUND);
-  try
-    Result := Integer(FHead.ValuesInteger[Ind]);
-  except
-    on E: Exception do
-      raise EFitsClassesException.CreateFmt(SLineErrorParse, [Ind, Self.Index], E.Message, ERROR_UMIT_GETBITPIX_INVALID);
+      AProp.Value := 'IMAGE';
   end;
-  if IntToBitPix(Result) = biUnknown then
-    raise EFitsClassesException.CreateFmt(SLineValueIncorrect, [Ind, Self.Index], ERROR_UMIT_GETBITPIX_INCORRECT);
 end;
 
-function TFitsUmit.GetGCOUNT: Integer;
-const
-  Key = cGCOUNT;
+function TFitsItem.GetXTENSION: string;
 var
-  Ind: Integer;
+  LProp: IXTENSION;
 begin
-  if not Assigned(FHead) then
-    raise EFitsClassesException.Create(SHeadNotAssign, ERROR_UMIT_GETGCOUNT_NOHEAD);
-  Ind := FHead.IndexOf(Key);
-  try
-    if Ind < 0 then
-      Result := 1
-    else
-      Result := Integer(FHead.ValuesInteger[Ind]);
-  except
-    on E: Exception do
-      raise EFitsClassesException.CreateFmt(SLineErrorParse, [Ind, Self.Index], E.Message, ERROR_UMIT_GETGCOUNT_INVALID);
+  LProp := TFitsXTENSION.Create;
+  if not ExtractCacheProp(LProp) then
+  begin
+    DoGetXTENSION(LProp);
+    AppendCacheProp(LProp);
   end;
-  if Result < 1 then
-    raise EFitsClassesException.CreateFmt(SLineValueIncorrect, [Ind, Self.Index], ERROR_UMIT_GETGCOUNT_INCORRECT);
+  Result := LProp.Value;
 end;
 
-function TFitsUmit.GetPCOUNT: Integer;
-const
-  Key = cPCOUNT;
+procedure TFitsItem.DoGetEXTNAME(AProp: IEXTNAME);
+begin
+  ExtractHeadProp(AProp);
+end;
+
+function TFitsItem.GetEXTNAME: string;
 var
-  Ind: Integer;
+  LProp: IEXTNAME;
 begin
-  if not Assigned(FHead) then
-    raise EFitsClassesException.Create(SHeadNotAssign, ERROR_UMIT_GETPCOUNT_NOHEAD);
-  Ind := FHead.IndexOf(Key);
-  try
-    if Ind < 0 then
-      Result := 0
-    else
-      Result := Integer(FHead.ValuesInteger[Ind]);
-  except
-    on E: Exception do
-      raise EFitsClassesException.CreateFmt(SLineErrorParse, [Ind, Self.Index], E.Message, ERROR_UMIT_GETPCOUNT_INVALID);
+  LProp := TFitsEXTNAME.Create;
+  if not ExtractCacheProp(LProp) then
+  begin
+    DoGetEXTNAME(LProp);
+    AppendCacheProp(LProp);
   end;
-  if Result < 0 then
-    raise EFitsClassesException.CreateFmt(SLineValueIncorrect, [Ind, Self.Index], ERROR_UMIT_GETPCOUNT_INCORRECT);
+  Result := LProp.Value;
 end;
 
-function TFitsUmit.GetNAXIS: Integer;
-const
-  Key = cNAXIS;
+procedure TFitsItem.DoGetEXTVER(AProp: IEXTVER);
+begin
+  if not ExtractHeadProp(AProp) then
+    // [FITS_STANDARD_4.0, SECT_4.4.2.6] Extension keywords ... If the EXTVER
+    // keyword is absent, the file should be treated as if the value were 1
+    AProp.Value := 1;
+end;
+
+function TFitsItem.GetEXTVER: Integer;
 var
-  Ind: Integer;
+  LProp: IEXTVER;
 begin
-  if not Assigned(FHead) then
-    raise EFitsClassesException.Create(SHeadNotAssign, ERROR_UMIT_GETNAXIS_NOHEAD);
-  Ind := FHead.IndexOf(Key);
-  if Ind < 0 then
-    raise EFitsClassesException.CreateFmt(SKeywordNotFound, [Key, Self.Index], ERROR_UMIT_GETNAXIS_NOTFOUND);
-  try
-    Result := Integer(FHead.ValuesInteger[Ind]);
-  except
-    on E: Exception do
-      raise EFitsClassesException.CreateFmt(SLineErrorParse, [Ind, Self.Index], E.Message, ERROR_UMIT_GETNAXIS_INVALID);
+  LProp := TFitsEXTVER.Create;
+  if not ExtractCacheProp(LProp) then
+  begin
+    DoGetEXTVER(LProp);
+    AppendCacheProp(LProp);
   end;
-  if not InRange(Result, 0, cMaxAxis) then
-    raise EFitsClassesException.CreateFmt(SLineValueIncorrect, [Ind, Self.Index], ERROR_UMIT_GETNAXIS_INCORRECT);
+  Result := LProp.Value;
 end;
 
-function TFitsUmit.GetNAXES(Number: Integer): Integer;
+procedure TFitsItem.DoGetEXTLEVEL(AProp: IEXTLEVEL);
+begin
+  if not ExtractHeadProp(AProp) then
+    // [FITS_STANDARD_4.0, SECT_4.4.2.6] Extension keywords ... If the EXTLEVEL
+    // keyword isabsent, the file should be treated as if the value were 1
+    AProp.Value := 1;
+end;
+
+function TFitsItem.GetEXTLEVEL: Integer;
 var
-  Key: string;
-  Ind, Count: Integer;
+  LProp: IEXTLEVEL;
 begin
-  if not Assigned(FHead) then
-    raise EFitsClassesException.Create(SHeadNotAssign, ERROR_UMIT_GETNAXES_NOHEAD);
-  Count := NAXIS;
-  if (Number < 1) or (Number > Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Number], ERROR_UMIT_GETNAXES_NUMBER);
-  Key := Format(cNAXISn, [Number]);
-  Ind := FHead.IndexOf(Key);
-  if Ind < 0 then
-    raise EFitsClassesException.CreateFmt(SKeywordNotFound, [Key, Self.Index], ERROR_UMIT_GETNAXES_NOTFOUND);
-  try
-    Result := Integer(FHead.ValuesInteger[Ind]);
-  except
-    on E: Exception do
-      raise EFitsClassesException.CreateFmt(SLineErrorParse, [Ind, Self.Index], E.Message, ERROR_UMIT_GETNAXES_INVALID);
+  LProp := TFitsEXTLEVEL.Create;
+  if not ExtractCacheProp(LProp) then
+  begin
+    DoGetEXTLEVEL(LProp);
+    AppendCacheProp(LProp);
   end;
-  // The FITS Standard (version 4.0), 4.4.1.1. "Primary header", page 11
-  // The value field of this indexed keyword shall contain a non-negative
-  // integer, representing the number of elements along Axis n of a data array
-  if Result < 0 then
-    raise EFitsClassesException.CreateFmt(SLineValueIncorrect, [Ind, Self.Index], ERROR_UMIT_GETNAXES_INCORRECT);
+  Result := LProp.Value;
 end;
 
-function TFitsUmit.GetHeadClass: TFitsUmitHeadClass;
+procedure TFitsItem.DoGetBITPIX(AProp: IBITPIX);
 begin
-  Result := TFitsUmitHead;
+  if not ExtractHeadProp(AProp) then
+    Error(SHeadLineNotFound, [AProp.Keyword], ERROR_ITEM_GETBITPIX_NOT_FOUND);
+  // The function to convert TBitPix from a string ensures that the
+  // TBitPix value is valid and belongs to the range [bi64f..bi64c]
 end;
 
-function TFitsUmit.GetDataClass: TFitsUmitDataClass;
+function TFitsItem.GetBITPIX: TBitPix;
+var
+  LProp: IBITPIX;
 begin
-   Result := TFitsUmitData;
+  LProp := TFitsBITPIX.Create;
+  if not ExtractCacheProp(LProp) then
+  begin
+    DoGetBITPIX(LProp);
+    AppendCacheProp(LProp);
+  end;
+  Result := LProp.Value;
 end;
 
-procedure TFitsUmit.Init;
+procedure TFitsItem.DoGetNAXIS(AProp: INAXIS);
 begin
-  FContainer := nil;
-  FHead := nil;
-  FData := nil;
+  if not ExtractHeadProp(AProp) then
+    Error(SHeadLineNotFound, [AProp.Keyword], ERROR_ITEM_GETNAXIS_NOT_FOUND);
+  if not InRange(AProp.Value, 0, cMaxAxis) then
+    Error(SPropIncorrectValue, [AProp.Keyword, AProp.PrintValue],
+      ERROR_ITEM_GETNAXIS_VALUE);
 end;
 
-constructor TFitsUmit.CreateExplorer(AContainer: TFitsContainer; APioneer: Boolean);
+function TFitsItem.GetNAXIS: Integer;
+var
+  LProp: INAXIS;
+begin
+  LProp := TFitsNAXIS.Create;
+  if not ExtractCacheProp(LProp) then
+  begin
+    DoGetNAXIS(LProp);
+    AppendCacheProp(LProp);
+  end;
+  Result := LProp.Value;
+end;
+
+procedure TFitsItem.DoGetNAXES(AProp: INAXES);
+begin
+  if not InRange(AProp.KeywordNumber, 1, GetNAXIS) then
+    Error(SPropAxisOutBounds, [AProp.Keyword, GetNAXIS],
+      ERROR_ITEM_GETNAXES_NUMBER);
+  if not ExtractHeadProp(AProp) then
+    Error(SHeadLineNotFound, [AProp.Keyword], ERROR_ITEM_GETNAXES_NOT_FOUND);
+  // [FITS_STANDARD_4.0, SECT_4.4.1.1] Primary header ... The value field of
+  // this indexed keyword shall contain a non-negative integer representing
+  // the number of elements along Axis n of a data array. A value of zero
+  // for any of the NAXISn signifies that no data follow the header in the
+  // HDU (however, the random-groups structure described in Sect. 6 has
+  // NAXIS1 = 0, but will have data following the header if the other NAXISn
+  // keywords are non-zero)
+  if AProp.Value < 0 then
+    Error(SPropIncorrectValue, [AProp.Keyword, AProp.PrintValue],
+      ERROR_ITEM_GETNAXES_VALUE);
+end;
+
+function TFitsItem.GetNAXES(ANumber: Integer): Integer;
+var
+  LProp: INAXES;
+begin
+  LProp := TFitsNAXES.Create(ANumber);
+  if not ExtractCacheProp(LProp) then
+  begin
+    DoGetNAXES(LProp);
+    AppendCacheProp(LProp);
+  end;
+  Result := LProp.Value;
+end;
+
+procedure TFitsItem.DoGetPCOUNT(AProp: IPCOUNT);
+begin
+  if not ExtractHeadProp(AProp) then
+    AProp.Value := DefaultPCOUNT
+  else if not CorrectPCOUNT(AProp.Value) then
+    Error(SPropIncorrectValue, [AProp.Keyword, AProp.PrintValue],
+      ERROR_ITEM_GETPCOUNT_VALUE);
+end;
+
+function TFitsItem.GetPCOUNT: Integer;
+var
+  LProp: IPCOUNT;
+begin
+  LProp := TFitsPCOUNT.Create;
+  if not ExtractCacheProp(LProp) then
+  begin
+    DoGetPCOUNT(LProp);
+    AppendCacheProp(LProp);
+  end;
+  Result := LProp.Value;
+end;
+
+procedure TFitsItem.DoGetGCOUNT(AProp: IGCOUNT);
+begin
+  if not ExtractHeadProp(AProp) then
+    AProp.Value := DefaultGCOUNT
+  else if not CorrectGCOUNT(AProp.Value) then
+    Error(SPropIncorrectValue, [AProp.Keyword, AProp.PrintValue],
+      ERROR_ITEM_GETGCOUNT_VALUE);
+end;
+
+function TFitsItem.GetGCOUNT: Integer;
+var
+  LProp: IGCOUNT;
+begin
+  LProp := TFitsGCOUNT.Create;
+  if not ExtractCacheProp(LProp) then
+  begin
+    DoGetGCOUNT(LProp);
+    AppendCacheProp(LProp);
+  end;
+  Result := LProp.Value;
+end;
+
+procedure TFitsItem.ChangeContent(const AOffset, ASize: Int64);
+var
+  LOffset: Int64;
+begin
+  if ASize <> 0 then
+  begin
+    LOffset := GetOffset;
+    if Assigned(FHead) and (AOffset < (LOffset + FHead.Size)) then
+    begin
+      if (AOffset + ASize) > LOffset then
+        FCacheProp.Clear;
+      FHead.Invalidate;
+    end;
+    if Assigned(FData) and (AOffset < (LOffset + FHead.Size + FData.Size)) then
+    begin
+      FData.Invalidate;
+    end;
+  end;
+end;
+
+function TFitsItem.GetHeadClass: TFitsItemHeadClass;
+begin
+  Result := TFitsItemHead;
+end;
+
+function TFitsItem.GetDataClass: TFitsItemDataClass;
+begin
+  Result := TFitsItemData;
+end;
+
+constructor TFitsItem.Create(AContainer: TFitsContainer);
 begin
   inherited Create;
-  Init();
   Bind(AContainer);
-  MakeExplorer(APioneer);
+  FHead := GetHeadClass.Create(Self);
+  FData := GetDataClass.Create(Self);
 end;
 
-constructor TFitsUmit.CreateNewcomer(AContainer: TFitsContainer; ASpec: TFitsUmitSpec);
+constructor TFitsItem.CreateNew(AContainer: TFitsContainer; ASpec: TFitsItemSpec);
 begin
   inherited Create;
-  Init();
   Bind(AContainer);
-  MakeNewcomer(ASpec);
+  FHead := GetHeadClass.CreateNew(Self, ASpec);
+  FData := GetDataClass.CreateNew(Self, ASpec);
 end;
 
-procedure TFitsUmit.BeforeDestruction;
+destructor TFitsItem.Destroy;
 begin
-  if not FContainer.FInspect then
-    raise EFitsClassesException.CreateFmt(SFreeNoInspect, [Self.Index], ERROR_UMIT_FREE_INSPECT);
+  FHead.Free;
+  FData.Free;
+  FCacheProp.Free;
   inherited;
 end;
 
-destructor TFitsUmit.Destroy;
+class function TFitsItem.ExtensionType: string;
 begin
-  if Assigned(FHead) then
-  begin
-    FHead.Free;
-    FHead := nil;
-  end;
-  if Assigned(FData) then
-  begin
-    FData.Free;
-    FData := nil;
-  end;
-  FContainer := nil;
-  inherited;
+  Result := 'IMAGE';
 end;
 
-function TFitsUmit.Coclass(UmitClass: TFitsUmitClass): Boolean;
-begin
-  Result := FContainer.Coclass(Index, UmitClass);
-end;
-
-function TFitsUmit.Reclass(UmitClass: TFitsUmitClass): TFitsUmit;
-begin
-  Result := FContainer.Reclass(Index, UmitClass);
-end;
-
-procedure TFitsUmit.Delete;
-begin
-  FContainer.Delete(Index);
-end;
-
-procedure TFitsUmit.Exchange(Index2: Integer);
-begin
-  FContainer.Exchange(Index, Index2);
-end;
-
-procedure TFitsUmit.Move(NewIndex: Integer);
-begin
-  FContainer.Move(Index, NewIndex);
-end;
-
-{ TFitsManagerBuffer }
-
-{$IFDEF DELA_MEMORY_SHARED}
+class function TFitsItem.ExtensionTypeIs(AItem: TFitsItem): Boolean;
 var
-  vBuffer: TBuffer = nil;
+  LIndex: Integer;
+  LItemExtensionType: string;
+begin
+  Result := Self = TFitsItem;
+  if not Result then
+  begin
+    LIndex := AItem.Head.LineIndexOfKeyword(cXTENSION);
+    if LIndex >= 0 then
+      LItemExtensionType := UnquotedString(AItem.Head.LineRecords[LIndex].Value)
+    else
+      LItemExtensionType := IfThen(AItem.Index = 0, AItem.ExtensionType, '');
+    Result := LItemExtensionType = ExtensionType;
+  end;
+end;
+
+{ EFitsMemoryException }
+
+function EFitsMemoryException.GetTopic: string;
+begin
+  Result := 'MEMORY';
+end;
+
+{ TFitsMemory }
+
+{$IFDEF DELAFITS_MEMORY_SHARED}
+var
+  vBytes1: TBytes1 = nil;
+  vBytes2: TBytes2 = nil;
 {$ENDIF}
 
-constructor TFitsManagerBuffer.Create;
+function TFitsMemory.GetExceptionClass: EFitsExceptionClass;
 begin
-  inherited;
-  {$IFDEF DELA_MEMORY_PRIVATE}
-  FBuffer := nil;
-  {$ENDIF}
+  Result := EFitsMemoryException;
 end;
 
-destructor TFitsManagerBuffer.Destroy;
+constructor TFitsMemory.Create(AContainer: TFitsContainer);
 begin
-  {$IFDEF DELA_MEMORY_PRIVATE}
-  FBuffer := nil;
-  {$ENDIF}
-  inherited;
+  inherited Create;
+  if not Assigned(AContainer) then
+    Error(SContainerNotAssigned, ERROR_MEMORY_BIND_NO_CONTAINER);
+  FContainer := AContainer;
 end;
 
-procedure TFitsManagerBuffer.Allocate(var ABuffer: Pointer; ASizeInBytes: Integer);
+procedure TFitsMemory.Allocate(out ABytes: TBytes1; ASize: Integer);
 begin
-  {$IF DEFINED(DELA_MEMORY_SHARED)}
-
-  if Length(vBuffer) < ASizeInBytes then
-    SetLength(vBuffer, ASizeInBytes);
-  TBuffer(ABuffer) := vBuffer;
-
-  {$ELSEIF DEFINED(DELA_MEMORY_PRIVATE)}
-
-  if Length(FBuffer) < ASizeInBytes then
-    SetLength(FBuffer, ASizeInBytes);
-  TBuffer(ABuffer) := FBuffer;
-
-  {$ELSEIF DEFINED(DELA_MEMORY_TEMP)}
-
-  SetLength(TBuffer(ABuffer), ASizeInBytes);
-
-  {$IFEND}
+  Assert(ASize > 0, SAssertionFailure);
+{$IF DEFINED(DELAFITS_MEMORY_SHARED)}
+  if Length(vBytes1) < ASize then
+    SetLength(vBytes1, ASize);
+  ABytes := vBytes1;
+{$ELSEIF DEFINED(DELAFITS_MEMORY_OBJECT)}
+  if Length(FBytes1) < ASize then
+    SetLength(FBytes1, ASize);
+  ABytes := FBytes1;
+{$ELSEIF DEFINED(DELAFITS_MEMORY_LOCAL)}
+  SetLength(ABytes, ASize);
+{$IFEND}
 end;
 
-procedure TFitsManagerBuffer.Release(var ABuffer: Pointer);
+procedure TFitsMemory.Allocate(out ABytes: TBytes2; ASize1, ASize2: Integer);
 begin
-  TBuffer(ABuffer) := nil;
-  ABuffer := nil;
+  Assert((ASize1 > 0) and (ASize2 > 0), SAssertionFailure);
+{$IF DEFINED(DELAFITS_MEMORY_SHARED)}
+  if (Length(vBytes2) < ASize1) or (Length(vBytes2[0]) < ASize2) then
+    SetLength(vBytes2, ASize1, ASize2);
+  ABytes := vBytes2;
+{$ELSEIF DEFINED(DELAFITS_MEMORY_OBJECT)}
+  if (Length(FBytes2) < ASize1) or (Length(FBytes2[0]) < ASize2) then
+    SetLength(FBytes2, ASize1, ASize2);
+  ABytes := FBytes2;
+{$ELSEIF DEFINED(DELAFITS_MEMORY_LOCAL)}
+  SetLength(ABytes, ASize1, ASize2);
+{$IFEND}
 end;
 
-procedure TFitsManagerBuffer.Reset;
+procedure TFitsMemory.Reset;
 begin
-  {$IF DEFINED(DELA_MEMORY_SHARED)}
-  vBuffer := nil;
-  {$ELSEIF DEFINED(DELA_MEMORY_PRIVATE)}
-  FBuffer := nil;
-  {$ELSEIF DEFINED(DELA_MEMORY_TEMP)}
-  {$IFEND}
+{$IF DEFINED(DELAFITS_MEMORY_SHARED)}
+  vBytes1 := nil;
+  vBytes2 := nil;
+{$ELSEIF DEFINED(DELAFITS_MEMORY_OBJECT)}
+  FBytes1 := nil;
+  FBytes2 := nil;
+{$ELSEIF DEFINED(DELAFITS_MEMORY_LOCAL)}
+  // Do nothing
+{$IFEND}
+end;
+
+{ EFitsContentException }
+
+function EFitsContentException.GetTopic: string;
+begin
+  Result := 'CONTENT';
 end;
 
 { TFitsContent }
@@ -2429,698 +2864,691 @@ begin
   Result := FStream.Size;
 end;
 
-constructor TFitsContent.Create(AStream: TStream);
+function TFitsContent.GetExceptionClass: EFitsExceptionClass;
 begin
-  inherited Create;
-  if not Assigned(AStream) then
-    raise EFitsClassesException.Create(SStreamNotAssign, ERROR_CONTENT_ASSIGN_STREAM);
-  FStream := AStream;
-  FBuffer := TFitsManagerBuffer.Create;
+  Result := EFitsContentException;
 end;
 
-destructor TFitsContent.Destroy;
+constructor TFitsContent.Create(AContainer: TFitsContainer; AStream: TStream);
 begin
-  FStream := nil;
-  if Assigned(FBuffer) then
-  begin
-    FBuffer.Free;
-    FBuffer := nil;
-  end;
-  inherited;
+  inherited Create;
+  if not Assigned(AContainer) then
+    Error(SContainerNotAssigned, ERROR_CONTENT_BIND_NO_CONTAINER);
+  if not Assigned(AStream) then
+    Error(SStreamNotAssigned, ERROR_CONTENT_BIND_NO_STREAM);
+  FContainer := AContainer;
+  FStream := AStream;
 end;
 
 procedure TFitsContent.Read(const AOffset, ASize: Int64; var ABuffer);
 begin
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, AOffset, ASize) then
+    Error(SContentChunkOutBounds, [AOffset, ASize, FStream.Size],
+      ERROR_CONTENT_READ_BOUNDS);
   FStream.Position := AOffset;
-  if (ASize <> 0) and (FStream.Read(ABuffer, ASize) <> ASize) then
-    raise EFitsClassesException.Create(SContentAccessError, ERROR_CONTENT_READ);
+  if FStream.Read(ABuffer, ASize) <> ASize then
+    Error(SContentReadError, ERROR_CONTENT_READ);
 end;
 
 procedure TFitsContent.ReadBuffer(const AOffset, ACount: Int64; var ABuffer: TBuffer);
 var
-  L: Integer;
+  LCount: Integer;
 begin
-  L := Length(ABuffer);
-  if L < ACount then
-    raise EFitsClassesException.CreateFmt(SBufferIncorrectSize, [ACount], ERROR_CONTENT_READ_BUFFER);
-  if L > 0 then
+  LCount := Length(ABuffer);
+  if LCount < ACount then
+    SetLength(ABuffer, ACount);
+  if LCount > 0 then
     Read(AOffset, ACount, ABuffer[0]);
 end;
 
 procedure TFitsContent.ReadString(const AOffset, ACount: Int64; var ABuffer: string);
 var
-  lBuffer: AnsiString;
+  LBuffer: AnsiString;
 begin
-  lBuffer := '';
+  LBuffer := '';
   if ACount > 0 then
   begin
-    SetLength(lBuffer, ACount);
-    Read(AOffset, ACount, lBuffer[1]);
+    SetLength(LBuffer, ACount);
+    Read(AOffset, ACount, LBuffer[1]);
   end;
-  ABuffer := string(lBuffer);
+  ABuffer := string(LBuffer);
+end;
+
+procedure TFitsContent.Change(const AOffset, ASize: Int64);
+var
+  LIndex: Integer;
+begin
+  for LIndex := 0 to FContainer.FItems.Count - 1 do
+    FContainer.FItems[LIndex].ChangeContent(AOffset, ASize);
 end;
 
 procedure TFitsContent.Write(const AOffset, ASize: Int64; const ABuffer);
 begin
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, AOffset, ASize) then
+    Error(SContentChunkOutBounds, [AOffset, ASize, FStream.Size],
+      ERROR_CONTENT_WRITE_BOUNDS);
   FStream.Position := AOffset;
-  if (ASize <> 0) and (FStream.Write(ABuffer, ASize) <> ASize) then
-    raise EFitsClassesException.Create(SContentAccessError, ERROR_CONTENT_WRITE);
+  if FStream.Write(ABuffer, ASize) <> ASize then
+    Error(SContentWriteError, ERROR_CONTENT_WRITE);
+  Change(AOffset, ASize);
 end;
 
 procedure TFitsContent.WriteBuffer(const AOffset, ACount: Int64; const ABuffer: TBuffer);
 var
-  L: Integer;
+  LCount: Integer;
 begin
-  L := Length(ABuffer);
-  if L < ACount then
-    raise EFitsClassesException.CreateFmt(SBufferIncorrectSize, [ACount], ERROR_CONTENT_WRITE_BUFFER);
-  if L > 0 then
+  LCount := Length(ABuffer);
+  if LCount < ACount then
+    Error(SContentWriteLowBufferSize, [LCount, ACount],
+      ERROR_CONTENT_WRITEBUFFER_SIZE);
+  if LCount > 0 then
     Write(AOffset, ACount, ABuffer[0]);
 end;
 
 procedure TFitsContent.WriteString(const AOffset, ACount: Int64; const ABuffer: string);
 var
-  L: Integer;
-  lBuffer: AnsiString;
+  LCount: Integer;
+  LBuffer: AnsiString;
 begin
-  L := Length(ABuffer);
-  if L < ACount then
-    raise EFitsClassesException.CreateFmt(SBufferIncorrectSize, [ACount], ERROR_CONTENT_WRITE_BUFFER);
-  if L > 0 then
+  LCount := Length(ABuffer);
+  if LCount < ACount then
+    Error(SContentWriteLowStringSize, [LCount, ACount],
+      ERROR_CONTENT_WRITESTRING_SIZE);
+  if LCount > 0 then
   begin
-    lBuffer := AnsiString(ABuffer);
-    Write(AOffset, ACount, lBuffer[1]);
+    LBuffer := AnsiString(ABuffer);
+    Write(AOffset, ACount, LBuffer[1]);
   end;
 end;
 
 procedure TFitsContent.Fill(const AOffset, ASize: Int64; AChar: Char);
 var
-  lSize: Int64;
-  N, L: Integer;
-  lBuffer: TBuffer;
+  LSize: Int64;
+  LSizeBuffer, LSizeChunk: Integer;
+  LBuffer: TBuffer;
 begin
-
-  if (AOffset < 0) or (ASize < 0) then
-    raise EFitsClassesException.Create(SContentIncorrectBounds, ERROR_CONTENT_FILL_BOUNDS);
-
-  if ASize = 0 then
-    Exit;
-
-  try
-    if ASize > cMaxSizeBuffer then L := cMaxSizeBuffer else L := ASize;
-    lBuffer := nil;
-    FBuffer.Allocate(Pointer(lBuffer), L);
-    FillChar(lBuffer[0], L, Char(AChar));
-    lSize := ASize;
-    while lSize > 0 do
-    begin
-      if lSize > L then N := L else N := lSize;
-      WriteBuffer(AOffset + lSize - N, N, lBuffer);
-      Dec(lSize, N);
-    end;
-  finally
-    FBuffer.Release(Pointer(lBuffer));
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, AOffset, ASize) then
+    Error(SContentChunkOutBounds, [AOffset, ASize, FStream.Size],
+      ERROR_CONTENT_FILL_BOUNDS);
+  LSize := ASize;
+  if LSize > cMaxSizeBuffer then
+    LSizeBuffer := cMaxSizeBuffer
+  else
+    LSizeBuffer := ASize;
+  FContainer.Memory.Allocate(LBuffer, LSizeBuffer);
+  System.FillChar(LBuffer[0], LSizeBuffer, Char(AChar));
+  while LSize > 0 do
+  begin
+    if LSize > LSizeBuffer then
+      LSizeChunk := LSizeBuffer
+    else
+      LSizeChunk := LSize;
+    WriteBuffer(AOffset + LSize - LSizeChunk, LSizeChunk, LBuffer);
+    Dec(LSize, LSizeChunk);
   end;
-
 end;
 
 procedure TFitsContent.Shift(const AOffset, ASize, AShift: Int64);
 var
-  lSize, lOffset: Int64;
-  N, L: Integer;
-  lBuffer: TBuffer;
+  LOffset, LSize: Int64;
+  LSizeBuffer, LSizeChunk: Integer;
+  LBuffer: TBuffer;
 begin
-
-  if (AOffset < 0) or (ASize < 0) then
-    raise EFitsClassesException.Create(SContentIncorrectBounds, ERROR_CONTENT_SHIFT_BOUNDS);
-
-  if (AOffset + ASize) > Size then
-    raise EFitsClassesException.Create(SContentIncorrectSize, ERROR_CONTENT_SHIFT_SIZE);
-
-  lSize := ASize;
-  lOffset := AOffset;
-  try
-    if lSize > cMaxSizeBuffer then L := cMaxSizeBuffer else L := lSize;
-    lBuffer := nil;
-    FBuffer.Allocate(Pointer(lBuffer), L);
-    // Shift content down
-    if AShift > 0 then
-      while lSize <> 0 do
-      begin
-        if lSize > L then N := L else N := lSize;
-        ReadBuffer(lOffset + lSize - N, N, lBuffer);
-        WriteBuffer(lOffset + AShift + lSize - N, N, lBuffer);
-        Dec(lSize, N);
-      end
-    // Shift content up
-    else { AShift < 0 }
-      while lSize <> 0 do
-      begin
-        if lSize > L then N := L else N := lSize;
-        ReadBuffer(lOffset, N, lBuffer);
-        WriteBuffer(lOffset + AShift, N, lBuffer);
-        Inc(lOffset, N);
-        Dec(lSize, N);
-      end;
-  finally
-    FBuffer.Release(Pointer(lBuffer));
-  end;
-
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, AOffset, ASize) then
+    Error(SContentChunkOutBounds, [AOffset, ASize, FStream.Size],
+      ERROR_CONTENT_SHIFT_BOUNDS);
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, AOffset + AShift, ASize) then
+    Error(SContentChunkOutBounds, [AOffset + AShift, ASize, FStream.Size],
+      ERROR_CONTENT_SHIFT_BOUNDS);
+  if AShift = 0 then
+    Exit;
+  LOffset := AOffset;
+  LSize := ASize;
+  if LSize > cMaxSizeBuffer then
+    LSizeBuffer := cMaxSizeBuffer
+  else
+    LSizeBuffer := LSize;
+  FContainer.Memory.Allocate(LBuffer, LSizeBuffer);
+  // Shift content down
+  if AShift > 0 then
+    while LSize <> 0 do
+    begin
+      if LSize > LSizeBuffer then
+        LSizeChunk := LSizeBuffer
+      else
+        LSizeChunk := LSize;
+      ReadBuffer(LOffset + LSize - LSizeChunk, LSizeChunk, LBuffer);
+      WriteBuffer(LOffset + AShift + LSize - LSizeChunk, LSizeChunk, LBuffer);
+      Dec(LSize, LSizeChunk);
+    end;
+  // Shift content up
+  if AShift < 0 then
+    while LSize <> 0 do
+    begin
+      if LSize > LSizeBuffer then
+        LSizeChunk := LSizeBuffer
+      else
+        LSizeChunk := LSize;
+      ReadBuffer(LOffset, LSizeChunk, LBuffer);
+      WriteBuffer(LOffset + AShift, LSizeChunk, LBuffer);
+      Inc(LOffset, LSizeChunk);
+      Dec(LSize, LSizeChunk);
+    end;
 end;
 
 procedure TFitsContent.Rotate(const AOffset, ASize: Int64);
 var
-  lSize, lOffset1, lOffset2: Int64;
-  N, L, I, Imax: Integer;
-  lUmit: T08u;
-  lBuffer: TBuffer;
+  LHalfSize, LOffset1, LOffset2: Int64;
+  LHalfSizeBuffer, LSizeChunk: Integer;
+  LIndex, LIndexMax: Integer;
+  LTemp: T08u;
+  LBuffer: TBuffer;
 begin
-
-  if (AOffset < 0) or (ASize < 0) then
-    raise EFitsClassesException.Create(SContentIncorrectBounds, ERROR_CONTENT_ROTATE_BOUNDS);
-
-  if (AOffset + ASize) > Size then
-    raise EFitsClassesException.Create(SContentIncorrectSize, ERROR_CONTENT_ROTATE_SIZE);
-
-  try
-    lSize := ASize div 2;
-    L := Min(lSize, cMaxSizeBuffer) div 2;
-    if L = 0 then
-      L := 1;
-    lBuffer := nil;
-    FBuffer.Allocate(Pointer(lBuffer), L * 2);
-    lOffset1 := AOffset;
-    lOffset2 := AOffset + lSize + (ASize mod 2);
-    while lSize <> 0 do
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, AOffset, ASize) then
+    Error(SContentChunkOutBounds, [AOffset, ASize, FStream.Size],
+      ERROR_CONTENT_ROTATE_BOUNDS);
+  LHalfSize := ASize div 2;
+  LHalfSizeBuffer := Min(LHalfSize, cMaxSizeBuffer) div 2;
+  if LHalfSizeBuffer = 0 then
+    LHalfSizeBuffer := 1;
+  FContainer.Memory.Allocate(LBuffer, LHalfSizeBuffer * 2);
+  LOffset1 := AOffset;
+  LOffset2 := AOffset + LHalfSize + (ASize mod 2);
+  while LHalfSize <> 0 do
+  begin
+    LSizeChunk := Min(LHalfSize, LHalfSizeBuffer);
+    // Read
+    Read(LOffset1, LSizeChunk, LBuffer[0]);
+    Read(LOffset2 + LHalfSize - LSizeChunk, LSizeChunk, LBuffer[LSizeChunk]);
+    // Rotate
+    LIndex := 0;
+    LIndexMax := LSizeChunk * 2 - 1;
+    while LIndex < LSizeChunk do
     begin
-      N := Min(lSize, L);
-      // read
-      FStream.Position := lOffset1;
-      FStream.Read(lBuffer[0], N);
-      FStream.Position := lOffset2 + lSize - N;
-      FStream.Read(lBuffer[N], N);
-      // rotation
-      Imax := N * 2 - 1;
-      I := 0;
-      while I < N do
-      begin
-        lUmit := lBuffer[I];
-        lBuffer[I] := lBuffer[Imax - I];
-        lBuffer[Imax - I] := lUmit;
-        Inc(I);
-      end;
-      // write
-      FStream.Position := lOffset1;
-      FStream.Write(lBuffer[0], N);
-      FStream.Position := lOffset2 + lSize - N;
-      FStream.Write(lBuffer[N], N);
-      // iteration
-      Inc(lOffset1, N);
-      Dec(lSize, N);
+      LTemp := LBuffer[LIndex];
+      LBuffer[LIndex] := LBuffer[LIndexMax - LIndex];
+      LBuffer[LIndexMax - LIndex] := LTemp;
+      Inc(LIndex);
     end;
-  finally
-    FBuffer.Release(Pointer(lBuffer));
+    // Write
+    Write(LOffset1, LSizeChunk, LBuffer[0]);
+    Write(LOffset2 + LHalfSize - LSizeChunk, LSizeChunk, LBuffer[LSizeChunk]);
+    // Iteration
+    Inc(LOffset1, LSizeChunk);
+    Dec(LHalfSize, LSizeChunk);
   end;
-
 end;
 
 procedure TFitsContent.Exchange(var AOffset1: Int64; const ASize1: Int64; var AOffset2: Int64; const ASize2: Int64);
 var
-  lSizeSame, lSize, lOffset, lNewOffset: Int64;
-  lOffset1, lSize1, lOffset2, lSize2: Int64;
-  N, L: Integer;
-  lBuffer: TBuffer;
+  LSize, LMinSize, LOffset, LNewOffset: Int64;
+  LSize1, LSize2, LOffset1, LOffset2: Int64;
+  LHalfSizeBuffer, LSizeChunk: Integer;
+  LBuffer: TBuffer;
 begin
-
-  if (AOffset1 < 0) or (ASize1 < 0) or (AOffset2 < 0) or (ASize2 < 0) then
-    raise EFitsClassesException.Create(SContentIncorrectBounds, ERROR_CONTENT_EXCHANGE_BOUNDS);
-
-  if ((AOffset1 + ASize1) > Size) or ((AOffset2 + ASize2) > Size) then
-    raise EFitsClassesException.Create(SContentIncorrectSize, ERROR_CONTENT_EXCHANGE_SIZE);
-
-  if (AOffset1 = AOffset2) or (ASize1 = 0) or (ASize2 = 0) then
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, AOffset1, ASize1) then
+    Error(SContentChunkOutBounds, [AOffset1, ASize1, FStream.Size],
+      ERROR_CONTENT_EXCHANGE_BOUNDS);
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, AOffset2, ASize2) then
+    Error(SContentChunkOutBounds, [AOffset2, ASize2, FStream.Size],
+      ERROR_CONTENT_EXCHANGE_BOUNDS);
+  if AOffset1 = AOffset2 then
     Exit;
-
   if AOffset1 < AOffset2 then
   begin
-    lOffset1 := AOffset1;
-    lSize1  := ASize1;
-    lOffset2 := AOffset2;
-    lSize2  := ASize2;
-  end
-  else
+    LOffset1 := AOffset1;
+    LSize1 := ASize1;
+    LOffset2 := AOffset2;
+    LSize2 := ASize2;
+  end else
+  // if AOffset1 > AOffset2 then
   begin
-    lOffset1 := AOffset2;
-    lSize1  := ASize2;
-    lOffset2 := AOffset1;
-    lSize2  := ASize1;
+    LOffset1 := AOffset2;
+    LSize1 := ASize2;
+    LOffset2 := AOffset1;
+    LSize2 := ASize1;
   end;
-  lSizeSame := Min(lSize1, lSize2);
-  if lOffset2 < (lOffset1 + lSize1) then
-    raise EFitsClassesException.Create(SContentInterBlocks, ERROR_CONTENT_EXCHANGE_INTER);
-
-  // exchange
-
-  lOffset  := AOffset1;
+  LMinSize := Min(LSize1, LSize2);
+  if LOffset2 < (LOffset1 + LSize1) then
+    Error(SContentChunksOverlap, [AOffset1, ASize1, AOffset2, ASize2],
+      ERROR_CONTENT_EXCHANGE_OVERLAP);
+  // Exchange
+  LOffset := AOffset1;
   AOffset1 := AOffset2;
-  AOffset2 := lOffset;
-  try
-    lSize := lSizeSame;
-    L := Min(lSize, cMaxSizeBuffer) div 2;
-    if L = 0 then
-      L := 1;
-    lBuffer := nil;
-    FBuffer.Allocate(Pointer(lBuffer), L * 2);
-    while lSize <> 0 do
-    begin
-      N := Min(lSize, L);
-      // read
-      FStream.Position := lOffset1;
-      FStream.Read(lBuffer[0], N);
-      FStream.Position := lOffset2;
-      FStream.Read(lBuffer[N], N);
-      // write
-      FStream.Position := lOffset1;
-      FStream.Write(lBuffer[N], N);
-      FStream.Position := lOffset2;
-      FStream.Write(lBuffer[0], N);
-      // iteration
-      Inc(lOffset1, N);
-      Inc(lOffset2, N);
-      Dec(lSize, N);
-    end;
-  finally
-    FBuffer.Release(Pointer(lBuffer));
+  AOffset2 := LOffset;
+  LSize := LMinSize;
+  LHalfSizeBuffer := Min(LSize, cMaxSizeBuffer) div 2;
+  if LHalfSizeBuffer = 0 then
+    LHalfSizeBuffer := 1;
+  FContainer.Memory.Allocate(LBuffer, LHalfSizeBuffer * 2);
+  while LSize <> 0 do
+  begin
+    LSizeChunk := Min(LSize, LHalfSizeBuffer);
+    // Read
+    Read(LOffset1, LSizeChunk, LBuffer[0]);
+    Read(LOffset2, LSizeChunk, LBuffer[LSizeChunk]);
+    // Write
+    Write(LOffset1, LSizeChunk, LBuffer[LSizeChunk]);
+    Write(LOffset2, LSizeChunk, LBuffer[0]);
+    // Iteration
+    Inc(LOffset1, LSizeChunk);
+    Inc(LOffset2, LSizeChunk);
+    Dec(LSize, LSizeChunk);
   end;
-
-  // move
-
+  // Move
   if AOffset1 < AOffset2 then
   begin
-    lOffset1 := AOffset1;
-    lOffset2 := AOffset2;
-  end
-  else
+    LOffset1 := AOffset1;
+    LOffset2 := AOffset2;
+  end else
+  // if AOffset1 > AOffset2 then
   begin
-    lOffset1 := AOffset2;
-    lOffset2 := AOffset1;
+    LOffset1 := AOffset2;
+    LOffset2 := AOffset1;
   end;
-  lSize := lSize1 - lSize2;
-  if lSize <> 0 then
+  LSize := LSize1 - LSize2;
+  if LSize <> 0 then
   begin
-    if lSize > 0 then
+    if LSize > 0 then
     begin
-      lOffset := lOffset1 + lSizeSame;
-      lNewOffset := lOffset2 + lSizeSame - 1;
-      Dec(AOffset1, lSize);
-    end
-    else if lSize < 0 then
+      LOffset := LOffset1 + LMinSize;
+      LNewOffset := LOffset2 + LMinSize - 1;
+      Dec(AOffset1, LSize);
+    end else
+    // if LSize < 0 then
     begin
-      lSize := Abs(lSize);
-      lOffset := lOffset2 + lSizeSame;
-      lNewOffset := lOffset1 + lSizeSame;
-      Inc(AOffset1, lSize);
+      LSize := Abs(LSize);
+      LOffset := LOffset2 + LMinSize;
+      LNewOffset := LOffset1 + LMinSize;
+      Inc(AOffset1, LSize);
     end;
-    Move(lOffset, lSize, lNewOffset);
+    Move(LOffset, LSize, LNewOffset);
   end;
-
 end;
 
 procedure TFitsContent.Move(const AOffset, ASize: Int64; var ANewOffset: Int64);
 var
-  lOffset1, lSize1, lOffset2, lSize2: Int64;
+  LOffset1, LOffset2, LSize1, LSize2: Int64;
 begin
-
-  if (AOffset < 0) or (ASize < 0) or (ANewOffset < 0) then
-    raise EFitsClassesException.Create(SContentIncorrectBounds, ERROR_CONTENT_MOVE_BOUNDS);
-
-  if (AOffset + ASize) > Size then
-    raise EFitsClassesException.Create(SContentIncorrectSize, ERROR_CONTENT_MOVE_SIZE);
-
-  if (AOffset = ANewOffset) or (ASize = 0) then
-    Exit;
-
-  if (ANewOffset > AOffset) and (ANewOffset < AOffset + ASize) then
-    raise EFitsClassesException.Create(SContentInterBlocks, ERROR_CONTENT_MOVE_INTER);
-
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, AOffset, ASize) then
+    Error(SContentChunkOutBounds, [AOffset, ASize, FStream.Size],
+      ERROR_CONTENT_MOVE_BOUNDS);
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size, ANewOffset) then
+    Error(SContentOffsetOutBounds, [ANewOffset, FStream.Size],
+      ERROR_CONTENT_MOVE_OFFSET);
+  if InSegmentBound(AOffset, ASize, ANewOffset) then
+    Error(SContentChunksOverlap, [AOffset, ASize, ANewOffset, {ASize2:} 1],
+      ERROR_CONTENT_MOVE_OVERLAP);
   // Move content down
-
-  if (ANewOffset > AOffset) then
+  if ANewOffset > AOffset then
   begin
-    lOffset1 := AOffset;
-    lSize1  := ASize;
-    lOffset2 := AOffset + ASize;
-    lSize2  := (ANewOffset - AOffset + 1) - ASize;
+    LOffset1 := AOffset;
+    LSize1 := ASize;
+    LOffset2 := AOffset + ASize;
+    LSize2 := (ANewOffset - AOffset + 1) - ASize;
     ANewOffset := ANewOffset - ASize + 1;
-  end
-
-  else
-
+  end else
   // Move content up
-
+  // if ANewOffset < AOffset then
   begin
-    lOffset1 := ANewOffset;
-    lSize1  := AOffset - ANewOffset;
-    lOffset2 := AOffset;
-    lSize2  := ASize;
+    LOffset1 := ANewOffset;
+    LSize1 := AOffset - ANewOffset;
+    LOffset2 := AOffset;
+    LSize2 := ASize;
   end;
-
-  Rotate(lOffset1, lSize1);
-  Rotate(lOffset2, lSize2);
-  Rotate(lOffset1, lSize1 + lSize2);
+  Rotate(LOffset1, LSize1);
+  Rotate(LOffset2, LSize2);
+  Rotate(LOffset1, LSize1 + LSize2);
 end;
 
 procedure TFitsContent.Resize(const AOffset, ASize: Int64);
 var
-  lOffset, lSize, lShift: Int64;
+  LOffset, LSize, LShift: Int64;
 begin
-
-  if AOffset < 0 then
-    raise EFitsClassesException.Create(SContentIncorrectBounds, ERROR_CONTENT_RESIZE_BOUNDS);
-
+  if not InSegmentBound({ASegmentPosition:} 0, FStream.Size + 1, AOffset) then
+    Error(SContentOffsetOutBounds, [AOffset, FStream.Size],
+      ERROR_CONTENT_RESIZE_OFFSET);
   if ASize = 0 then
-    Exit;
-
+    Error(SContentZeroSize, ERROR_CONTENT_RESIZE_ZERO_SIZE);
   // Grow size stream
-
   if ASize > 0 then
   begin
-    lOffset := AOffset;
-    lSize := FStream.Size - lOffset;
-    lShift := ASize;
+    LOffset := AOffset;
+    LSize := FStream.Size - LOffset;
+    LShift := ASize;
     FStream.Size := FStream.Size + ASize;
-    Shift(lOffset, lSize, lShift);
-  end
-
-  else { ASize < 0 }
-
+    if LSize > 0 then
+      Shift(LOffset, LSize, LShift);
+  end;
   // Reduce size stream
-
+  if ASize < 0 then
   begin
-    if (AOffset + Abs(ASize)) > Size then
-      raise EFitsClassesException.Create(SContentIncorrectSize, ERROR_CONTENT_RESIZE_SIZE);
-    lOffset := AOffset + Abs(ASize);
-    lSize := FStream.Size - lOffset;
-    lShift := ASize;
-    Shift(lOffset, lSize, lShift);
+    LOffset := AOffset + Abs(ASize);
+    if LOffset > FStream.Size then
+      Error(SContentChunkOutBounds, [AOffset, ASize, FStream.Size],
+        ERROR_CONTENT_RESIZE_BOUNDS);
+    if LOffset < FStream.Size then
+    begin
+      LSize := FStream.Size - LOffset;
+      LShift := ASize;
+      Shift(LOffset, LSize, LShift);
+    end;
     FStream.Size := FStream.Size + ASize;
   end;
-
 end;
 
-{ TFits }
+{ TFitsItemList }
 
-procedure TFitsContainer.Embed(NewUmit: TFitsUmit);
+function TFitsItemList.GetItem(AIndex: Integer): TFitsItem;
 begin
-  FUmits[FEmbindex] := NewUmit;
+  Result := TFitsItem(inherited Items[AIndex]);
+end;
+
+procedure TFitsItemList.SetItem(AIndex: Integer; AItem: TFitsItem);
+begin
+  inherited Items[AIndex] := AItem;
+end;
+
+destructor TFitsItemList.Destroy;
+var
+  LIndex: Integer;
+begin
+  for LIndex := 0 to Count - 1 do
+    GetItem(LIndex).Free;
+  inherited;
+end;
+
+function TFitsItemList.IndexOf(AItem: TFitsItem): Integer;
+begin
+  Result := Integer(inherited IndexOf(AItem));
+end;
+
+procedure TFitsItemList.Remove(AIndex: Integer);
+begin
+  inherited Items[AIndex] := nil;
+  inherited Delete(AIndex);
+end;
+
+procedure TFitsItemList.Delete(AIndex: Integer);
+begin
+  GetItem(AIndex).Free;
+  inherited Delete(AIndex);
+end;
+
+procedure TFitsItemList.Delete(AItem: TFitsItem);
+begin
+  if Assigned(AItem) then
+    Delete(IndexOf(AItem));
+end;
+
+{ EFitsContainerException }
+
+function EFitsContainerException.GetTopic: string;
+begin
+  Result := 'CONTAINER';
+end;
+
+{ TFitsContainer }
+
+function TFitsContainer.GetExceptionClass: EFitsExceptionClass;
+begin
+  Result := EFitsContainerException;
+end;
+
+procedure TFitsContainer.MakeItems;
+var
+  LItem: TFitsItem;
+  LItemsSize: Int64;
+begin
+  LItemsSize := 0;
+  while (FContent.Size - LItemsSize) > 0 do
+  try
+    FItemsCursor := FItems.Add(nil);
+    try
+      LItem := TFitsItem.Create(Self);
+    except
+      FItems.Remove(FItemsCursor);
+      raise;
+    end;
+    LItemsSize := LItem.Offset + LItem.Size;
+  finally
+    FItemsCursor := -1;
+  end;
+end;
+
+procedure TFitsContainer.ReorderItems;
+var
+  LCount, LIndex: Integer;
+begin
+  LCount := FItems.Count;
+  case LCount of
+    0: ;
+    1: FItems[0].SetOrder(ioSingle);
+  else
+    FItems[0].SetOrder(ioPrimary);
+    for LIndex := 1 to LCount - 1 do
+      FItems[LIndex].SetOrder(ioExtension);
+  end;
+end;
+
+procedure TFitsContainer.Check(const ACheck: string; const AArgs: array of const; ACodeError: Integer);
+var
+  LArgIndex, LArgIndexNewPimary, LCount: Integer;
+begin
+  if ACheck = 'index' then
+  begin
+    LArgIndex := AArgs[0].VInteger;
+    LCount := FItems.Count;
+    if (LArgIndex < 0) or (LArgIndex >= LCount) then
+      Error(SItemIndexOutBounds, [LArgIndex, LCount], ACodeError);
+  end else
+  if ACheck = 'order' then
+  begin
+    LArgIndex := AArgs[0].VInteger;
+    LArgIndexNewPimary := AArgs[1].VInteger;
+    LCount := FItems.Count;
+    if (LArgIndex = 0) and (LArgIndexNewPimary < LCount) and (not FItems[LArgIndexNewPimary].CanPrimary) then
+      Error(SItemCannotPrimary, [LArgIndexNewPimary], ACodeError);
+  end else
+    Assert(False, SAssertionFailureArgs(AArgs));
+end;
+
+function TFitsContainer.GetItemClass(AIndex: Integer): TFitsItemClass;
+var
+  LItem: TFitsItem;
+begin
+  Check('index', [AIndex], ERROR_CONTAINER_GETITEMCLASS_INDEX);
+  LItem := FItems[AIndex];
+  Result := TFitsItemClass(LItem.ClassType);
+end;
+
+procedure TFitsContainer.SetItemClass(AIndex: Integer; AItemClass: TFitsItemClass);
+var
+  LCurrentItem: TFitsItem;
+begin
+  Check('index', [AIndex], ERROR_CONTAINER_SETITEMCLASS_INDEX);
+  LCurrentItem := FItems[AIndex];
+  if not AItemClass.ExtensionTypeIs(LCurrentItem) then
+    Error(SItemInvalidExtension, [AItemClass.ClassName, LCurrentItem.GetXTENSION],
+      ERROR_CONTAINER_SETITEMCLASS_EXTENSION);
+  try
+    FItemsCursor := AIndex;
+    try
+      AItemClass.Create(Self);
+    except
+      FItems[FItemsCursor] := LCurrentItem;
+      raise;
+    end;
+    LCurrentItem.Free;
+  finally
+    FItemsCursor := -1;
+  end;
+end;
+
+function TFitsContainer.GetItem(AIndex: Integer): TFitsItem;
+begin
+  Check('index', [AIndex], ERROR_CONTAINER_GETITEM_INDEX);
+  Result := FItems[AIndex];
+end;
+
+function TFitsContainer.GetPrimary: TFitsItem;
+begin
+  Result := nil;
+  if FItems.Count > 0 then
+    Result := FItems[0];
 end;
 
 function TFitsContainer.GetCount: Integer;
 begin
-  Result := FUmits.Count;
+  Result := FItems.Count;
 end;
 
-function TFitsContainer.GetUmit(Index: Integer): TFitsUmit;
+function TFitsContainer.GetMemoryClass: TFitsMemoryClass;
 begin
-  if (Index < 0) or (Index >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_CONTAINER_GETUMIT_INDEX);
-  Result := TFitsUmit(FUmits[Index]);
+  Result := TFitsMemory;
 end;
 
-function TFitsContainer.GetPrimary: TFitsUmit;
+function TFitsContainer.GetContentClass: TFitsContentClass;
 begin
-  Result := nil;
-  if Count > 0 then
-    Result := Umits[0];
+  Result := TFitsContent;
 end;
 
 constructor TFitsContainer.Create(AStream: TStream);
 begin
   inherited Create;
-  FContent := TFitsContent.Create(AStream);
-  FUmits := TList.Create;
-  FInspect := False;
-  FEmbindex := -1;
-  Explore;
+  FMemory := GetMemoryClass.Create(Self);
+  FContent := GetContentClass.Create(Self, AStream);
+  FItems := TFitsItemList.Create;
+  FItemsCursor := -1;
+  MakeItems;
 end;
 
 destructor TFitsContainer.Destroy;
 begin
-  if Assigned(FUmits) then
-  begin
-    Clear;
-    FUmits.Free;
-    FUmits := nil;
-  end;
-  if Assigned(FContent) then
-  begin
-    FContent.Free;
-    FContent := nil;
-  end;
+  FItems.Free;
+  FContent.Free;
+  FMemory.Free;
   inherited;
 end;
 
-procedure TFitsContainer.Explore;
+function TFitsContainer.Add(AItemClass: TFitsItemClass; AItemSpec: TFitsItemSpec): TFitsItem;
 var
-  Umit: TFitsUmit;
+  LNewPrimaryItem, LNewItem: TFitsItem;
+  LOriginSize: Int64;
 begin
-  if FContent.Size > 0 then
-    while True do
+  LNewPrimaryItem := nil;
+  LNewItem := nil;
+  LOriginSize := FContent.Size;
+  try
+    // Try to add a primary item
+    if (FItems.Count = 0) and (AItemClass.ExtensionType <> 'IMAGE') then
     try
+      FItemsCursor := FItems.Add(nil);
       try
-        FInspect := True;
-        FEmbindex := FUmits.Add(nil);
-        Umit := TFitsUmit.CreateExplorer(Self, True);
-      finally
-        FInspect := False;
+        LNewPrimaryItem := TFitsItem.CreateNew(Self, {AItemSpec:} nil);
+      except
+        FItems.Remove(FItemsCursor);
+        raise;
       end;
-      if FContent.Size - (Umit.Offset + Umit.Size) <= 0 then
-        Break;
-    except
-      FUmits.Delete(FEmbindex);
-      raise;
-    end;
-end;
-
-function TFitsContainer.Coclass(Index: Integer; UmitClass: TFitsUmitClass): Boolean;
-begin
-  if (Index < 0) or (Index >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_CONTAINER_COCLASS_INDEX);
-  Result := (UmitClass = TFitsUmit) or SameText(Umits[Index].Family, UmitClass.ClassFamily);
-end;
-
-function TFitsContainer.Reclass(Index: Integer; UmitClass: TFitsUmitClass): TFitsUmit;
-var
-  Prev: TFitsUmit;
-begin
-
-  if (Index < 0) or (Index >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_CONTAINER_RECLASS_INDEX);
-
-  Prev := nil;
-
-  try
-    try
-      FInspect := True;
-      FEmbindex := Index;
-      Prev := Umits[FEmbindex];
-      Result := UmitClass.CreateExplorer(Self, False);
-      Prev.Free;
     finally
-      FInspect := False;
+      FItemsCursor := -1;
     end;
+    // Add a new item
+    try
+      FItemsCursor := FItems.Add(nil);
+      try
+        LNewItem := AItemClass.CreateNew(Self, AItemSpec);
+      except
+        FItems.Remove(FItemsCursor);
+        raise;
+      end;
+    finally
+      FItemsCursor := -1;
+    end;
+    // Set items order
+    ReorderItems;
+    // Return
+    Result := LNewItem;
   except
-    FUmits[FEmbindex] := Prev;
+    // If we failed to create new items, we will restore the
+    // content size and remove these items from the list
+    FContent.Resize({AOffset:} LOriginSize, {ASize:} LOriginSize - FContent.Size);
+    FItems.Delete(LNewPrimaryItem);
+    FItems.Delete(LNewItem);
     raise;
   end;
-
 end;
 
-function TFitsContainer.Add(UmitClass: TFitsUmitClass; UmitSpec: TFitsUmitSpec): TFitsUmit;
+procedure TFitsContainer.Delete(AIndex: Integer);
 var
-  RemOffset, RemSize: Int64;
+  LItem: TFitsItem;
 begin
-
-  // remember a current content size
-
-  RemOffset := FContent.Size;
-  RemSize := FContent.Size;
-
-  // add a new content block and embed a new umit
-
+  Check('index', [AIndex], ERROR_CONTAINER_DELETE_INDEX);
+  Check('order', [AIndex, {AIndexNewPimary:} Integer(1)], ERROR_CONTAINER_DELETE_ORDER);
   try
-    try
-      FInspect := True;
-      FEmbindex := Count;
-      FUmits.Insert(FEmbindex, nil);
-      FContent.Resize(RemOffset, cSizeBlock);
-      FContent.Fill(RemOffset, cSizeBlock, cChrBlank);
-      Result := UmitClass.CreateNewcomer(Self, UmitSpec);
-      // reorder first umit
-      if Count = 2 then
-        Umits[0].Reorder(otPrim);
-    finally
-      FInspect := False;
-    end;
-  except
-    FUmits.Delete(FEmbindex);
-    FContent.Resize(RemOffset, RemSize - FContent.Size);
-    raise;
-  end;
-
-end;
-
-procedure TFitsContainer.Delete(Index: Integer);
-var
-  Umit, Vary: TFitsUmit;
-  Order: TOrderType;
-begin
-
-  if (Index < 0) or (Index >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index], ERROR_CONTAINER_DELETE_INDEX);
-
-  Umit := Umits[Index];
-
-  // prepare a new order of umits
-
-  Vary := nil;
-  Order := otNone;
-  if (Index = 0) and (Count > 1) then
-  begin
-    Vary := Umits[1];
-    if not Vary.CanPrimary then
-      raise EFitsClassesException.CreateFmt(SUmitCannotPrimary, [Vary.Index], ERROR_CONTAINER_DELETE_REORDER);
-    Vary.Reorder(IfThen(Count = 2, otSing, otPrim));
-    Order := otXten;
-  end;
-  if (Index = 1) and (Count = 2) then
-  begin
-    Vary := Umits[0];
-    if not Vary.CanPrimary then
-      raise EFitsClassesException.CreateFmt(SUmitCannotPrimary, [Vary.Index], ERROR_CONTAINER_DELETE_REORDER);
-    Vary.Reorder(otSing);
-    Order := otPrim;
-  end;
-
-  // remove umit and block of stream !-> restore umits order
-
-  try
-    try
-      FInspect := True;
-      FContent.Resize(Umit.Offset, -Umit.Size);
-      Umit.Free;
-      FUmits.Delete(Index);
-    finally
-      FInspect := False;
-    end;
-  except
-    if Assigned(Vary) then
-      Vary.Reorder(Order);
-    raise;
-  end;
-
-end;
-
-procedure TFitsContainer.Clear;
-var
-  I: Integer;
-begin
-  try
-    FInspect := True;
-    for I := 0 to Count - 1 do
-    begin
-      Umits[I].Free;
-      FUmits[I] := nil;
-    end;
-    FUmits.Clear;
+    FItemsCursor := AIndex;
+    LItem := FItems[FItemsCursor];
+    FContent.Resize(LItem.Offset, -LItem.Size);
+    FItems.Delete(FItemsCursor);
+    ReorderItems;
   finally
-    FInspect := False;
+    FItemsCursor := -1;
   end;
 end;
 
-procedure TFitsContainer.Exchange(Index1, Index2: Integer);
+procedure TFitsContainer.Exchange(AIndex1, AIndex2: Integer);
 var
-  Umit1, Umit2: TFitsUmit;
-  Offset1, Offset2: Int64;
+  LItem1, LItem2: TFitsItem;
+  LOffset1, LOffset2: Int64;
 begin
-  if (Index1 < 0) or (Index1 >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index1], ERROR_CONTAINER_EXCHANGE_INDEX);
-  if (Index2 < 0) or (Index2 >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [Index2], ERROR_CONTAINER_EXCHANGE_INDEX);
-  if Index1 = Index2 then
-    Exit;
-  // prepare a new order of umits
-  Umit1 := Umits[Index1];
-  Umit2 := Umits[Index2];
-  if Index1 = 0 then
+  Check('index', [AIndex1], ERROR_CONTAINER_EXCHANGE_INDEX);
+  Check('index', [AIndex2], ERROR_CONTAINER_EXCHANGE_INDEX);
+  if AIndex1 <> AIndex2 then
   begin
-    if not Umit2.CanPrimary then
-      raise EFitsClassesException.CreateFmt(SUmitCannotPrimary, [Index2], ERROR_CONTAINER_EXCHANGE_REORDER);
-    Umit1.Reorder(otXten);
-    Umit2.Reorder(otPrim);
+    Check('order', [AIndex1, {AIndexNewPimary:} AIndex2], ERROR_CONTAINER_EXCHANGE_ORDER);
+    Check('order', [AIndex2, {AIndexNewPimary:} AIndex1], ERROR_CONTAINER_EXCHANGE_ORDER);
+    LItem1 := FItems[AIndex1];
+    LItem2 := FItems[AIndex2];
+    LOffset1 := LItem1.Offset;
+    LOffset2 := LItem2.Offset;
+    FContent.Exchange({var} LOffset1, LItem1.Size, {var} LOffset2, LItem2.Size);
+    FItems.Exchange(AIndex1, AIndex2);
+    ReorderItems;
   end;
-  if Index2 = 0 then
-  begin
-    if not Umit1.CanPrimary then
-      raise EFitsClassesException.CreateFmt(SUmitCannotPrimary, [Index1], ERROR_CONTAINER_EXCHANGE_REORDER);
-    Umit1.Reorder(otPrim);
-    Umit2.Reorder(otXten);
-  end;
-  // exchange blocks of stream and umits
-  Offset1 := Umit1.Offset;
-  Offset2 := Umit2.Offset;
-  FContent.Exchange(Offset1, Umit1.Size, Offset2, Umit2.Size);
-  FUmits.Exchange(Index1, Index2);
 end;
 
-procedure TFitsContainer.Move(CurIndex, NewIndex: Integer);
+procedure TFitsContainer.Move(ACurIndex, ANewIndex: Integer);
 var
-  NewPrim, NewXten: TFitsUmit;
-  NewOffset: Int64;
+  LCurItem, LNewItem: TFitsItem;
+  LNewOffset: Int64;
 begin
-  if (CurIndex < 0) or (CurIndex >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [CurIndex], ERROR_CONTAINER_MOVE_INDEX);
-  if (NewIndex < 0) or (NewIndex >= Count) then
-    raise EFitsClassesException.CreateFmt(SListIndexOutBounds, [NewIndex], ERROR_CONTAINER_MOVE_INDEX);
-  if CurIndex = NewIndex then
-    Exit;
-  // prepare a new order of umits
-  if (CurIndex = 0) or (NewIndex = 0) then
+  Check('index', [ACurIndex], ERROR_CONTAINER_MOVE_INDEX);
+  Check('index', [ANewIndex], ERROR_CONTAINER_MOVE_INDEX);
+  if ACurIndex <> ANewIndex then
   begin
-    if CurIndex = 0 then
-    begin
-      NewPrim := Umits[1];
-      NewXten := Umits[0];
-    end
-    else // if NewIndex = 0 then
-    begin
-      NewPrim := Umits[CurIndex];
-      NewXten := Umits[0];
-    end;
-    if not NewPrim.CanPrimary then
-      raise EFitsClassesException.CreateFmt(SUmitCannotPrimary, [NewPrim.Index], ERROR_CONTAINER_MOVE_REORDER);
-    NewPrim.Reorder(otPrim);
-    NewXten.Reorder(otXten);
+    Check('order', [ACurIndex, {AIndexNewPimary:} Integer(1)], ERROR_CONTAINER_MOVE_ORDER);
+    Check('order', [ANewIndex, {AIndexNewPimary:} ACurIndex], ERROR_CONTAINER_MOVE_ORDER);
+    LCurItem := FItems[ACurIndex];
+    LNewItem := FItems[ANewIndex];
+    LNewOffset := IfThen(ACurIndex > ANewIndex, LNewItem.Offset, LNewItem.Offset + LNewItem.Size - 1);
+    FContent.Move(LCurItem.Offset, LCurItem.Size, {var} LNewOffset);
+    FItems.Move(ACurIndex, ANewIndex);
+    ReorderItems;
   end;
-  // move blocks of stream and umits
-  NewOffset := Umits[NewIndex].Offset;
-  if CurIndex < NewIndex then
-    NewOffset := NewOffset + Umits[NewIndex].Size - 1;
-  FContent.Move(Umits[CurIndex].Offset, Umits[CurIndex].Size, NewOffset);
-  FUmits.Move(CurIndex, NewIndex);
 end;
 
-function TFitsContainer.IndexOf(Umit: TFitsUmit): Integer;
-var
-  I: Integer;
+function TFitsContainer.IndexOf(AItem: TFitsItem): Integer;
 begin
-  Result := -1;
-  for I := 0 to Count - 1 do
-    if Umits[I] = Umit then
-    begin
-      Result := I;
-      Break;
-    end;
+  Result := FItems.IndexOf(AItem);
+end;
+
+function TFitsContainer.ItemExtensionTypeIs(AIndex: Integer; AItemClass: TFitsItemClass): Boolean;
+var
+  LItem: TFitsItem;
+begin
+  Check('index', [AIndex], ERROR_CONTAINER_EXTENSIONTYPEIS_INDEX);
+  LItem := TFitsItem(FItems[AIndex]);
+  Result := AItemClass.ExtensionTypeIs(LItem);
 end;
 
 end.

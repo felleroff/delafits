@@ -4,7 +4,7 @@
 {         Types, constants, keyword dictionary         }
 {                 and simple functions                 }
 {                                                      }
-{          Copyright(c) 2013-2021, felleroff           }
+{          Copyright(c) 2013-2026, felleroff           }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }
@@ -24,39 +24,47 @@ const
 
   cDeLaFits = 'DeLaFits';
 
-  { FITS Standard. Each FITS structure shall consist of an integral number
-    of FITS blocks which are each 2880 bytes (23040 bits) in length }
+  { [FITS_STANDARD_4.0, SECT_3.1] Each FITS structure shall consist of an
+    integral number of FITS blocks which are each 2880 bytes (23040 bits)
+    in length }
 
   cSizeBlock = 2880;
 
   cSizeLine = 80;
   cCountLinesInBlock = cSizeBlock div cSizeLine; // 36
+
   cSizeKeyword = 08;
 
   cChrValueIndicator: Char = '=';     // $3D
   cChrNoteIndicator : Char = '/';     // $2F
   cChrBlank         : Char = ' ';     // $20
   cChrNull          : Char = Char(0); // $00
+  cChrAmpersand     : Char = '&';     // $26
   cChrQuote         : Char = '''';    // $27
 
   cWidthLineValue = 20;
   cWidthLineValueQuote = 08;
 
-  { FITS Standard. A sequence of data values. This sequence corresponds
-    to the elements in a rectilinear, n-dimension matrix (1 <= n <= 999,
-    or n = 0 in the case of a null array) }
+  { [FITS_STANDARD_4.0, SECT_2.2] Array a sequence of data values. This
+    sequence corresponds to the elements in a rectilinear, n-dimension
+    matrix (1 <= n <= 999, or n = 0 in the case of a null array) }
 
   cMaxAxis = 999;
 
-  { FITS Standard. The ASCII-table extension / Binary-table extension. The value
-    field TFIELDS shall contain a non-negative integer representing the number
-    of fields in each row. The maximum permissible value is 999 }
+  { [FITS_STANDARD_4.0, SECT_7.2.1] The ASCII-table extension / Binary-table
+    extension. TFIELDS keyword. The value field shall contain a non-negative
+    integer representing the number of fields in each row. The maximum
+    permissible value is 999 }
 
   cMaxFields = 999;
 
+  { Indication of an undefined value for the internal size of HDU blocks }
+
+  cInternalSizeNull = -1;
+
 const
 
-  { FITS Standard. Basic and other commonly used keywords:
+  { [FITS_STANDARD_4.0] Basic and other commonly used keywords:
     https://heasarc.gsfc.nasa.gov/docs/fcg/standard_dict.html
     https://heasarc.gsfc.nasa.gov/docs/fcg/common_dict.html }
 
@@ -70,21 +78,23 @@ const
   cEXTLEVEL = 'EXTLEVEL'; // Integer: specifying the level in a hierarchy of extension levels of the extension header containing it, default = 1
 
   cBITPIX   = 'BITPIX';
-  cGCOUNT   = 'GCOUNT';   // Integer: group count, optional, default = 1
-  cPCOUNT   = 'PCOUNT';   // Integer: parameter count, optional, default = 0
   cNAXIS    = 'NAXIS';
   cNAXISn   = 'NAXIS%d';
   cNAXIS1   = 'NAXIS1';
   cNAXIS2   = 'NAXIS2';
   cNAXIS3   = 'NAXIS3';
+  cGCOUNT   = 'GCOUNT';   // Integer: group count, optional, default = 1
+  cPCOUNT   = 'PCOUNT';   // Integer: parameter count, optional, default = 0
 
   cGROUPS   = 'GROUPS';   // Boolean: indicates random groups structure
+
   cBSCALE   = 'BSCALE';
   cBZERO    = 'BZERO';
 
   cTFIELDS  = 'TFIELDS';
   cTBCOLn   = 'TBCOL%d';
   cTFORMn   = 'TFORM%d';
+
   cTTYPEn   = 'TTYPE%d';
   cTUNITn   = 'TUNIT%d';
   cTSCALn   = 'TSCAL%d';
@@ -98,6 +108,7 @@ const
 
   cAUTHOR   = 'AUTHOR';
   cBLANK    = '';
+  cCONTINUE = 'CONTINUE';
   cCOMMENT  = 'COMMENT';
   cDATAMAX  = 'DATAMAX';  // Double
   cDATAMIN  = 'DATAMIN';  // Double
@@ -130,31 +141,40 @@ const
 
   cEND      = 'END';
 
+  function ExpandKeyword(const AKeyword: string; AKeywordNumber: Integer): string; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+
 type
 
-  { Numbers: f ~ floating-point, u ~ unsigned binary integer, c ~ two's
-    complement binary integer }
+  { Numbers (platform-independent types):
+    f ~ floating-point
+    c ~ two's complement binary integer
+    u ~ unsigned binary integer }
 
-  T08u = Byte;
   T08c = ShortInt;
-  T16u = Word;
+  T08u = Byte;
   T16c = SmallInt;
+  T16u = Word;
   T32f = Single;
-  T32u = LongWord;
-  T32c = LongInt;
+  T32c = Integer;
+  T32u = Cardinal;
   T64f = Double;
   T64c = Int64;
   T80f = Extended;
 
+  { Type numbers: the physical values of the data block }
+
+  TNumberType = (numUnknown, num80f, num64f, num32f, num08c, num08u, num16c,
+    num16u, num32c, num32u, num64c);
+
   { Arrays }
 
-  TA08u = array of T08u;
   TA08c = array of T08c;
-  TA16u = array of T16u;
+  TA08u = array of T08u;
   TA16c = array of T16c;
+  TA16u = array of T16u;
   TA32f = array of T32f;
-  TA32u = array of T32u;
   TA32c = array of T32c;
+  TA32u = array of T32u;
   TA64f = array of T64f;
   TA64c = array of T64c;
   TA80f = array of T80f;
@@ -162,6 +182,11 @@ type
   TABol = array of Boolean;
 
   TAStr = array of string;
+
+  { TBytes }
+
+  TBytes1 = array of Byte;
+  TBytes2 = array of array of Byte;
 
 type
 
@@ -176,7 +201,7 @@ type
   { The type of data in the temporary buffer when dealing with stream, possible
     need packed }
 
-  TBuffer = array of T08u;
+  TBuffer = TBytes1;
 
 const
 
@@ -189,15 +214,7 @@ const
 
 type
 
-  { Numbers type of the data elements: physical values representation of the
-    data block }
-
-  TRepNumber = (repUnknown, rep80f, rep64f, rep32f, rep08c, rep08u, rep16c,
-    rep16u, rep32c, rep32u, rep64c);
-
-type
-
-  { Fits Standard. BITPIX (bits per data value):
+  { [FITS_STANDARD_4.0, SECT_4.1.1.1] BITPIX (bits per data value) keyword:
     -64 ~ IEEE double precision floating-point
     -32 ~ IEEE single precision floating-point
     +08 ~ Character or unsigned binary integer
@@ -207,136 +224,127 @@ type
 
   TBitPix = (biUnknown, bi64f, bi32f, bi08u, bi16c, bi32c, bi64c);
 
-  function BitPixToInt(Value: TBitPix): Integer; {$IFDEF HAS_INLINE} inline; {$ENDIF}
-  function IntToBitPix(Value: Integer): TBitPix; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+  function BitPixToInt(AValue: TBitPix): Integer; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+  function IntToBitPix(AValue: Integer): TBitPix; {$IFDEF HAS_INLINE} inline; {$ENDIF}
 
-  function BitPixToRep(Value: TBitPix): TRepNumber; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+  { Returns size BitPix in bytes }
 
-  // Returns size BitPix in bytes
-  function BitPixSize(Value: TBitPix): Byte; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
-  function BitPixSize(Value: Integer): Byte; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
+  function BitPixSize(AValue: TBitPix): Byte; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
+  function BitPixSize(AValue: Integer): Byte; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
+
+type
+
+  { TVariable: dynamic value type (a simplified analogue of the Variant type) }
+
+  TVariableType = (vtNone, vtBoolean, vtInt64, vtExtended, vtString);
+
+  TVariable = record
+    VarType: TVariableType;
+    ValueString: string;
+  case Integer of
+    1: (ValueBoolean: Boolean);
+    2: (ValueInt64: Int64);
+    3: (ValueExtended: Extended);
+  end;
+
+  function ClearVariable: TVariable; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+
+  function NewVariable(const AValue: Boolean): TVariable; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
+  function NewVariable(const AValue: Int64): TVariable; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
+  function NewVariable(const AValue: Extended): TVariable; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
+  function NewVariable(const AValue: string): TVariable; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
 
 const
 
-  { Usage of BZERO to represent non-default integer data types }
+  { [FITS_STANDARD_4.0, SECT_4.4.2.5] BZERO keyword: usage of ZERO to represent
+    non-default integer data types }
 
   cZero08c = -$80;
   cZero16u = +$8000;
   cZero32u = +$80000000;
 
-const
-
-  { Constant string values parsing rules }
-
-  cCast = 0;
-
-  cCastChars     = cCast + 1;  // ~ string as is, one line (len ~ 80)
-  cCastText      = cCast + 2;  // ~ string as is long
-  cCastString    = cCast + 3;  // ~ quoted/unquoted string
-  cCastBoolean   = cCast + 4;  // ~ Boolean
-  cCastInteger   = cCast + 5;  // ~ Int64
-  cCastFloat     = cCast + 6;  // ~ Extended
-  cCastRa        = cCast + 7;  // ~ Extended
-  cCastDe        = cCast + 8;  // ~ Extended
-  cCastDateTime  = cCast + 9;  // ~ TDateTime
-  cCastDate      = cCast + 10; // ~ TDateTime, only Date
-  cCastTime      = cCast + 11; // ~ TDateTime, only Time
+  function NumberTypeToBitPix(AValueType: TNumberType): TBitPix; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+  function NumberTypeToTypicalZero(AValueType: TNumberType): Int64; {$IFDEF HAS_INLINE} inline; {$ENDIF}
 
 type
 
-  TSliceDateTime = cCastDateTime .. cCastTime; // DateTime, only Date, only Time
+  { The type of the coefficients zero and scale in the linear transformation
+    equation "values = zero + scale * buffer":
+    linearPlain ~ zero=0.0 and scale=1.0
+    linearShift ~ zero=cZeroXXX and scale=1.0
+    linearScale ~ non-trivial values of zero and scale }
 
-  { Fits Standard. Each 80-character header keyword record shall consist of
-    a keyword name, a value indicator (only required if a value is present),
-    an optional value, and an optional comment.
+  TLinearType = (linearPlain, linearShift, linearScale);
 
-    Card.Value contains only one! value: string, Boolean, Int64, Extended
-    or TDateTime, ie this simple analog of the type Variant }
+type
 
-  TCard = record
+  { [FITS_STANDARD_4.0, SECT_4.1.1] Syntax ... Each 80-character header keyword
+    record shall consist of a keyword name, a value indicator (only required if
+    a value is present), an optional value, and an optional comment }
+
+  TLineRecord = record
     Keyword: string;
     ValueIndicate: Boolean;
-    Value: record
-      Str: string;
-      Bol: Boolean;
-      Int: Int64;
-      Ext: Extended;
-      Dtm: TDateTime;
-    end;
+    Value: string;
     NoteIndicate: Boolean;
     Note: string;
   end;
 
-  // Just a wrapper, no checks
-
-  function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: string;
-                  NoteIndicate: Boolean; const Note: string): TCard; overload;
-  function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: Boolean;
-                  NoteIndicate: Boolean; const Note: string): TCard; overload;
-  function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: Int64;
-                  NoteIndicate: Boolean; const Note: string): TCard; overload;
-  function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: Extended;
-                  NoteIndicate: Boolean; const Note: string): TCard; overload;
-  function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: TDateTime;
-                  NoteIndicate: Boolean; const Note: string): TCard; overload;
+  function ToLineRecord(const AKeyword: string; AValueIndicate: Boolean; const AValue: string;
+    ANoteIndicate: Boolean; const ANote: string): TLineRecord; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+  function EmptyLineRecord: TLineRecord; {$IFDEF HAS_INLINE} inline; {$ENDIF}
 
 type
 
-  TFmtShortDate = (yymmdd, ddmmyy); // Fits format short date ~ yymmdd
+  { Type of card packaging in FITS header lines:
+    cardEmpty     ~ empty single-line
+    cardTypical   ~ single-line as "KEYWORD=VALUE/NOTE"
+    cardContinued ~ multi-line as a continued string
+    cardGrouped   ~ multi-line as a grouping "KEYWORD VALUE" }
 
-  TFmtRepCoord = (coWhole, coParts); // G.(g) or GG MM SS.(s)
-  TFmtMeaCoord = (coDegree, coHour); // DDD:MM:SS.(s) or HH:MM:SS.(s)
+  TCardType = (cardUnknown, cardEmpty, cardTypical, cardContinued, cardGrouped);
 
-  { Format equatorial coordinate system (Ra, De). Fits standard:
-    Ra in [coHour, coParts], De in [coDegree, coParts]
-    |------|------------------------|----------------------------|
-    |      |  Ra                    | De                         |
-    |------|------------------------|----------------------------|
-    | Fits | HH:MM:SS.(s)  | 0..24  | +/-DD:MM:SS.(s) | -90..+90 |
-    |  ~   | HH.(h)        | 0..24  | +/-DD.(d)       | -90..+90 |
-    |  ~   | DDD:MM:SS.(s) | 0..360 | +/-DD:MM:SS.(s) | -90..+90 |
-    |  ~   | DDD.(d)       | 0..360 | +/-DD.(d)       | -90..+90 |
-    |------------------------------------------------------------| }
+  { Scope of card search: range and direction }
 
-  { Formatting options header lines: additional parameters when parsing
-    the header lines }
+  TSearchScope = (searchFirstForward, searchLastBackward, searchNextForward, searchPriorBackward);
 
-  PFormatLine = ^TFormatLine;
-  TFormatLine = record
-    vaStr: record
-      wWidth: ShortInt;             // default = -cWidthLineValue ~ <text >
-      wWidthQuoteInside: ShortInt;  // default = -cWidthLineValueQuote ~ 'text '
-    end;
-    vaBol: record
-      wWidth: ShortInt;             // default = cWidthLineValue ~ < text>
-    end;
-    vaInt: record
-      wWidth: ShortInt;             // default = cWidthLineValue ~ < text>
-      wSign: Boolean;               // default = False
-      wFmt: string;                 // see Format function; default = '%d'
-    end;
-    vaFloat: record
-      wWidth: ShortInt;             // default = cWidthLineValue ~ < text>
-      wSign: Boolean;               // default = False
-      wFmt: string;                 // see Format function; default = '%g'
-    end;
-    vaDateTime: record
-      rFmtShortDate: TFmtShortDate; // used as a prompt when reading short date format; default = yymmdd
-      wWidth: ShortInt;             // default = -cWidthLineValue ~ <text >
-      wWidthQuoteInside: ShortInt;  // default = -cWidthLineValueQuote ~ <text >
-    end;
-    vaCoord: record
-      rFmtMeaRa: TFmtMeaCoord;     // used as a prompt when reading Ra (Equatorial coordinate system); default = coHour
-      wWidth: ShortInt;            // default = -cWidthLineValue ~ <text >, used Abs(cWidthLineValue) for coDec representation
-      wWidthQuoteInside: ShortInt; // default = -cWidthLineValueQuote ~ <text >
-      wPrecRa: Word;               // in [degree], '%.(wPrecRa)f'; default = 4 ~ hh:mm:ss.ss, ie (0.1")
-      wPrecDe: Word;               // in [degree], '%.(wPrecDe)f'; default = 4 ~ dd:mm:ss.s, ie (0.1")
-      wFmtMeaRa: TFmtMeaCoord;     // default = coHour
-      wFmtRepCoord: TFmtRepCoord;  // default = coParts
-    end;
+  { Card location in FITS header lines: index of the starting line and
+    number of lines occupied }
+
+  TCardSpot = record
+    Start: Integer;
+    Count: Integer;
   end;
 
-  function FormatLineDefault: TFormatLine;
+const
+
+  cCardSpotNull: TCardSpot = (Start: -1; Count: -1);
+
+type
+
+  { Precise DateTime: date and time with a precision of up to a second and
+    the number of attoseconds (1s = 1*10^18 = 1_000_000_000_000_000_000 as) }
+
+  TPreciseDateTime = record
+    DateTime: TDateTime;
+    AttoSec: Int64;
+  end;
+
+  TPartDateTime = set of (paDate, paTime); // DateTime, only Date, only Time
+  TFmtShortDate = (yymmdd, ddmmyy);        // FITS format short date ~ yymmdd
+
+  { Coordinate format of the II equatorial coordinate system:
+    Ra [coDecimal,coDegree] ~   recommended, ddd(.d), [0.0..360.0)
+    Ra [  coMixed,  coHour] ~   recommended, HH:MM:SS(.s), [0.0..24.0)
+    Ra [coDecimal,  coHour] ~ unrecommended, hh(.h), [0.0..24.0)
+    Ra [  coMixed,coDegree] ~ unrecommended, DDD:MM:SS(.s), [0.0..360.0)
+    De [coDecimal,coDegree] ~   recommended, dd(.d), [-90.0..+90.0]
+    De [  coMixed,coDegree] ~   recommended, DD:MM:SS(.s), [-90.0..+90.0]
+    De [coDecimal,  coHour] ~   unsupported
+    De [  coMixed,  coHour] ~   unsupported }
+
+  TFmtRepCoord = (coDecimal, coMixed); // G.(g) or GG MM SS.(s)
+  TFmtMeaCoord = (coDegree, coHour);   // DDD:MM:SS.(s) or HH:MM:SS.(s)
 
   { String }
 
@@ -348,20 +356,15 @@ type
 
   PHistogramBucket = ^THistogramBucket;
   THistogramBucket = record
-    Elem: Extended;
-    Freq: Integer;
+    Value: Extended;
+    Frequency: Integer;
   end;
   THistogramBuckets = array of PHistogramBucket;
 
-  THistogramIndexRange = record
-    Black: Integer;
-    White: Integer;
-  end;
-
 const
 
-  cHistogramMaxQuota = 1024 * 1024; // maximum pixel sample size
-  cHistogramMaxCount  =  50 * 1000; // maximum bucket size, eq ~586 kb
+  cHistogramMaxVolume = 1024 * 1024; // maximum count of values in all buckets (bins), i.e. the maximum sum of all frequencies
+  cHistogramMaxCount  =  50 * 1000;  // maximum count of buckets (bins), eq ~586 kb
 
 const
 
@@ -393,16 +396,14 @@ type
   PPaletteTuples = ^TPaletteTuples;
   TPaletteTuples = array [0 .. cPaletteCount - 1] of TPaletteTuple;
 
-  TPaletteIndexs = array of array of Byte;
+  TPaletteRaster = TBytes2;
 
-type
-
-  { Picture frame pixel map }
-
-  TPixmap = record
-    Pix: TPaletteIndexs;
-    Map: TPaletteTuples;
+  TPaletteRasterCell = record
+    X, Y: Integer;
   end;
+
+  procedure AllocateRaster(var ARaster: TPaletteRaster; AWidth, AHeight: Integer); {$IFDEF HAS_INLINE} inline; {$ENDIF}
+  procedure FillRaster(var ARaster: TPaletteRaster; AWidth, AHeight: Integer; AValue: Byte); {$IFDEF HAS_INLINE} inline; {$ENDIF}
 
 const
 
@@ -420,30 +421,28 @@ type
 
   TMatrix = array [1 .. 3, 1 .. 3] of Double;
 
-  TPix = record
+  TPlanePixel = record
     X, Y: Integer;
   end;
 
-  TPnt = record
+  TPlanePoint = record
     X, Y: Double;
   end;
 
-  TDesignPoint = (xy00, xyLT, xyRT, xyRB, xyLB, xyCC);
-  TDesignShift = (xyLTat00, xyRTat00, xyRBat00, xyLBat00, xyCCat00);
+  TVirtualPoint = (xy00, xyLT, xyRT, xyRB, xyLB, xyCC);
 
-  function ToPnt(const X, Y: Double): TPnt;
-  function ToPix(const X, Y: Integer): TPix;
+  TVirtualShift = (xyLTat00, xyRTat00, xyRBat00, xyLBat00, xyCCat00);
 
-type
+  //  (X1,Y1)-- W --*
+  //     |          |
+  //     H          |
+  //     |          |
+  //     *----------*
 
   TRegion = record
     X1, Y1: Integer;
     Width, Height: Integer;
   end;
-
-  function ToRegion(X1, Y1: Integer; Width, Height: Integer): TRegion;
-
-type
 
   TBound = record
     Xmin: Integer;
@@ -454,33 +453,47 @@ type
     Ycount: Integer;
   end;
 
-  function ToBound(const Region: TRegion): TBound;
+  // P1----P2
+  //  |    |
+  // P4----P3
 
-type
-
-  TPntsQuad = array [1 .. 4] of TPnt;
+  TQuadPoints = array [1 .. 4] of TPlanePoint;
   TQuad = record
     case Integer of
       0: (X1, Y1, X2, Y2, X3, Y3, X4, Y4: Double);
-      1: (P1, P2, P3, P4: TPnt);
-      2: (PA: TPntsQuad);
+      1: (P1, P2, P3, P4: TPlanePoint);
+      2: (Points: TQuadPoints);
   end;
 
-  function ToQuad(const X1, Y1, X2, Y2, X3, Y3, X4, Y4: Double): TQuad; overload;
-  function ToQuad(const Region: TRegion): TQuad; overload;
-
-type
-
-  TPntsClip = array [1 .. 8] of TPnt;
+  TClipPoints = array [1 .. 8] of TPlanePoint;
   TClip = record
-    PN: Integer;
+    Count: Integer;
     case Integer of
       0: (X1, Y1, X2, Y2, X3, Y3, X4, Y4, X5, Y5, X6, Y6, X7, Y7, X8, Y8: Double);
-      1: (P1, P2, P3, P4, P5, P6, P7, P8: TPnt);
-      2: (PA: TPntsClip);
+      1: (P1, P2, P3, P4, P5, P6, P7, P8: TPlanePoint);
+      2: (Points: TClipPoints);
   end;
 
-  function ToClip(const XA, YA: array of Double): TClip;
+const
+
+  cPointOrigin: TPlanePoint = (X: 0.0; Y: 0.0);
+
+  function ToPixel(const AX, AY: Integer): TPlanePixel; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+
+  function ToPoint(const AX, AY: Double): TPlanePoint; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+
+  function ToRegion(AX1, AY1, AWidth, AHeight: Integer): TRegion; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+
+  function ToBound(const ARegion: TRegion): TBound; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+
+  function ToQuad(const AX1, AY1, AX2, AY2, AX3, AY3, AX4, AY4: Double): TQuad; overload; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+  function ToQuad(const ARegion: TRegion): TQuad; overload; {$IFDEF HAS_INLINE} inline; {$ENDIF}
+
+  function ToClip(const AX, AY: array of Double): TClip;
+
+const
+
+  cRecordIndexNull = -1;
 
 const
 
@@ -492,21 +505,64 @@ const
 
 resourcestring
 
+  { The messages of exceptions }
+
   SAssertionFailure = 'DeLaFits assertion failure';
 
+  function SAssertionFailureArgs(const AArgs: array of const): string;
+
 type
+
+  { EFitsException: base exception class }
 
   EFitsException = class(Exception)
   private
     FCode: Integer;
+    function GetCaption: string;
+    function FormatMessage(const AMsg: string; const AArgs: array of const): string;
+  protected
+    function GetTopic: string; virtual;
   public
     constructor Create(const AMsg: string; ACode: Integer);
-    constructor CreateFmt(const AMsg: string; const Args: array of const; ACode: Integer); overload;
-    constructor CreateFmt(const AMsg: string; const Args: array of const; const EMsg: string; ACode: Integer); overload;
+    constructor CreateFmt(const AMsg: string; const AArgs: array of const; ACode: Integer);
+    property Topic: string read GetTopic;
     property Code: Integer read FCode;
   end;
 
+  EFitsExceptionClass = class of EFitsException;
+
+  { TFitsObject [abstract]: base class }
+
+  TFitsObject = class(TObject)
+  protected
+    procedure Init; virtual;
+    function GetExceptionClass: EFitsExceptionClass; virtual; abstract;
+    procedure Error(const AMsg: string; ACode: Integer); overload;
+    procedure Error(const AMsg: string; const AArgs: array of const; ACode: Integer); overload;
+  public
+    constructor Create;
+  end;
+
+  { TFitsInterfacedObject [abstract]: base interfaced class }
+
+  TFitsInterfacedObject = class(TInterfacedObject)
+  protected
+    procedure Init; virtual;
+    function GetExceptionClass: EFitsExceptionClass; virtual; abstract;
+    procedure Error(const AMsg: string; ACode: Integer); overload;
+    procedure Error(const AMsg: string; const AArgs: array of const; ACode: Integer); overload;
+  public
+    constructor Create;
+  end;
+
 implementation
+
+{ Keywords }
+
+function ExpandKeyword(const AKeyword: string; AKeywordNumber: Integer): string;
+begin
+  Result := Format(AKeyword, [AKeywordNumber]);
+end;
 
 { TEndianness }
 
@@ -521,7 +577,7 @@ begin
   if X = $1234 then
     Result := sysBE
   else { X = $3412 }
-    Result := sysLE
+    Result := sysLE;
 end;
 
 { Temporary buffer }
@@ -539,151 +595,143 @@ end;
 
 { TBitPix }
 
-function BitPixToInt(Value: TBitPix): Integer;
+function BitPixToInt(AValue: TBitPix): Integer;
 begin
-  case Value of
+  case AValue of
     bi64f: Result := -64;
     bi32f: Result := -32;
     bi08u: Result :=  08;
     bi16c: Result :=  16;
     bi32c: Result :=  32;
     bi64c: Result :=  64;
-    else   Result :=  00;
+  else     Result :=  00;
   end;
 end;
 
-function IntToBitPix(Value: Integer): TBitPix;
+function IntToBitPix(AValue: Integer): TBitPix;
 begin
-  case Value of
+  case AValue of
     -64: Result := bi64f;
     -32: Result := bi32f;
      08: Result := bi08u;
      16: Result := bi16c;
      32: Result := bi32c;
      64: Result := bi64c;
-    else Result := biUnknown;
+  else   Result := biUnknown;
   end;
 end;
 
-function BitPixToRep(Value: TBitPix): TRepNumber;
+function BitPixSize(AValue: TBitPix): Byte;
 begin
-  case Value of
-    bi64f: Result := rep64f;
-    bi32f: Result := rep32f;
-    bi08u: Result := rep08u;
-    bi16c: Result := rep16c;
-    bi32c: Result := rep32c;
-    bi64c: Result := rep64c;
-    else   Result := repUnknown;
-  end;
-end;
-
-function BitPixSize(Value: TBitPix): Byte;
-begin
-  case Value of
+  case AValue of
     bi64f: Result := 8;
     bi32f: Result := 4;
     bi08u: Result := 1;
     bi16c: Result := 2;
     bi32c: Result := 4;
     bi64c: Result := 8;
-    else   Result := 0;
+  else     Result := 0;
   end;
 end;
 
-function BitPixSize(Value: Integer): Byte;
+function BitPixSize(AValue: Integer): Byte;
 var
-  BitPix: TBitPix;
+  LBitPix: TBitPix;
 begin
-  BitPix := IntToBitPix(Value);
-  Result := BitPixSize(BitPix);
+  LBitPix := IntToBitPix(AValue);
+  Result := BitPixSize(LBitPix);
 end;
 
-{ TCard }
+{ TVariable }
 
-function EmptyCard(const Keyword: string; ValueIndicate: Boolean;
-  NoteIndicate: Boolean; const Note: string): TCard;
+function ClearVariable: TVariable;
 begin
-  Result.Keyword := Keyword;
-  Result.ValueIndicate := ValueIndicate;
-  with Result.Value do
-  begin
-    Str := '';
-    Bol := False;
-    Int := 0;
-    Ext := 0.0;
-    Dtm := Now;
+  Result.VarType := vtNone;
+  Result.ValueExtended := 0.0;
+  Result.ValueString := '';
+end;
+
+function NewVariable(const AValue: Boolean): TVariable;
+begin
+  Result.VarType := vtBoolean;
+  Result.ValueBoolean := AValue;
+  Result.ValueString := '';
+end;
+
+function NewVariable(const AValue: Int64): TVariable;
+begin
+  Result.VarType := vtInt64;
+  Result.ValueInt64 := AValue;
+  Result.ValueString := '';
+end;
+
+function NewVariable(const AValue: Extended): TVariable;
+begin
+  Result.VarType := vtExtended;
+  Result.ValueExtended := AValue;
+  Result.ValueString := '';
+end;
+
+function NewVariable(const AValue: string): TVariable;
+begin
+  Result.VarType := vtString;
+  Result.ValueExtended := 0.0;
+  Result.ValueString := AValue;
+end;
+
+{ TNumberType }
+
+function NumberTypeToBitPix(AValueType: TNumberType): TBitPix;
+begin
+  case AValueType of
+    num80f: Result := bi64f;
+    num64f: Result := bi64f;
+    num32f: Result := bi32f;
+    num08c: Result := bi08u;
+    num08u: Result := bi08u;
+    num16c: Result := bi16c;
+    num16u: Result := bi16c;
+    num32c: Result := bi32c;
+    num32u: Result := bi32c;
+    num64c: Result := bi64c;
+  else      Result := biUnknown;
   end;
-  Result.NoteIndicate := NoteIndicate;
-  Result.Note := Note;
 end;
 
-function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: string;
-  NoteIndicate: Boolean; const Note: string): TCard; overload;
+function NumberTypeToTypicalZero(AValueType: TNumberType): Int64;
 begin
-  Result := EmptyCard(Keyword, ValueIndicate, NoteIndicate, Note);
-  Result.Value.Str := Value;
-end;
-
-function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: Boolean;
-  NoteIndicate: Boolean; const Note: string): TCard; overload;
-begin
-  Result := EmptyCard(Keyword, ValueIndicate, NoteIndicate, Note);
-  Result.Value.Bol := Value;
-end;
-
-function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: Int64;
-  NoteIndicate: Boolean; const Note: string): TCard; overload;
-begin
-  Result := EmptyCard(Keyword, ValueIndicate, NoteIndicate, Note);
-  Result.Value.Int := Value;
-end;
-
-function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: Extended;
-  NoteIndicate: Boolean; const Note: string): TCard; overload;
-begin
-  Result := EmptyCard(Keyword, ValueIndicate, NoteIndicate, Note);
-  Result.Value.Ext := Value;
-end;
-
-function ToCard(const Keyword: string; ValueIndicate: Boolean; Value: TDateTime;
-  NoteIndicate: Boolean; const Note: string): TCard; overload;
-begin
-  Result := EmptyCard(Keyword, ValueIndicate, NoteIndicate, Note);
-  Result.Value.Dtm := Value;
-end;
-
-{ TFormatLine }
-
-function FormatLineDefault: TFormatLine;
-begin
-  with Result do
-  begin
-    vaStr.wWidth := -cWidthLineValue;
-    vaStr.wWidthQuoteInside := -cWidthLineValueQuote;
-    vaBol.wWidth := cWidthLineValue;
-    vaInt.wWidth := cWidthLineValue;
-    vaInt.wSign := False;
-    vaInt.wFmt := '%d';
-    vaFloat.wWidth := cWidthLineValue;
-    vaFloat.wSign := False;
-    vaFloat.wFmt := '%g';
-    vaDateTime.rFmtShortDate := yymmdd;
-    vaDateTime.wWidth := -cWidthLineValue;
-    vaDateTime.wWidthQuoteInside := -cWidthLineValueQuote;
-    vaCoord.rFmtMeaRa := coHour;
-    vaCoord.wWidth := -cWidthLineValue;
-    vaCoord.wWidthQuoteInside := -cWidthLineValueQuote;
-    vaCoord.wPrecRa := 4;
-    vaCoord.wPrecDe := 4;
-    vaCoord.wFmtMeaRa := coHour;
-    vaCoord.wFmtRepCoord := coParts;
+  case AValueType of
+    num08c: Result := cZero08c;
+    num16u: Result := cZero16u;
+    num32u: Result := cZero32u;
+  else      Result := 0;
   end;
+end;
+
+{ TLineRecord }
+
+function ToLineRecord(const AKeyword: string; AValueIndicate: Boolean;
+  const AValue: string; ANoteIndicate: Boolean; const ANote: string): TLineRecord;
+begin
+  Result.Keyword := AKeyword;
+  Result.ValueIndicate := AValueIndicate;
+  Result.Value := AValue;
+  Result.NoteIndicate := ANoteIndicate;
+  Result.Note := ANote;
+end;
+
+function EmptyLineRecord: TLineRecord;
+begin
+  Result.Keyword := '';
+  Result.ValueIndicate := False;
+  Result.Value := '';
+  Result.NoteIndicate := False;
+  Result.Note := '';
 end;
 
 { String }
 
-function IfThen(AValue: Boolean; const ATrue: string; const AFalse: string = ''): string; {$IFDEF HAS_INLINE} inline; {$ENDIF} overload;
+function IfThen(AValue: Boolean; const ATrue: string; const AFalse: string = ''): string;
 begin
   if AValue then
     Result := ATrue
@@ -691,109 +739,198 @@ begin
     Result := AFalse;
 end;
 
+{ Picture frame palette }
+
+procedure AllocateRaster(var ARaster: TPaletteRaster; AWidth, AHeight: Integer);
+var
+  LWidth, LHeight: Integer;
+begin
+  LWidth := Length(ARaster);
+  if LWidth > 0 then
+    LHeight := Length(ARaster[0])
+  else
+    LHeight := 0;
+  if (LWidth < AWidth) or (LHeight < AHeight) then
+    SetLength(ARaster, AWidth, AHeight);
+end;
+
+procedure FillRaster(var ARaster: TPaletteRaster; AWidth, AHeight: Integer; AValue: Byte);
+var
+  X, Y: Integer;
+begin
+  for X := 0 to AWidth - 1 do
+  for Y := 0 to AHeight - 1 do
+    ARaster[X, Y] := AValue;
+end;
+
 { Picture frame geometry }
 
-function ToPnt(const X, Y: Double): TPnt;
+function ToPixel(const AX, AY: Integer): TPlanePixel;
 begin
-  Result.X := X;
-  Result.Y := Y;
+  Result.X := AX;
+  Result.Y := AY;
 end;
 
-function ToPix(const X, Y: Integer): TPix;
+function ToPoint(const AX, AY: Double): TPlanePoint;
 begin
-  Result.X := X;
-  Result.Y := Y;
+  Result.X := AX;
+  Result.Y := AY;
 end;
 
-function ToRegion(X1, Y1: Integer; Width, Height: Integer): TRegion;
+function ToRegion(AX1, AY1, AWidth, AHeight: Integer): TRegion;
 begin
-  Assert((Width >= 0) and (Height >= 0), SAssertionFailure);
-  Result.X1 := X1;
-  Result.Y1 := Y1;
-  Result.Width := Width;
-  Result.Height := Height;
+  Assert((AWidth >= 0) and (AHeight >= 0), SAssertionFailure);
+  Result.X1 := AX1;
+  Result.Y1 := AY1;
+  Result.Width := AWidth;
+  Result.Height := AHeight;
 end;
 
-function ToBound(const Region: TRegion): TBound;
+function ToBound(const ARegion: TRegion): TBound;
 begin
-  Assert((Region.Width >= 0) and (Region.Height >= 0), SAssertionFailure);
-  Result.Xmin   := Region.X1;
-  Result.Ymin   := Region.Y1;
-  Result.Xmax   := Region.X1 + Region.Width - 1;
-  Result.Ymax   := Region.Y1 + Region.Height - 1;
-  Result.Xcount := Region.Width;
-  Result.Ycount := Region.Height;
+  Assert((ARegion.Width >= 0) and (ARegion.Height >= 0), SAssertionFailure);
+  Result.Xmin   := ARegion.X1;
+  Result.Ymin   := ARegion.Y1;
+  Result.Xmax   := ARegion.X1 + ARegion.Width - 1;
+  Result.Ymax   := ARegion.Y1 + ARegion.Height - 1;
+  Result.Xcount := ARegion.Width;
+  Result.Ycount := ARegion.Height;
 end;
 
-function ToQuad(const X1, Y1, X2, Y2, X3, Y3, X4, Y4: Double): TQuad; overload;
+function ToQuad(const AX1, AY1, AX2, AY2, AX3, AY3, AX4, AY4: Double): TQuad; overload;
 begin
-  Result.X1 := X1;
-  Result.Y1 := Y1;
-  Result.X2 := X2;
-  Result.Y2 := Y2;
-  Result.X3 := X3;
-  Result.Y3 := Y3;
-  Result.X4 := X4;
-  Result.Y4 := Y4;
+  Result.X1 := AX1;
+  Result.Y1 := AY1;
+  Result.X2 := AX2;
+  Result.Y2 := AY2;
+  Result.X3 := AX3;
+  Result.Y3 := AY3;
+  Result.X4 := AX4;
+  Result.Y4 := AY4;
 end;
 
-function ToQuad(const Region: TRegion): TQuad; overload;
-var
-  dx, dy: Integer;
+function ToQuad(const ARegion: TRegion): TQuad; overload;
 begin
-  dx := Region.Width;
-  dy := Region.Height;
-  with Region do
+  with ARegion do
   begin
-    Result.P1 := ToPnt(X1, Y1);
-    Result.P2 := ToPnt(X1 + dx, Y1);
-    Result.P3 := ToPnt(X1 + dx, Y1 + dy);
-    Result.P4 := ToPnt(X1, Y1 + dy);
+    Result.P1 := ToPoint(X1, Y1);
+    Result.P2 := ToPoint(X1 + Width, Y1);
+    Result.P3 := ToPoint(X1 + Width, Y1 + Height);
+    Result.P4 := ToPoint(X1, Y1 + Height);
   end;
 end;
 
-function ToClip(const XA, YA: array of Double): TClip;
+function ToClip(const AX, AY: array of Double): TClip;
 var
-  I: Integer;
+  LIndex: Integer;
 begin
-  Assert(Length(XA) = Length(YA), SAssertionFailure);
-  Result.PN := Length(XA);
-  for I := 1 to Result.PN do
+  Assert(Length(AX) = Length(AY), SAssertionFailure);
+  Result.Count := Length(AX);
+  for LIndex := 1 to Result.Count do
   begin
-    Result.PA[I].X := XA[I - 1];
-    Result.PA[I].Y := YA[I - 1];
+    Result.Points[LIndex].X := AX[LIndex - 1];
+    Result.Points[LIndex].Y := AY[LIndex - 1];
   end;
+end;
+
+{ Assert }
+
+function SAssertionFailureArgs(const AArgs: array of const): string;
+begin
+  Result := SAssertionFailure + Format(' (%d)', [Length(AArgs)]);
 end;
 
 { EFitsException }
 
+function EFitsException.GetTopic: string;
+begin
+  Result := 'COMMON';
+end;
+
+function EFitsException.GetCaption: string;
+begin
+  Result := Format('$%s-%s-%.4d', [cDeLaFits, GetTopic, FCode]);
+  Result := UpperCase(Result);
+end;
+
+function EFitsException.FormatMessage(const AMsg: string; const AArgs: array of const): string;
+var
+  LMsg, LCaption: string;
+begin
+  if Length(AArgs) = 0 then
+    LMsg := AMsg
+  else
+    LMsg := Format(AMsg, AArgs);
+  LCaption := GetCaption;
+  // Return
+  if LMsg = '' then
+    Result := LCaption
+  else
+    Result := LCaption + ', ' + LMsg;
+end;
+
 constructor EFitsException.Create(const AMsg: string; ACode: Integer);
 var
-  Msg: string;
+  LMessage: string;
 begin
   FCode := ACode;
-  Msg := Format('%s %.4d', [cDeLaFits, FCode]);
-  Msg := Msg + IfThen(AMsg = '', '', ', ' + AMsg);
-  inherited Create(Msg);
+  LMessage := FormatMessage(AMsg, {AArgs:} []);
+  inherited Create(LMessage);
 end;
 
-constructor EFitsException.CreateFmt(const AMsg: string; const Args: array of const; ACode: Integer);
+constructor EFitsException.CreateFmt(const AMsg: string; const AArgs: array of const; ACode: Integer);
 var
-  Msg: string;
+  LMessage: string;
 begin
-  Msg := Format(AMsg, Args);
-  Create(Msg, ACode);
+  FCode := ACode;
+  LMessage := FormatMessage(AMsg, AArgs);
+  inherited Create(LMessage);
 end;
 
-constructor EFitsException.CreateFmt(const AMsg: string; const Args: array of const; const EMsg: string; ACode: Integer);
-var
-  Msg: string;
+{ TFitsObject }
+
+procedure TFitsObject.Init;
 begin
-  Msg := Format(AMsg, Args);
-  Msg := Msg + IfThen(Msg = '', '.', '');
-  Msg := Msg + IfThen(Msg[Length(Msg)] = '.', '', '.');
-  Msg := Msg + IfThen(EMsg = '', '', sLineBreak + EMsg);
-  Create(Msg, ACode);
+  // Do nothing: implicit call, custom initialization of class members
+end;
+
+procedure TFitsObject.Error(const AMsg: string; ACode: Integer);
+begin
+  raise GetExceptionClass.Create(AMsg, ACode);
+end;
+
+procedure TFitsObject.Error(const AMsg: string; const AArgs: array of const; ACode: Integer);
+begin
+  raise GetExceptionClass.CreateFmt(AMsg, AArgs, ACode);
+end;
+
+constructor TFitsObject.Create;
+begin
+  inherited Create;
+  Init;
+end;
+
+{ TFitsInterfacedObject }
+
+procedure TFitsInterfacedObject.Init;
+begin
+  // Do nothing: implicit call, custom initialization of class members
+end;
+
+procedure TFitsInterfacedObject.Error(const AMsg: string; ACode: Integer);
+begin
+  raise GetExceptionClass.Create(AMsg, ACode);
+end;
+
+procedure TFitsInterfacedObject.Error(const AMsg: string; const AArgs: array of const; ACode: Integer);
+begin
+  raise GetExceptionClass.CreateFmt(AMsg, AArgs, ACode);
+end;
+
+constructor TFitsInterfacedObject.Create;
+begin
+  inherited Create;
+  Init;
 end;
 
 end.

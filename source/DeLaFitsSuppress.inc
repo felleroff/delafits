@@ -3,7 +3,7 @@
 {                                                      }
 {     Suppress a wrong compiler hints and warnings     }
 {                                                      }
-{          Copyright(c) 2013-2021, felleroff           }
+{          Copyright(c) 2013-2026, felleroff           }
 {              delafits.library@gmail.com              }
 {        https://github.com/felleroff/delafits         }
 { **************************************************** }

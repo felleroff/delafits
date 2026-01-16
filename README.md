@@ -1,119 +1,93 @@
 ![DeLaFits](./preview.png)
 
-DeLaFits is a native [Delphi](https://www.embarcadero.com/products/delphi) and [Lazarus](https://www.lazarus-ide.org) class library for operation with files in the [FITS](https://fits.gsfc.nasa.gov) format:
+DeLaFits is a pure [Delphi](https://www.embarcadero.com/products/delphi) and [Lazarus](https://www.lazarus-ide.org) library for working with data in the [FITS](https://fits.gsfc.nasa.gov) format:
 
-- reading, editing and building the HDU (header and data units)
-- high-level access to Standard Extensions
-- data rendering of the IMAGE extension
+- parsing a byte stream to an HDU container
+- creating and deleting an HDU in a container
+- reading, writing, adding, and deleting HDU header keyword records
+- reading and writing HDU data array
+- reading, writing, and rendering physical values (pixels) of an IMAGE extension
+- reading and writing records and fields of a TABLE extension
 
 ### How to use
 
-Just add the library `source` directory to your project’s [search path](https://wiki.freepascal.org/IDE_Window:_Compiler_Options#Other_Unit_Files)
+Add the DeLaFits directory "source" to your project's search path.
 
-Basic API is in DeLaFitsCommon and DeLaFitsClasses units
+The core concept of DeLaFits is the HDU container. A typical workflow: open FITS file > create HDU container from it > select HDU > get pointer to its header and data array.
 
-For details, see [User's Manual](https://felleroff.github.io/delafits/)
+For more information, please see the [User Manual](https://felleroff.github.io/delafits/) and [Demo Projects](#demo-projects).
 
 ### Code Sample
 
 ```pascal
 uses
-  SysUtils, Classes, Graphics, DeLaFitsCommon, DeLaFitsClasses, DeLaFitsPicture;
+  ..., DeLaFitsCommon, DeLaFitsCard, DeLaFitsClasses, DeLaFitsImage;
 
-var
+// Open the FITS file
+LStream := TFileStream.Create('demo-image.fits', fmOpenRead);
 
-  Stream: TFileStream;
+// Create a FITS container
+LContainer := TFitsContainer.Create(LStream);
 
-  Container: TFitsContainer;
-  Picture: TFitsPicture;
-  Head: TFitsPictureHead;
-  Data: TFitsPictureData;
-  Frame: TFitsPictureFrame;
+// Get the first HDU from the container, its header and data
+LItem := LContainer.Items[0];
+LHead := LItem.Head;
+LData := LItem.Data;
 
-  IndexLine: Integer;
-  IndexElems: Int64;
-  X, CountElems: Integer;
-  Elems: array of Double;
-  Region: TRegion;
-  Bitmap: TBitmap;
-
+// Read the HDU header keyword records. Get the date and time
+// of the observation specified by the keyword "DATE-OBS"
+if LHead.LocateCard('DATE-OBS') then
 begin
+  LCard := TFitsDateTimeCard.Create;
+  LCard.Card := LHead.Card;
+  LDateTime := LCard.ValueAsDateTime;
+  LCard.Free;
+end;
 
-  Stream    := nil;
-  Container := nil;
-  Bitmap    := nil;
+// Read the HDU data byte array
+var LBuffer: array of Byte;
+SetLength(LBuffer, LData.InternalSize);
+LData.ReadChunk({AInternalOffset:} 0, Length(LBuffer), {var} LBuffer[0]);
 
-  try
+// Set the HDU class as TFitsImage and read its pixel values
+if LContainer.ItemExtensionTypeIs({AIndex:} 0, TFitsImage) then
+begin
+  LContainer.ItemClasses[0] := TFitsImage;
+  LImage := LContainer.Items[0] as TFitsImage;
+  var LPixels: array of Integer;
+  SetLength(LPixels, LImage.Data.ValueCount);
+  LImage.Data.ReadValues({AIndex:} 0, Length(LPixels), {var} TA32c(LPixels));
+end;
 
-    // Open FITS file
-
-    Stream := TFileStream.Create('demo-image.fits', fmOpenReadWrite);
-
-    // Create FITS container
-
-    Container := TFitsContainer.Create(Stream);
-
-    // Cast HDU[0] as IMAGE extension
-
-    Picture := Container.Reclass(0, TFitsPicture) as TFitsPicture;
-
-    // Get Objects of IMAGE extension
-
-    Head  := Picture.Head;
-    Data  := Picture.Data;
-    Frame := Picture.Frames[0];
-
-    // Edit Header
-
-    IndexLine := Head.IndexOf('DATE-OBS');
-    if IndexLine < 0 then
-    begin
-      Head.AddDateTime('DATE-OBS', Now, 'Add datetime');
-    end
-    else
-    begin
-      Head.ValuesDateTime[IndexLine] := Now;
-      Head.Notes[IndexLine] := 'Set datetime';
-    end;
-
-    // Edit Data
-
-    IndexElems := Frame.IndexElems;
-    CountElems := Frame.LocalWidth;
-    SetLength(Elems, CountElems);
-    Data.ReadElems(IndexElems, CountElems, TA64f(Elems));
-    for X := 0 to CountElems - 1 do
-      Elems[X] := Elems[X] + 1.0;
-    Data.WriteElems(IndexElems, CountElems, TA64f(Elems));
-
-    // Render
-
-    Bitmap := TBitmap.Create;
-    Region := ToRegion(0, 0, 300, 300);
-    Frame.Tone.Contrast := 1.2;
-    Frame.Geometry.Scale(2.0, 2.0, xy00).Rotate(45.0, xy00);
-    Frame.RenderScene(Bitmap, Region);
-    Bitmap.SaveToFile('demo-image.bmp');
-
-  finally
-    Stream.Free;
-    Container.Free;
-    Elems := nil;
-    Bitmap.Free;
-  end;
-
-end.
+// Free objects
+LContainer.Free;
+LStream.Free;
 ```
+
+### Demo Projects
+
+The "demo" directory contains projects that demonstrate various DeLaFits features. Each project is located in a separate directory and can be compiled using Delphi ("\*.dpr") or Lazarus ("\*.lpr"):
+
+- [container](demo/container) - parse of the Official Individual Samples of FITS files
+- [newitem](demo/newitem) - create a new FITS file with the typeless HDU
+- [itemhead](demo/itemhead) - read and write the HDU header
+- [itemdata](demo/itemdata) - read and write the HDU data
+- [imagevalues](demo/imagevalues) - read and write the IMAGE physical values
+- [newframe](demo/newframe) - create a new IMAGE from the BITMAP file
+- [framevalues](demo/framevalues) - read and write IMAGE frame physical values
+- [renderframe](demo/renderframe) - render an IMAGE frame
+- [newtable](demo/newtable) - create a new TABLE
+- [tablerecords](demo/tablerecords) - read and write the TABLE records
 
 ### Data
 
-The `data` directory contains samples FITS files
+The "data" directory contains samples FITS files.
 
 | **[Custom Demo Samples](data)** |                                                                                                                                                     |
-|:--------------------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| demo-asctable.fits    | Primary HDU without data block and  ASCII-TABLE extension: 5 x 10 table                                                                                       |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| demo-item.fits        | Single Image: 1-dimensional primary array 1 x 100 with BITPIX = 8, data array contains a sequence from 0 to 99                       |
 | demo-image.fits       | Single Image: 2-dimensional primary array 1400 x 1000 with BITPIX = 16                                                                              |
-| demo-simple.fits      | Single Image: 1-dimensional primary array 1 x 100 with BITPIX = 8, data block contains a sequence from 0 to 99                                      |
+| demo-table.fits       | Primary HDU without data array and ASCII-TABLE extension 6 fileds x 10 records                                                                      |
 | **[Official Individual Samples](https://fits.gsfc.nasa.gov/fits_samples.html)** |                                                                                                     |
 | 01-HST-WFPC-II.fits   | WFPC II 800 x 800 x 4 primary array data cube containing the 4 CCD images, plus a table extension containing world coordinate parameters. This sample file has been trimmed to 200 x 200 x 4 pixels to save disk space |
 | 02-HST-WFPC-II.fits   | WFPC II 1600 x 1600 primary array mosaic constructed from the 4 individual CCD chips. Image has been trimmed to 100 x 100 pixels to save disk space |
@@ -127,24 +101,16 @@ The `data` directory contains samples FITS files
 | 10-EUVE.fits          | EUVE sky image and 2D spectra, contained in multiple image extensions, with associated binary table extensions                                                          |
 | 11-RANDOM-GROUPS.fits | This example file illustrates the Random Groups FITS file format which has the keywords NAXIS1 = 0 and GROUPS = T                                   |
 
-### Demo
+### Repository
 
-The `demo` directory contains examples of using the library. Each example is located in a separate directory and has two entry points: Delphi and Lazarus project. 
-
-- [editdata](demo/editdata) - reading and editing the Data of the FITS file
-- [edithead](demo/edithead) - reading and editing the Header of the FITS file
-- [makeasctable](demo/makeasctable) - make a new ASCII-TABLE extension
-- [makeimage](demo/makeimage) - make a new IMAGE extension from a BITMAP file
-- [makeumit](demo/makeumit) - make a new FITS file
-- [markup](demo/markup) - markup of the Official Individual Samples of FITS files
-- [renderimage](demo/renderimage) - render the IMAGE extension of the FITS file
+The only branch. The latest commit contains the current version. Tags indicate previous, outdated, but stable API versions. It is recommended to use the current version.
 
 ### Credits
 
-DeLaFits is used in the [CoLiTec](http://www.neoastrosoft.com) project - software package for automatic processing of CCD observations for accurate astrometry and photometry.
+DeLaFits is used in the [Lemur software](https://instalf.space) (search and detection of moving space objects in a series of astronomical frames).
 
-The list of known FITS I/O libraries (including DeLaFits) is published in the official resource of the [FITS Support Office](https://fits.gsfc.nasa.gov/fits_libraries.html) at NASA/GSFC at NASA/GSFC.
+DeLaFits is included in the list of [FITS I/O libraries](https://fits.gsfc.nasa.gov/fits_libraries.html) published by the FITS Support Office at NASA/GSFC.
 
 ### License
 
-[MIT](LICENSE.md) © 2013-2021, felleroff, delafits.library@gmail.com
+[MIT](LICENSE.md) © 2013-2026, felleroff, delafits.library@gmail.com
